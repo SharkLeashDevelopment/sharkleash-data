@@ -1,5 +1,5 @@
 {
-  "_readme": "SharkLeash data for the laws map and the conditions panel. Edit text, then set lastVerified (YYYY-MM-DD) on anything you checked. state category must be a key in categories; drone.status must be ban, limit or none. Beach state is the 2-letter code.",
+  "_readme": "SharkLeash data for the laws map, conditions panel and Shark Water. Edit text, then set lastVerified (YYYY-MM-DD) on anything you checked. States: category must be a key in categories; drone.status is ban, limit or none. Beaches: state is the 2-letter code; depth is yards from the low-tide waterline to 10 ft and 15 ft (write \">2543\" when it never gets that deep within that distance; confidence is high, medium, low or inlet). speciesByMonth: per state, [species code, 12 digits Jan..Dec] where 0 absent, 1 occasional, 2 common, 3 peak.",
   "lastVerified": "2026-11-02",
   "coastWide": "most states require non-offset, non-stainless (corrodible) circle hooks when fishing sharks with natural bait, and it's good practice everywhere. Shortfin mako can't be kept. Sandbar, sand tiger and dusky are prohibited and the most common from shore. Keep any shark you're releasing in the water. Drones are banned in every National Seashore, and FAA drone rules apply everywhere.",
   "categories": {
@@ -714,655 +714,1588 @@
       "name": "Sand Beach (Acadia)",
       "state": "ME",
       "lat": 44.33,
-      "lon": -68.183
+      "lon": -68.183,
+      "depth": {
+        "to10ftYd": 137,
+        "to15ftYd": 191,
+        "confidence": "high"
+      }
     },
     {
       "name": "Reid State Park",
       "state": "ME",
       "lat": 43.776,
-      "lon": -69.729
+      "lon": -69.729,
+      "depth": {
+        "to10ftYd": 137,
+        "to15ftYd": 164,
+        "confidence": "medium"
+      }
     },
     {
       "name": "Popham Beach",
       "state": "ME",
       "lat": 43.737,
-      "lon": -69.797
+      "lon": -69.797,
+      "depth": {
+        "to10ftYd": 1668,
+        "to15ftYd": 1750,
+        "confidence": "low"
+      }
     },
     {
       "name": "Higgins Beach",
       "state": "ME",
       "lat": 43.563,
-      "lon": -70.276
+      "lon": -70.276,
+      "depth": {
+        "to10ftYd": 301,
+        "to15ftYd": 492,
+        "confidence": "high"
+      }
     },
     {
       "name": "Old Orchard Beach",
       "state": "ME",
       "lat": 43.514,
-      "lon": -70.374
+      "lon": -70.374,
+      "depth": {
+        "to10ftYd": 328,
+        "to15ftYd": 519,
+        "confidence": "high"
+      }
     },
     {
       "name": "Ogunquit",
       "state": "ME",
       "lat": 43.249,
-      "lon": -70.592
+      "lon": -70.592,
+      "depth": {
+        "to10ftYd": 383,
+        "to15ftYd": 519,
+        "confidence": "high"
+      }
     },
     {
       "name": "Rye Harbor",
       "state": "NH",
       "lat": 42.991,
-      "lon": -70.743
+      "lon": -70.743,
+      "depth": {
+        "to10ftYd": 328,
+        "to15ftYd": 547,
+        "confidence": "low"
+      }
     },
     {
       "name": "Hampton Beach",
       "state": "NH",
       "lat": 42.909,
-      "lon": -70.811
+      "lon": -70.811,
+      "depth": {
+        "to10ftYd": 273,
+        "to15ftYd": 383,
+        "confidence": "high"
+      }
     },
     {
       "name": "Plum Island",
       "state": "MA",
       "lat": 42.76,
-      "lon": -70.797
+      "lon": -70.797,
+      "depth": {
+        "to10ftYd": 137,
+        "to15ftYd": 410,
+        "confidence": "high"
+      }
     },
     {
       "name": "Race Point",
       "state": "MA",
       "lat": 42.075,
-      "lon": -70.244
+      "lon": -70.244,
+      "depth": {
+        "to10ftYd": 164,
+        "to15ftYd": 246,
+        "confidence": "medium"
+      }
     },
     {
       "name": "Nauset Beach",
       "state": "MA",
       "lat": 41.787,
-      "lon": -69.937
+      "lon": -69.937,
+      "depth": {
+        "to10ftYd": 82,
+        "to15ftYd": 219,
+        "confidence": "high"
+      }
     },
     {
       "name": "Sandy Neck",
       "state": "MA",
       "lat": 41.739,
-      "lon": -70.38
+      "lon": -70.38,
+      "depth": {
+        "to10ftYd": 109,
+        "to15ftYd": 301,
+        "confidence": "high"
+      }
     },
     {
       "name": "Chatham",
       "state": "MA",
       "lat": 41.669,
-      "lon": -69.947
+      "lon": -69.947,
+      "depth": {
+        "to10ftYd": 273,
+        "to15ftYd": 355,
+        "confidence": "low"
+      }
     },
     {
       "name": "Horseneck Beach",
       "state": "MA",
       "lat": 41.505,
-      "lon": -71.026
+      "lon": -71.026,
+      "depth": {
+        "to10ftYd": 109,
+        "to15ftYd": 246,
+        "confidence": "high"
+      }
     },
     {
       "name": "Great Point (Nantucket)",
       "state": "MA",
       "lat": 41.39,
-      "lon": -70.048
+      "lon": -70.048,
+      "depth": {
+        "to10ftYd": 55,
+        "to15ftYd": 55,
+        "confidence": "low"
+      }
     },
     {
       "name": "Wasque (Martha's Vineyard)",
       "state": "MA",
       "lat": 41.351,
-      "lon": -70.452
+      "lon": -70.452,
+      "depth": {
+        "to10ftYd": 301,
+        "to15ftYd": 437,
+        "confidence": "low"
+      }
     },
     {
       "name": "Narragansett",
       "state": "RI",
       "lat": 41.43,
-      "lon": -71.455
+      "lon": -71.455,
+      "depth": {
+        "to10ftYd": 109,
+        "to15ftYd": 164,
+        "confidence": "high"
+      }
     },
     {
       "name": "Charlestown Breachway",
       "state": "RI",
       "lat": 41.356,
-      "lon": -71.64
+      "lon": -71.64,
+      "depth": {
+        "to10ftYd": 137,
+        "to15ftYd": 246,
+        "confidence": "high"
+      }
     },
     {
       "name": "Misquamicut",
       "state": "RI",
       "lat": 41.322,
-      "lon": -71.808
+      "lon": -71.808,
+      "depth": {
+        "to10ftYd": 82,
+        "to15ftYd": 137,
+        "confidence": "high"
+      }
     },
     {
       "name": "Ocean Beach Park",
       "state": "CT",
       "lat": 41.307,
-      "lon": -72.095
+      "lon": -72.095,
+      "depth": {
+        "to10ftYd": 55,
+        "to15ftYd": 82,
+        "confidence": "medium"
+      }
     },
     {
       "name": "Hammonasset",
       "state": "CT",
       "lat": 41.258,
-      "lon": -72.552
+      "lon": -72.552,
+      "depth": {
+        "to10ftYd": 164,
+        "to15ftYd": 246,
+        "confidence": "high"
+      }
     },
     {
       "name": "Silver Sands",
       "state": "CT",
       "lat": 41.2,
-      "lon": -73.07
+      "lon": -73.07,
+      "depth": {
+        "to10ftYd": 574,
+        "to15ftYd": 820,
+        "confidence": "high"
+      }
     },
     {
       "name": "Montauk",
       "state": "NY",
       "lat": 41.071,
-      "lon": -71.857
+      "lon": -71.857,
+      "depth": {
+        "to10ftYd": 109,
+        "to15ftYd": 219,
+        "confidence": "high"
+      }
     },
     {
       "name": "Shinnecock Inlet",
       "state": "NY",
       "lat": 40.84,
-      "lon": -72.477
+      "lon": -72.477,
+      "depth": {
+        "confidence": "inlet"
+      }
     },
     {
       "name": "Smith Point",
       "state": "NY",
       "lat": 40.733,
-      "lon": -72.86
+      "lon": -72.86,
+      "depth": {
+        "to10ftYd": 82,
+        "to15ftYd": 383,
+        "confidence": "high"
+      }
     },
     {
       "name": "Robert Moses SP",
       "state": "NY",
       "lat": 40.625,
-      "lon": -73.255
+      "lon": -73.255,
+      "depth": {
+        "to10ftYd": 328,
+        "to15ftYd": 574,
+        "confidence": "high"
+      }
     },
     {
       "name": "Long Beach",
       "state": "NY",
       "lat": 40.584,
-      "lon": -73.656
+      "lon": -73.656,
+      "depth": {
+        "to10ftYd": 191,
+        "to15ftYd": 355,
+        "confidence": "high"
+      }
     },
     {
       "name": "Jones Beach",
       "state": "NY",
       "lat": 40.583,
-      "lon": -73.507
+      "lon": -73.507,
+      "depth": {
+        "to10ftYd": 137,
+        "to15ftYd": 328,
+        "confidence": "medium"
+      }
     },
     {
       "name": "Rockaway Beach",
       "state": "NY",
       "lat": 40.58,
-      "lon": -73.825
+      "lon": -73.825,
+      "depth": {
+        "to10ftYd": 219,
+        "to15ftYd": 301,
+        "confidence": "high"
+      }
     },
     {
       "name": "Breezy Point",
       "state": "NY",
       "lat": 40.556,
-      "lon": -73.93
+      "lon": -73.93,
+      "depth": {
+        "to10ftYd": 273,
+        "to15ftYd": 383,
+        "confidence": "low"
+      }
     },
     {
       "name": "Sandy Hook",
       "state": "NJ",
       "lat": 40.43,
-      "lon": -73.99
+      "lon": -73.99,
+      "depth": {
+        "to10ftYd": 82,
+        "to15ftYd": 109,
+        "confidence": "high"
+      }
     },
     {
       "name": "Asbury Park",
       "state": "NJ",
       "lat": 40.22,
-      "lon": -73.998
+      "lon": -73.998,
+      "depth": {
+        "to10ftYd": 82,
+        "to15ftYd": 82,
+        "confidence": "high"
+      }
     },
     {
       "name": "Manasquan Inlet",
       "state": "NJ",
       "lat": 40.103,
-      "lon": -74.035
+      "lon": -74.035,
+      "depth": {
+        "to10ftYd": 164,
+        "to15ftYd": 246,
+        "confidence": "medium"
+      }
     },
     {
       "name": "Seaside Heights",
       "state": "NJ",
       "lat": 39.944,
-      "lon": -74.073
+      "lon": -74.073,
+      "depth": {
+        "to10ftYd": 109,
+        "to15ftYd": 137,
+        "confidence": "high"
+      }
     },
     {
       "name": "Island Beach SP",
       "state": "NJ",
       "lat": 39.866,
-      "lon": -74.087
+      "lon": -74.087,
+      "depth": {
+        "to10ftYd": 164,
+        "to15ftYd": 246,
+        "confidence": "high"
+      }
     },
     {
       "name": "Barnegat Light",
       "state": "NJ",
       "lat": 39.763,
-      "lon": -74.105
+      "lon": -74.105,
+      "depth": {
+        "to10ftYd": 191,
+        "to15ftYd": 246,
+        "confidence": "high"
+      }
     },
     {
       "name": "Holgate (LBI)",
       "state": "NJ",
       "lat": 39.546,
-      "lon": -74.264
+      "lon": -74.264,
+      "depth": {
+        "to10ftYd": 164,
+        "to15ftYd": 273,
+        "confidence": "low"
+      }
     },
     {
       "name": "Atlantic City",
       "state": "NJ",
       "lat": 39.355,
-      "lon": -74.433
+      "lon": -74.433,
+      "depth": {
+        "to10ftYd": 301,
+        "to15ftYd": 766,
+        "confidence": "high"
+      }
     },
     {
       "name": "Ocean City",
       "state": "NJ",
       "lat": 39.264,
-      "lon": -74.584
+      "lon": -74.584,
+      "depth": {
+        "to10ftYd": 273,
+        "to15ftYd": 383,
+        "confidence": "medium"
+      }
     },
     {
       "name": "Wildwood",
       "state": "NJ",
       "lat": 38.983,
-      "lon": -74.818
+      "lon": -74.818,
+      "depth": {
+        "to10ftYd": 848,
+        "to15ftYd": 902,
+        "confidence": "high"
+      }
     },
     {
       "name": "Cape May",
       "state": "NJ",
       "lat": 38.93,
-      "lon": -74.92
+      "lon": -74.92,
+      "depth": {
+        "to10ftYd": 164,
+        "to15ftYd": 301,
+        "confidence": "high"
+      }
     },
     {
       "name": "Cape Henlopen",
       "state": "DE",
       "lat": 38.79,
-      "lon": -75.091
+      "lon": -75.091,
+      "depth": {
+        "to10ftYd": 55,
+        "to15ftYd": 109,
+        "confidence": "high"
+      }
     },
     {
       "name": "Rehoboth Beach",
       "state": "DE",
       "lat": 38.718,
-      "lon": -75.075
+      "lon": -75.075,
+      "depth": {
+        "to10ftYd": 55,
+        "to15ftYd": 82,
+        "confidence": "high"
+      }
     },
     {
       "name": "Indian River Inlet",
       "state": "DE",
       "lat": 38.61,
-      "lon": -75.064
+      "lon": -75.064,
+      "depth": {
+        "to10ftYd": 137,
+        "to15ftYd": 137,
+        "confidence": "high"
+      }
     },
     {
       "name": "Fenwick Island",
       "state": "DE",
       "lat": 38.462,
-      "lon": -75.05
+      "lon": -75.05,
+      "depth": {
+        "to10ftYd": 55,
+        "to15ftYd": 109,
+        "confidence": "high"
+      }
     },
     {
       "name": "Ocean City",
       "state": "MD",
       "lat": 38.36,
-      "lon": -75.072
+      "lon": -75.072,
+      "depth": {
+        "to10ftYd": 137,
+        "to15ftYd": 191,
+        "confidence": "high"
+      }
     },
     {
       "name": "Assateague",
       "state": "MD",
       "lat": 38.21,
-      "lon": -75.153
+      "lon": -75.153,
+      "depth": {
+        "to10ftYd": 164,
+        "to15ftYd": 246,
+        "confidence": "high"
+      }
     },
     {
       "name": "Chincoteague",
       "state": "VA",
       "lat": 37.905,
-      "lon": -75.343
+      "lon": -75.343,
+      "depth": {
+        "to10ftYd": 547,
+        "to15ftYd": 601,
+        "confidence": "high"
+      }
     },
     {
       "name": "Ocean View (Norfolk)",
       "state": "VA",
       "lat": 36.955,
-      "lon": -76.248
+      "lon": -76.248,
+      "depth": {
+        "to10ftYd": 437,
+        "to15ftYd": 875,
+        "confidence": "medium"
+      }
     },
     {
       "name": "Virginia Beach Oceanfront",
       "state": "VA",
       "lat": 36.851,
-      "lon": -75.972
+      "lon": -75.972,
+      "depth": {
+        "to10ftYd": 164,
+        "to15ftYd": 246,
+        "confidence": "medium"
+      }
     },
     {
       "name": "Sandbridge",
       "state": "VA",
       "lat": 36.722,
-      "lon": -75.937
+      "lon": -75.937,
+      "depth": {
+        "to10ftYd": 137,
+        "to15ftYd": 273,
+        "confidence": "high"
+      }
     },
     {
       "name": "False Cape",
       "state": "VA",
       "lat": 36.59,
-      "lon": -75.875
+      "lon": -75.875,
+      "depth": {
+        "to10ftYd": 328,
+        "to15ftYd": 492,
+        "confidence": "high"
+      }
     },
     {
       "name": "Corolla",
       "state": "NC",
       "lat": 36.377,
-      "lon": -75.83
+      "lon": -75.83,
+      "depth": {
+        "to10ftYd": 219,
+        "to15ftYd": 273,
+        "confidence": "high"
+      }
     },
     {
       "name": "Kill Devil Hills",
       "state": "NC",
       "lat": 36.03,
-      "lon": -75.676
+      "lon": -75.676,
+      "depth": {
+        "to10ftYd": 219,
+        "to15ftYd": 273,
+        "confidence": "high"
+      }
     },
     {
       "name": "Nags Head",
       "state": "NC",
       "lat": 35.957,
-      "lon": -75.624
+      "lon": -75.624,
+      "depth": {
+        "to10ftYd": 191,
+        "to15ftYd": 246,
+        "confidence": "high"
+      }
     },
     {
       "name": "Oregon Inlet",
       "state": "NC",
       "lat": 35.774,
-      "lon": -75.527
+      "lon": -75.527,
+      "depth": {
+        "to10ftYd": 273,
+        "to15ftYd": 301,
+        "confidence": "high"
+      }
     },
     {
       "name": "Avon",
       "state": "NC",
       "lat": 35.352,
-      "lon": -75.505
+      "lon": -75.505,
+      "depth": {
+        "to10ftYd": 191,
+        "to15ftYd": 301,
+        "confidence": "high"
+      }
     },
     {
       "name": "Buxton",
       "state": "NC",
       "lat": 35.268,
-      "lon": -75.523
+      "lon": -75.523,
+      "depth": {
+        "to10ftYd": 273,
+        "to15ftYd": 328,
+        "confidence": "low"
+      }
     },
     {
       "name": "Frisco",
       "state": "NC",
       "lat": 35.234,
-      "lon": -75.611
+      "lon": -75.611,
+      "depth": {
+        "to10ftYd": 355,
+        "to15ftYd": 437,
+        "confidence": "medium"
+      }
     },
     {
       "name": "Cape Hatteras",
       "state": "NC",
       "lat": 35.23,
-      "lon": -75.528
+      "lon": -75.528,
+      "depth": {
+        "to10ftYd": 273,
+        "to15ftYd": 383,
+        "confidence": "low"
+      }
     },
     {
       "name": "Ocracoke",
       "state": "NC",
       "lat": 35.105,
-      "lon": -75.966
+      "lon": -75.966,
+      "depth": {
+        "to10ftYd": 191,
+        "to15ftYd": 273,
+        "confidence": "high"
+      }
     },
     {
       "name": "Atlantic Beach",
       "state": "NC",
       "lat": 34.698,
-      "lon": -76.74
+      "lon": -76.74,
+      "depth": {
+        "to10ftYd": 219,
+        "to15ftYd": 410,
+        "confidence": "high"
+      }
     },
     {
       "name": "Emerald Isle",
       "state": "NC",
       "lat": 34.661,
-      "lon": -77.047
+      "lon": -77.047,
+      "depth": {
+        "to10ftYd": 219,
+        "to15ftYd": 301,
+        "confidence": "high"
+      }
     },
     {
       "name": "Topsail Beach",
       "state": "NC",
       "lat": 34.366,
-      "lon": -77.629
+      "lon": -77.629,
+      "depth": {
+        "to10ftYd": 219,
+        "to15ftYd": 273,
+        "confidence": "high"
+      }
     },
     {
       "name": "Wrightsville Beach",
       "state": "NC",
       "lat": 34.209,
-      "lon": -77.796
+      "lon": -77.796,
+      "depth": {
+        "to10ftYd": 137,
+        "to15ftYd": 328,
+        "confidence": "high"
+      }
     },
     {
       "name": "Carolina Beach",
       "state": "NC",
       "lat": 34.035,
-      "lon": -77.893
+      "lon": -77.893,
+      "depth": {
+        "to10ftYd": 273,
+        "to15ftYd": 437,
+        "confidence": "high"
+      }
     },
     {
       "name": "Kure Beach",
       "state": "NC",
       "lat": 33.998,
-      "lon": -77.907
+      "lon": -77.907,
+      "depth": {
+        "to10ftYd": 137,
+        "to15ftYd": 273,
+        "confidence": "high"
+      }
     },
     {
       "name": "Fort Fisher",
       "state": "NC",
       "lat": 33.955,
-      "lon": -77.925
+      "lon": -77.925,
+      "depth": {
+        "to10ftYd": 437,
+        "to15ftYd": 711,
+        "confidence": "low"
+      }
     },
     {
       "name": "Holden Beach",
       "state": "NC",
       "lat": 33.912,
-      "lon": -78.302
+      "lon": -78.302,
+      "depth": {
+        "to10ftYd": 219,
+        "to15ftYd": 301,
+        "confidence": "high"
+      }
     },
     {
       "name": "Oak Island",
       "state": "NC",
       "lat": 33.906,
-      "lon": -78.16
+      "lon": -78.16,
+      "depth": {
+        "to10ftYd": 219,
+        "to15ftYd": 328,
+        "confidence": "medium"
+      }
     },
     {
       "name": "Ocean Isle Beach",
       "state": "NC",
       "lat": 33.889,
-      "lon": -78.432
+      "lon": -78.432,
+      "depth": {
+        "to10ftYd": 219,
+        "to15ftYd": 301,
+        "confidence": "high"
+      }
     },
     {
       "name": "Myrtle Beach",
       "state": "SC",
       "lat": 33.689,
-      "lon": -78.887
+      "lon": -78.887,
+      "depth": {
+        "to10ftYd": 137,
+        "to15ftYd": 246,
+        "confidence": "high"
+      }
     },
     {
       "name": "Isle of Palms",
       "state": "SC",
       "lat": 32.786,
-      "lon": -79.785
+      "lon": -79.785,
+      "depth": {
+        "to10ftYd": 355,
+        "to15ftYd": 1941,
+        "confidence": "high"
+      }
     },
     {
       "name": "Sullivan's Island",
       "state": "SC",
       "lat": 32.761,
-      "lon": -79.84
+      "lon": -79.84,
+      "depth": {
+        "to10ftYd": 164,
+        "to15ftYd": 1968,
+        "confidence": "low"
+      }
     },
     {
       "name": "Folly Beach",
       "state": "SC",
       "lat": 32.655,
-      "lon": -79.94
+      "lon": -79.94,
+      "depth": {
+        "to10ftYd": 355,
+        "to15ftYd": ">2543",
+        "confidence": "high"
+      }
     },
     {
       "name": "Kiawah Island",
       "state": "SC",
       "lat": 32.597,
-      "lon": -80.08
+      "lon": -80.08,
+      "depth": {
+        "to10ftYd": 465,
+        "to15ftYd": 1449,
+        "confidence": "medium"
+      }
     },
     {
       "name": "Edisto Beach",
       "state": "SC",
       "lat": 32.48,
-      "lon": -80.32
+      "lon": -80.32,
+      "depth": {
+        "to10ftYd": 574,
+        "to15ftYd": 2625,
+        "confidence": "medium"
+      }
     },
     {
       "name": "Hunting Island",
       "state": "SC",
       "lat": 32.375,
-      "lon": -80.43
+      "lon": -80.43,
+      "depth": {
+        "to10ftYd": ">2707",
+        "to15ftYd": ">2707",
+        "confidence": "medium"
+      }
     },
     {
       "name": "Hilton Head",
       "state": "SC",
       "lat": 32.15,
-      "lon": -80.74
+      "lon": -80.74,
+      "depth": {
+        "to10ftYd": 1886,
+        "to15ftYd": ">2187",
+        "confidence": "high"
+      }
     },
     {
       "name": "Tybee Island",
       "state": "GA",
       "lat": 32.006,
-      "lon": -80.845
+      "lon": -80.845,
+      "depth": {
+        "to10ftYd": 1066,
+        "to15ftYd": 2160,
+        "confidence": "high"
+      }
     },
     {
       "name": "St. Simons Island",
       "state": "GA",
       "lat": 31.15,
-      "lon": -81.367
+      "lon": -81.367,
+      "depth": {
+        "to10ftYd": 820,
+        "to15ftYd": 1449,
+        "confidence": "low"
+      }
     },
     {
       "name": "Jekyll Island",
       "state": "GA",
       "lat": 31.064,
-      "lon": -81.41
+      "lon": -81.41,
+      "depth": {
+        "to10ftYd": ">2078",
+        "to15ftYd": ">2078",
+        "confidence": "high"
+      }
     },
     {
       "name": "Amelia Island",
       "state": "FL",
       "lat": 30.67,
-      "lon": -81.43
+      "lon": -81.43,
+      "depth": {
+        "to10ftYd": 273,
+        "to15ftYd": 1640,
+        "confidence": "high"
+      }
     },
     {
       "name": "Little Talbot Island",
       "state": "FL",
       "lat": 30.405,
-      "lon": -81.405
+      "lon": -81.405,
+      "depth": {
+        "to10ftYd": 137,
+        "to15ftYd": 164,
+        "confidence": "high"
+      }
     },
     {
       "name": "Jacksonville Beach",
       "state": "FL",
       "lat": 30.286,
-      "lon": -81.391
+      "lon": -81.391,
+      "depth": {
+        "to10ftYd": 273,
+        "to15ftYd": 383,
+        "confidence": "high"
+      }
     },
     {
       "name": "St. Augustine Beach",
       "state": "FL",
       "lat": 29.857,
-      "lon": -81.263
+      "lon": -81.263,
+      "depth": {
+        "to10ftYd": 219,
+        "to15ftYd": 301,
+        "confidence": "medium"
+      }
     },
     {
       "name": "Matanzas Inlet",
       "state": "FL",
       "lat": 29.715,
-      "lon": -81.233
+      "lon": -81.233,
+      "depth": {
+        "to10ftYd": 55,
+        "to15ftYd": 301,
+        "confidence": "high"
+      }
     },
     {
       "name": "Flagler Beach",
       "state": "FL",
       "lat": 29.475,
-      "lon": -81.127
+      "lon": -81.127,
+      "depth": {
+        "to10ftYd": 164,
+        "to15ftYd": 301,
+        "confidence": "high"
+      }
     },
     {
       "name": "Daytona Beach",
       "state": "FL",
       "lat": 29.21,
-      "lon": -81.015
+      "lon": -81.015,
+      "depth": {
+        "to10ftYd": 328,
+        "to15ftYd": 437,
+        "confidence": "medium"
+      }
     },
     {
       "name": "New Smyrna Beach",
       "state": "FL",
       "lat": 29.024,
-      "lon": -80.915
+      "lon": -80.915,
+      "depth": {
+        "confidence": "inlet"
+      }
     },
     {
       "name": "Playalinda Beach",
       "state": "FL",
       "lat": 28.655,
-      "lon": -80.632
+      "lon": -80.632,
+      "depth": {
+        "to10ftYd": 191,
+        "to15ftYd": 246,
+        "confidence": "high"
+      }
     },
     {
       "name": "Cocoa Beach",
       "state": "FL",
       "lat": 28.32,
-      "lon": -80.607
+      "lon": -80.607,
+      "depth": {
+        "to10ftYd": 219,
+        "to15ftYd": 383,
+        "confidence": "high"
+      }
     },
     {
       "name": "Melbourne Beach",
       "state": "FL",
       "lat": 28.065,
-      "lon": -80.555
+      "lon": -80.555,
+      "depth": {
+        "to10ftYd": 191,
+        "to15ftYd": 355,
+        "confidence": "high"
+      }
     },
     {
       "name": "Sebastian Inlet",
       "state": "FL",
       "lat": 27.861,
-      "lon": -80.447
+      "lon": -80.447,
+      "depth": {
+        "to10ftYd": 191,
+        "to15ftYd": 683,
+        "confidence": "low"
+      }
     },
     {
       "name": "Vero Beach",
       "state": "FL",
       "lat": 27.638,
-      "lon": -80.373
+      "lon": -80.373,
+      "depth": {
+        "to10ftYd": 273,
+        "to15ftYd": 383,
+        "confidence": "medium"
+      }
     },
     {
       "name": "Fort Pierce",
       "state": "FL",
       "lat": 27.47,
-      "lon": -80.29
+      "lon": -80.29,
+      "depth": {
+        "confidence": "inlet"
+      }
     },
     {
       "name": "Hutchinson Island",
       "state": "FL",
       "lat": 27.248,
-      "lon": -80.2
+      "lon": -80.2,
+      "depth": {
+        "to10ftYd": 219,
+        "to15ftYd": 355,
+        "confidence": "medium"
+      }
     },
     {
       "name": "Jupiter Inlet",
       "state": "FL",
       "lat": 26.944,
-      "lon": -80.072
+      "lon": -80.072,
+      "depth": {
+        "confidence": "inlet"
+      }
     },
     {
       "name": "Juno Beach",
       "state": "FL",
       "lat": 26.88,
-      "lon": -80.054
+      "lon": -80.054,
+      "depth": {
+        "to10ftYd": 109,
+        "to15ftYd": 410,
+        "confidence": "high"
+      }
     },
     {
       "name": "Palm Beach",
       "state": "FL",
       "lat": 26.705,
-      "lon": -80.034
+      "lon": -80.034,
+      "depth": {
+        "to10ftYd": 164,
+        "to15ftYd": 355,
+        "confidence": "high"
+      }
     },
     {
       "name": "Boca Raton",
       "state": "FL",
       "lat": 26.35,
-      "lon": -80.068
+      "lon": -80.068,
+      "depth": {
+        "to10ftYd": 109,
+        "to15ftYd": 191,
+        "confidence": "high"
+      }
     },
     {
       "name": "Pompano Beach",
       "state": "FL",
       "lat": 26.233,
-      "lon": -80.088
+      "lon": -80.088,
+      "depth": {
+        "to10ftYd": 109,
+        "to15ftYd": 246,
+        "confidence": "high"
+      }
     },
     {
       "name": "Fort Lauderdale",
       "state": "FL",
       "lat": 26.122,
-      "lon": -80.103
+      "lon": -80.103,
+      "depth": {
+        "to10ftYd": 55,
+        "to15ftYd": 82,
+        "confidence": "high"
+      }
     },
     {
       "name": "Haulover",
       "state": "FL",
       "lat": 25.9,
-      "lon": -80.12
+      "lon": -80.12,
+      "depth": {
+        "confidence": "inlet"
+      }
     },
     {
       "name": "Miami Beach",
       "state": "FL",
       "lat": 25.79,
-      "lon": -80.128
+      "lon": -80.128,
+      "depth": {
+        "to10ftYd": 164,
+        "to15ftYd": 219,
+        "confidence": "high"
+      }
     },
     {
       "name": "Islamorada",
       "state": "FL",
       "lat": 24.924,
-      "lon": -80.627
+      "lon": -80.627,
+      "depth": {
+        "to10ftYd": 1722,
+        "to15ftYd": 2215,
+        "confidence": "low"
+      }
     },
     {
       "name": "Marathon",
       "state": "FL",
       "lat": 24.71,
-      "lon": -81.09
+      "lon": -81.09,
+      "depth": {
+        "to10ftYd": 656,
+        "to15ftYd": ">2734",
+        "confidence": "low"
+      }
     },
     {
       "name": "Bahia Honda",
       "state": "FL",
       "lat": 24.656,
-      "lon": -81.277
+      "lon": -81.277,
+      "depth": {
+        "to10ftYd": 437,
+        "to15ftYd": 547,
+        "confidence": "low"
+      }
     },
     {
       "name": "Key West",
       "state": "FL",
       "lat": 24.548,
-      "lon": -81.795
+      "lon": -81.795,
+      "depth": {
+        "to10ftYd": 601,
+        "to15ftYd": 875,
+        "confidence": "low"
+      }
     }
-  ]
+  ],
+  "speciesByMonth": {
+    "ME": [
+      [
+        "sd",
+        "000012333210"
+      ],
+      [
+        "st",
+        "000000111000"
+      ]
+    ],
+    "NH": [
+      [
+        "sd",
+        "000012333210"
+      ],
+      [
+        "st",
+        "000000111000"
+      ]
+    ],
+    "MA": [
+      [
+        "sb",
+        "000002332000"
+      ],
+      [
+        "st",
+        "000001332100"
+      ],
+      [
+        "du",
+        "000000221000"
+      ],
+      [
+        "sm",
+        "000012221100"
+      ],
+      [
+        "sd",
+        "000121000121"
+      ]
+    ],
+    "RI": [
+      [
+        "sb",
+        "000001332000"
+      ],
+      [
+        "sm",
+        "000023332100"
+      ],
+      [
+        "st",
+        "000001221000"
+      ],
+      [
+        "du",
+        "000000111000"
+      ],
+      [
+        "sd",
+        "000121000121"
+      ]
+    ],
+    "CT": [
+      [
+        "sb",
+        "000001221000"
+      ],
+      [
+        "st",
+        "000001221000"
+      ],
+      [
+        "sm",
+        "000022222100"
+      ],
+      [
+        "du",
+        "000000111000"
+      ],
+      [
+        "sd",
+        "000121000121"
+      ]
+    ],
+    "NY": [
+      [
+        "sb",
+        "000012333100"
+      ],
+      [
+        "du",
+        "000001332100"
+      ],
+      [
+        "st",
+        "000012332100"
+      ],
+      [
+        "sm",
+        "000222222110"
+      ],
+      [
+        "bt",
+        "000000012100"
+      ],
+      [
+        "sd",
+        "211200000112"
+      ]
+    ],
+    "NJ": [
+      [
+        "sb",
+        "000012333210"
+      ],
+      [
+        "st",
+        "000012333210"
+      ],
+      [
+        "du",
+        "000001222100"
+      ],
+      [
+        "sm",
+        "000222222110"
+      ],
+      [
+        "bt",
+        "000000012100"
+      ],
+      [
+        "sp",
+        "000000012100"
+      ],
+      [
+        "sd",
+        "221200000122"
+      ]
+    ],
+    "DE": [
+      [
+        "st",
+        "000123333210"
+      ],
+      [
+        "sb",
+        "000123333210"
+      ],
+      [
+        "du",
+        "000001222100"
+      ],
+      [
+        "sm",
+        "001232222210"
+      ],
+      [
+        "sd",
+        "221100000122"
+      ]
+    ],
+    "MD": [
+      [
+        "sb",
+        "000013333210"
+      ],
+      [
+        "st",
+        "000123332100"
+      ],
+      [
+        "du",
+        "000001222100"
+      ],
+      [
+        "sm",
+        "001222222110"
+      ],
+      [
+        "bt",
+        "000000112100"
+      ],
+      [
+        "sd",
+        "221100000122"
+      ]
+    ],
+    "VA": [
+      [
+        "sb",
+        "000123333210"
+      ],
+      [
+        "sn",
+        "000013332100"
+      ],
+      [
+        "du",
+        "000012222100"
+      ],
+      [
+        "st",
+        "000122221100"
+      ],
+      [
+        "sm",
+        "012321112210"
+      ],
+      [
+        "bt",
+        "000001221100"
+      ],
+      [
+        "sh",
+        "000001221000"
+      ],
+      [
+        "sd",
+        "221000000012"
+      ]
+    ],
+    "NC": [
+      [
+        "bt",
+        "000123333210"
+      ],
+      [
+        "sn",
+        "000133333210"
+      ],
+      [
+        "sb",
+        "111223332211"
+      ],
+      [
+        "bo",
+        "000122222210"
+      ],
+      [
+        "du",
+        "001221000110"
+      ],
+      [
+        "st",
+        "112211000111"
+      ],
+      [
+        "sp",
+        "000012222100"
+      ],
+      [
+        "bu",
+        "000001222100"
+      ],
+      [
+        "ti",
+        "000001111100"
+      ],
+      [
+        "sm",
+        "221100000012"
+      ],
+      [
+        "sd",
+        "332100000123"
+      ]
+    ],
+    "SC": [
+      [
+        "sn",
+        "000233333320"
+      ],
+      [
+        "bt",
+        "001233333210"
+      ],
+      [
+        "sb",
+        "000122332100"
+      ],
+      [
+        "bo",
+        "000222222210"
+      ],
+      [
+        "sp",
+        "000122222100"
+      ],
+      [
+        "bu",
+        "000012222100"
+      ],
+      [
+        "ft",
+        "000012222100"
+      ],
+      [
+        "sh",
+        "000012221000"
+      ],
+      [
+        "du",
+        "000110000110"
+      ],
+      [
+        "st",
+        "111100000011"
+      ],
+      [
+        "sm",
+        "221100000012"
+      ]
+    ],
+    "GA": [
+      [
+        "sn",
+        "000233333320"
+      ],
+      [
+        "bo",
+        "001233333221"
+      ],
+      [
+        "bt",
+        "001233333210"
+      ],
+      [
+        "sb",
+        "000112221100"
+      ],
+      [
+        "bu",
+        "000012222100"
+      ],
+      [
+        "sp",
+        "000122222100"
+      ],
+      [
+        "ft",
+        "000012222100"
+      ],
+      [
+        "st",
+        "111000000011"
+      ],
+      [
+        "sm",
+        "211000000012"
+      ]
+    ],
+    "FL": [
+      [
+        "bt",
+        "333332222333"
+      ],
+      [
+        "le",
+        "332100000123"
+      ],
+      [
+        "bu",
+        "112333332211"
+      ],
+      [
+        "nu",
+        "112333332211"
+      ],
+      [
+        "sp",
+        "332100000123"
+      ],
+      [
+        "sn",
+        "222222222222"
+      ],
+      [
+        "bo",
+        "222222222222"
+      ],
+      [
+        "ti",
+        "111122222111"
+      ],
+      [
+        "sb",
+        "221100000012"
+      ],
+      [
+        "gh",
+        "112210000000"
+      ]
+    ]
+  }
 }
