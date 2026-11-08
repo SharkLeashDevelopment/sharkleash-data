@@ -161,8 +161,9 @@
    "draft": true,
    "summary": "No size, bag or possession limit on blacktip and bull sharks in state waters (since Jan 2025). The old April–June closure is gone.",
    "drone": {
-    "status": "limit",
-    "note": "State law bans using any aircraft or other aerial surveillance to assist in taking finfish (R.S. 56:320), which likely covers drone bait drops. No LDWF guidance on drones specifically. Drones are banned on LDWF refuges and WMAs."
+    "status": "ban",
+    "note": "State law makes it illegal to use any aircraft or other aerial surveillance to assist in taking finfish (R.S. 56:320(G)), and a drone drop fits that wording. Violators can lose the aircraft, gear and fish. No LDWF guidance on drones specifically. Drones are also banned on LDWF refuges and WMAs.",
+    "url": "https://legis.la.gov/legis/LawPrint.aspx?d=105199"
    },
    "rules": [
     {
@@ -196,8 +197,8 @@
      "url": "https://regulations.justia.com/states/louisiana/title-76/part-vii/chapter-3/section-vii-357"
     },
     {
-     "title": "La. R.S. 56:320 (aircraft ban)",
-     "url": "https://codes.findlaw.com/la/revised-statutes/la-rev-stat-tit-56-sect-320/"
+     "title": "La. R.S. 56:320(G) (aircraft ban)",
+     "url": "https://legis.la.gov/legis/LawPrint.aspx?d=105199"
     }
    ]
   },
@@ -209,8 +210,9 @@
    "draft": true,
    "summary": "1 shark per day, total-length minimums (24\"/64\"/99\"). Circle hooks required when fishing for sharks. TPWD says drone bait drops are a federal violation.",
    "drone": {
-    "status": "limit",
-    "note": "TPWD (Dec 8, 2025): drone bait drops violate the federal Airborne Hunting Act (50 CFR 19.11), a federal not state violation, with no state charges. Disputed by anglers. Padre Island National Seashore: no drones."
+    "status": "ban",
+    "note": "TPWD (Dec 8, 2025): drone bait drops violate the federal Airborne Hunting Act (50 CFR 19.11), a federal not state violation, with no state charges. Disputed by anglers. Padre Island National Seashore: no drones.",
+    "url": "https://tpwd.texas.gov/newsmedia/releases/?req=20251208a"
    },
    "rules": [
     {
