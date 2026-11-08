@@ -1,60 +1,2356 @@
-<!-- GULF TEST state accordion -->
-<style>
-#slall{max-width:900px;margin:40px auto;padding:0 16px;color:#e9eef3;font-family:inherit}
-#slall h2{font-size:clamp(24px,4vw,34px);font-weight:900;margin:0 0 6px;color:#fff}
-#slall .intro{color:rgba(255,255,255,.7);margin:0 0 18px;line-height:1.5}
-#slall details{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12);border-radius:14px;margin:0 0 10px;padding:0 16px}
-#slall summary{cursor:pointer;padding:14px 0;font-weight:800;font-size:17px;list-style:none;display:flex;gap:10px;align-items:center;flex-wrap:wrap}
-#slall summary::-webkit-details-marker{display:none}
-#slall summary::after{content:"+";margin-left:auto;color:#ff5a5a;font-size:22px}
-#slall details[open] summary::after{content:"–"}
-#slall .cat{font-size:11px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;padding:3px 8px;border-radius:999px;color:#111}
-#slall h3{font-size:17px;margin:0;font-weight:800;color:#fff;display:inline}
-#slall p.tag{margin:0 0 10px;color:rgba(255,255,255,.85);line-height:1.5}
-#slall dl{margin:0 0 10px}#slall dt{font-weight:800;color:#ff5a5a;margin-top:8px;font-size:14px}
-#slall dd{margin:2px 0 0;line-height:1.5;color:rgba(255,255,255,.85);font-size:15px}
-#slall .src{font-size:13px;margin:6px 0 16px;color:rgba(255,255,255,.6)}#slall .src a{color:#7cc8ff}
-#slall .note{font-size:13px;color:rgba(255,255,255,.55);margin-top:14px}
-</style>
-<section id="slall" aria-labelledby="slall-h">
-<h2 id="slall-h">Shore shark fishing laws, state by state</h2>
-<p class="intro">Every state's rules for shark fishing from the beach, pier or jetty: licenses, which sharks you can keep, gear rules, drone bait drops and local beach bans. Last checked Nov 2, 2026.</p>
-<details id="laws-me"><summary><h3>Maine shark fishing laws</h3><span class="cat" style="background:#b46cff">Sharks largely off-limits from shore</span></summary>
-<p class="tag">Maine: Taking listed coastal sharks is prohibited in state waters, possibly including catch-and-release.</p><dl><dt>License</dt><dd>Saltwater Recreational Fishing Registry (annual).</dd><dt>Keep</dt><dd>No sand tiger, white, dusky, sandbar, shortfin mako or other species Maine lists as 'coastal sharks'; they can't be taken in state waters. Blue, porbeagle and common thresher aren't on that list: an HMS permit is required to fish for them in federal waters, and state-waters rules for them are unclear, so check with Maine DMR before keeping any shark.</dd><dt>Gear</dt><dd>No Maine shark gear rule (taking coastal sharks is banned). Circle hooks are required when bait-fishing for striped bass, and a circle hook is good practice for any shark.</dd><dt>Note</dt><dd>Maine defines "take" to include attempting to remove a fish from the water, so deliberately targeting a listed coastal shark, even for catch-and-release, may be illegal. Ask Maine DMR first.</dd><dt>Local</dt><dd>No town ordinances found. Acadia NP: no drones.</dd><dt>Drone bait drops: no state ban</dt><dd>No state drone rule found, but Maine bans taking coastal sharks. Acadia NP: no drones.</dd></dl><p class="src">Sources: <a href="https://www.maine.gov/dmr/sites/maine.gov.dmr/files/inline-files/Chapter50_08162022.pdf" target="_blank" rel="noopener">Maine DMR – Chapter 50 (coastal sharks)</a> · <a href="https://www.maine.gov/dmr/fisheries/recreational/fishing-regulations-tips" target="_blank" rel="noopener">Maine DMR – Fishing regulations</a></p></details>
-<details id="laws-nh"><summary><h3>New Hampshire shark fishing laws</h3><span class="cat" style="background:#00c2ff">Standard rules</span></summary>
-<p class="tag">New Hampshire: circle hooks with bait, mako and other prohibited sharks are off-limits.</p><dl><dt>License</dt><dd>NH Saltwater Recreational Fishing License required, age 16 and older.</dd><dt>Gear</dt><dd>Non-offset, corrodible circle hooks required when fishing for sharks with bait (Fis 603.20). No shortfin mako, white, sand tiger, dusky or other prohibited sharks. Head, fins and tail must stay attached. Blue, thresher and porbeagle: no state size or bag limit.</dd><dt>Local</dt><dd>No town shark ordinances found. State seacoast beaches (Hampton, North Beach, North Hampton, Jenness, Wallis Sands) ban fishing 9 a.m.-5:30 p.m. when lifeguards are on duty. Odiorne Point, Rye Harbor and the Hampton River entrance are exempt.</dd><dt>Drone bait drops: no state ban</dt><dd>No state drone rule found. Seacoast state beaches: no fishing during guarded hours.</dd></dl><p class="src">Sources: <a href="https://regulations.justia.com/states/new-hampshire/fis/chapter-fis-600/part-fis-603/section-fis-603-20" target="_blank" rel="noopener">NH Fis 603.20 – Sharks</a> · <a href="https://www.wildlife.nh.gov/marine-licenses-and-permits" target="_blank" rel="noopener">NH Fish and Game – Marine licenses</a> · <a href="https://regulations.justia.com/states/new-hampshire/res/chapter-res-7300/part-res-7303/section-res-7303-09" target="_blank" rel="noopener">NH Res 7303.09 – Seacoast beaches</a></p></details>
-<details id="laws-ma"><summary><h3>Massachusetts shark fishing laws</h3><span class="cat" style="background:#ff2b2b">Statewide shore-shark rules</span></summary>
-<p class="tag">Massachusetts: Leader + hook limits on the Cape, no mechanized bait deployment statewide.</p><dl><dt>License</dt><dd>Recreational saltwater fishing permit, age 16 and older ($10; free at 60+). CT, NH and RI licenses accepted.</dd><dt>Keep</dt><dd>Shore: 1 permitted shark per trip (54" fork length minimum; hammerheads 78"), plus 1 bonnethead, 1 Atlantic sharpnose and 1 smooth dogfish. Prohibited species can't be kept; release them.</dd><dt>Don't target</dt><dd>White sharks: attracting or capturing one is illegal without a special permit. Also prohibited: sand tiger, sandbar, dusky.</dd><dt>Gear</dt><dd>Plymouth Beach around Cape Cod Bay, the Outer Cape, Chatham &amp; Monomoy (including jetties and piers): no wire leader over 18" combined with a hook gap over 5/8". Nantucket's 2026 emergency rule expired at the end of October.</dd><dt>Bait deployment</dt><dd>Shore anglers can't use drones, RC boats, bait cannons or other motorized devices to deploy baits. Kayaks and kites are allowed for now (DMF has proposed casting-only).</dd><dt>Chumming</dt><dd>With the heavy hook + leader setup: no chumming sunrise to sunset.</dd><dt>Watch</dt><dd>Nantucket's emergency rule expired Oct 2026. DMF has proposed statewide rules for 2027: leader/hook limit statewide (leader possibly 12"), casting-only bait deployment, a ban on liquid or blood chum, and no striped bass as bait. Public hearing expected this winter.</dd><dt>Drone bait drops: banned</dt><dd>Banned statewide from shore: no drones, RC boats or bait cannons. <a href="https://law.cornell.edu/regulations/massachusetts/322-CMR-4-09" target="_blank" rel="noopener">Read the law ↗</a></dd></dl><p class="src">Sources: <a href="https://www.law.cornell.edu/regulations/massachusetts/322-CMR-6-37" target="_blank" rel="noopener">322 CMR 6.37 – Coastal sharks</a> · <a href="https://law.cornell.edu/regulations/massachusetts/322-CMR-4-09" target="_blank" rel="noopener">322 CMR 4.09 – Bait deployment</a> · <a href="https://www.mass.gov/saltwater-regulations" target="_blank" rel="noopener">MA DMF – Saltwater regulations</a> · <a href="https://www.mass.gov/doc/october-2026-mfac-materials/download" target="_blank" rel="noopener">MA DMF – Oct 2026 MFAC materials</a></p></details>
-<details id="laws-ri"><summary><h3>Rhode Island shark fishing laws</h3><span class="cat" style="background:#00c2ff">Standard rules</span></summary>
-<p class="tag">Rhode Island: 1 shark per person per day from shore.</p><dl><dt>License</dt><dd>Recreational saltwater license, age 16 and older (NY, CT, MA and ME licenses accepted).</dd><dt>Keep</dt><dd>1 shark/person/day (54" fork length minimum; hammerheads 78"), plus 1 bonnethead and 1 Atlantic sharpnose. Smooth dogfish unlimited. Keep head, tail and fins attached.</dd><dt>Don't keep</dt><dd>Sandbar, sand tiger, dusky, white, shortfin mako and others.</dd><dt>Gear</dt><dd>Corrodible circle hooks (except flies/lures).</dd><dt>Drone bait drops: no state ban</dt><dd>No state drone rule found.</dd></dl><p class="src">Sources: <a href="https://rules.sos.ri.gov/regulations/part/250-90-00-3" target="_blank" rel="noopener">RI 250-RICR-90-00-3 (§3.18 sharks)</a> · <a href="https://www.dem.ri.gov/programs/managementservices/licenses/saltwater-fishing-licenses.php" target="_blank" rel="noopener">RI DEM – Saltwater licenses</a></p></details>
-<details id="laws-ct"><summary><h3>Connecticut shark fishing laws</h3><span class="cat" style="background:#b46cff">Sharks largely off-limits from shore</span></summary>
-<p class="tag">Connecticut: Only dogfish can be taken without a federal HMS permit, and that permit is issued to boats.</p><dl><dt>License</dt><dd>Marine Waters Fishing License, age 16 and older (ME, MA, RI and NY licenses accepted).</dd><dt>Keep</dt><dd>Smooth and spiny dogfish only (no size or bag limit). Every other shark requires a federal HMS permit to take, possess or land, and that permit is issued to boats. Check with CT DEEP before targeting sharks from shore.</dd><dt>Don't keep</dt><dd>Sand tiger, sandbar, dusky, white and other prohibited sharks: don't take; release immediately without avoidable injury.</dd><dt>Gear</dt><dd>Non-offset, non-stainless circle hooks with bait (federal HMS rule; CT requires an HMS permit for sharks).</dd><dt>Local</dt><dd>No shark ordinances found. Town beaches often restrict non-resident access; state parks set their own fishing areas.</dd><dt>Drone bait drops: no state ban</dt><dd>No state drone rule found, but only dogfish can be taken from shore.</dd></dl><p class="src">Sources: <a href="https://portal.ct.gov/DEEP/Fishing/Saltwater-Fishing-Guide/Species-Regulations" target="_blank" rel="noopener">CT DEEP – Species regulations</a> · <a href="https://portal.ct.gov/deep/fishing/saltwater-fishing-guide/licenses-and-permits" target="_blank" rel="noopener">CT DEEP – Licenses</a></p></details>
-<details id="laws-ny"><summary><h3>New York shark fishing laws</h3><span class="cat" style="background:#ff2b2b">Statewide shore-shark rules</span></summary>
-<p class="tag">New York: 18" max metal leader on baited hooks from shore. Cast only. No chum (shellfish/crustaceans excepted).</p><dl><dt>License</dt><dd>Free Recreational Marine Fishing Registry.</dd><dt>Keep</dt><dd>54" fork length for most species (hammerheads 78"). 1 shark per trip, plus 1 sharpnose and 1 bonnethead.</dd><dt>Don't land</dt><dd>A shark you're not keeping must stay fully in the water, gills submerged. Prohibited: sandbar, dusky, sand tiger, white, shortfin mako.</dd><dt>Gear</dt><dd>Shore: metal leader 18" max on a baited hook. Non-offset, non-stainless circle hooks. Wire or bolt cutters on hand.</dd><dt>Bait deployment</dt><dd>Casting with rod and reel only. No kayaks, no drones.</dd><dt>Chumming</dt><dd>No chumming from shore (mollusks and crustaceans excepted).</dd><dt>Local</dt><dd>Fire Island NS: no drones.</dd><dt>Drone bait drops: banned</dt><dd>Banned from shore: baits must be cast with rod and reel. <a href="https://dec.ny.gov/things-to-do/saltwater-fishing/recreational-shark-fishing" target="_blank" rel="noopener">Read the law ↗</a></dd></dl><p class="src">Sources: <a href="https://dec.ny.gov/things-to-do/saltwater-fishing/recreational-shark-fishing" target="_blank" rel="noopener">NY DEC – Recreational shark fishing</a> · <a href="https://home.nps.gov/fiis/learn/management/upload/FIIS-Compendium-2023_SIGNED_SM.pdf" target="_blank" rel="noopener">Fire Island NS – Compendium</a></p></details>
-<details id="laws-nj"><summary><h3>New Jersey shark fishing laws</h3><span class="cat" style="background:#00c2ff">Standard rules</span></summary>
-<p class="tag">New Jersey: Using a drone to take wildlife (Bay Head police apply this to drone-dropped shark baits) is a disorderly persons offense. Shark rules under review.</p><dl><dt>License</dt><dd>Free saltwater registry.</dd><dt>Keep</dt><dd>1 shark per person per trip (no shortfin mako). 54" fork length (hammerheads 78"). Large coastal &amp; hammerhead sharks closed in state waters May 15 – July 15.</dd><dt>Don't land</dt><dd>Prohibited sharks must be released immediately without removing them from the water. Prohibited include sandbar, sand tiger, dusky, white and others.</dd><dt>Gear</dt><dd>Non-offset, non-stainless circle hooks (except flies/lures).</dd><dt>Bait deployment</dt><dd>Knowingly using a drone to take wildlife is a disorderly persons offense statewide (N.J.S.A. 2C:40-28(d)). Bay Head police began enforcing it against drone-dropped shark baits in August 2026.</dd><dt>Watch</dt><dd>NJ Marine Fisheries Council shark advisory committee (2026).</dd><dt>Drone bait drops: banned</dt><dd>Banned: using a drone to take wildlife is an offense statewide (enforced on shark baits since Aug 2026). <a href="https://law.justia.com/codes/new-jersey/title-2c/section-2c-40-28/" target="_blank" rel="noopener">Read the law ↗</a></dd></dl><p class="src">Sources: <a href="https://www.eregulations.com/newjersey/fishing/saltwater/sharks" target="_blank" rel="noopener">2026 NJ Marine Digest – Sharks</a> · <a href="https://law.justia.com/codes/new-jersey/title-2c/section-2c-40-28/" target="_blank" rel="noopener">N.J.S.A. 2C:40-28 (drones)</a></p></details>
-<details id="laws-de"><summary><h3>Delaware shark fishing laws</h3><span class="cat" style="background:#00c2ff">Standard rules</span></summary>
-<p class="tag">Delaware: Big coastal sharks closed May 15 – July 15.</p><dl><dt>Keep</dt><dd>1 non-prohibited shark/day from shore (54" fork length, hammerheads 78"), plus 1 bonnethead and 1 sharpnose. No shortfin mako.</dd><dt>Closed season</dt><dd>May 15 – July 15: no silky, tiger, blacktip, spinner, bull, lemon, nurse or hammerheads.</dd><dt>Don't land</dt><dd>Unlawful to remove a sandbar or any prohibited shark from the water.</dd><dt>Gear</dt><dd>Non-offset, corrodible circle hooks (except flies/lures).</dd><dt>Watch</dt><dd>Proposed DE State Parks rule (2026) would ban paddling baits out and using drones/RC boats to drop baits in state parks (Cape Henlopen, Delaware Seashore, Fenwick Island). Not yet adopted.</dd><dt>Drone bait drops: no state ban</dt><dd>No state ban yet. A drone and RC-boat ban for state parks has been proposed.</dd></dl><p class="src">Sources: <a href="https://archive.regulations.delaware.gov/AdminCode/title7/3000/3500/3541.shtml" target="_blank" rel="noopener">7 DE Admin. Code 3541</a> · <a href="https://documents.dnrec.delaware.gov/Admin/Hearings/2025-R-P-0017/Exhibits/DNREC-Presentation.pdf" target="_blank" rel="noopener">DNREC – Proposed state parks rule</a></p></details>
-<details id="laws-md"><summary><h3>Maryland shark fishing laws</h3><span class="cat" style="background:#ffb020">Local bans or limits</span></summary>
-<p class="tag">Maryland: Ocean City: no daytime surf fishing in season, no chum, cast only.</p><dl><dt>Keep</dt><dd>54" fork length for most permitted species. Shortfin mako and oceanic whitetip codified as no-retention (2026). Sand tiger is not a permitted species.</dd><dt>Don't land</dt><dd>A shark you'll release can't be removed from the water.</dd><dt>Gear</dt><dd>Corrodible (non-stainless) circle hook, except flies/lures. Carry a device that can quickly cut the leader or hook.</dd><dt>Ocean City</dt><dd>No surf fishing 10 a.m.–5:30 p.m. from the Friday of Memorial Day weekend to Sept 30, or within 50 yards of beachgoers. Year-round: no chumming or blood bait; baits must be cast (no kayaking or drones). Fines up to $1,000.</dd><dt>Local</dt><dd>Assateague Island National Seashore: no drones; bait cannons only in the OSV zone (KM 22–27); no fishing in lifeguarded zones in season.</dd><dt>Drone bait drops: restricted</dt><dd>Ocean City: cast only, no drones. Assateague NS: no drones.</dd></dl><p class="src">Sources: <a href="https://regs.maryland.gov/us/md/exec/comar/08.02.22.02" target="_blank" rel="noopener">COMAR 08.02.22.02</a> · <a href="https://oceancitymd.gov/oc/surf-fishing-in-ocean-city/" target="_blank" rel="noopener">Ocean City – Surf fishing</a> · <a href="https://www.nps.gov/asis/learn/management/upload/2026-ASIS-Superintendents-Compendium-02Mar26.pdf" target="_blank" rel="noopener">Assateague NS – 2026 Compendium</a></p></details>
-<details id="laws-va"><summary><h3>Virginia shark fishing laws</h3><span class="cat" style="background:#ffb020">Local bans or limits</span></summary>
-<p class="tag">Virginia: Virginia Beach bans shark fishing on its beaches. Statewide: 1 permitted shark/day from shore, 54" fork length (hammerheads 78").</p><dl><dt>License</dt><dd>Saltwater fishing license.</dd><dt>Keep</dt><dd>1 permitted shark/day, plus 1 bonnethead and 1 sharpnose. 54" fork length min (hammerheads 78"); no size limit on sharpnose, bonnethead, finetooth or blacknose.</dd><dt>Don't keep</dt><dd>Sandbar, sand tiger, dusky, white and others.</dd><dt>Gear</dt><dd>Non-offset, non-stainless circle hooks (except flies/lures).</dd><dt>Virginia Beach</dt><dd>NO SHARK FISHING on city beaches, the boardwalk or city parks (City of Virginia Beach beach rules).</dd><dt>Oceanfront &amp; Sandbridge hours</dt><dd>No fishing of any kind from the sand 42nd St–Rudee Inlet or at Little Island Park (Sandbridge), May 1–Sept 30: 10 a.m.–4 p.m. weekdays, 10 a.m.–6 p.m. weekends and holidays.</dd><dt>Drone bait drops: no state ban</dt><dd>No state drone rule found. Virginia Beach bans shark fishing on its beaches entirely.</dd></dl><p class="src">Sources: <a href="https://law.lis.virginia.gov/admincodefull/title4/agency20/chapter490" target="_blank" rel="noopener">4VAC20-490 – Sharks</a> · <a href="https://cvb.virginiabeach.gov/resort-management/beach-rules" target="_blank" rel="noopener">Virginia Beach – Beach rules</a> · <a href="https://mrc.virginia.gov/regulations/recfish-licensing.shtm" target="_blank" rel="noopener">VMRC – Licensing</a></p></details>
-<details id="laws-nc"><summary><h3>North Carolina shark fishing laws</h3><span class="cat" style="background:#ffb020">Local bans or limits</span></summary>
-<p class="tag">North Carolina: Town baiting bans and seasonal daytime limits.</p><dl><dt>License</dt><dd>Coastal Recreational Fishing License.</dd><dt>Keep</dt><dd>1 shark/day from shore, plus 1 sharpnose and 1 bonnethead. 54" fork length for most species (no minimum for sharpnose/bonnethead); hammerheads 78". No sandbar, silky, sand tiger, dusky, mako or oceanic whitetip.</dd><dt>Gear</dt><dd>Non-stainless, non-offset circle hook with natural bait.</dd><dt>Tournaments</dt><dd>May 1 – Oct 31: no shore-based shark tournaments at Carolina Beach, Caswell, Holden, Kure, Oak Island, Ocean Isle, Sunset Beach, Bald Head.</dd><dt>Nags Head</dt><dd>No baiting that attracts sharks. No shark targeting 9 a.m.–5 p.m., May 1 – Oct 31 (drone-assisted included). (Being confirmed with the town.)</dd><dt>Wrightsville Beach</dt><dd>No bait that attracts sharks from shore or piers.</dd><dt>Jennette's Pier</dt><dd>Shark fishing prohibited at all times. (Being confirmed with the pier.)</dd><dt>Cape Hatteras NS</dt><dd>No drones. No bait cannons or launchers.</dd><dt>Drone bait drops: restricted</dt><dd>Cape Hatteras NS: no drones or bait launchers. Nags Head daytime limits include drone fishing.</dd></dl><p class="src">Sources: <a href="https://www.deq.nc.gov/marine-fisheries/fisheries-management-proclamations/2026/shark-commercial-and-recreational-opening-date-and-harvest-restrictions/open" target="_blank" rel="noopener">NCDMF Proclamation FF-3-2026</a> · <a href="https://house.ncleg.gov/EnactedLegislation/Statutes/HTML/BySection/Chapter_113/GS_113-192.html" target="_blank" rel="noopener">G.S. 113-192</a> · <a href="https://codelibrary.amlegal.com/codes/wrightsvillebeach/latest/wright_nc/0-0-0-3678" target="_blank" rel="noopener">Wrightsville Beach § 92.14</a> · <a href="https://home.nps.gov/caha/learn/management/upload/2026-CAHA-Compendium-6-4-26-508-Compliant.pdf" target="_blank" rel="noopener">Cape Hatteras NS – 2026 Compendium</a></p></details>
-<details id="laws-sc"><summary><h3>South Carolina shark fishing laws</h3><span class="cat" style="background:#ffb020">Local bans or limits</span></summary>
-<p class="tag">South Carolina: Shark fishing banned on beaches and piers in Horry County and Myrtle Beach.</p><dl><dt>License</dt><dd>Saltwater Recreational Fishing License.</dd><dt>Keep</dt><dd>Federal limits apply in state waters: 1 shark per vessel per trip, 54" fork length (hammerheads 78"). Sharpnose and bonnethead 1 per person per trip, no size limit. Limits may change when NOAA finalizes its 2026 shark rule.</dd><dt>Gear</dt><dd>No state circle-hook rule specific to sharks found; non-offset, non-stainless circle hooks recommended. Required (4/0+ with natural bait) when targeting red drum, cobia or tarpon.</dd><dt>Horry County / Myrtle Beach</dt><dd>Shark fishing from any pier, beach or shore is prohibited in unincorporated Horry County and Myrtle Beach; North Myrtle Beach and Surfside Beach also ban it. Release any shark caught right away. (County ban challenged in court in 2025; still in effect.)</dd><dt>Pawleys Island</dt><dd>No targeting sharks when surf fishing, May 1 – Sept 30. (Being confirmed with the town.)</dd><dt>Myrtle Beach State Park</dt><dd>No shark fishing from the pier.</dd><dt>Folly Beach</dt><dd>No catching or attempting to catch sharks from the pier.</dd><dt>Drone bait drops: no state ban</dt><dd>No state drone rule found. Horry County and Myrtle Beach ban shark fishing entirely.</dd></dl><p class="src">Sources: <a href="https://horrycountysc.gov/about-our-beaches" target="_blank" rel="noopener">Horry County – About our beaches</a> · <a href="https://www.fisheries.noaa.gov/atlantic-highly-migratory-species/recreational-atlantic-shark-fishery-statuses-and-limits" target="_blank" rel="noopener">NOAA – Recreational shark limits</a> · <a href="https://southcarolinaparks.com/myrtle-beach/things-to-do" target="_blank" rel="noopener">Myrtle Beach State Park</a></p></details>
-<details id="laws-ga"><summary><h3>Georgia shark fishing laws</h3><span class="cat" style="background:#ffb020">Local bans or limits</span></summary>
-<p class="tag">Georgia: Tybee Island bans shark fishing from beaches, docks and piers.</p><dl><dt>License</dt><dd>Georgia fishing license + free SIP permit.</dd><dt>Keep</dt><dd>1 shark per angler or per boat, whichever is less, 54" fork length (hammerheads 78"). Plus 1 sharpnose/bonnethead per angler, 30" fork length. No mako (federal retention limit is zero). Sandbar, sand tiger, dusky and other prohibited sharks: no harvest.</dd><dt>Gear</dt><dd>When fishing for sharks: non-offset, non-stainless circle hooks (except flies/lures). Rod and reel or handline only.</dd><dt>Tybee Island</dt><dd>Shark fishing prohibited from public beaches, docks and piers (city ordinance). Violations can bring fines and possible jail time.</dd><dt>Cumberland Island NS</dt><dd>No drones.</dd><dt>Drone bait drops: no state ban</dt><dd>No state drone rule found. Cumberland Island NS: no drones. Tybee bans shark fishing.</dd></dl><p class="src">Sources: <a href="https://www.law.cornell.edu/regulations/georgia/Ga-Comp-R-Regs-R-391-2-4-.04" target="_blank" rel="noopener">Ga. Rule 391-2-4-.04</a> · <a href="https://gadnrle.org/SIPpermit" target="_blank" rel="noopener">GA DNR – SIP permit</a> · <a href="https://www.nps.gov/cuis/learn/management/superintendent-s-compendium.htm" target="_blank" rel="noopener">Cumberland Island NS – Compendium</a></p></details>
-<details id="laws-fl"><summary><h3>Florida shark fishing laws</h3><span class="cat" style="background:#ff2b2b">Statewide shore-shark rules</span></summary>
-<p class="tag">Florida: Free shore-based shark permit + course required (16+). No chumming from the beach.</p><dl><dt>Permit</dt><dd>Saltwater license (unless exempt) + free annual Shore-based Shark Fishing Permit and Shark-Smart course, age 16+. Anglers 65+ who are license-exempt still need the permit. Under 16: course only, unless fishing with a permit holder.</dd><dt>Permit triggers</dt><dd>Targeting sharks from shore, or fishing any species with: wire leader over 4 ft, a fighting belt/harness, or non-cast bait deployment (kayak) with a hook 1.5" or larger.</dd><dt>Keep</dt><dd>1 shark/person/day, 2/vessel max. Blacktip, sharpnose, blacknose, bonnethead, finetooth: no minimum size. Bull, spinner, nurse and other allowed sharks: 54" fork length minimum.</dd><dt>Don't land</dt><dd>Prohibited sharks stay in the water, gills submerged; cut the leader if the hook will delay release. Includes hammerheads, tiger, lemon, sandbar, dusky, sand tiger.</dd><dt>Gear</dt><dd>Non-offset, non-stainless circle hooks with natural bait. Carry a cutting device. No multiple hooks with natural bait.</dd><dt>Chumming</dt><dd>Prohibited from the beach for any species.</dd><dt>Local</dt><dd>State law reserves fishing rules to the state; cities and counties can only ban fishing on property they own (parks, piers) for public safety. Martin County's beach rules are being rewritten (a draft would ban fishing at guarded beach parks during guarded hours; no vote yet). Miami Beach voted a land-based shark fishing ban in Feb 2026; its current status is unclear. Canaveral NS: no drones.</dd><dt>Gulf coast (draft)</dt><dd>Same statewide rules as Florida's Atlantic side: free shore-based shark permit + Shark-Smart course (16+), circle hooks, no chumming from the beach. Local: Walton County: no intentional shark fishing, chumming or bloodbaiting on the beach or within 2,500 ft of shore (Sec. 22-54, re-adopted Nov 2025). Okaloosa County: no shark fishing or chumming on county-owned beaches (Okaloosa Island, James Lee Park) or the Okaloosa Island Pier. Gulf Islands National Seashore: no drones.</dd><dt>Drone bait drops: restricted</dt><dd>Allowed by the state, but drone or kayak drops with a 1.5"+ hook require the shore-based shark permit. Canaveral NS: no drones.</dd></dl><p class="src">Sources: <a href="https://myfwc.com/fishing/saltwater/recreational/sharks/" target="_blank" rel="noopener">FWC – Sharks</a> · <a href="https://www.law.cornell.edu/regulations/florida/Fla-Admin-Code-Ann-R-68B-44-006" target="_blank" rel="noopener">FAC 68B-44.006</a> · <a href="https://flsenate.gov/Laws/Statutes/2025/0379.2412" target="_blank" rel="noopener">§379.2412 F.S. (preemption)</a></p></details>
-<details id="laws-al"><summary><h3>Alabama shark fishing laws</h3><span class="cat" style="background:#ffb020">Local bans or limits</span><span class="cat" style="background:#ffb020">Draft · checking sources</span></summary>
-<p class="tag">Alabama: Circle hooks with natural bait; no chumming or bloodbaiting for sharks within 300 ft of shore or on public piers. Shark fishing is banned on Gulf State Park beaches and pier and on Orange Beach city beaches.</p><dl><dt>License</dt><dd>Alabama saltwater license (16+); no shark permit.</dd><dt>Keep</dt><dd>1 Atlantic sharpnose + 1 bonnethead + 1 other shark per person per day. Hammerheads (great, scalloped, smooth) 78" fork length; others 54" fork length; no minimum for sharpnose or bonnethead.</dd><dt>Don't keep</dt><dd>Sandbar (unless you hold a NOAA research permit), dusky, sand tiger, shortfin and longfin mako, white, night, bignose and the rest of the state prohibited list. Tiger, lemon and hammerheads can be kept at legal size. Silky is prohibited in federal waters.</dd><dt>Gear</dt><dd>Non-offset, non-stainless circle hooks with natural bait. No surf fishing for sharks in a way that creates an unsafe condition for swimmers or beachgoers.</dd><dt>Chumming</dt><dd>No chumming or bloodbaiting for sharks within 300 ft of the shoreline, on a public pier, or on a private pier where it creates an unsafe condition.</dd><dt>Local</dt><dd>Gulf State Park: shark fishing and shark gear banned on the park's public beach and saltwater pier (except permitted managed shark-fishing nights on the pier). Orange Beach: the city says shark fishing and chumming are prohibited on the beach.</dd><dt>Drone bait drops: no state ban</dt><dd>No state drone rule found. Refuges generally ban drone launches.</dd></dl><p class="src">Sources: <a href="https://regulations.justia.com/states/alabama/title-220/chapter-220-3/section-220-3-77" target="_blank" rel="noopener">Ala. Admin. Code 220-3-.77 (shark fishing)</a> · <a href="https://www.outdooralabama.com/sites/default/files/Recreational-Fishing-Handout_6-2025.pdf" target="_blank" rel="noopener">ADCNR – Recreational limits (June 2025)</a> · <a href="https://regulations.justia.com/states/alabama/title-220/chapter-220-5/section-220-5-02" target="_blank" rel="noopener">Ala. Admin. Code 220-5-.02 (Gulf State Park)</a> · <a href="https://orangebeachal.gov/m/faq?cat=25" target="_blank" rel="noopener">Orange Beach – Beach regulations FAQ</a></p></details>
-<details id="laws-ms"><summary><h3>Mississippi shark fishing laws</h3><span class="cat" style="background:#00c2ff">Standard rules</span><span class="cat" style="background:#ffb020">Draft · checking sources</span></summary>
-<p class="tag">Mississippi: Total-length minimums: 25" small coastal, 37" large coastal. No state circle-hook or chumming rule for sharks.</p><dl><dt>License</dt><dd>Mississippi saltwater license; no shark permit.</dd><dt>Keep</dt><dd>Small coastal (sharpnose, finetooth, blacknose, bonnethead): 4 combined per person per day, 25" total length. Large coastal (blacktip, spinner, bull, tiger, lemon, nurse, hammerheads): 1 per person, max 3 per vessel, 37" total length.</dd><dt>Don't keep</dt><dd>Sand tiger, bigeye sand tiger, dusky, sandbar, silky, oceanic whitetip, white, whale, basking, night, bignose and the rest of the state protected list.</dd><dt>Gear</dt><dd>No circle-hook requirement for sharks (circle hooks still recommended).</dd><dt>Drone bait drops: no state ban</dt><dd>No state drone rule found. Gulf Islands National Seashore (Ship, Horn, Petit Bois, Cat islands): no drones.</dd></dl><p class="src">Sources: <a href="https://www.law.cornell.edu/regulations/mississippi/22-Miss-Code-R-SS-3-07-7-1" target="_blank" rel="noopener">22 Miss. Code R. 3-07-7.1 (recreational limits)</a> · <a href="https://www.eregulations.com/mississippi/fishing/saltwater/sharks" target="_blank" rel="noopener">MDMR – Shark regulations</a></p></details>
-<details id="laws-la"><summary><h3>Louisiana shark fishing laws</h3><span class="cat" style="background:#00c2ff">Standard rules</span><span class="cat" style="background:#ffb020">Draft · checking sources</span></summary>
-<p class="tag">Louisiana: No size, bag or possession limit on blacktip and bull sharks in state waters (since Jan 2025). The old April–June closure is gone.</p><dl><dt>License</dt><dd>Basic + saltwater license; no shark permit.</dd><dt>Keep</dt><dd>Blacktip and bull: no size, bag or possession limit in state waters. Atlantic sharpnose and bonnethead: 1 each per person per trip, no size limit. All other legal sharks: 54" fork length, 1 per vessel per trip.</dd><dt>Don't keep</dt><dd>Sandbar, silky, shortfin mako, and all federally prohibited species (sand tiger, dusky, white and others).</dd><dt>Gear</dt><dd>No circle-hook requirement for sharks (reef fish only).</dd><dt>Watch</dt><dd>Federal waters (past 3 nm for sharks) have different limits.</dd><dt>Drone bait drops: banned</dt><dd>State law makes it illegal to use any aircraft or other aerial surveillance to assist in taking finfish (R.S. 56:320(G)), and a drone drop fits that wording. Violators can lose the aircraft, gear and fish. No LDWF guidance on drones specifically. Drones are also banned on LDWF refuges and WMAs. <a href="https://legis.la.gov/legis/LawPrint.aspx?d=105199" target="_blank" rel="noopener">Read the law ↗</a></dd></dl><p class="src">Sources: <a href="https://www.wlf.louisiana.gov/news/new-shark-regulations-are-now-in-effect" target="_blank" rel="noopener">LDWF – New shark regulations (Jan 2025)</a> · <a href="https://regulations.justia.com/states/louisiana/title-76/part-vii/chapter-3/section-vii-357" target="_blank" rel="noopener">LAC 76:VII.357 (shark harvest rules)</a> · <a href="https://legis.la.gov/legis/LawPrint.aspx?d=105199" target="_blank" rel="noopener">La. R.S. 56:320(G) (aircraft ban)</a></p></details>
-<details id="laws-tx"><summary><h3>Texas shark fishing laws</h3><span class="cat" style="background:#ff2b2b">Statewide shore-shark rules</span><span class="cat" style="background:#ffb020">Draft · checking sources</span></summary>
-<p class="tag">Texas: 1 shark per day, total-length minimums (24"/64"/99"). Circle hooks required when fishing for sharks. TPWD says drone bait drops are a federal violation.</p><dl><dt>License</dt><dd>Fishing license + saltwater endorsement; no shark permit.</dd><dt>Keep</dt><dd>1 shark per day, all species combined (possession 2). Sharpnose, blacktip, bonnethead 24" total length; hammerheads 99"; all other allowable sharks 64". Only the head may be removed; keep the rest of the carcass and tail intact.</dd><dt>Don't keep</dt><dd>Sandbar, sand tiger, dusky, silky, oceanic whitetip, white and others: release immediately without removing from the water. Unsure of the species? Release it.</dd><dt>Gear</dt><dd>Non-offset, non-stainless circle hooks required when fishing for sharks in state waters.</dd><dt>Drone bait drops: banned</dt><dd>TPWD (Dec 8, 2025): drone bait drops violate the federal Airborne Hunting Act (50 CFR 19.11), a federal not state violation, with no state charges. Disputed by anglers. Padre Island National Seashore: no drones. <a href="https://tpwd.texas.gov/newsmedia/releases/?req=20251208a" target="_blank" rel="noopener">Read the law ↗</a></dd></dl><p class="src">Sources: <a href="https://tpwd.texas.gov/regulations/outdoor-annual/fishing/saltwater-fishing/bag-length-limits/shark-bag-length-limits/" target="_blank" rel="noopener">TPWD – Shark bag &amp; length limits</a> · <a href="https://tpwd.texas.gov/newsmedia/releases/?req=20251208a" target="_blank" rel="noopener">TPWD – Drone guidance (Dec 2025)</a> · <a href="https://www.nps.gov/pais/learn/management/lawsandpolicies.htm" target="_blank" rel="noopener">Padre Island NS – Laws &amp; Policies</a></p></details>
-<p class="note">For information only, not legal advice. Rules change and local ordinances vary; confirm with the state agency before you fish.</p>
-</section>
-<script>(function(){function o(){var h=location.hash;if(h.indexOf('#laws-')===0){var d=document.querySelector(h);if(d){d.open=true;d.scrollIntoView({block:'start'});}}}o();window.addEventListener('hashchange',o);})();</script>
+{
+ "_readme": "SharkLeash data for the laws map, conditions panel and Shark Water. Edit text, then set lastVerified (YYYY-MM-DD) on anything you checked. States: category must be a key in categories; drone.status is ban, limit or none. Beaches: state is the 2-letter code; depth is yards from the low-tide waterline to 10 ft and 15 ft (write \">2543\" when it never gets that deep within that distance; confidence is high, medium, low or inlet; noDrones names the park where drones are banned and keeps the beach out of the Best Beaches Top 5, unless privateLaunch is true, meaning anglers can launch from private property next to the park, so the beach stays in with a private-property note). speciesByMonth: per state, [species code, 12 digits Jan..Dec] where 0 absent, 1 occasional, 2 common, 3 peak.",
+ "lastVerified": "2026-11-02",
+ "coastWide": "most states require non-offset, non-stainless (corrodible) circle hooks when fishing sharks with natural bait, and it's good practice everywhere. Shortfin mako can't be kept. Sandbar, sand tiger and dusky are prohibited and the most common from shore. Keep any shark you're releasing in the water. Drones are banned in every National Seashore, and FAA drone rules apply everywhere.",
+ "categories": {
+  "strict": {
+   "label": "Statewide shore-shark rules",
+   "color": "#ff2b2b"
+  },
+  "local": {
+   "label": "Local bans or limits",
+   "color": "#ffb020"
+  },
+  "closed": {
+   "label": "Sharks largely off-limits from shore",
+   "color": "#b46cff"
+  },
+  "standard": {
+   "label": "Standard rules",
+   "color": "#00c2ff"
+  }
+ },
+ "droneLabels": {
+  "ban": "Drone bait drops: banned",
+  "limit": "Drone bait drops: restricted",
+  "none": "Drone bait drops: no state ban"
+ },
+ "states": [
+  {
+   "name": "Maine",
+   "ab": "ME",
+   "category": "closed",
+   "lastVerified": "2026-11-02",
+   "summary": "Taking listed coastal sharks is prohibited in state waters, possibly including catch-and-release.",
+   "drone": {
+    "status": "none",
+    "note": "No state drone rule found, but Maine bans taking coastal sharks. Acadia NP: no drones."
+   },
+   "rules": [
+    {
+     "label": "License",
+     "text": "Saltwater Recreational Fishing Registry (annual)."
+    },
+    {
+     "label": "Keep",
+     "text": "No sand tiger, white, dusky, sandbar, shortfin mako or other species Maine lists as 'coastal sharks'; they can't be taken in state waters. Blue, porbeagle and common thresher aren't on that list: an HMS permit is required to fish for them in federal waters, and state-waters rules for them are unclear, so check with Maine DMR before keeping any shark."
+    },
+    {
+     "label": "Gear",
+     "text": "No Maine shark gear rule (taking coastal sharks is banned). Circle hooks are required when bait-fishing for striped bass, and a circle hook is good practice for any shark."
+    },
+    {
+     "label": "Note",
+     "text": "Maine defines \"take\" to include attempting to remove a fish from the water, so deliberately targeting a listed coastal shark, even for catch-and-release, may be illegal. Ask Maine DMR first."
+    },
+    {
+     "label": "Local",
+     "text": "No town ordinances found. Acadia NP: no drones."
+    }
+   ],
+   "sources": [
+    {
+     "title": "Maine DMR – Chapter 50 (coastal sharks)",
+     "url": "https://www.maine.gov/dmr/sites/maine.gov.dmr/files/inline-files/Chapter50_08162022.pdf"
+    },
+    {
+     "title": "Maine DMR – Fishing regulations",
+     "url": "https://www.maine.gov/dmr/fisheries/recreational/fishing-regulations-tips"
+    }
+   ]
+  },
+  {
+   "name": "New Hampshire",
+   "ab": "NH",
+   "category": "standard",
+   "lastVerified": "2026-11-02",
+   "summary": "circle hooks with bait, mako and other prohibited sharks are off-limits.",
+   "drone": {
+    "status": "none",
+    "note": "No state drone rule found. Seacoast state beaches: no fishing during guarded hours."
+   },
+   "rules": [
+    {
+     "label": "License",
+     "text": "NH Saltwater Recreational Fishing License required, age 16 and older."
+    },
+    {
+     "label": "Gear",
+     "text": "Non-offset, corrodible circle hooks required when fishing for sharks with bait (Fis 603.20). No shortfin mako, white, sand tiger, dusky or other prohibited sharks. Head, fins and tail must stay attached. Blue, thresher and porbeagle: no state size or bag limit."
+    },
+    {
+     "label": "Local",
+     "text": "No town shark ordinances found. State seacoast beaches (Hampton, North Beach, North Hampton, Jenness, Wallis Sands) ban fishing 9 a.m.-5:30 p.m. when lifeguards are on duty. Odiorne Point, Rye Harbor and the Hampton River entrance are exempt."
+    }
+   ],
+   "sources": [
+    {
+     "title": "NH Fis 603.20 – Sharks",
+     "url": "https://regulations.justia.com/states/new-hampshire/fis/chapter-fis-600/part-fis-603/section-fis-603-20"
+    },
+    {
+     "title": "NH Fish and Game – Marine licenses",
+     "url": "https://www.wildlife.nh.gov/marine-licenses-and-permits"
+    },
+    {
+     "title": "NH Res 7303.09 – Seacoast beaches",
+     "url": "https://regulations.justia.com/states/new-hampshire/res/chapter-res-7300/part-res-7303/section-res-7303-09"
+    }
+   ]
+  },
+  {
+   "name": "Massachusetts",
+   "ab": "MA",
+   "category": "strict",
+   "lastVerified": "2026-11-02",
+   "summary": "Leader + hook limits on the Cape, no mechanized bait deployment statewide.",
+   "drone": {
+    "status": "ban",
+    "note": "Banned statewide from shore: no drones, RC boats or bait cannons.",
+    "url": "https://law.cornell.edu/regulations/massachusetts/322-CMR-4-09"
+   },
+   "rules": [
+    {
+     "label": "License",
+     "text": "Recreational saltwater fishing permit, age 16 and older ($10; free at 60+). CT, NH and RI licenses accepted."
+    },
+    {
+     "label": "Keep",
+     "text": "Shore: 1 permitted shark per trip (54\" fork length minimum; hammerheads 78\"), plus 1 bonnethead, 1 Atlantic sharpnose and 1 smooth dogfish. Prohibited species can't be kept; release them."
+    },
+    {
+     "label": "Don't target",
+     "text": "White sharks: attracting or capturing one is illegal without a special permit. Also prohibited: sand tiger, sandbar, dusky."
+    },
+    {
+     "label": "Gear",
+     "text": "Plymouth Beach around Cape Cod Bay, the Outer Cape, Chatham & Monomoy (including jetties and piers): no wire leader over 18\" combined with a hook gap over 5/8\". Nantucket's 2026 emergency rule expired at the end of October."
+    },
+    {
+     "label": "Bait deployment",
+     "text": "Shore anglers can't use drones, RC boats, bait cannons or other motorized devices to deploy baits. Kayaks and kites are allowed for now (DMF has proposed casting-only)."
+    },
+    {
+     "label": "Chumming",
+     "text": "With the heavy hook + leader setup: no chumming sunrise to sunset."
+    },
+    {
+     "label": "Watch",
+     "text": "Nantucket's emergency rule expired Oct 2026. DMF has proposed statewide rules for 2027: leader/hook limit statewide (leader possibly 12\"), casting-only bait deployment, a ban on liquid or blood chum, and no striped bass as bait. Public hearing expected this winter."
+    }
+   ],
+   "sources": [
+    {
+     "title": "322 CMR 6.37 – Coastal sharks",
+     "url": "https://www.law.cornell.edu/regulations/massachusetts/322-CMR-6-37"
+    },
+    {
+     "title": "322 CMR 4.09 – Bait deployment",
+     "url": "https://law.cornell.edu/regulations/massachusetts/322-CMR-4-09"
+    },
+    {
+     "title": "MA DMF – Saltwater regulations",
+     "url": "https://www.mass.gov/saltwater-regulations"
+    },
+    {
+     "title": "MA DMF – Oct 2026 MFAC materials",
+     "url": "https://www.mass.gov/doc/october-2026-mfac-materials/download"
+    }
+   ]
+  },
+  {
+   "name": "Rhode Island",
+   "ab": "RI",
+   "category": "standard",
+   "lastVerified": "2026-11-02",
+   "summary": "1 shark per person per day from shore.",
+   "drone": {
+    "status": "none",
+    "note": "No state drone rule found."
+   },
+   "rules": [
+    {
+     "label": "License",
+     "text": "Recreational saltwater license, age 16 and older (NY, CT, MA and ME licenses accepted)."
+    },
+    {
+     "label": "Keep",
+     "text": "1 shark/person/day (54\" fork length minimum; hammerheads 78\"), plus 1 bonnethead and 1 Atlantic sharpnose. Smooth dogfish unlimited. Keep head, tail and fins attached."
+    },
+    {
+     "label": "Don't keep",
+     "text": "Sandbar, sand tiger, dusky, white, shortfin mako and others."
+    },
+    {
+     "label": "Gear",
+     "text": "Corrodible circle hooks (except flies/lures)."
+    }
+   ],
+   "sources": [
+    {
+     "title": "RI 250-RICR-90-00-3 (§3.18 sharks)",
+     "url": "https://rules.sos.ri.gov/regulations/part/250-90-00-3"
+    },
+    {
+     "title": "RI DEM – Saltwater licenses",
+     "url": "https://www.dem.ri.gov/programs/managementservices/licenses/saltwater-fishing-licenses.php"
+    }
+   ]
+  },
+  {
+   "name": "Connecticut",
+   "ab": "CT",
+   "category": "closed",
+   "lastVerified": "2026-11-02",
+   "summary": "Only dogfish can be taken without a federal HMS permit, and that permit is issued to boats.",
+   "drone": {
+    "status": "none",
+    "note": "No state drone rule found, but only dogfish can be taken from shore."
+   },
+   "rules": [
+    {
+     "label": "License",
+     "text": "Marine Waters Fishing License, age 16 and older (ME, MA, RI and NY licenses accepted)."
+    },
+    {
+     "label": "Keep",
+     "text": "Smooth and spiny dogfish only (no size or bag limit). Every other shark requires a federal HMS permit to take, possess or land, and that permit is issued to boats. Check with CT DEEP before targeting sharks from shore."
+    },
+    {
+     "label": "Don't keep",
+     "text": "Sand tiger, sandbar, dusky, white and other prohibited sharks: don't take; release immediately without avoidable injury."
+    },
+    {
+     "label": "Gear",
+     "text": "Non-offset, non-stainless circle hooks with bait (federal HMS rule; CT requires an HMS permit for sharks)."
+    },
+    {
+     "label": "Local",
+     "text": "No shark ordinances found. Town beaches often restrict non-resident access; state parks set their own fishing areas."
+    }
+   ],
+   "sources": [
+    {
+     "title": "CT DEEP – Species regulations",
+     "url": "https://portal.ct.gov/DEEP/Fishing/Saltwater-Fishing-Guide/Species-Regulations"
+    },
+    {
+     "title": "CT DEEP – Licenses",
+     "url": "https://portal.ct.gov/deep/fishing/saltwater-fishing-guide/licenses-and-permits"
+    }
+   ]
+  },
+  {
+   "name": "New York",
+   "ab": "NY",
+   "category": "strict",
+   "lastVerified": "2026-11-02",
+   "summary": "18\" max metal leader on baited hooks from shore. Cast only. No chum (shellfish/crustaceans excepted).",
+   "drone": {
+    "status": "ban",
+    "note": "Banned from shore: baits must be cast with rod and reel.",
+    "url": "https://dec.ny.gov/things-to-do/saltwater-fishing/recreational-shark-fishing"
+   },
+   "rules": [
+    {
+     "label": "License",
+     "text": "Free Recreational Marine Fishing Registry."
+    },
+    {
+     "label": "Keep",
+     "text": "54\" fork length for most species (hammerheads 78\"). 1 shark per trip, plus 1 sharpnose and 1 bonnethead."
+    },
+    {
+     "label": "Don't land",
+     "text": "A shark you're not keeping must stay fully in the water, gills submerged. Prohibited: sandbar, dusky, sand tiger, white, shortfin mako."
+    },
+    {
+     "label": "Gear",
+     "text": "Shore: metal leader 18\" max on a baited hook. Non-offset, non-stainless circle hooks. Wire or bolt cutters on hand."
+    },
+    {
+     "label": "Bait deployment",
+     "text": "Casting with rod and reel only. No kayaks, no drones."
+    },
+    {
+     "label": "Chumming",
+     "text": "No chumming from shore (mollusks and crustaceans excepted)."
+    },
+    {
+     "label": "Local",
+     "text": "Fire Island NS: no drones."
+    }
+   ],
+   "sources": [
+    {
+     "title": "NY DEC – Recreational shark fishing",
+     "url": "https://dec.ny.gov/things-to-do/saltwater-fishing/recreational-shark-fishing"
+    },
+    {
+     "title": "Fire Island NS – Compendium",
+     "url": "https://home.nps.gov/fiis/learn/management/upload/FIIS-Compendium-2023_SIGNED_SM.pdf"
+    }
+   ]
+  },
+  {
+   "name": "New Jersey",
+   "ab": "NJ",
+   "category": "standard",
+   "lastVerified": "2026-11-02",
+   "summary": "Using a drone to take wildlife (Bay Head police apply this to drone-dropped shark baits) is a disorderly persons offense. Shark rules under review.",
+   "drone": {
+    "status": "ban",
+    "note": "Banned: using a drone to take wildlife is an offense statewide (enforced on shark baits since Aug 2026).",
+    "url": "https://law.justia.com/codes/new-jersey/title-2c/section-2c-40-28/"
+   },
+   "rules": [
+    {
+     "label": "License",
+     "text": "Free saltwater registry."
+    },
+    {
+     "label": "Keep",
+     "text": "1 shark per person per trip (no shortfin mako). 54\" fork length (hammerheads 78\"). Large coastal & hammerhead sharks closed in state waters May 15 – July 15."
+    },
+    {
+     "label": "Don't land",
+     "text": "Prohibited sharks must be released immediately without removing them from the water. Prohibited include sandbar, sand tiger, dusky, white and others."
+    },
+    {
+     "label": "Gear",
+     "text": "Non-offset, non-stainless circle hooks (except flies/lures)."
+    },
+    {
+     "label": "Bait deployment",
+     "text": "Knowingly using a drone to take wildlife is a disorderly persons offense statewide (N.J.S.A. 2C:40-28(d)). Bay Head police began enforcing it against drone-dropped shark baits in August 2026."
+    },
+    {
+     "label": "Watch",
+     "text": "NJ Marine Fisheries Council shark advisory committee (2026)."
+    }
+   ],
+   "sources": [
+    {
+     "title": "2026 NJ Marine Digest – Sharks",
+     "url": "https://www.eregulations.com/newjersey/fishing/saltwater/sharks"
+    },
+    {
+     "title": "N.J.S.A. 2C:40-28 (drones)",
+     "url": "https://law.justia.com/codes/new-jersey/title-2c/section-2c-40-28/"
+    }
+   ]
+  },
+  {
+   "name": "Delaware",
+   "ab": "DE",
+   "category": "standard",
+   "lastVerified": "2026-11-02",
+   "summary": "Big coastal sharks closed May 15 – July 15.",
+   "drone": {
+    "status": "none",
+    "note": "No state ban yet. A drone and RC-boat ban for state parks has been proposed."
+   },
+   "rules": [
+    {
+     "label": "Keep",
+     "text": "1 non-prohibited shark/day from shore (54\" fork length, hammerheads 78\"), plus 1 bonnethead and 1 sharpnose. No shortfin mako."
+    },
+    {
+     "label": "Closed season",
+     "text": "May 15 – July 15: no silky, tiger, blacktip, spinner, bull, lemon, nurse or hammerheads."
+    },
+    {
+     "label": "Don't land",
+     "text": "Unlawful to remove a sandbar or any prohibited shark from the water."
+    },
+    {
+     "label": "Gear",
+     "text": "Non-offset, corrodible circle hooks (except flies/lures)."
+    },
+    {
+     "label": "Watch",
+     "text": "Proposed DE State Parks rule (2026) would ban paddling baits out and using drones/RC boats to drop baits in state parks (Cape Henlopen, Delaware Seashore, Fenwick Island). Not yet adopted."
+    }
+   ],
+   "sources": [
+    {
+     "title": "7 DE Admin. Code 3541",
+     "url": "https://archive.regulations.delaware.gov/AdminCode/title7/3000/3500/3541.shtml"
+    },
+    {
+     "title": "DNREC – Proposed state parks rule",
+     "url": "https://documents.dnrec.delaware.gov/Admin/Hearings/2025-R-P-0017/Exhibits/DNREC-Presentation.pdf"
+    }
+   ]
+  },
+  {
+   "name": "Maryland",
+   "ab": "MD",
+   "category": "local",
+   "lastVerified": "2026-11-02",
+   "summary": "Ocean City: no daytime surf fishing in season, no chum, cast only.",
+   "drone": {
+    "status": "limit",
+    "note": "Ocean City: cast only, no drones. Assateague NS: no drones."
+   },
+   "rules": [
+    {
+     "label": "Keep",
+     "text": "54\" fork length for most permitted species. Shortfin mako and oceanic whitetip codified as no-retention (2026). Sand tiger is not a permitted species."
+    },
+    {
+     "label": "Don't land",
+     "text": "A shark you'll release can't be removed from the water."
+    },
+    {
+     "label": "Gear",
+     "text": "Corrodible (non-stainless) circle hook, except flies/lures. Carry a device that can quickly cut the leader or hook."
+    },
+    {
+     "label": "Ocean City",
+     "text": "No surf fishing 10 a.m.–5:30 p.m. from the Friday of Memorial Day weekend to Sept 30, or within 50 yards of beachgoers. Year-round: no chumming or blood bait; baits must be cast (no kayaking or drones). Fines up to $1,000."
+    },
+    {
+     "label": "Local",
+     "text": "Assateague Island National Seashore: no drones; bait cannons only in the OSV zone (KM 22–27); no fishing in lifeguarded zones in season."
+    }
+   ],
+   "sources": [
+    {
+     "title": "COMAR 08.02.22.02",
+     "url": "https://regs.maryland.gov/us/md/exec/comar/08.02.22.02"
+    },
+    {
+     "title": "Ocean City – Surf fishing",
+     "url": "https://oceancitymd.gov/oc/surf-fishing-in-ocean-city/"
+    },
+    {
+     "title": "Assateague NS – 2026 Compendium",
+     "url": "https://www.nps.gov/asis/learn/management/upload/2026-ASIS-Superintendents-Compendium-02Mar26.pdf"
+    }
+   ]
+  },
+  {
+   "name": "Virginia",
+   "ab": "VA",
+   "category": "local",
+   "lastVerified": "2026-11-02",
+   "summary": "Virginia Beach bans shark fishing on its beaches. Statewide: 1 permitted shark/day from shore, 54\" fork length (hammerheads 78\").",
+   "drone": {
+    "status": "none",
+    "note": "No state drone rule found. Virginia Beach bans shark fishing on its beaches entirely."
+   },
+   "rules": [
+    {
+     "label": "License",
+     "text": "Saltwater fishing license."
+    },
+    {
+     "label": "Keep",
+     "text": "1 permitted shark/day, plus 1 bonnethead and 1 sharpnose. 54\" fork length min (hammerheads 78\"); no size limit on sharpnose, bonnethead, finetooth or blacknose."
+    },
+    {
+     "label": "Don't keep",
+     "text": "Sandbar, sand tiger, dusky, white and others."
+    },
+    {
+     "label": "Gear",
+     "text": "Non-offset, non-stainless circle hooks (except flies/lures)."
+    },
+    {
+     "label": "Virginia Beach",
+     "text": "NO SHARK FISHING on city beaches, the boardwalk or city parks (City of Virginia Beach beach rules)."
+    },
+    {
+     "label": "Oceanfront & Sandbridge hours",
+     "text": "No fishing of any kind from the sand 42nd St–Rudee Inlet or at Little Island Park (Sandbridge), May 1–Sept 30: 10 a.m.–4 p.m. weekdays, 10 a.m.–6 p.m. weekends and holidays."
+    }
+   ],
+   "sources": [
+    {
+     "title": "4VAC20-490 – Sharks",
+     "url": "https://law.lis.virginia.gov/admincodefull/title4/agency20/chapter490"
+    },
+    {
+     "title": "Virginia Beach – Beach rules",
+     "url": "https://cvb.virginiabeach.gov/resort-management/beach-rules"
+    },
+    {
+     "title": "VMRC – Licensing",
+     "url": "https://mrc.virginia.gov/regulations/recfish-licensing.shtm"
+    }
+   ]
+  },
+  {
+   "name": "North Carolina",
+   "ab": "NC",
+   "category": "local",
+   "lastVerified": "2026-11-02",
+   "summary": "Town baiting bans and seasonal daytime limits.",
+   "drone": {
+    "status": "limit",
+    "note": "Cape Hatteras NS: no drones or bait launchers. Nags Head daytime limits include drone fishing."
+   },
+   "rules": [
+    {
+     "label": "License",
+     "text": "Coastal Recreational Fishing License."
+    },
+    {
+     "label": "Keep",
+     "text": "1 shark/day from shore, plus 1 sharpnose and 1 bonnethead. 54\" fork length for most species (no minimum for sharpnose/bonnethead); hammerheads 78\". No sandbar, silky, sand tiger, dusky, mako or oceanic whitetip."
+    },
+    {
+     "label": "Gear",
+     "text": "Non-stainless, non-offset circle hook with natural bait."
+    },
+    {
+     "label": "Tournaments",
+     "text": "May 1 – Oct 31: no shore-based shark tournaments at Carolina Beach, Caswell, Holden, Kure, Oak Island, Ocean Isle, Sunset Beach, Bald Head."
+    },
+    {
+     "label": "Nags Head",
+     "text": "No baiting that attracts sharks. No shark targeting 9 a.m.–5 p.m., May 1 – Oct 31 (drone-assisted included). (Being confirmed with the town.)"
+    },
+    {
+     "label": "Wrightsville Beach",
+     "text": "No bait that attracts sharks from shore or piers."
+    },
+    {
+     "label": "Jennette's Pier",
+     "text": "Shark fishing prohibited at all times. (Being confirmed with the pier.)"
+    },
+    {
+     "label": "Cape Hatteras NS",
+     "text": "No drones. No bait cannons or launchers."
+    }
+   ],
+   "sources": [
+    {
+     "title": "NCDMF Proclamation FF-3-2026",
+     "url": "https://www.deq.nc.gov/marine-fisheries/fisheries-management-proclamations/2026/shark-commercial-and-recreational-opening-date-and-harvest-restrictions/open"
+    },
+    {
+     "title": "G.S. 113-192",
+     "url": "https://house.ncleg.gov/EnactedLegislation/Statutes/HTML/BySection/Chapter_113/GS_113-192.html"
+    },
+    {
+     "title": "Wrightsville Beach § 92.14",
+     "url": "https://codelibrary.amlegal.com/codes/wrightsvillebeach/latest/wright_nc/0-0-0-3678"
+    },
+    {
+     "title": "Cape Hatteras NS – 2026 Compendium",
+     "url": "https://home.nps.gov/caha/learn/management/upload/2026-CAHA-Compendium-6-4-26-508-Compliant.pdf"
+    }
+   ]
+  },
+  {
+   "name": "South Carolina",
+   "ab": "SC",
+   "category": "local",
+   "lastVerified": "2026-11-02",
+   "summary": "Shark fishing banned on beaches and piers in Horry County and Myrtle Beach.",
+   "drone": {
+    "status": "none",
+    "note": "No state drone rule found. Horry County and Myrtle Beach ban shark fishing entirely."
+   },
+   "rules": [
+    {
+     "label": "License",
+     "text": "Saltwater Recreational Fishing License."
+    },
+    {
+     "label": "Keep",
+     "text": "Federal limits apply in state waters: 1 shark per vessel per trip, 54\" fork length (hammerheads 78\"). Sharpnose and bonnethead 1 per person per trip, no size limit. Limits may change when NOAA finalizes its 2026 shark rule."
+    },
+    {
+     "label": "Gear",
+     "text": "No state circle-hook rule specific to sharks found; non-offset, non-stainless circle hooks recommended. Required (4/0+ with natural bait) when targeting red drum, cobia or tarpon."
+    },
+    {
+     "label": "Horry County / Myrtle Beach",
+     "text": "Shark fishing from any pier, beach or shore is prohibited in unincorporated Horry County and Myrtle Beach; North Myrtle Beach and Surfside Beach also ban it. Release any shark caught right away. (County ban challenged in court in 2025; still in effect.)"
+    },
+    {
+     "label": "Pawleys Island",
+     "text": "No targeting sharks when surf fishing, May 1 – Sept 30. (Being confirmed with the town.)"
+    },
+    {
+     "label": "Myrtle Beach State Park",
+     "text": "No shark fishing from the pier."
+    },
+    {
+     "label": "Folly Beach",
+     "text": "No catching or attempting to catch sharks from the pier."
+    }
+   ],
+   "sources": [
+    {
+     "title": "Horry County – About our beaches",
+     "url": "https://horrycountysc.gov/about-our-beaches"
+    },
+    {
+     "title": "NOAA – Recreational shark limits",
+     "url": "https://www.fisheries.noaa.gov/atlantic-highly-migratory-species/recreational-atlantic-shark-fishery-statuses-and-limits"
+    },
+    {
+     "title": "Myrtle Beach State Park",
+     "url": "https://southcarolinaparks.com/myrtle-beach/things-to-do"
+    }
+   ]
+  },
+  {
+   "name": "Georgia",
+   "ab": "GA",
+   "category": "local",
+   "lastVerified": "2026-11-02",
+   "summary": "Tybee Island bans shark fishing from beaches, docks and piers.",
+   "drone": {
+    "status": "none",
+    "note": "No state drone rule found. Cumberland Island NS: no drones. Tybee bans shark fishing."
+   },
+   "rules": [
+    {
+     "label": "License",
+     "text": "Georgia fishing license + free SIP permit."
+    },
+    {
+     "label": "Keep",
+     "text": "1 shark per angler or per boat, whichever is less, 54\" fork length (hammerheads 78\"). Plus 1 sharpnose/bonnethead per angler, 30\" fork length. No mako (federal retention limit is zero). Sandbar, sand tiger, dusky and other prohibited sharks: no harvest."
+    },
+    {
+     "label": "Gear",
+     "text": "When fishing for sharks: non-offset, non-stainless circle hooks (except flies/lures). Rod and reel or handline only."
+    },
+    {
+     "label": "Tybee Island",
+     "text": "Shark fishing prohibited from public beaches, docks and piers (city ordinance). Violations can bring fines and possible jail time."
+    },
+    {
+     "label": "Cumberland Island NS",
+     "text": "No drones."
+    }
+   ],
+   "sources": [
+    {
+     "title": "Ga. Rule 391-2-4-.04",
+     "url": "https://www.law.cornell.edu/regulations/georgia/Ga-Comp-R-Regs-R-391-2-4-.04"
+    },
+    {
+     "title": "GA DNR – SIP permit",
+     "url": "https://gadnrle.org/SIPpermit"
+    },
+    {
+     "title": "Cumberland Island NS – Compendium",
+     "url": "https://www.nps.gov/cuis/learn/management/superintendent-s-compendium.htm"
+    }
+   ]
+  },
+  {
+   "name": "Florida",
+   "ab": "FL",
+   "category": "strict",
+   "lastVerified": "2026-11-02",
+   "summary": "Free shore-based shark permit + course required (16+). No chumming from the beach.",
+   "drone": {
+    "status": "limit",
+    "note": "Allowed by the state, but drone or kayak drops with a 1.5\"+ hook require the shore-based shark permit. Canaveral NS: no drones."
+   },
+   "rules": [
+    {
+     "label": "Permit",
+     "text": "Saltwater license (unless exempt) + free annual Shore-based Shark Fishing Permit and Shark-Smart course, age 16+. Anglers 65+ who are license-exempt still need the permit. Under 16: course only, unless fishing with a permit holder."
+    },
+    {
+     "label": "Permit triggers",
+     "text": "Targeting sharks from shore, or fishing any species with: wire leader over 4 ft, a fighting belt/harness, or non-cast bait deployment (kayak) with a hook 1.5\" or larger."
+    },
+    {
+     "label": "Keep",
+     "text": "1 shark/person/day, 2/vessel max. Blacktip, sharpnose, blacknose, bonnethead, finetooth: no minimum size. Bull, spinner, nurse and other allowed sharks: 54\" fork length minimum."
+    },
+    {
+     "label": "Don't land",
+     "text": "Prohibited sharks stay in the water, gills submerged; cut the leader if the hook will delay release. Includes hammerheads, tiger, lemon, sandbar, dusky, sand tiger."
+    },
+    {
+     "label": "Gear",
+     "text": "Non-offset, non-stainless circle hooks with natural bait. Carry a cutting device. No multiple hooks with natural bait."
+    },
+    {
+     "label": "Chumming",
+     "text": "Prohibited from the beach for any species."
+    },
+    {
+     "label": "Local",
+     "text": "State law reserves fishing rules to the state; cities and counties can only ban fishing on property they own (parks, piers) for public safety. Martin County's beach rules are being rewritten (a draft would ban fishing at guarded beach parks during guarded hours; no vote yet). Miami Beach voted a land-based shark fishing ban in Feb 2026; its current status is unclear. Canaveral NS: no drones."
+    }
+   ],
+   "sources": [
+    {
+     "title": "FWC – Sharks",
+     "url": "https://myfwc.com/fishing/saltwater/recreational/sharks/"
+    },
+    {
+     "title": "FAC 68B-44.006",
+     "url": "https://www.law.cornell.edu/regulations/florida/Fla-Admin-Code-Ann-R-68B-44-006"
+    },
+    {
+     "title": "§379.2412 F.S. (preemption)",
+     "url": "https://flsenate.gov/Laws/Statutes/2025/0379.2412"
+    }
+   ]
+  }
+ ],
+ "beaches": [
+  {
+   "name": "Sand Beach (Acadia)",
+   "state": "ME",
+   "lat": 44.33,
+   "lon": -68.183,
+   "depth": {
+    "to10ftYd": 137,
+    "to15ftYd": 191,
+    "confidence": "high"
+   },
+   "noDrones": "Acadia NP"
+  },
+  {
+   "name": "Reid State Park",
+   "state": "ME",
+   "lat": 43.776,
+   "lon": -69.729,
+   "depth": {
+    "to10ftYd": 137,
+    "to15ftYd": 164,
+    "confidence": "medium"
+   }
+  },
+  {
+   "name": "Popham Beach",
+   "state": "ME",
+   "lat": 43.737,
+   "lon": -69.797,
+   "depth": {
+    "to10ftYd": 1668,
+    "to15ftYd": 1750,
+    "confidence": "low"
+   }
+  },
+  {
+   "name": "Higgins Beach",
+   "state": "ME",
+   "lat": 43.563,
+   "lon": -70.276,
+   "depth": {
+    "to10ftYd": 301,
+    "to15ftYd": 492,
+    "confidence": "high"
+   }
+  },
+  {
+   "name": "Old Orchard Beach",
+   "state": "ME",
+   "lat": 43.514,
+   "lon": -70.374,
+   "depth": {
+    "to10ftYd": 328,
+    "to15ftYd": 519,
+    "confidence": "high"
+   }
+  },
+  {
+   "name": "Ogunquit",
+   "state": "ME",
+   "lat": 43.249,
+   "lon": -70.592,
+   "depth": {
+    "to10ftYd": 383,
+    "to15ftYd": 519,
+    "confidence": "high"
+   }
+  },
+  {
+   "name": "Rye Harbor",
+   "state": "NH",
+   "lat": 42.991,
+   "lon": -70.743,
+   "depth": {
+    "to10ftYd": 328,
+    "to15ftYd": 547,
+    "confidence": "low"
+   }
+  },
+  {
+   "name": "Hampton Beach",
+   "state": "NH",
+   "lat": 42.909,
+   "lon": -70.811,
+   "depth": {
+    "to10ftYd": 273,
+    "to15ftYd": 383,
+    "confidence": "high"
+   }
+  },
+  {
+   "name": "Plum Island",
+   "state": "MA",
+   "lat": 42.76,
+   "lon": -70.797,
+   "depth": {
+    "to10ftYd": 137,
+    "to15ftYd": 410,
+    "confidence": "high"
+   }
+  },
+  {
+   "name": "Race Point",
+   "state": "MA",
+   "lat": 42.075,
+   "lon": -70.244,
+   "depth": {
+    "to10ftYd": 164,
+    "to15ftYd": 246,
+    "confidence": "medium"
+   },
+   "noDrones": "Cape Cod NS"
+  },
+  {
+   "name": "Nauset Beach",
+   "state": "MA",
+   "lat": 41.787,
+   "lon": -69.937,
+   "depth": {
+    "to10ftYd": 82,
+    "to15ftYd": 219,
+    "confidence": "high"
+   },
+   "noDrones": "Cape Cod NS"
+  },
+  {
+   "name": "Sandy Neck",
+   "state": "MA",
+   "lat": 41.739,
+   "lon": -70.38,
+   "depth": {
+    "to10ftYd": 109,
+    "to15ftYd": 301,
+    "confidence": "high"
+   }
+  },
+  {
+   "name": "Chatham",
+   "state": "MA",
+   "lat": 41.669,
+   "lon": -69.947,
+   "depth": {
+    "to10ftYd": 273,
+    "to15ftYd": 355,
+    "confidence": "low"
+   }
+  },
+  {
+   "name": "Horseneck Beach",
+   "state": "MA",
+   "lat": 41.505,
+   "lon": -71.026,
+   "depth": {
+    "to10ftYd": 109,
+    "to15ftYd": 246,
+    "confidence": "high"
+   }
+  },
+  {
+   "name": "Great Point (Nantucket)",
+   "state": "MA",
+   "lat": 41.39,
+   "lon": -70.048,
+   "depth": {
+    "to10ftYd": 55,
+    "to15ftYd": 55,
+    "confidence": "low"
+   }
+  },
+  {
+   "name": "Wasque (Martha's Vineyard)",
+   "state": "MA",
+   "lat": 41.351,
+   "lon": -70.452,
+   "depth": {
+    "to10ftYd": 301,
+    "to15ftYd": 437,
+    "confidence": "low"
+   }
+  },
+  {
+   "name": "Narragansett",
+   "state": "RI",
+   "lat": 41.43,
+   "lon": -71.455,
+   "depth": {
+    "to10ftYd": 109,
+    "to15ftYd": 164,
+    "confidence": "high"
+   }
+  },
+  {
+   "name": "Charlestown Breachway",
+   "state": "RI",
+   "lat": 41.356,
+   "lon": -71.64,
+   "depth": {
+    "to10ftYd": 137,
+    "to15ftYd": 246,
+    "confidence": "high"
+   }
+  },
+  {
+   "name": "Misquamicut",
+   "state": "RI",
+   "lat": 41.322,
+   "lon": -71.808,
+   "depth": {
+    "to10ftYd": 82,
+    "to15ftYd": 137,
+    "confidence": "high"
+   }
+  },
+  {
+   "name": "Ocean Beach Park",
+   "state": "CT",
+   "lat": 41.307,
+   "lon": -72.095,
+   "depth": {
+    "to10ftYd": 55,
+    "to15ftYd": 82,
+    "confidence": "medium"
+   }
+  },
+  {
+   "name": "Hammonasset",
+   "state": "CT",
+   "lat": 41.258,
+   "lon": -72.552,
+   "depth": {
+    "to10ftYd": 164,
+    "to15ftYd": 246,
+    "confidence": "high"
+   }
+  },
+  {
+   "name": "Silver Sands",
+   "state": "CT",
+   "lat": 41.2,
+   "lon": -73.07,
+   "depth": {
+    "to10ftYd": 574,
+    "to15ftYd": 820,
+    "confidence": "high"
+   }
+  },
+  {
+   "name": "Montauk",
+   "state": "NY",
+   "lat": 41.071,
+   "lon": -71.857,
+   "depth": {
+    "to10ftYd": 109,
+    "to15ftYd": 219,
+    "confidence": "high"
+   }
+  },
+  {
+   "name": "Shinnecock Inlet",
+   "state": "NY",
+   "lat": 40.84,
+   "lon": -72.477,
+   "depth": {
+    "confidence": "inlet"
+   }
+  },
+  {
+   "name": "Smith Point",
+   "state": "NY",
+   "lat": 40.733,
+   "lon": -72.86,
+   "depth": {
+    "to10ftYd": 82,
+    "to15ftYd": 383,
+    "confidence": "high"
+   }
+  },
+  {
+   "name": "Robert Moses SP",
+   "state": "NY",
+   "lat": 40.625,
+   "lon": -73.255,
+   "depth": {
+    "to10ftYd": 328,
+    "to15ftYd": 574,
+    "confidence": "high"
+   }
+  },
+  {
+   "name": "Long Beach",
+   "state": "NY",
+   "lat": 40.584,
+   "lon": -73.656,
+   "depth": {
+    "to10ftYd": 191,
+    "to15ftYd": 355,
+    "confidence": "high"
+   }
+  },
+  {
+   "name": "Jones Beach",
+   "state": "NY",
+   "lat": 40.583,
+   "lon": -73.507,
+   "depth": {
+    "to10ftYd": 137,
+    "to15ftYd": 328,
+    "confidence": "medium"
+   }
+  },
+  {
+   "name": "Rockaway Beach",
+   "state": "NY",
+   "lat": 40.58,
+   "lon": -73.825,
+   "depth": {
+    "to10ftYd": 219,
+    "to15ftYd": 301,
+    "confidence": "high"
+   }
+  },
+  {
+   "name": "Breezy Point",
+   "state": "NY",
+   "lat": 40.556,
+   "lon": -73.93,
+   "depth": {
+    "to10ftYd": 273,
+    "to15ftYd": 383,
+    "confidence": "low"
+   },
+   "noDrones": "Gateway NRA"
+  },
+  {
+   "name": "Sandy Hook",
+   "state": "NJ",
+   "lat": 40.43,
+   "lon": -73.99,
+   "depth": {
+    "to10ftYd": 82,
+    "to15ftYd": 109,
+    "confidence": "high"
+   },
+   "noDrones": "Gateway NRA"
+  },
+  {
+   "name": "Asbury Park",
+   "state": "NJ",
+   "lat": 40.22,
+   "lon": -73.998,
+   "depth": {
+    "to10ftYd": 82,
+    "to15ftYd": 82,
+    "confidence": "high"
+   }
+  },
+  {
+   "name": "Manasquan Inlet",
+   "state": "NJ",
+   "lat": 40.103,
+   "lon": -74.035,
+   "depth": {
+    "to10ftYd": 164,
+    "to15ftYd": 246,
+    "confidence": "medium"
+   }
+  },
+  {
+   "name": "Seaside Heights",
+   "state": "NJ",
+   "lat": 39.944,
+   "lon": -74.073,
+   "depth": {
+    "to10ftYd": 109,
+    "to15ftYd": 137,
+    "confidence": "high"
+   }
+  },
+  {
+   "name": "Island Beach SP",
+   "state": "NJ",
+   "lat": 39.866,
+   "lon": -74.087,
+   "depth": {
+    "to10ftYd": 164,
+    "to15ftYd": 246,
+    "confidence": "high"
+   }
+  },
+  {
+   "name": "Barnegat Light",
+   "state": "NJ",
+   "lat": 39.763,
+   "lon": -74.105,
+   "depth": {
+    "to10ftYd": 191,
+    "to15ftYd": 246,
+    "confidence": "high"
+   }
+  },
+  {
+   "name": "Holgate (LBI)",
+   "state": "NJ",
+   "lat": 39.546,
+   "lon": -74.264,
+   "depth": {
+    "to10ftYd": 164,
+    "to15ftYd": 273,
+    "confidence": "low"
+   }
+  },
+  {
+   "name": "Atlantic City",
+   "state": "NJ",
+   "lat": 39.355,
+   "lon": -74.433,
+   "depth": {
+    "to10ftYd": 301,
+    "to15ftYd": 766,
+    "confidence": "high"
+   }
+  },
+  {
+   "name": "Ocean City",
+   "state": "NJ",
+   "lat": 39.264,
+   "lon": -74.584,
+   "depth": {
+    "to10ftYd": 273,
+    "to15ftYd": 383,
+    "confidence": "medium"
+   }
+  },
+  {
+   "name": "Wildwood",
+   "state": "NJ",
+   "lat": 38.983,
+   "lon": -74.818,
+   "depth": {
+    "to10ftYd": 848,
+    "to15ftYd": 902,
+    "confidence": "high"
+   }
+  },
+  {
+   "name": "Cape May",
+   "state": "NJ",
+   "lat": 38.93,
+   "lon": -74.92,
+   "depth": {
+    "to10ftYd": 164,
+    "to15ftYd": 301,
+    "confidence": "high"
+   }
+  },
+  {
+   "name": "Cape Henlopen",
+   "state": "DE",
+   "lat": 38.79,
+   "lon": -75.091,
+   "depth": {
+    "to10ftYd": 55,
+    "to15ftYd": 109,
+    "confidence": "high"
+   }
+  },
+  {
+   "name": "Rehoboth Beach",
+   "state": "DE",
+   "lat": 38.718,
+   "lon": -75.075,
+   "depth": {
+    "to10ftYd": 55,
+    "to15ftYd": 82,
+    "confidence": "high"
+   }
+  },
+  {
+   "name": "Indian River Inlet",
+   "state": "DE",
+   "lat": 38.61,
+   "lon": -75.064,
+   "depth": {
+    "to10ftYd": 137,
+    "to15ftYd": 137,
+    "confidence": "high"
+   }
+  },
+  {
+   "name": "Fenwick Island",
+   "state": "DE",
+   "lat": 38.462,
+   "lon": -75.05,
+   "depth": {
+    "to10ftYd": 55,
+    "to15ftYd": 109,
+    "confidence": "high"
+   }
+  },
+  {
+   "name": "Ocean City",
+   "state": "MD",
+   "lat": 38.36,
+   "lon": -75.072,
+   "depth": {
+    "to10ftYd": 137,
+    "to15ftYd": 191,
+    "confidence": "high"
+   }
+  },
+  {
+   "name": "Assateague",
+   "state": "MD",
+   "lat": 38.21,
+   "lon": -75.153,
+   "depth": {
+    "to10ftYd": 164,
+    "to15ftYd": 246,
+    "confidence": "high"
+   },
+   "noDrones": "Assateague NS"
+  },
+  {
+   "name": "Chincoteague",
+   "state": "VA",
+   "lat": 37.905,
+   "lon": -75.343,
+   "depth": {
+    "to10ftYd": 547,
+    "to15ftYd": 601,
+    "confidence": "high"
+   },
+   "noDrones": "Chincoteague NWR"
+  },
+  {
+   "name": "Ocean View (Norfolk)",
+   "state": "VA",
+   "lat": 36.955,
+   "lon": -76.248,
+   "depth": {
+    "to10ftYd": 437,
+    "to15ftYd": 875,
+    "confidence": "medium"
+   }
+  },
+  {
+   "name": "Virginia Beach Oceanfront",
+   "state": "VA",
+   "lat": 36.851,
+   "lon": -75.972,
+   "depth": {
+    "to10ftYd": 164,
+    "to15ftYd": 246,
+    "confidence": "medium"
+   }
+  },
+  {
+   "name": "Sandbridge",
+   "state": "VA",
+   "lat": 36.722,
+   "lon": -75.937,
+   "depth": {
+    "to10ftYd": 137,
+    "to15ftYd": 273,
+    "confidence": "high"
+   }
+  },
+  {
+   "name": "False Cape",
+   "state": "VA",
+   "lat": 36.59,
+   "lon": -75.875,
+   "depth": {
+    "to10ftYd": 328,
+    "to15ftYd": 492,
+    "confidence": "high"
+   },
+   "noDrones": "False Cape SP"
+  },
+  {
+   "name": "Corolla",
+   "state": "NC",
+   "lat": 36.377,
+   "lon": -75.83,
+   "depth": {
+    "to10ftYd": 219,
+    "to15ftYd": 273,
+    "confidence": "high"
+   }
+  },
+  {
+   "name": "Kill Devil Hills",
+   "state": "NC",
+   "lat": 36.03,
+   "lon": -75.676,
+   "depth": {
+    "to10ftYd": 219,
+    "to15ftYd": 273,
+    "confidence": "high"
+   }
+  },
+  {
+   "name": "Nags Head",
+   "state": "NC",
+   "lat": 35.957,
+   "lon": -75.624,
+   "depth": {
+    "to10ftYd": 191,
+    "to15ftYd": 246,
+    "confidence": "high"
+   }
+  },
+  {
+   "name": "Oregon Inlet",
+   "state": "NC",
+   "lat": 35.774,
+   "lon": -75.527,
+   "depth": {
+    "to10ftYd": 273,
+    "to15ftYd": 301,
+    "confidence": "high"
+   },
+   "noDrones": "Cape Hatteras NS"
+  },
+  {
+   "name": "Avon",
+   "state": "NC",
+   "lat": 35.352,
+   "lon": -75.505,
+   "depth": {
+    "to10ftYd": 191,
+    "to15ftYd": 301,
+    "confidence": "high"
+   },
+   "noDrones": "Cape Hatteras NS",
+   "privateLaunch": true
+  },
+  {
+   "name": "Buxton",
+   "state": "NC",
+   "lat": 35.268,
+   "lon": -75.523,
+   "depth": {
+    "to10ftYd": 273,
+    "to15ftYd": 328,
+    "confidence": "low"
+   },
+   "noDrones": "Cape Hatteras NS",
+   "privateLaunch": true
+  },
+  {
+   "name": "Frisco",
+   "state": "NC",
+   "lat": 35.234,
+   "lon": -75.611,
+   "depth": {
+    "to10ftYd": 355,
+    "to15ftYd": 437,
+    "confidence": "medium"
+   },
+   "noDrones": "Cape Hatteras NS",
+   "privateLaunch": true
+  },
+  {
+   "name": "Cape Hatteras",
+   "state": "NC",
+   "lat": 35.23,
+   "lon": -75.528,
+   "depth": {
+    "to10ftYd": 273,
+    "to15ftYd": 383,
+    "confidence": "low"
+   },
+   "noDrones": "Cape Hatteras NS"
+  },
+  {
+   "name": "Ocracoke",
+   "state": "NC",
+   "lat": 35.105,
+   "lon": -75.966,
+   "depth": {
+    "to10ftYd": 191,
+    "to15ftYd": 273,
+    "confidence": "high"
+   },
+   "noDrones": "Cape Hatteras NS"
+  },
+  {
+   "name": "Cape Lookout",
+   "state": "NC",
+   "lat": 34.6216,
+   "lon": -76.5197,
+   "depth": {
+    "to10ftYd": 164,
+    "to15ftYd": 246,
+    "confidence": "high"
+   },
+   "noDrones": "Cape Lookout NS"
+  },
+  {
+   "name": "Atlantic Beach",
+   "state": "NC",
+   "lat": 34.698,
+   "lon": -76.74,
+   "depth": {
+    "to10ftYd": 219,
+    "to15ftYd": 410,
+    "confidence": "high"
+   }
+  },
+  {
+   "name": "Emerald Isle",
+   "state": "NC",
+   "lat": 34.661,
+   "lon": -77.047,
+   "depth": {
+    "to10ftYd": 219,
+    "to15ftYd": 301,
+    "confidence": "high"
+   }
+  },
+  {
+   "name": "Topsail Beach",
+   "state": "NC",
+   "lat": 34.366,
+   "lon": -77.629,
+   "depth": {
+    "to10ftYd": 219,
+    "to15ftYd": 273,
+    "confidence": "high"
+   }
+  },
+  {
+   "name": "Wrightsville Beach",
+   "state": "NC",
+   "lat": 34.209,
+   "lon": -77.796,
+   "depth": {
+    "to10ftYd": 137,
+    "to15ftYd": 328,
+    "confidence": "high"
+   }
+  },
+  {
+   "name": "Carolina Beach",
+   "state": "NC",
+   "lat": 34.035,
+   "lon": -77.893,
+   "depth": {
+    "to10ftYd": 273,
+    "to15ftYd": 437,
+    "confidence": "high"
+   }
+  },
+  {
+   "name": "Kure Beach",
+   "state": "NC",
+   "lat": 33.998,
+   "lon": -77.907,
+   "depth": {
+    "to10ftYd": 137,
+    "to15ftYd": 273,
+    "confidence": "high"
+   }
+  },
+  {
+   "name": "Fort Fisher",
+   "state": "NC",
+   "lat": 33.955,
+   "lon": -77.925,
+   "depth": {
+    "to10ftYd": 437,
+    "to15ftYd": 711,
+    "confidence": "low"
+   }
+  },
+  {
+   "name": "Holden Beach",
+   "state": "NC",
+   "lat": 33.912,
+   "lon": -78.302,
+   "depth": {
+    "to10ftYd": 219,
+    "to15ftYd": 301,
+    "confidence": "high"
+   }
+  },
+  {
+   "name": "Oak Island",
+   "state": "NC",
+   "lat": 33.906,
+   "lon": -78.16,
+   "depth": {
+    "to10ftYd": 219,
+    "to15ftYd": 328,
+    "confidence": "medium"
+   }
+  },
+  {
+   "name": "Ocean Isle Beach",
+   "state": "NC",
+   "lat": 33.889,
+   "lon": -78.432,
+   "depth": {
+    "to10ftYd": 219,
+    "to15ftYd": 301,
+    "confidence": "high"
+   }
+  },
+  {
+   "name": "Myrtle Beach",
+   "state": "SC",
+   "lat": 33.689,
+   "lon": -78.887,
+   "depth": {
+    "to10ftYd": 137,
+    "to15ftYd": 246,
+    "confidence": "high"
+   }
+  },
+  {
+   "name": "Surfside Beach",
+   "state": "SC",
+   "lat": 33.6037,
+   "lon": -78.9712,
+   "depth": {
+    "to10ftYd": 82,
+    "to15ftYd": 137,
+    "confidence": "high"
+   }
+  },
+  {
+   "name": "Pawleys Island",
+   "state": "SC",
+   "lat": 33.4307,
+   "lon": -79.1194,
+   "depth": {
+    "to10ftYd": 191,
+    "to15ftYd": 273,
+    "confidence": "medium"
+   }
+  },
+  {
+   "name": "Isle of Palms",
+   "state": "SC",
+   "lat": 32.786,
+   "lon": -79.785,
+   "depth": {
+    "to10ftYd": 355,
+    "to15ftYd": 1941,
+    "confidence": "high"
+   }
+  },
+  {
+   "name": "Sullivan's Island",
+   "state": "SC",
+   "lat": 32.761,
+   "lon": -79.84,
+   "depth": {
+    "to10ftYd": 164,
+    "to15ftYd": 1968,
+    "confidence": "low"
+   }
+  },
+  {
+   "name": "Folly Beach",
+   "state": "SC",
+   "lat": 32.655,
+   "lon": -79.94,
+   "depth": {
+    "to10ftYd": 355,
+    "to15ftYd": ">2543",
+    "confidence": "high"
+   }
+  },
+  {
+   "name": "Kiawah Island",
+   "state": "SC",
+   "lat": 32.597,
+   "lon": -80.08,
+   "depth": {
+    "to10ftYd": 465,
+    "to15ftYd": 1449,
+    "confidence": "medium"
+   }
+  },
+  {
+   "name": "Edisto Beach",
+   "state": "SC",
+   "lat": 32.48,
+   "lon": -80.32,
+   "depth": {
+    "to10ftYd": 574,
+    "to15ftYd": 2625,
+    "confidence": "medium"
+   }
+  },
+  {
+   "name": "Hunting Island",
+   "state": "SC",
+   "lat": 32.375,
+   "lon": -80.43,
+   "depth": {
+    "to10ftYd": ">2707",
+    "to15ftYd": ">2707",
+    "confidence": "medium"
+   }
+  },
+  {
+   "name": "Hilton Head",
+   "state": "SC",
+   "lat": 32.15,
+   "lon": -80.74,
+   "depth": {
+    "to10ftYd": 1886,
+    "to15ftYd": ">2187",
+    "confidence": "high"
+   }
+  },
+  {
+   "name": "Tybee Island",
+   "state": "GA",
+   "lat": 32.006,
+   "lon": -80.845,
+   "depth": {
+    "to10ftYd": 1066,
+    "to15ftYd": 2160,
+    "confidence": "high"
+   }
+  },
+  {
+   "name": "St. Simons Island",
+   "state": "GA",
+   "lat": 31.15,
+   "lon": -81.367,
+   "depth": {
+    "to10ftYd": 820,
+    "to15ftYd": 1449,
+    "confidence": "low"
+   }
+  },
+  {
+   "name": "Jekyll Island",
+   "state": "GA",
+   "lat": 31.064,
+   "lon": -81.41,
+   "depth": {
+    "to10ftYd": ">2078",
+    "to15ftYd": ">2078",
+    "confidence": "high"
+   }
+  },
+  {
+   "name": "Amelia Island",
+   "state": "FL",
+   "lat": 30.67,
+   "lon": -81.43,
+   "depth": {
+    "to10ftYd": 273,
+    "to15ftYd": 1640,
+    "confidence": "high"
+   }
+  },
+  {
+   "name": "Little Talbot Island",
+   "state": "FL",
+   "lat": 30.405,
+   "lon": -81.405,
+   "depth": {
+    "to10ftYd": 137,
+    "to15ftYd": 164,
+    "confidence": "high"
+   }
+  },
+  {
+   "name": "Jacksonville Beach",
+   "state": "FL",
+   "lat": 30.286,
+   "lon": -81.391,
+   "depth": {
+    "to10ftYd": 273,
+    "to15ftYd": 383,
+    "confidence": "high"
+   }
+  },
+  {
+   "name": "St. Augustine Beach",
+   "state": "FL",
+   "lat": 29.857,
+   "lon": -81.263,
+   "depth": {
+    "to10ftYd": 219,
+    "to15ftYd": 301,
+    "confidence": "medium"
+   }
+  },
+  {
+   "name": "Matanzas Inlet",
+   "state": "FL",
+   "lat": 29.715,
+   "lon": -81.233,
+   "depth": {
+    "to10ftYd": 55,
+    "to15ftYd": 301,
+    "confidence": "high"
+   }
+  },
+  {
+   "name": "Flagler Beach",
+   "state": "FL",
+   "lat": 29.475,
+   "lon": -81.127,
+   "depth": {
+    "to10ftYd": 164,
+    "to15ftYd": 301,
+    "confidence": "high"
+   }
+  },
+  {
+   "name": "Daytona Beach",
+   "state": "FL",
+   "lat": 29.21,
+   "lon": -81.015,
+   "depth": {
+    "to10ftYd": 328,
+    "to15ftYd": 437,
+    "confidence": "medium"
+   }
+  },
+  {
+   "name": "New Smyrna Beach",
+   "state": "FL",
+   "lat": 29.024,
+   "lon": -80.915,
+   "depth": {
+    "confidence": "inlet"
+   }
+  },
+  {
+   "name": "Playalinda Beach",
+   "state": "FL",
+   "lat": 28.655,
+   "lon": -80.632,
+   "depth": {
+    "to10ftYd": 191,
+    "to15ftYd": 246,
+    "confidence": "high"
+   },
+   "noDrones": "Canaveral NS"
+  },
+  {
+   "name": "Cocoa Beach",
+   "state": "FL",
+   "lat": 28.32,
+   "lon": -80.607,
+   "depth": {
+    "to10ftYd": 219,
+    "to15ftYd": 383,
+    "confidence": "high"
+   }
+  },
+  {
+   "name": "Melbourne Beach",
+   "state": "FL",
+   "lat": 28.065,
+   "lon": -80.555,
+   "depth": {
+    "to10ftYd": 191,
+    "to15ftYd": 355,
+    "confidence": "high"
+   }
+  },
+  {
+   "name": "Sebastian Inlet",
+   "state": "FL",
+   "lat": 27.861,
+   "lon": -80.447,
+   "depth": {
+    "to10ftYd": 191,
+    "to15ftYd": 683,
+    "confidence": "low"
+   }
+  },
+  {
+   "name": "Vero Beach",
+   "state": "FL",
+   "lat": 27.638,
+   "lon": -80.373,
+   "depth": {
+    "to10ftYd": 273,
+    "to15ftYd": 383,
+    "confidence": "medium"
+   }
+  },
+  {
+   "name": "Fort Pierce",
+   "state": "FL",
+   "lat": 27.47,
+   "lon": -80.29,
+   "depth": {
+    "confidence": "inlet"
+   }
+  },
+  {
+   "name": "Hutchinson Island",
+   "state": "FL",
+   "lat": 27.248,
+   "lon": -80.2,
+   "depth": {
+    "to10ftYd": 219,
+    "to15ftYd": 355,
+    "confidence": "medium"
+   }
+  },
+  {
+   "name": "Jupiter Inlet",
+   "state": "FL",
+   "lat": 26.944,
+   "lon": -80.072,
+   "depth": {
+    "confidence": "inlet"
+   }
+  },
+  {
+   "name": "Juno Beach",
+   "state": "FL",
+   "lat": 26.88,
+   "lon": -80.054,
+   "depth": {
+    "to10ftYd": 109,
+    "to15ftYd": 410,
+    "confidence": "high"
+   }
+  },
+  {
+   "name": "Palm Beach",
+   "state": "FL",
+   "lat": 26.705,
+   "lon": -80.034,
+   "depth": {
+    "to10ftYd": 164,
+    "to15ftYd": 355,
+    "confidence": "high"
+   }
+  },
+  {
+   "name": "Boca Raton",
+   "state": "FL",
+   "lat": 26.35,
+   "lon": -80.068,
+   "depth": {
+    "to10ftYd": 109,
+    "to15ftYd": 191,
+    "confidence": "high"
+   }
+  },
+  {
+   "name": "Pompano Beach",
+   "state": "FL",
+   "lat": 26.233,
+   "lon": -80.088,
+   "depth": {
+    "to10ftYd": 109,
+    "to15ftYd": 246,
+    "confidence": "high"
+   }
+  },
+  {
+   "name": "Fort Lauderdale",
+   "state": "FL",
+   "lat": 26.122,
+   "lon": -80.103,
+   "depth": {
+    "to10ftYd": 55,
+    "to15ftYd": 82,
+    "confidence": "high"
+   }
+  },
+  {
+   "name": "Haulover",
+   "state": "FL",
+   "lat": 25.9,
+   "lon": -80.12,
+   "depth": {
+    "confidence": "inlet"
+   }
+  },
+  {
+   "name": "Miami Beach",
+   "state": "FL",
+   "lat": 25.79,
+   "lon": -80.128,
+   "depth": {
+    "to10ftYd": 164,
+    "to15ftYd": 219,
+    "confidence": "high"
+   }
+  },
+  {
+   "name": "Islamorada",
+   "state": "FL",
+   "lat": 24.924,
+   "lon": -80.627,
+   "depth": {
+    "to10ftYd": 1722,
+    "to15ftYd": 2215,
+    "confidence": "low"
+   }
+  },
+  {
+   "name": "Marathon",
+   "state": "FL",
+   "lat": 24.71,
+   "lon": -81.09,
+   "depth": {
+    "to10ftYd": 656,
+    "to15ftYd": ">2734",
+    "confidence": "low"
+   }
+  },
+  {
+   "name": "Bahia Honda",
+   "state": "FL",
+   "lat": 24.656,
+   "lon": -81.277,
+   "depth": {
+    "to10ftYd": 437,
+    "to15ftYd": 547,
+    "confidence": "low"
+   }
+  },
+  {
+   "name": "Key West",
+   "state": "FL",
+   "lat": 24.548,
+   "lon": -81.795,
+   "depth": {
+    "to10ftYd": 601,
+    "to15ftYd": 875,
+    "confidence": "low"
+   }
+  }
+ ],
+ "speciesByMonth": {
+  "ME": [
+   [
+    "sd",
+    "000012333210"
+   ],
+   [
+    "st",
+    "000000111000"
+   ]
+  ],
+  "NH": [
+   [
+    "sd",
+    "000012333210"
+   ],
+   [
+    "st",
+    "000000111000"
+   ]
+  ],
+  "MA": [
+   [
+    "sb",
+    "000002332000"
+   ],
+   [
+    "st",
+    "000001332100"
+   ],
+   [
+    "du",
+    "000000221000"
+   ],
+   [
+    "sm",
+    "000012221100"
+   ],
+   [
+    "sd",
+    "000121000121"
+   ]
+  ],
+  "RI": [
+   [
+    "sb",
+    "000001332000"
+   ],
+   [
+    "sm",
+    "000023332100"
+   ],
+   [
+    "st",
+    "000001221000"
+   ],
+   [
+    "du",
+    "000000111000"
+   ],
+   [
+    "sd",
+    "000121000121"
+   ]
+  ],
+  "CT": [
+   [
+    "sb",
+    "000001221000"
+   ],
+   [
+    "st",
+    "000001221000"
+   ],
+   [
+    "sm",
+    "000022222100"
+   ],
+   [
+    "du",
+    "000000111000"
+   ],
+   [
+    "sd",
+    "000121000121"
+   ]
+  ],
+  "NY": [
+   [
+    "sb",
+    "000012333100"
+   ],
+   [
+    "du",
+    "000001332100"
+   ],
+   [
+    "st",
+    "000012332100"
+   ],
+   [
+    "sm",
+    "000222222110"
+   ],
+   [
+    "bt",
+    "000000012100"
+   ],
+   [
+    "sd",
+    "211200000112"
+   ]
+  ],
+  "NJ": [
+   [
+    "sb",
+    "000012333210"
+   ],
+   [
+    "st",
+    "000012333210"
+   ],
+   [
+    "du",
+    "000001222100"
+   ],
+   [
+    "sm",
+    "000222222110"
+   ],
+   [
+    "bt",
+    "000000012100"
+   ],
+   [
+    "sp",
+    "000000012100"
+   ],
+   [
+    "sd",
+    "221200000122"
+   ]
+  ],
+  "DE": [
+   [
+    "st",
+    "000123333210"
+   ],
+   [
+    "sb",
+    "000123333210"
+   ],
+   [
+    "du",
+    "000001222100"
+   ],
+   [
+    "sm",
+    "001232222210"
+   ],
+   [
+    "sd",
+    "221100000122"
+   ]
+  ],
+  "MD": [
+   [
+    "sb",
+    "000013333210"
+   ],
+   [
+    "st",
+    "000123332100"
+   ],
+   [
+    "du",
+    "000001222100"
+   ],
+   [
+    "sm",
+    "001222222110"
+   ],
+   [
+    "bt",
+    "000000112100"
+   ],
+   [
+    "sd",
+    "221100000122"
+   ]
+  ],
+  "VA": [
+   [
+    "sb",
+    "000123333210"
+   ],
+   [
+    "sn",
+    "000013332100"
+   ],
+   [
+    "du",
+    "000012222100"
+   ],
+   [
+    "st",
+    "000122221100"
+   ],
+   [
+    "sm",
+    "012321112210"
+   ],
+   [
+    "bt",
+    "000001221100"
+   ],
+   [
+    "sh",
+    "000001221000"
+   ],
+   [
+    "sd",
+    "221000000012"
+   ]
+  ],
+  "NC": [
+   [
+    "bt",
+    "000123333210"
+   ],
+   [
+    "sn",
+    "000133333210"
+   ],
+   [
+    "sb",
+    "111223332211"
+   ],
+   [
+    "bo",
+    "000122222210"
+   ],
+   [
+    "du",
+    "001221000110"
+   ],
+   [
+    "st",
+    "112211000111"
+   ],
+   [
+    "sp",
+    "000012222100"
+   ],
+   [
+    "bu",
+    "000001222100"
+   ],
+   [
+    "ti",
+    "000001111100"
+   ],
+   [
+    "sm",
+    "221100000012"
+   ],
+   [
+    "sd",
+    "332100000123"
+   ]
+  ],
+  "SC": [
+   [
+    "sn",
+    "000233333320"
+   ],
+   [
+    "bt",
+    "001233333210"
+   ],
+   [
+    "sb",
+    "000122332100"
+   ],
+   [
+    "bo",
+    "000222222210"
+   ],
+   [
+    "sp",
+    "000122222100"
+   ],
+   [
+    "bu",
+    "000012222100"
+   ],
+   [
+    "ft",
+    "000012222100"
+   ],
+   [
+    "sh",
+    "000012221000"
+   ],
+   [
+    "du",
+    "000110000110"
+   ],
+   [
+    "st",
+    "111100000011"
+   ],
+   [
+    "sm",
+    "221100000012"
+   ]
+  ],
+  "GA": [
+   [
+    "sn",
+    "000233333320"
+   ],
+   [
+    "bo",
+    "001233333221"
+   ],
+   [
+    "bt",
+    "001233333210"
+   ],
+   [
+    "sb",
+    "000112221100"
+   ],
+   [
+    "bu",
+    "000012222100"
+   ],
+   [
+    "sp",
+    "000122222100"
+   ],
+   [
+    "ft",
+    "000012222100"
+   ],
+   [
+    "st",
+    "111000000011"
+   ],
+   [
+    "sm",
+    "211000000012"
+   ]
+  ],
+  "FL": [
+   [
+    "bt",
+    "333332222333"
+   ],
+   [
+    "le",
+    "332100000123"
+   ],
+   [
+    "bu",
+    "112333332211"
+   ],
+   [
+    "nu",
+    "112333332211"
+   ],
+   [
+    "sp",
+    "332100000123"
+   ],
+   [
+    "sn",
+    "222222222222"
+   ],
+   [
+    "bo",
+    "222222222222"
+   ],
+   [
+    "ti",
+    "111122222111"
+   ],
+   [
+    "sb",
+    "221100000012"
+   ],
+   [
+    "gh",
+    "112210000000"
+   ]
+  ]
+ }
+}
