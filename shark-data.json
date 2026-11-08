@@ -1,5 +1,5 @@
 {
-  "_readme": "SharkLeash data for the laws map, conditions panel and Shark Water. Edit text, then set lastVerified (YYYY-MM-DD) on anything you checked. States: category must be a key in categories; drone.status is ban, limit or none. Beaches: state is the 2-letter code; depth is yards from the low-tide waterline to 10 ft and 15 ft (write \">2543\" when it never gets that deep within that distance; confidence is high, medium, low or inlet). speciesByMonth: per state, [species code, 12 digits Jan..Dec] where 0 absent, 1 occasional, 2 common, 3 peak.",
+  "_readme": "SharkLeash data for the laws map, conditions panel and Shark Water. Edit text, then set lastVerified (YYYY-MM-DD) on anything you checked. States: category must be a key in categories; drone.status is ban, limit or none. Beaches: state is the 2-letter code; depth is yards from the low-tide waterline to 10 ft and 15 ft (write \">2543\" when it never gets that deep within that distance; confidence is high, medium, low or inlet; noDrones names the park where drones are banned, and keeps the beach out of the Best Beaches Top 5). speciesByMonth: per state, [species code, 12 digits Jan..Dec] where 0 absent, 1 occasional, 2 common, 3 peak.",
   "lastVerified": "2026-11-02",
   "coastWide": "most states require non-offset, non-stainless (corrodible) circle hooks when fishing sharks with natural bait, and it's good practice everywhere. Shortfin mako can't be kept. Sandbar, sand tiger and dusky are prohibited and the most common from shore. Keep any shark you're releasing in the water. Drones are banned in every National Seashore, and FAA drone rules apply everywhere.",
   "categories": {
@@ -719,7 +719,8 @@
         "to10ftYd": 137,
         "to15ftYd": 191,
         "confidence": "high"
-      }
+      },
+      "noDrones": "Acadia NP"
     },
     {
       "name": "Reid State Park",
@@ -818,7 +819,8 @@
         "to10ftYd": 164,
         "to15ftYd": 246,
         "confidence": "medium"
-      }
+      },
+      "noDrones": "Cape Cod NS"
     },
     {
       "name": "Nauset Beach",
@@ -829,7 +831,8 @@
         "to10ftYd": 82,
         "to15ftYd": 219,
         "confidence": "high"
-      }
+      },
+      "noDrones": "Cape Cod NS"
     },
     {
       "name": "Sandy Neck",
@@ -1036,7 +1039,8 @@
         "to10ftYd": 273,
         "to15ftYd": 383,
         "confidence": "low"
-      }
+      },
+      "noDrones": "Gateway NRA"
     },
     {
       "name": "Sandy Hook",
@@ -1047,7 +1051,8 @@
         "to10ftYd": 82,
         "to15ftYd": 109,
         "confidence": "high"
-      }
+      },
+      "noDrones": "Gateway NRA"
     },
     {
       "name": "Asbury Park",
@@ -1223,7 +1228,8 @@
         "to10ftYd": 164,
         "to15ftYd": 246,
         "confidence": "high"
-      }
+      },
+      "noDrones": "Assateague NS"
     },
     {
       "name": "Chincoteague",
@@ -1234,7 +1240,8 @@
         "to10ftYd": 547,
         "to15ftYd": 601,
         "confidence": "high"
-      }
+      },
+      "noDrones": "Chincoteague NWR"
     },
     {
       "name": "Ocean View (Norfolk)",
@@ -1278,7 +1285,8 @@
         "to10ftYd": 328,
         "to15ftYd": 492,
         "confidence": "high"
-      }
+      },
+      "noDrones": "False Cape SP"
     },
     {
       "name": "Corolla",
@@ -1322,7 +1330,8 @@
         "to10ftYd": 273,
         "to15ftYd": 301,
         "confidence": "high"
-      }
+      },
+      "noDrones": "Cape Hatteras NS"
     },
     {
       "name": "Avon",
@@ -1333,7 +1342,8 @@
         "to10ftYd": 191,
         "to15ftYd": 301,
         "confidence": "high"
-      }
+      },
+      "noDrones": "Cape Hatteras NS"
     },
     {
       "name": "Buxton",
@@ -1344,7 +1354,8 @@
         "to10ftYd": 273,
         "to15ftYd": 328,
         "confidence": "low"
-      }
+      },
+      "noDrones": "Cape Hatteras NS"
     },
     {
       "name": "Frisco",
@@ -1355,7 +1366,8 @@
         "to10ftYd": 355,
         "to15ftYd": 437,
         "confidence": "medium"
-      }
+      },
+      "noDrones": "Cape Hatteras NS"
     },
     {
       "name": "Cape Hatteras",
@@ -1366,7 +1378,8 @@
         "to10ftYd": 273,
         "to15ftYd": 383,
         "confidence": "low"
-      }
+      },
+      "noDrones": "Cape Hatteras NS"
     },
     {
       "name": "Ocracoke",
@@ -1377,7 +1390,20 @@
         "to10ftYd": 191,
         "to15ftYd": 273,
         "confidence": "high"
-      }
+      },
+      "noDrones": "Cape Hatteras NS"
+    },
+    {
+      "name": "Cape Lookout",
+      "state": "NC",
+      "lat": 34.6216,
+      "lon": -76.5197,
+      "depth": {
+        "to10ftYd": 164,
+        "to15ftYd": 246,
+        "confidence": "high"
+      },
+      "noDrones": "Cape Lookout NS"
     },
     {
       "name": "Atlantic Beach",
@@ -1498,6 +1524,28 @@
         "to10ftYd": 137,
         "to15ftYd": 246,
         "confidence": "high"
+      }
+    },
+    {
+      "name": "Surfside Beach",
+      "state": "SC",
+      "lat": 33.6037,
+      "lon": -78.9712,
+      "depth": {
+        "to10ftYd": 82,
+        "to15ftYd": 137,
+        "confidence": "high"
+      }
+    },
+    {
+      "name": "Pawleys Island",
+      "state": "SC",
+      "lat": 33.4307,
+      "lon": -79.1194,
+      "depth": {
+        "to10ftYd": 191,
+        "to15ftYd": 273,
+        "confidence": "medium"
       }
     },
     {
@@ -1705,7 +1753,8 @@
         "to10ftYd": 191,
         "to15ftYd": 246,
         "confidence": "high"
-      }
+      },
+      "noDrones": "Canaveral NS"
     },
     {
       "name": "Cocoa Beach",
