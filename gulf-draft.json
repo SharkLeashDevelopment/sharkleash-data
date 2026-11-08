@@ -949,6 +949,71 @@
    }
   },
   {
+   "name": "Padre Island NS – Mile 5",
+   "state": "TX",
+   "lat": 27.3548,
+   "lon": -97.3238,
+   "speciesRegion": "TX",
+   "noDrones": "Padre Island NS",
+   "depth": {
+    "to10ftYd": 465,
+    "to15ftYd": 738,
+    "confidence": "high"
+   }
+  },
+  {
+   "name": "Padre Island NS – Mile 15",
+   "state": "TX",
+   "lat": 27.2198,
+   "lon": -97.361,
+   "speciesRegion": "TX",
+   "noDrones": "Padre Island NS",
+   "depth": {
+    "to10ftYd": 328,
+    "to15ftYd": 738,
+    "confidence": "high"
+   }
+  },
+  {
+   "name": "Padre Island NS – Mile 30 (Big Shell)",
+   "state": "TX",
+   "lat": 27.01,
+   "lon": -97.3787,
+   "speciesRegion": "TX",
+   "noDrones": "Padre Island NS",
+   "depth": {
+    "to10ftYd": 465,
+    "to15ftYd": 711,
+    "confidence": "high"
+   }
+  },
+  {
+   "name": "Padre Island NS – Mile 45",
+   "state": "TX",
+   "lat": 26.7998,
+   "lon": -97.3492,
+   "speciesRegion": "TX",
+   "noDrones": "Padre Island NS",
+   "depth": {
+    "to10ftYd": 246,
+    "to15ftYd": 629,
+    "confidence": "high"
+   }
+  },
+  {
+   "name": "Padre Island NS – Mile 55",
+   "state": "TX",
+   "lat": 26.6598,
+   "lon": -97.3097,
+   "speciesRegion": "TX",
+   "noDrones": "Padre Island NS",
+   "depth": {
+    "to10ftYd": 246,
+    "to15ftYd": 711,
+    "confidence": "high"
+   }
+  },
+  {
    "name": "South Padre Island",
    "state": "TX",
    "lat": 26.11,
