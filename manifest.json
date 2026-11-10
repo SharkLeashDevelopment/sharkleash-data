@@ -1,0 +1,26 @@
+{
+  "name": "SharkLeash Shark Conditions",
+  "short_name": "Shark Conditions",
+  "description": "Shark fishing laws, live wind, waves, tides and water temp, and the SharkLeash Drop Score for every beach, Maine to Texas.",
+  "id": "https://sharkleashfishing.com/shark-fishing-laws",
+  "start_url": "https://sharkleashfishing.com/shark-fishing-laws?source=homescreen",
+  "scope": "https://sharkleashfishing.com/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#02080d",
+  "theme_color": "#02080d",
+  "icons": [
+    {
+      "src": "https://cdn.prod.website-files.com/69e7a3a67e4cb98ff4873ef7/6aec96748bc2016371bedac9_sharkleash-touch-icon-512.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "https://cdn.prod.website-files.com/69e7a3a67e4cb98ff4873ef7/6aec9674c114530f4ddfa9e5_sharkleash-touch-icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ]
+}
