@@ -2828,7 +2828,8 @@
     "to15ftYd": ">3500",
     "confidence": "medium"
    },
-   "faces": 123
+   "faces": 123,
+   "clarityBase": 1.0
   },
   {
    "name": "Pass Christian",
@@ -2841,7 +2842,8 @@
     "to15ftYd": ">3855",
     "confidence": "medium"
    },
-   "faces": 134
+   "faces": 134,
+   "clarityBase": 1.0
   },
   {
    "name": "Long Beach",
@@ -2854,7 +2856,8 @@
     "to15ftYd": ">3062",
     "confidence": "medium"
    },
-   "faces": 133
+   "faces": 133,
+   "clarityBase": 1.0
   },
   {
    "name": "Biloxi beach",
@@ -2867,7 +2870,8 @@
     "to15ftYd": ">3281",
     "confidence": "medium"
    },
-   "faces": 174
+   "faces": 174,
+   "clarityBase": 1.0
   },
   {
    "name": "Grand Isle",
@@ -2919,7 +2923,8 @@
     "to15ftYd": ">3117",
     "confidence": "high"
    },
-   "faces": 180
+   "faces": 180,
+   "clarityBase": 0.8
   },
   {
    "name": "Constance Beach",
@@ -2932,7 +2937,8 @@
     "to15ftYd": 4347,
     "confidence": "high"
    },
-   "faces": 182
+   "faces": 182,
+   "clarityBase": 0.8
   },
   {
    "name": "Rutherford Beach",
@@ -2945,7 +2951,8 @@
     "to15ftYd": 2242,
     "confidence": "high"
    },
-   "faces": 188
+   "faces": 188,
+   "clarityBase": 0.8
   },
   {
    "name": "Isles Dernieres",
