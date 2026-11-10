@@ -1,6 +1,6 @@
 {
  "_readme": "SharkLeash data for the laws map, conditions panel and Shark Water. Edit text, then set lastVerified (YYYY-MM-DD) on anything you checked. States: category must be a key in categories; drone.status is ban, limit or none. Beaches: state is the 2-letter code; depth is yards from the low-tide waterline to 10 ft and 15 ft (write \">2543\" when it never gets that deep within that distance; confidence is high, medium, low or inlet; noDrones names the park where drones are banned and keeps the beach out of the Best Beaches Top 5, unless privateLaunch is true, meaning anglers can launch from private property next to the park, so the beach stays in with a private-property note). speciesByMonth: per state, [species code, 12 digits Jan..Dec] where 0 absent, 1 occasional, 2 common, 3 peak. Gulf beaches carry speciesRegion (key in speciesByRegion; falls back to the state in speciesByMonth). Any beach can carry optional localBan (shark fishing banned there; kept out of Top 5). protected lists species each state bans from harvest beyond the coast-wide sandbar, sand tiger and dusky. faces: compass direction (degrees) the beach looks out to open water; Drop Assist uses it near the beach.",
- "lastVerified": "2026-11-08",
+ "lastVerified": "2026-11-09",
  "coastWide": "most states require non-offset, non-stainless (corrodible) circle hooks when fishing sharks with natural bait, and it's good practice everywhere. Shortfin mako can't be kept. Sandbar, sand tiger and dusky are prohibited and the most common from shore. Keep any shark you're releasing in the water. Drones are banned in every National Seashore, and FAA drone rules apply everywhere.",
  "categories": {
   "strict": {
@@ -558,8 +558,8 @@
    "name": "South Carolina",
    "ab": "SC",
    "category": "local",
-   "lastVerified": "2026-11-02",
-   "summary": "Shark fishing banned on beaches and piers in Horry County and Myrtle Beach.",
+   "lastVerified": "2026-11-09",
+   "summary": "Shark fishing banned on beaches in Horry County, Myrtle Beach, Surfside and Hilton Head; Isle of Palms restricts it.",
    "drone": {
     "status": "none",
     "note": "No state drone rule found. Horry County and Myrtle Beach ban shark fishing entirely."
@@ -592,6 +592,14 @@
     {
      "label": "Folly Beach",
      "text": "No catching or attempting to catch sharks from the pier."
+    },
+    {
+     "label": "Hilton Head Island",
+     "text": "Shark fishing is prohibited on town beaches (Town beach regulations)."
+    },
+    {
+     "label": "Isle of Palms",
+     "text": "Ord. 2025-07 (passed Sept 2025) restricts shark fishing from the beach and bans using drones to drop baits. Sullivan's Island is drafting a shark-fishing ordinance (2026)."
     }
    ],
    "sources": [
@@ -606,6 +614,14 @@
     {
      "title": "Myrtle Beach State Park",
      "url": "https://southcarolinaparks.com/myrtle-beach/things-to-do"
+    },
+    {
+     "title": "Hilton Head Island – Beach regulations",
+     "url": "https://hiltonheadislandsc.gov/beach/regulations.cfm"
+    },
+    {
+     "title": "Isle of Palms – Council minutes (Ord. 2025-07)",
+     "url": "https://www.iop.net/sites/default/files/uploads/agendas/city-council-packet-10-28-25.pdf"
     }
    ]
   },
@@ -613,11 +629,11 @@
    "name": "Georgia",
    "ab": "GA",
    "category": "local",
-   "lastVerified": "2026-11-02",
+   "lastVerified": "2026-11-09",
    "summary": "Tybee Island bans shark fishing from beaches, docks and piers.",
    "drone": {
     "status": "none",
-    "note": "No state drone rule found. Cumberland Island NS: no drones. Tybee bans shark fishing."
+    "note": "No state drone rule found. Cumberland Island NS and Jekyll Island: no drones. Tybee bans shark fishing."
    },
    "rules": [
     {
@@ -639,6 +655,10 @@
     {
      "label": "Cumberland Island NS",
      "text": "No drones."
+    },
+    {
+     "label": "Jekyll Island",
+     "text": "No recreational drones (Jekyll Island Authority rules)."
     }
    ],
    "sources": [
@@ -653,6 +673,10 @@
     {
      "title": "Cumberland Island NS – Compendium",
      "url": "https://www.nps.gov/cuis/learn/management/superintendent-s-compendium.htm"
+    },
+    {
+     "title": "Jekyll Island – Rules & safety",
+     "url": "https://www.jekyllisland.com/?p=793"
     }
    ]
   },
@@ -693,11 +717,11 @@
     },
     {
      "label": "Local",
-     "text": "State law reserves fishing rules to the state; cities and counties can only ban fishing on property they own (parks, piers) for public safety. Martin County's beach rules are being rewritten (a draft would ban fishing at guarded beach parks during guarded hours; no vote yet). Miami Beach: the city banned land-based shark fishing from the shoreline, docks and bridges in Feb 2026; treat it as banned (one report claims a repeal, unconfirmed). Canaveral NS: no drones."
+     "text": "State law reserves fishing rules to the state, but several cities ban or restrict shark fishing on their beaches anyway. Miami Beach: banned from the shoreline, docks and bridges (Feb 2026; one report claims a repeal, unconfirmed). Delray Beach: no shark fishing within 300 ft of the public beach and Atlantic Dunes Park. Boca Raton, Palm Beach and Manalapan (Ord. 405, May 2026): targeted limits on shark-attracting activity near swimmers. Martin County: FWC ordered it to repeal its shark rules; a draft would ban fishing at guarded beach parks during guarded hours (no vote yet). Canaveral NS: no drones."
     },
     {
      "label": "Gulf coast",
-     "text": "Same statewide rules on the Gulf side. Local: Walton County: no intentional shark fishing, chumming or bloodbaiting on the beach or within 2,500 ft of shore (Sec. 22-54, re-adopted Nov 2025). Okaloosa County: no shark fishing or chumming on county-owned beaches (Okaloosa Island, James Lee Park) or the Okaloosa Island Pier. Gulf Islands National Seashore: no drones."
+     "text": "Same statewide rules on the Gulf side. Local: Walton County: no intentional shark fishing, chumming or bloodbaiting on the beach or within 2,500 ft of shore (Sec. 22-54, re-adopted Nov 2025). Okaloosa County: no shark fishing or chumming on county-owned beaches (Okaloosa Island, James Lee Park) or the Okaloosa Island Pier. Treasure Island, Indian Shores, Redington Shores and Belleair Shore (Pinellas): city ordinances prohibit shark fishing from shore. Gulf Islands National Seashore: no drones."
     }
    ],
    "sources": [
@@ -728,6 +752,14 @@
     {
      "title": "City of Miami Beach – Land-based shark fishing ban (Feb 2026)",
      "url": "https://www.miamibeachfl.gov/miami-beach-bans-land-based-shark-fishing/"
+    },
+    {
+     "title": "Belleair Shore Ord. 2026-01 (cites Treasure Island, Indian Shores, Redington Shores, Delray)",
+     "url": "https://belleairshore.com/wp-content/uploads/2026/03/2026-01-Shark-Fishing-Ordinance.pdf"
+    },
+    {
+     "title": "Martin County – Proposed fishing ordinance",
+     "url": "https://www.martin.fl.us/resource/business-impact-estimate-fishing-county-property"
     }
    ]
   },
@@ -924,6 +956,7 @@
    "state": "ME",
    "lat": 44.33,
    "lon": -68.183,
+   "localBan": "Maine: taking coastal sharks is prohibited in state waters (possibly catch-and-release too)",
    "depth": {
     "to10ftYd": 137,
     "to15ftYd": 191,
@@ -937,6 +970,7 @@
    "state": "ME",
    "lat": 43.776,
    "lon": -69.729,
+   "localBan": "Maine: taking coastal sharks is prohibited in state waters (possibly catch-and-release too)",
    "depth": {
     "to10ftYd": 137,
     "to15ftYd": 164,
@@ -949,6 +983,7 @@
    "state": "ME",
    "lat": 43.737,
    "lon": -69.797,
+   "localBan": "Maine: taking coastal sharks is prohibited in state waters (possibly catch-and-release too)",
    "depth": {
     "to10ftYd": 1668,
     "to15ftYd": 1750,
@@ -961,6 +996,7 @@
    "state": "ME",
    "lat": 43.563,
    "lon": -70.276,
+   "localBan": "Maine: taking coastal sharks is prohibited in state waters (possibly catch-and-release too)",
    "depth": {
     "to10ftYd": 301,
     "to15ftYd": 492,
@@ -973,6 +1009,7 @@
    "state": "ME",
    "lat": 43.514,
    "lon": -70.374,
+   "localBan": "Maine: taking coastal sharks is prohibited in state waters (possibly catch-and-release too)",
    "depth": {
     "to10ftYd": 328,
     "to15ftYd": 519,
@@ -985,6 +1022,7 @@
    "state": "ME",
    "lat": 43.249,
    "lon": -70.592,
+   "localBan": "Maine: taking coastal sharks is prohibited in state waters (possibly catch-and-release too)",
    "depth": {
     "to10ftYd": 383,
     "to15ftYd": 519,
@@ -1155,6 +1193,7 @@
    "state": "CT",
    "lat": 41.307,
    "lon": -72.095,
+   "localBan": "Connecticut: only dogfish can be taken from shore without a federal HMS permit",
    "depth": {
     "to10ftYd": 55,
     "to15ftYd": 82,
@@ -1167,6 +1206,7 @@
    "state": "CT",
    "lat": 41.258,
    "lon": -72.552,
+   "localBan": "Connecticut: only dogfish can be taken from shore without a federal HMS permit",
    "depth": {
     "to10ftYd": 164,
     "to15ftYd": 246,
@@ -1179,6 +1219,7 @@
    "state": "CT",
    "lat": 41.2,
    "lon": -73.07,
+   "localBan": "Connecticut: only dogfish can be taken from shore without a federal HMS permit",
    "depth": {
     "to10ftYd": 574,
     "to15ftYd": 820,
@@ -1517,6 +1558,7 @@
    "state": "VA",
    "lat": 36.851,
    "lon": -75.972,
+   "localBan": "Virginia Beach: no shark fishing on city beaches",
    "depth": {
     "to10ftYd": 164,
     "to15ftYd": 246,
@@ -1529,6 +1571,7 @@
    "state": "VA",
    "lat": 36.722,
    "lon": -75.937,
+   "localBan": "Virginia Beach: no shark fishing on city beaches",
    "depth": {
     "to10ftYd": 137,
     "to15ftYd": 273,
@@ -1720,6 +1763,7 @@
    "state": "NC",
    "lat": 34.209,
    "lon": -77.796,
+   "localBan": "Wrightsville Beach: no bait that attracts sharks from shore or piers",
    "depth": {
     "to10ftYd": 137,
     "to15ftYd": 328,
@@ -1804,6 +1848,7 @@
    "state": "SC",
    "lat": 33.689,
    "lon": -78.887,
+   "localBan": "Myrtle Beach: shark fishing from the beach, pier or shore prohibited",
    "depth": {
     "to10ftYd": 137,
     "to15ftYd": 246,
@@ -1816,6 +1861,7 @@
    "state": "SC",
    "lat": 33.6037,
    "lon": -78.9712,
+   "localBan": "Surfside Beach: shark fishing from the beach prohibited",
    "depth": {
     "to10ftYd": 82,
     "to15ftYd": 137,
@@ -1840,6 +1886,7 @@
    "state": "SC",
    "lat": 32.786,
    "lon": -79.785,
+   "localBan": "Isle of Palms: Ord. 2025-07 restricts shark fishing and bans drone-dropped baits",
    "depth": {
     "to10ftYd": 355,
     "to15ftYd": 1941,
@@ -1912,6 +1959,7 @@
    "state": "SC",
    "lat": 32.15,
    "lon": -80.74,
+   "localBan": "Hilton Head Island: shark fishing prohibited on town beaches",
    "depth": {
     "to10ftYd": 1886,
     "to15ftYd": ">2187",
@@ -1924,6 +1972,7 @@
    "state": "GA",
    "lat": 32.006,
    "lon": -80.845,
+   "localBan": "Tybee Island: shark fishing prohibited from public beaches, docks and piers",
    "depth": {
     "to10ftYd": 1066,
     "to15ftYd": 2160,
@@ -1948,6 +1997,7 @@
    "state": "GA",
    "lat": 31.064,
    "lon": -81.41,
+   "noDrones": "Jekyll Island Authority (no recreational drones)",
    "depth": {
     "to10ftYd": ">2078",
     "to15ftYd": ">2078",
@@ -2519,6 +2569,7 @@
    "lat": 27.77,
    "lon": -82.77,
    "speciesRegion": "FL-SW",
+   "localBan": "Treasure Island: city ordinance prohibits shark fishing from shore",
    "depth": {
     "to10ftYd": 137,
     "to15ftYd": 875,
