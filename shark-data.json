@@ -1,5 +1,5 @@
 {
- "_readme": "SharkLeash data for the laws map, conditions panel and Shark Water. Edit text, then set lastVerified (YYYY-MM-DD) on anything you checked. States: category must be a key in categories; drone.status is ban, limit or none. Beaches: state is the 2-letter code; depth is yards from the low-tide waterline to 10 ft and 15 ft (write \">2543\" when it never gets that deep within that distance; confidence is high, medium, low or inlet; noDrones names the park where drones are banned and keeps the beach out of the Best Beaches Top 5, unless privateLaunch is true, meaning anglers can launch from private property next to the park, so the beach stays in with a private-property note). speciesByMonth: per state, [species code, 12 digits Jan..Dec] where 0 absent, 1 occasional, 2 common, 3 peak. Gulf beaches carry speciesRegion (key in speciesByRegion; falls back to the state in speciesByMonth) and optional localBan (shark fishing banned there; kept out of Top 5). protected lists species each state bans from harvest beyond the coast-wide sandbar, sand tiger and dusky. faces: compass direction (degrees) the beach looks out to open water; Drop Assist uses it near the beach.",
+ "_readme": "SharkLeash data for the laws map, conditions panel and Shark Water. Edit text, then set lastVerified (YYYY-MM-DD) on anything you checked. States: category must be a key in categories; drone.status is ban, limit or none. Beaches: state is the 2-letter code; depth is yards from the low-tide waterline to 10 ft and 15 ft (write \">2543\" when it never gets that deep within that distance; confidence is high, medium, low or inlet; noDrones names the park where drones are banned and keeps the beach out of the Best Beaches Top 5, unless privateLaunch is true, meaning anglers can launch from private property next to the park, so the beach stays in with a private-property note). speciesByMonth: per state, [species code, 12 digits Jan..Dec] where 0 absent, 1 occasional, 2 common, 3 peak. Gulf beaches carry speciesRegion (key in speciesByRegion; falls back to the state in speciesByMonth). Any beach can carry optional localBan (shark fishing banned there; kept out of Top 5). protected lists species each state bans from harvest beyond the coast-wide sandbar, sand tiger and dusky. faces: compass direction (degrees) the beach looks out to open water; Drop Assist uses it near the beach.",
  "lastVerified": "2026-11-08",
  "coastWide": "most states require non-offset, non-stainless (corrodible) circle hooks when fishing sharks with natural bait, and it's good practice everywhere. Shortfin mako can't be kept. Sandbar, sand tiger and dusky are prohibited and the most common from shore. Keep any shark you're releasing in the water. Drones are banned in every National Seashore, and FAA drone rules apply everywhere.",
  "categories": {
@@ -660,7 +660,7 @@
    "name": "Florida",
    "ab": "FL",
    "category": "strict",
-   "lastVerified": "2026-11-08",
+   "lastVerified": "2026-11-09",
    "summary": "Free shore-based shark permit + course required (16+). No chumming from the beach.",
    "drone": {
     "status": "limit",
@@ -693,7 +693,7 @@
     },
     {
      "label": "Local",
-     "text": "State law reserves fishing rules to the state; cities and counties can only ban fishing on property they own (parks, piers) for public safety. Martin County's beach rules are being rewritten (a draft would ban fishing at guarded beach parks during guarded hours; no vote yet). Miami Beach voted a land-based shark fishing ban in Feb 2026; its current status is unclear. Canaveral NS: no drones."
+     "text": "State law reserves fishing rules to the state; cities and counties can only ban fishing on property they own (parks, piers) for public safety. Martin County's beach rules are being rewritten (a draft would ban fishing at guarded beach parks during guarded hours; no vote yet). Miami Beach: the city banned land-based shark fishing from the shoreline, docks and bridges in Feb 2026; treat it as banned (one report claims a repeal, unconfirmed). Canaveral NS: no drones."
     },
     {
      "label": "Gulf coast",
@@ -724,6 +724,10 @@
     {
      "title": "Gulf Islands NS – Laws & Policies",
      "url": "https://www.nps.gov/guis/learn/management/lawsandpolicies.htm"
+    },
+    {
+     "title": "City of Miami Beach – Land-based shark fishing ban (Feb 2026)",
+     "url": "https://www.miamibeachfl.gov/miami-beach-bans-land-based-shark-fishing/"
     }
    ]
   },
@@ -2213,6 +2217,7 @@
    "state": "FL",
    "lat": 25.79,
    "lon": -80.128,
+   "localBan": "Miami Beach: land-based shark fishing banned by city ordinance (Feb 2026)",
    "depth": {
     "to10ftYd": 164,
     "to15ftYd": 219,
