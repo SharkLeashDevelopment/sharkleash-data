@@ -2564,6 +2564,19 @@
    "faces": 273
   },
   {
+   "name": "Madeira Beach",
+   "state": "FL",
+   "lat": 27.806,
+   "lon": -82.809,
+   "speciesRegion": "FL-SW",
+   "depth": {
+    "to10ftYd": 191,
+    "to15ftYd": 1449,
+    "confidence": "high"
+   },
+   "faces": 220
+  },
+  {
    "name": "Treasure Island",
    "state": "FL",
    "lat": 27.77,
