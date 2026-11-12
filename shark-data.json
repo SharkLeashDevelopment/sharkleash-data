@@ -2897,7 +2897,8 @@
     "to15ftYd": 957,
     "confidence": "medium"
    },
-   "faces": 173
+   "faces": 173,
+   "clarityBase": 0.6
   },
   {
    "name": "Elmer's Island",
@@ -2910,7 +2911,8 @@
     "to15ftYd": 875,
     "confidence": "medium"
    },
-   "faces": 162
+   "faces": 162,
+   "clarityBase": 0.6
   },
   {
    "name": "Fourchon Beach",
@@ -2923,7 +2925,8 @@
     "to15ftYd": 410,
     "confidence": "medium"
    },
-   "faces": 161
+   "faces": 161,
+   "clarityBase": 0.6
   },
   {
    "name": "Holly Beach",
@@ -2978,7 +2981,8 @@
     "to15ftYd": ">2187",
     "confidence": "low"
    },
-   "faces": 200
+   "faces": 200,
+   "clarityBase": 0.7
   },
   {
    "name": "Sea Rim State Park",
@@ -2991,7 +2995,8 @@
     "to15ftYd": 2433,
     "confidence": "high"
    },
-   "faces": 167
+   "faces": 167,
+   "clarityBase": 0.8
   },
   {
    "name": "Crystal Beach (Bolivar)",
@@ -3004,7 +3009,8 @@
     "to15ftYd": 1012,
     "confidence": "high"
    },
-   "faces": 148
+   "faces": 148,
+   "clarityBase": 0.7
   },
   {
    "name": "Galveston",
@@ -3017,7 +3023,8 @@
     "to15ftYd": 793,
     "confidence": "medium"
    },
-   "faces": 145
+   "faces": 145,
+   "clarityBase": 0.6
   },
   {
    "name": "San Luis Pass",
@@ -3030,7 +3037,8 @@
     "to15ftYd": 301,
     "confidence": "high"
    },
-   "faces": 133
+   "faces": 133,
+   "clarityBase": 0.6
   },
   {
    "name": "Quintana Beach",
@@ -3043,7 +3051,8 @@
     "to15ftYd": 1176,
     "confidence": "high"
    },
-   "faces": 140
+   "faces": 140,
+   "clarityBase": 0.7
   },
   {
    "name": "Surfside Beach",
@@ -3056,7 +3065,8 @@
     "to15ftYd": 930,
     "confidence": "high"
    },
-   "faces": 140
+   "faces": 140,
+   "clarityBase": 0.7
   },
   {
    "name": "Sargent Beach",
@@ -3069,7 +3079,8 @@
     "to15ftYd": 1340,
     "confidence": "high"
    },
-   "faces": 150
+   "faces": 150,
+   "clarityBase": 0.5
   },
   {
    "name": "Matagorda Beach",
@@ -3082,7 +3093,8 @@
     "to15ftYd": 383,
     "confidence": "high"
    },
-   "faces": 153
+   "faces": 153,
+   "clarityBase": 0.6
   },
   {
    "name": "Port Aransas",
