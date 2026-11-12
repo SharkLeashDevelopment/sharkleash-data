@@ -912,7 +912,7 @@
    "lastVerified": "2026-11-08",
    "summary": "1 shark per day, total-length minimums (24\"/64\"/99\"). Circle hooks required when fishing for sharks. TPWD says drone bait drops are a federal violation.",
    "drone": {
-    "status": "ban",
+    "status": "limit",
     "note": "TPWD (Dec 8, 2025): drone bait drops violate the federal Airborne Hunting Act (50 CFR 19.11), a federal not state violation, with no state charges. Disputed by anglers. Padre Island National Seashore: no drones.",
     "url": "https://tpwd.texas.gov/newsmedia/releases/?req=20251208a"
    },
