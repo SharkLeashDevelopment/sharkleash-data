@@ -1,5 +1,5 @@
 {
- "_readme": "SharkLeash data for the laws map, conditions panel and Shark Water. Edit text, then set lastVerified (YYYY-MM-DD) on anything you checked. States: category must be a key in categories; drone.status is ban, limit or none. Beaches: state is the 2-letter code; depth is yards from the low-tide waterline to 10 ft and 15 ft (write \">2543\" when it never gets that deep within that distance; confidence is high, medium, low or inlet; noDrones names the park where drones are banned and keeps the beach out of the Best Beaches Top 5, unless privateLaunch is true, meaning anglers can launch from private property next to the park, so the beach stays in with a private-property note). speciesByMonth: per state, [species code, 12 digits Jan..Dec] where 0 absent, 1 occasional, 2 common, 3 peak. Gulf beaches carry speciesRegion (key in speciesByRegion; falls back to the state in speciesByMonth). Any beach can carry optional localBan (shark fishing banned there; kept out of Top 5). protected lists species each state bans from harvest beyond the coast-wide sandbar, sand tiger and dusky. faces: compass direction (degrees) the beach looks out to open water; Drop Assist uses it near the beach.",
+ "_readme": "SharkLeash data for the laws map, conditions panel and Shark Water. Edit text, then set lastVerified (YYYY-MM-DD) on anything you checked. States: category must be a key in categories; drone.status is ban, limit or none. Beaches: state is the 2-letter code; depth is yards from the low-tide waterline to 10 ft and 15 ft (write \">2543\" when it never gets that deep within that distance; confidence is high, medium, low or inlet; noDrones names the park where drones are banned and keeps the beach out of the Best Beaches Top 5, unless privateLaunch is true, meaning anglers can launch from private property next to the park, so the beach stays in with a private-property note). speciesByMonth: per state, [species code, 12 digits Jan..Dec] where 0 absent, 1 occasional, 2 common, 3 peak. Gulf beaches carry speciesRegion (key in speciesByRegion; falls back to the state in speciesByMonth). Any beach can carry optional localBan (shark fishing banned there; kept out of Top 5). protected lists species each state bans from harvest beyond the coast-wide sandbar, sand tiger and dusky. faces: compass direction (degrees) the beach looks out to open water; Drop Assist uses it near the beach. baitByRegion: per region, [bait code, 12 digits Jan..Dec] with 0 absent, 1 occasional, 2 common, 3 peak (estimates, not survey data); codes are in baitSpecies. baitRules: bait-catching rules shown to anglers only; they never change the Drop Score.",
  "lastVerified": "2026-11-09",
  "coastWide": "most states require non-offset, non-stainless (corrodible) circle hooks when fishing sharks with natural bait, and it's good practice everywhere. Shortfin mako can't be kept. Sandbar, sand tiger and dusky are prohibited and the most common from shore. Keep any shark you're releasing in the water. Drones are banned in every National Seashore, and FAA drone rules apply everywhere.",
  "categories": {
@@ -3983,6 +3983,1120 @@
    "sk",
    "du",
    "st"
+  ]
+ },
+ "baitSpecies": [
+  {
+   "code": "SMUL",
+   "name": "Striped (black) mullet",
+   "short": "Mullet",
+   "tempF": "55-85; run starts as nearshore water falls through ~70 to low 60s",
+   "catch": "Cast net at inlets, beaches and creek mouths",
+   "sharks": [
+    "bull",
+    "blacktip",
+    "spinner",
+    "lemon",
+    "sandbar",
+    "tiger"
+   ],
+   "conf": "H"
+  },
+  {
+   "code": "WMUL",
+   "name": "White (silver) mullet",
+   "short": "Silver mullet",
+   "tempF": "65-88",
+   "catch": "Cast net in surf and inlets, often mixed with striped mullet",
+   "sharks": [
+    "blacktip",
+    "spinner",
+    "bull"
+   ],
+   "conf": "M"
+  },
+  {
+   "code": "ABUN",
+   "name": "Atlantic menhaden (bunker)",
+   "short": "Menhaden",
+   "tempF": "50-80; leaves bays as water drops below ~60",
+   "catch": "Cast net, weighted treble snag, sabiki for peanuts; or buy fresh",
+   "sharks": [
+    "blacktip",
+    "spinner",
+    "sandbar",
+    "dusky",
+    "sand tiger",
+    "bull",
+    "Atlantic sharpnose"
+   ],
+   "conf": "H"
+  },
+  {
+   "code": "GMEN",
+   "name": "Gulf menhaden (pogy)",
+   "short": "Pogies",
+   "tempF": "60-88",
+   "catch": "Cast net from piers, jetties and surf",
+   "sharks": [
+    "blacktip",
+    "spinner",
+    "Atlantic sharpnose",
+    "bull"
+   ],
+   "conf": "H"
+  },
+  {
+   "code": "BLUE",
+   "name": "Bluefish",
+   "short": "Bluefish",
+   "tempF": "55-78",
+   "catch": "Rod and reel with metal lures or cut bait; snappers on small lures and sabiki",
+   "sharks": [
+    "dusky",
+    "sandbar",
+    "bull",
+    "blacktip",
+    "tiger"
+   ],
+   "conf": "H"
+  },
+  {
+   "code": "LADY",
+   "name": "Ladyfish",
+   "short": "Ladyfish",
+   "tempF": "68-90 (cold-sensitive)",
+   "catch": "Rod and reel with small jigs or shrimp; night pier lights",
+   "sharks": [
+    "blacktip",
+    "spinner",
+    "bull",
+    "lemon"
+   ],
+   "conf": "M"
+  },
+  {
+   "code": "JACK",
+   "name": "Jack crevalle",
+   "short": "Jacks",
+   "tempF": "68-88",
+   "catch": "Rod and reel with poppers, spoons or live bait at inlets and jetties",
+   "sharks": [
+    "bull",
+    "tiger",
+    "great hammerhead",
+    "lemon"
+   ],
+   "conf": "M"
+  },
+  {
+   "code": "SPMK",
+   "name": "Spanish mackerel",
+   "short": "Spanish mackerel",
+   "tempF": "68-85 (arrives near 70)",
+   "catch": "Rod and reel from piers (Gotcha plugs, spoons); sabiki for small fish",
+   "sharks": [
+    "blacktip",
+    "spinner",
+    "sandbar",
+    "bull"
+   ],
+   "conf": "H"
+  },
+  {
+   "code": "LTUN",
+   "name": "Little tunny (false albacore, 'bonito')",
+   "short": "Little tunny",
+   "tempF": "65-82",
+   "catch": "Rod and reel with metals and epoxy jigs from jetties and piers",
+   "sharks": [
+    "bull",
+    "tiger",
+    "great hammerhead",
+    "dusky"
+   ],
+   "conf": "M"
+  },
+  {
+   "code": "CROK",
+   "name": "Atlantic croaker",
+   "short": "Croaker",
+   "tempF": "55-85",
+   "catch": "Bottom rigs with shrimp or bloodworm from pier and surf",
+   "sharks": [
+    "blacktip",
+    "Atlantic sharpnose",
+    "sandbar",
+    "bull"
+   ],
+   "conf": "H"
+  },
+  {
+   "code": "SPOT",
+   "name": "Spot",
+   "short": "Spot",
+   "tempF": "50-80; fall spot run on falling temps",
+   "catch": "Bottom rigs with bloodworm or shrimp; cast net in creeks",
+   "sharks": [
+    "sandbar",
+    "blacktip",
+    "Atlantic sharpnose",
+    "dusky"
+   ],
+   "conf": "M"
+  },
+  {
+   "code": "WHIT",
+   "name": "Whiting / kingfish",
+   "short": "Whiting",
+   "tempF": "55-80",
+   "catch": "Surf trough with sand fleas or shrimp",
+   "sharks": [
+    "Atlantic sharpnose",
+    "blacktip",
+    "bonnethead",
+    "sandbar"
+   ],
+   "conf": "M"
+  },
+  {
+   "code": "RAYS",
+   "name": "Stingrays and other rays",
+   "short": "Rays",
+   "tempF": "60-88",
+   "catch": "Bottom rig with cut bait or shrimp; spotted eagle rays are protected in Florida",
+   "sharks": [
+    "great hammerhead",
+    "bull",
+    "sandbar",
+    "tiger",
+    "dusky"
+   ],
+   "conf": "H"
+  },
+  {
+   "code": "SKAT",
+   "name": "Skates (little, winter, clearnose)",
+   "short": "Skates",
+   "tempF": "40-65",
+   "catch": "Bottom rig with squid or clam; cold-water fallback bait",
+   "sharks": [
+    "sand tiger",
+    "dusky",
+    "sandbar",
+    "smooth dogfish"
+   ],
+   "conf": "M"
+  }
+ ],
+ "baitByRegion": {
+  "ME": [
+   [
+    "ABUN",
+    "000012333210"
+   ],
+   [
+    "BLUE",
+    "000001232100"
+   ],
+   [
+    "LTUN",
+    "000000011000"
+   ],
+   [
+    "SKAT",
+    "000112222210"
+   ]
+  ],
+  "NH": [
+   [
+    "ABUN",
+    "000012333210"
+   ],
+   [
+    "BLUE",
+    "000001232100"
+   ],
+   [
+    "LTUN",
+    "000000011000"
+   ],
+   [
+    "SKAT",
+    "000112222210"
+   ]
+  ],
+  "MA": [
+   [
+    "SMUL",
+    "000000001210"
+   ],
+   [
+    "ABUN",
+    "000123333210"
+   ],
+   [
+    "BLUE",
+    "000012233210"
+   ],
+   [
+    "LTUN",
+    "000000023200"
+   ],
+   [
+    "SPMK",
+    "000000001100"
+   ],
+   [
+    "SPOT",
+    "000000001100"
+   ],
+   [
+    "WHIT",
+    "000000111000"
+   ],
+   [
+    "SKAT",
+    "112322112221"
+   ]
+  ],
+  "RI": [
+   [
+    "SMUL",
+    "000000012210"
+   ],
+   [
+    "ABUN",
+    "000123333210"
+   ],
+   [
+    "BLUE",
+    "000012233210"
+   ],
+   [
+    "LTUN",
+    "000000023300"
+   ],
+   [
+    "SPMK",
+    "000000001100"
+   ],
+   [
+    "SPOT",
+    "000000001100"
+   ],
+   [
+    "WHIT",
+    "000000111000"
+   ],
+   [
+    "SKAT",
+    "112322112221"
+   ]
+  ],
+  "CT": [
+   [
+    "SMUL",
+    "000000012210"
+   ],
+   [
+    "ABUN",
+    "000123333210"
+   ],
+   [
+    "BLUE",
+    "000012233210"
+   ],
+   [
+    "LTUN",
+    "000000023200"
+   ],
+   [
+    "SPOT",
+    "000000001100"
+   ],
+   [
+    "WHIT",
+    "000001111000"
+   ],
+   [
+    "SKAT",
+    "112322112221"
+   ]
+  ],
+  "NY": [
+   [
+    "SMUL",
+    "000000013320"
+   ],
+   [
+    "ABUN",
+    "000123333321"
+   ],
+   [
+    "BLUE",
+    "000122233320"
+   ],
+   [
+    "LTUN",
+    "000000023310"
+   ],
+   [
+    "SPMK",
+    "000000011100"
+   ],
+   [
+    "CROK",
+    "000001122100"
+   ],
+   [
+    "SPOT",
+    "000000012210"
+   ],
+   [
+    "WHIT",
+    "000012222100"
+   ],
+   [
+    "RAYS",
+    "000001222100"
+   ],
+   [
+    "SKAT",
+    "222322112222"
+   ]
+  ],
+  "NJ": [
+   [
+    "SMUL",
+    "000000123320"
+   ],
+   [
+    "ABUN",
+    "000123333321"
+   ],
+   [
+    "BLUE",
+    "000122333321"
+   ],
+   [
+    "LTUN",
+    "000000023310"
+   ],
+   [
+    "SPMK",
+    "000000122100"
+   ],
+   [
+    "CROK",
+    "000012222100"
+   ],
+   [
+    "SPOT",
+    "000001223210"
+   ],
+   [
+    "WHIT",
+    "000012332100"
+   ],
+   [
+    "RAYS",
+    "000012333100"
+   ],
+   [
+    "SKAT",
+    "222321112222"
+   ]
+  ],
+  "DE": [
+   [
+    "SMUL",
+    "000000123320"
+   ],
+   [
+    "ABUN",
+    "000123333321"
+   ],
+   [
+    "BLUE",
+    "000122333321"
+   ],
+   [
+    "LTUN",
+    "000000012210"
+   ],
+   [
+    "SPMK",
+    "000000122100"
+   ],
+   [
+    "CROK",
+    "000123332100"
+   ],
+   [
+    "SPOT",
+    "000012333210"
+   ],
+   [
+    "WHIT",
+    "000012332100"
+   ],
+   [
+    "RAYS",
+    "000012333100"
+   ],
+   [
+    "SKAT",
+    "122321112321"
+   ]
+  ],
+  "MD": [
+   [
+    "SMUL",
+    "000000123320"
+   ],
+   [
+    "ABUN",
+    "000123333321"
+   ],
+   [
+    "BLUE",
+    "000122333321"
+   ],
+   [
+    "LTUN",
+    "000000012210"
+   ],
+   [
+    "SPMK",
+    "000000122100"
+   ],
+   [
+    "CROK",
+    "000123332100"
+   ],
+   [
+    "SPOT",
+    "000012333210"
+   ],
+   [
+    "WHIT",
+    "000012332100"
+   ],
+   [
+    "RAYS",
+    "000012333100"
+   ],
+   [
+    "SKAT",
+    "122321112321"
+   ]
+  ],
+  "VA": [
+   [
+    "SMUL",
+    "000001223320"
+   ],
+   [
+    "ABUN",
+    "001233333321"
+   ],
+   [
+    "BLUE",
+    "001232222331"
+   ],
+   [
+    "JACK",
+    "000000012100"
+   ],
+   [
+    "LTUN",
+    "000000122210"
+   ],
+   [
+    "SPMK",
+    "000001233210"
+   ],
+   [
+    "CROK",
+    "000123333210"
+   ],
+   [
+    "SPOT",
+    "000012233320"
+   ],
+   [
+    "WHIT",
+    "000123332210"
+   ],
+   [
+    "RAYS",
+    "000123333210"
+   ],
+   [
+    "SKAT",
+    "223211111223"
+   ]
+  ],
+  "NC": [
+   [
+    "SMUL",
+    "111122223321"
+   ],
+   [
+    "WMUL",
+    "000012222100"
+   ],
+   [
+    "ABUN",
+    "212332222332"
+   ],
+   [
+    "BLUE",
+    "112332222332"
+   ],
+   [
+    "LADY",
+    "000001222100"
+   ],
+   [
+    "JACK",
+    "000012233210"
+   ],
+   [
+    "SPMK",
+    "000123333210"
+   ],
+   [
+    "LTUN",
+    "001221112331"
+   ],
+   [
+    "CROK",
+    "000123333210"
+   ],
+   [
+    "SPOT",
+    "000122223320"
+   ],
+   [
+    "WHIT",
+    "112332222331"
+   ],
+   [
+    "RAYS",
+    "000123333210"
+   ],
+   [
+    "SKAT",
+    "222211000112"
+   ]
+  ],
+  "SC": [
+   [
+    "SMUL",
+    "111122223321"
+   ],
+   [
+    "WMUL",
+    "000122222100"
+   ],
+   [
+    "ABUN",
+    "112233333322"
+   ],
+   [
+    "BLUE",
+    "223321111222"
+   ],
+   [
+    "LADY",
+    "000012333210"
+   ],
+   [
+    "JACK",
+    "000123333210"
+   ],
+   [
+    "SPMK",
+    "000123333210"
+   ],
+   [
+    "LTUN",
+    "001221111221"
+   ],
+   [
+    "CROK",
+    "111223333221"
+   ],
+   [
+    "SPOT",
+    "111122223321"
+   ],
+   [
+    "WHIT",
+    "222332222332"
+   ],
+   [
+    "RAYS",
+    "001233333321"
+   ]
+  ],
+  "GA": [
+   [
+    "SMUL",
+    "111122223321"
+   ],
+   [
+    "WMUL",
+    "000122222100"
+   ],
+   [
+    "ABUN",
+    "112233333322"
+   ],
+   [
+    "BLUE",
+    "223321111222"
+   ],
+   [
+    "LADY",
+    "000012333210"
+   ],
+   [
+    "JACK",
+    "000123333210"
+   ],
+   [
+    "SPMK",
+    "000123333210"
+   ],
+   [
+    "LTUN",
+    "001221111221"
+   ],
+   [
+    "CROK",
+    "111223333221"
+   ],
+   [
+    "SPOT",
+    "111122223321"
+   ],
+   [
+    "WHIT",
+    "222332222332"
+   ],
+   [
+    "RAYS",
+    "001233333321"
+   ]
+  ],
+  "FL": [
+   [
+    "SMUL",
+    "222222233332"
+   ],
+   [
+    "WMUL",
+    "222322222222"
+   ],
+   [
+    "ABUN",
+    "222332222233"
+   ],
+   [
+    "BLUE",
+    "333210000123"
+   ],
+   [
+    "LADY",
+    "222333333322"
+   ],
+   [
+    "JACK",
+    "222233333332"
+   ],
+   [
+    "SPMK",
+    "333322111233"
+   ],
+   [
+    "LTUN",
+    "223221111222"
+   ],
+   [
+    "CROK",
+    "222222222222"
+   ],
+   [
+    "SPOT",
+    "222111111222"
+   ],
+   [
+    "WHIT",
+    "333322222233"
+   ],
+   [
+    "RAYS",
+    "222333333322"
+   ]
+  ],
+  "FL-PAN": [
+   [
+    "SMUL",
+    "111122222332"
+   ],
+   [
+    "WMUL",
+    "000122222100"
+   ],
+   [
+    "GMEN",
+    "000123333210"
+   ],
+   [
+    "BLUE",
+    "001332222210"
+   ],
+   [
+    "LADY",
+    "000123333210"
+   ],
+   [
+    "JACK",
+    "000123333210"
+   ],
+   [
+    "SPMK",
+    "001333333210"
+   ],
+   [
+    "LTUN",
+    "000233221100"
+   ],
+   [
+    "CROK",
+    "112222222221"
+   ],
+   [
+    "SPOT",
+    "211111111122"
+   ],
+   [
+    "WHIT",
+    "333322222333"
+   ],
+   [
+    "RAYS",
+    "001233333210"
+   ]
+  ],
+  "FL-SW": [
+   [
+    "SMUL",
+    "322222222333"
+   ],
+   [
+    "WMUL",
+    "222333222222"
+   ],
+   [
+    "GMEN",
+    "111222222211"
+   ],
+   [
+    "BLUE",
+    "222110000012"
+   ],
+   [
+    "LADY",
+    "333333333333"
+   ],
+   [
+    "JACK",
+    "333333333333"
+   ],
+   [
+    "SPMK",
+    "222332222332"
+   ],
+   [
+    "LTUN",
+    "112332211111"
+   ],
+   [
+    "CROK",
+    "111111111111"
+   ],
+   [
+    "SPOT",
+    "100000000001"
+   ],
+   [
+    "WHIT",
+    "333322222233"
+   ],
+   [
+    "RAYS",
+    "333333333333"
+   ]
+  ],
+  "AL": [
+   [
+    "SMUL",
+    "111122222332"
+   ],
+   [
+    "WMUL",
+    "000122222100"
+   ],
+   [
+    "GMEN",
+    "000233333210"
+   ],
+   [
+    "BLUE",
+    "001232222210"
+   ],
+   [
+    "LADY",
+    "000123333210"
+   ],
+   [
+    "JACK",
+    "000123333210"
+   ],
+   [
+    "SPMK",
+    "000233333210"
+   ],
+   [
+    "LTUN",
+    "000122221100"
+   ],
+   [
+    "CROK",
+    "112333333221"
+   ],
+   [
+    "SPOT",
+    "211111111112"
+   ],
+   [
+    "WHIT",
+    "333222222333"
+   ],
+   [
+    "RAYS",
+    "001233333210"
+   ]
+  ],
+  "MS": [
+   [
+    "SMUL",
+    "111122222332"
+   ],
+   [
+    "WMUL",
+    "000122222100"
+   ],
+   [
+    "GMEN",
+    "000233333210"
+   ],
+   [
+    "BLUE",
+    "001232222210"
+   ],
+   [
+    "LADY",
+    "000123333210"
+   ],
+   [
+    "JACK",
+    "000123333210"
+   ],
+   [
+    "SPMK",
+    "000233333210"
+   ],
+   [
+    "LTUN",
+    "000011111000"
+   ],
+   [
+    "CROK",
+    "112333333221"
+   ],
+   [
+    "SPOT",
+    "211111111112"
+   ],
+   [
+    "WHIT",
+    "333222222333"
+   ],
+   [
+    "RAYS",
+    "001233333210"
+   ]
+  ],
+  "LA": [
+   [
+    "SMUL",
+    "111122222332"
+   ],
+   [
+    "GMEN",
+    "001233333321"
+   ],
+   [
+    "BLUE",
+    "001122222100"
+   ],
+   [
+    "LADY",
+    "000123333210"
+   ],
+   [
+    "JACK",
+    "000123333210"
+   ],
+   [
+    "SPMK",
+    "000123333210"
+   ],
+   [
+    "LTUN",
+    "000011111000"
+   ],
+   [
+    "CROK",
+    "112333333221"
+   ],
+   [
+    "SPOT",
+    "111111111111"
+   ],
+   [
+    "WHIT",
+    "222333322222"
+   ],
+   [
+    "RAYS",
+    "001233333210"
+   ]
+  ],
+  "TX": [
+   [
+    "SMUL",
+    "111222233332"
+   ],
+   [
+    "WMUL",
+    "000122222100"
+   ],
+   [
+    "GMEN",
+    "001233333321"
+   ],
+   [
+    "BLUE",
+    "000111111000"
+   ],
+   [
+    "LADY",
+    "000123333210"
+   ],
+   [
+    "JACK",
+    "000123333321"
+   ],
+   [
+    "SPMK",
+    "000123333210"
+   ],
+   [
+    "LTUN",
+    "000012221000"
+   ],
+   [
+    "CROK",
+    "112333333221"
+   ],
+   [
+    "SPOT",
+    "211111111112"
+   ],
+   [
+    "WHIT",
+    "333222222333"
+   ],
+   [
+    "RAYS",
+    "112333333321"
+   ]
+  ]
+ },
+ "baitRules": {
+  "_note": "Bait rules only; they do not affect the Drop Score. Checked Nov 13, 2026. 'verify' = not confirmed against the agency.",
+  "ME": [
+   "Bluefish 5 per day (emergency rule Apr 2, 2026)."
+  ],
+  "NH": [
+   "Bluefish: a 5-fish limit was proposed in May 2026; adoption not confirmed. Check NH Fish and Game. (verify)"
+  ],
+  "MA": [
+   "Bluefish 5 per day from shore or private boat, 7 for-hire (May 8, 2026)."
+  ],
+  "RI": [
+   "Bluefish 5 per day, no minimum size."
+  ],
+  "CT": [
+   "Bluefish 5 per day, snappers included. (verify)"
+  ],
+  "NY": [
+   "Bluefish 5 per day (July 2, 2026). Cast-net rules not confirmed. (verify)"
+  ],
+  "NJ": [
+   "Bluefish 5 per day. Menhaden: no minimum size. No license needed for personal bait cast nets up to 20 ft diameter."
+  ],
+  "DE": [
+   "Bluefish 5 per day from shore or private boat."
+  ],
+  "MD": [
+   "Cast nets up to 10 ft radius. Menhaden: no size or creel limit in the Chesapeake. Spotted seatrout can't be used as bait. Cownose ray fishing contests are banned."
+  ],
+  "VA": [
+   "No license needed to cast-net minnows, menhaden or mullet for personal bait. Snagging is illegal except for menhaden and mullet. Cast-net catch must meet size and bag limits."
+  ],
+  "NC": [
+   "Mullet 100 per person (striped and white combined), 400 per boat. Spot 50, croaker 50. Bluefish 5. Spanish mackerel 12 in, 15 per day."
+  ],
+  "SC": [
+   "Spot, croaker and whiting: 50 per person per day combined (hook and line). Bluefish 5 per day."
+  ],
+  "GA": [
+   "Bluefish 15 per day, 12 in fork length, closed March and April. Croaker 25 and spot 25 per day. No state whiting limit listed."
+  ],
+  "FL": [
+   "Mullet 50 per person (striped and silver combined); boat limit 50 Sept 1-Jan 31. Ladyfish, bonito, menhaden, whiting, croaker, jacks, southern stingray: 2 fish or 100 lb per person, whichever is more. Spotted eagle ray: no harvest."
+  ],
+  "AL": [
+   "Mullet 25 per person from shore, Oct 24-Dec 31. Cast nets up to 30 ft diameter; no cast-netting mullet in or within 300 ft of Theodore Industrial Canal, Dog River or Fowl River. Cast nets can't be used for game fish."
+  ],
+  "MS": [
+   "Spanish mackerel 12 in, 15 per day. No state mullet limit."
+  ],
+  "LA": [
+   "Striped mullet 100 lb per day. Spanish mackerel 12 in, 15 per day. Cast nets up to 8 ft 6 in radius."
+  ],
+  "TX": [
+   "No mullet over 12 in, October through January. Cast nets up to 14 ft, nongame fish only, for bait only in saltwater. Game fish, or any part of one, can't be used as bait."
+  ],
+  "federal": [
+   "Thorny skate: no possession. Release thorny, smooth and barndoor skates to be safe."
   ]
  }
 }
