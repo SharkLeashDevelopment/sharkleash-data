@@ -1764,9 +1764,9 @@
    "lat": 34.427,
    "lon": -77.546,
    "depth": {
-    "to10ftYd": 219,
-    "to15ftYd": 273,
-    "confidence": "low"
+    "to10ftYd": 175,
+    "to15ftYd": 363,
+    "confidence": "high"
    },
    "faces": 140
   },
