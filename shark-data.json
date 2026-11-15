@@ -1759,6 +1759,18 @@
    "faces": 135
   },
   {
+   "name": "Surf City",
+   "state": "NC",
+   "lat": 34.427,
+   "lon": -77.546,
+   "depth": {
+    "to10ftYd": 219,
+    "to15ftYd": 273,
+    "confidence": "low"
+   },
+   "faces": 140
+  },
+  {
    "name": "Wrightsville Beach",
    "state": "NC",
    "lat": 34.209,
