@@ -1055,6 +1055,18 @@
    "faces": 90
   },
   {
+   "name": "Salisbury Beach",
+   "state": "MA",
+   "lat": 42.84,
+   "lon": -70.8146,
+   "depth": {
+    "to10ftYd": 273,
+    "to15ftYd": 383,
+    "confidence": "high"
+   },
+   "faces": 90
+  },
+  {
    "name": "Plum Island",
    "state": "MA",
    "lat": 42.76,
@@ -1065,6 +1077,30 @@
     "confidence": "high"
    },
    "faces": 73
+  },
+  {
+   "name": "Nantasket Beach",
+   "state": "MA",
+   "lat": 42.2724,
+   "lon": -70.8558,
+   "depth": {
+    "to10ftYd": 355,
+    "to15ftYd": 629,
+    "confidence": "high"
+   },
+   "faces": 80
+  },
+  {
+   "name": "Duxbury Beach",
+   "state": "MA",
+   "lat": 42.0398,
+   "lon": -70.6344,
+   "depth": {
+    "to10ftYd": 355,
+    "to15ftYd": 519,
+    "confidence": "high"
+   },
+   "faces": 95
   },
   {
    "name": "Race Point",
@@ -1165,6 +1201,18 @@
    "faces": 147
   },
   {
+   "name": "East Matunuck",
+   "state": "RI",
+   "lat": 41.3749,
+   "lon": -71.5362,
+   "depth": {
+    "to10ftYd": 410,
+    "to15ftYd": 519,
+    "confidence": "medium"
+   },
+   "faces": 170
+  },
+  {
    "name": "Charlestown Breachway",
    "state": "RI",
    "lat": 41.356,
@@ -1187,6 +1235,18 @@
     "confidence": "high"
    },
    "faces": 149
+  },
+  {
+   "name": "Block Island (Crescent Beach)",
+   "state": "RI",
+   "lat": 41.1824,
+   "lon": -71.5654,
+   "depth": {
+    "to10ftYd": 137,
+    "to15ftYd": 219,
+    "confidence": "high"
+   },
+   "faces": 75
   },
   {
    "name": "Ocean Beach Park",
@@ -1250,6 +1310,16 @@
    "faces": 158
   },
   {
+   "name": "Moriches Inlet",
+   "state": "NY",
+   "lat": 40.7625,
+   "lon": -72.753,
+   "depth": {
+    "confidence": "inlet"
+   },
+   "faces": 160
+  },
+  {
    "name": "Smith Point",
    "state": "NY",
    "lat": 40.733,
@@ -1310,6 +1380,19 @@
    "faces": 143
   },
   {
+   "name": "Fort Tilden",
+   "state": "NY",
+   "lat": 40.5607,
+   "lon": -73.8833,
+   "depth": {
+    "to10ftYd": 246,
+    "to15ftYd": 301,
+    "confidence": "medium"
+   },
+   "noDrones": "Gateway NRA",
+   "faces": 165
+  },
+  {
    "name": "Breezy Point",
    "state": "NY",
    "lat": 40.556,
@@ -1360,6 +1443,18 @@
    "faces": 113
   },
   {
+   "name": "Point Pleasant Beach",
+   "state": "NJ",
+   "lat": 40.0871,
+   "lon": -74.0372,
+   "depth": {
+    "to10ftYd": 82,
+    "to15ftYd": 137,
+    "confidence": "high"
+   },
+   "faces": 95
+  },
+  {
    "name": "Seaside Heights",
    "state": "NJ",
    "lat": 39.944,
@@ -1396,6 +1491,18 @@
    "faces": 108
   },
   {
+   "name": "Beach Haven (LBI)",
+   "state": "NJ",
+   "lat": 39.5584,
+   "lon": -74.238,
+   "depth": {
+    "to10ftYd": 164,
+    "to15ftYd": 191,
+    "confidence": "high"
+   },
+   "faces": 125
+  },
+  {
    "name": "Holgate (LBI)",
    "state": "NJ",
    "lat": 39.546,
@@ -1406,6 +1513,18 @@
     "confidence": "low"
    },
    "faces": 125
+  },
+  {
+   "name": "Brigantine",
+   "state": "NJ",
+   "lat": 39.4061,
+   "lon": -74.3617,
+   "depth": {
+    "to10ftYd": 191,
+    "to15ftYd": 437,
+    "confidence": "high"
+   },
+   "faces": 130
   },
   {
    "name": "Atlantic City",
@@ -1430,6 +1549,30 @@
     "confidence": "medium"
    },
    "faces": 133
+  },
+  {
+   "name": "Sea Isle City",
+   "state": "NJ",
+   "lat": 39.1501,
+   "lon": -74.6921,
+   "depth": {
+    "to10ftYd": 191,
+    "to15ftYd": 301,
+    "confidence": "high"
+   },
+   "faces": 130
+  },
+  {
+   "name": "Avalon",
+   "state": "NJ",
+   "lat": 39.0908,
+   "lon": -74.7185,
+   "depth": {
+    "to10ftYd": 246,
+    "to15ftYd": 492,
+    "confidence": "high"
+   },
+   "faces": 125
   },
   {
    "name": "Wildwood",
@@ -1480,6 +1623,18 @@
    "faces": 105
   },
   {
+   "name": "Dewey Beach",
+   "state": "DE",
+   "lat": 38.692,
+   "lon": -75.071,
+   "depth": {
+    "to10ftYd": 55,
+    "to15ftYd": 109,
+    "confidence": "high"
+   },
+   "faces": 90
+  },
+  {
    "name": "Indian River Inlet",
    "state": "DE",
    "lat": 38.61,
@@ -1490,6 +1645,18 @@
     "confidence": "high"
    },
    "faces": 100
+  },
+  {
+   "name": "Bethany Beach",
+   "state": "DE",
+   "lat": 38.538,
+   "lon": -75.053,
+   "depth": {
+    "to10ftYd": 55,
+    "to15ftYd": 109,
+    "confidence": "high"
+   },
+   "faces": 90
   },
   {
    "name": "Fenwick Island",
@@ -1513,6 +1680,7 @@
     "to15ftYd": 191,
     "confidence": "high"
    },
+   "noDrones": "Ocean City: baits must be cast (no drones or kayaks)",
    "faces": 108
   },
   {
@@ -1540,6 +1708,18 @@
    },
    "noDrones": "Chincoteague NWR",
    "faces": 118
+  },
+  {
+   "name": "Buckroe Beach",
+   "state": "VA",
+   "lat": 37.0397,
+   "lon": -76.29,
+   "depth": {
+    "to10ftYd": 164,
+    "to15ftYd": 1476,
+    "confidence": "high"
+   },
+   "faces": 80
   },
   {
    "name": "Ocean View (Norfolk)",
@@ -1605,6 +1785,18 @@
    "faces": 78
   },
   {
+   "name": "Duck",
+   "state": "NC",
+   "lat": 36.1705,
+   "lon": -75.7475,
+   "depth": {
+    "to10ftYd": 328,
+    "to15ftYd": 465,
+    "confidence": "high"
+   },
+   "faces": 75
+  },
+  {
    "name": "Kill Devil Hills",
    "state": "NC",
    "lat": 36.03,
@@ -1640,6 +1832,18 @@
    },
    "noDrones": "Cape Hatteras NS",
    "faces": 63
+  },
+  {
+   "name": "Rodanthe",
+   "state": "NC",
+   "lat": 35.5927,
+   "lon": -75.4621,
+   "depth": {
+    "to10ftYd": 219,
+    "to15ftYd": 273,
+    "confidence": "high"
+   },
+   "faces": 95
   },
   {
    "name": "Avon",
@@ -1735,6 +1939,18 @@
    "faces": 183
   },
   {
+   "name": "Pine Knoll Shores",
+   "state": "NC",
+   "lat": 34.6933,
+   "lon": -76.821,
+   "depth": {
+    "to10ftYd": 246,
+    "to15ftYd": 465,
+    "confidence": "high"
+   },
+   "faces": 170
+  },
+  {
    "name": "Emerald Isle",
    "state": "NC",
    "lat": 34.661,
@@ -1745,6 +1961,18 @@
     "confidence": "high"
    },
    "faces": 165
+  },
+  {
+   "name": "North Topsail Beach",
+   "state": "NC",
+   "lat": 34.492,
+   "lon": -77.4193,
+   "depth": {
+    "to10ftYd": 191,
+    "to15ftYd": 410,
+    "confidence": "high"
+   },
+   "faces": 145
   },
   {
    "name": "Topsail Beach",
@@ -1820,6 +2048,30 @@
    "faces": 118
   },
   {
+   "name": "Bald Head Island",
+   "state": "NC",
+   "lat": 33.852,
+   "lon": -77.99,
+   "depth": {
+    "to10ftYd": 109,
+    "to15ftYd": 383,
+    "confidence": "high"
+   },
+   "faces": 190
+  },
+  {
+   "name": "Caswell Beach",
+   "state": "NC",
+   "lat": 33.8931,
+   "lon": -78.0448,
+   "depth": {
+    "to10ftYd": 766,
+    "to15ftYd": 1531,
+    "confidence": "low"
+   },
+   "faces": 175
+  },
+  {
    "name": "Holden Beach",
    "state": "NC",
    "lat": 33.912,
@@ -1856,6 +2108,31 @@
    "faces": 165
   },
   {
+   "name": "Sunset Beach",
+   "state": "NC",
+   "lat": 33.8632,
+   "lon": -78.5142,
+   "depth": {
+    "to10ftYd": 246,
+    "to15ftYd": 301,
+    "confidence": "high"
+   },
+   "faces": 170
+  },
+  {
+   "name": "North Myrtle Beach",
+   "state": "SC",
+   "lat": 33.8178,
+   "lon": -78.6689,
+   "localBan": "North Myrtle Beach: shark fishing banned within one mile of shore (city ordinance)",
+   "depth": {
+    "to10ftYd": 191,
+    "to15ftYd": 301,
+    "confidence": "high"
+   },
+   "faces": 130
+  },
+  {
    "name": "Myrtle Beach",
    "state": "SC",
    "lat": 33.689,
@@ -1882,10 +2159,48 @@
    "faces": 133
   },
   {
+   "name": "Garden City Beach",
+   "state": "SC",
+   "lat": 33.5773,
+   "lon": -78.9966,
+   "localBan": "Horry County: shark fishing from the beach and piers prohibited (the Georgetown County end of Garden City has no ban)",
+   "depth": {
+    "to10ftYd": 137,
+    "to15ftYd": 191,
+    "confidence": "high"
+   },
+   "faces": 120
+  },
+  {
+   "name": "Huntington Beach State Park",
+   "state": "SC",
+   "lat": 33.5075,
+   "lon": -79.0564,
+   "depth": {
+    "to10ftYd": 273,
+    "to15ftYd": 1012,
+    "confidence": "high"
+   },
+   "faces": 110
+  },
+  {
+   "name": "Litchfield Beach",
+   "state": "SC",
+   "lat": 33.4687,
+   "lon": -79.0954,
+   "depth": {
+    "to10ftYd": 164,
+    "to15ftYd": 246,
+    "confidence": "high"
+   },
+   "faces": 120
+  },
+  {
    "name": "Pawleys Island",
    "state": "SC",
    "lat": 33.4307,
    "lon": -79.1194,
+   "localBan": "Pawleys Island: no shark fishing within one mile of the beach, May through September",
    "depth": {
     "to10ftYd": 191,
     "to15ftYd": 273,
@@ -2018,6 +2333,19 @@
    "faces": 105
   },
   {
+   "name": "Cumberland Island",
+   "state": "GA",
+   "lat": 30.8003,
+   "lon": -81.4493,
+   "depth": {
+    "to10ftYd": 164,
+    "to15ftYd": 629,
+    "confidence": "high"
+   },
+   "noDrones": "Cumberland Island NS",
+   "faces": 95
+  },
+  {
    "name": "Amelia Island",
    "state": "FL",
    "lat": 30.67,
@@ -2054,6 +2382,30 @@
    "faces": 80
   },
   {
+   "name": "Ponte Vedra Beach",
+   "state": "FL",
+   "lat": 30.24,
+   "lon": -81.3764,
+   "depth": {
+    "to10ftYd": 246,
+    "to15ftYd": 383,
+    "confidence": "high"
+   },
+   "faces": 90
+  },
+  {
+   "name": "Vilano Beach",
+   "state": "FL",
+   "lat": 29.92,
+   "lon": -81.2908,
+   "depth": {
+    "to10ftYd": 519,
+    "to15ftYd": 930,
+    "confidence": "high"
+   },
+   "faces": 90
+  },
+  {
    "name": "St. Augustine Beach",
    "state": "FL",
    "lat": 29.857,
@@ -2064,6 +2416,18 @@
     "confidence": "medium"
    },
    "faces": 75
+  },
+  {
+   "name": "Crescent Beach",
+   "state": "FL",
+   "lat": 29.7705,
+   "lon": -81.2506,
+   "depth": {
+    "to10ftYd": 246,
+    "to15ftYd": 355,
+    "confidence": "high"
+   },
+   "faces": 85
   },
   {
    "name": "Matanzas Inlet",
@@ -2090,6 +2454,18 @@
    "faces": 68
   },
   {
+   "name": "Ormond Beach",
+   "state": "FL",
+   "lat": 29.2866,
+   "lon": -81.0353,
+   "depth": {
+    "to10ftYd": 273,
+    "to15ftYd": 355,
+    "confidence": "high"
+   },
+   "faces": 75
+  },
+  {
    "name": "Daytona Beach",
    "state": "FL",
    "lat": 29.21,
@@ -2100,6 +2476,16 @@
     "confidence": "medium"
    },
    "faces": 65
+  },
+  {
+   "name": "Ponce Inlet",
+   "state": "FL",
+   "lat": 29.0798,
+   "lon": -80.9197,
+   "depth": {
+    "confidence": "inlet"
+   },
+   "faces": 80
   },
   {
    "name": "New Smyrna Beach",
@@ -2135,6 +2521,30 @@
     "confidence": "high"
    },
    "faces": 95
+  },
+  {
+   "name": "Satellite Beach",
+   "state": "FL",
+   "lat": 28.1755,
+   "lon": -80.5889,
+   "depth": {
+    "to10ftYd": 219,
+    "to15ftYd": 383,
+    "confidence": "high"
+   },
+   "faces": 80
+  },
+  {
+   "name": "Indialantic",
+   "state": "FL",
+   "lat": 28.0904,
+   "lon": -80.5643,
+   "depth": {
+    "to10ftYd": 219,
+    "to15ftYd": 355,
+    "confidence": "high"
+   },
+   "faces": 80
   },
   {
    "name": "Melbourne Beach",
@@ -2195,6 +2605,44 @@
    "faces": 65
   },
   {
+   "name": "Jensen Beach",
+   "state": "FL",
+   "lat": 27.2556,
+   "lon": -80.1959,
+   "localBan": "Martin County: no shark fishing at guarded beach parks (rule under county review after an FWC directive)",
+   "depth": {
+    "to10ftYd": 191,
+    "to15ftYd": 301,
+    "confidence": "high"
+   },
+   "faces": 70
+  },
+  {
+   "name": "Stuart Beach",
+   "state": "FL",
+   "lat": 27.2003,
+   "lon": -80.1657,
+   "localBan": "Martin County: no shark fishing at guarded beach parks (rule under county review after an FWC directive)",
+   "depth": {
+    "to10ftYd": 164,
+    "to15ftYd": 219,
+    "confidence": "high"
+   },
+   "faces": 75
+  },
+  {
+   "name": "Hobe Sound Beach",
+   "state": "FL",
+   "lat": 27.06,
+   "lon": -80.1111,
+   "depth": {
+    "to10ftYd": 301,
+    "to15ftYd": 437,
+    "confidence": "high"
+   },
+   "faces": 75
+  },
+  {
    "name": "Jupiter Inlet",
    "state": "FL",
    "lat": 26.944,
@@ -2217,6 +2665,18 @@
    "faces": 78
   },
   {
+   "name": "Singer Island",
+   "state": "FL",
+   "lat": 26.79,
+   "lon": -80.0316,
+   "depth": {
+    "to10ftYd": 219,
+    "to15ftYd": 328,
+    "confidence": "high"
+   },
+   "faces": 90
+  },
+  {
    "name": "Palm Beach",
    "state": "FL",
    "lat": 26.705,
@@ -2229,6 +2689,31 @@
    "faces": 93
   },
   {
+   "name": "Lake Worth Beach",
+   "state": "FL",
+   "lat": 26.612,
+   "lon": -80.0364,
+   "depth": {
+    "to10ftYd": 246,
+    "to15ftYd": 383,
+    "confidence": "high"
+   },
+   "faces": 90
+  },
+  {
+   "name": "Delray Beach",
+   "state": "FL",
+   "lat": 26.46,
+   "lon": -80.0574,
+   "localBan": "Delray Beach: no shark fishing within 300 ft of the municipal beach and Atlantic Dunes Park",
+   "depth": {
+    "to10ftYd": 191,
+    "to15ftYd": 246,
+    "confidence": "high"
+   },
+   "faces": 90
+  },
+  {
    "name": "Boca Raton",
    "state": "FL",
    "lat": 26.35,
@@ -2239,6 +2724,18 @@
     "confidence": "high"
    },
    "faces": 98
+  },
+  {
+   "name": "Deerfield Beach",
+   "state": "FL",
+   "lat": 26.317,
+   "lon": -80.0747,
+   "depth": {
+    "to10ftYd": 191,
+    "to15ftYd": 246,
+    "confidence": "high"
+   },
+   "faces": 90
   },
   {
    "name": "Pompano Beach",
@@ -2265,6 +2762,18 @@
    "faces": 95
   },
   {
+   "name": "Hollywood Beach",
+   "state": "FL",
+   "lat": 26.01,
+   "lon": -80.115,
+   "depth": {
+    "to10ftYd": 191,
+    "to15ftYd": 246,
+    "confidence": "high"
+   },
+   "faces": 90
+  },
+  {
    "name": "Haulover",
    "state": "FL",
    "lat": 25.9,
@@ -2286,6 +2795,18 @@
     "confidence": "high"
    },
    "faces": 98
+  },
+  {
+   "name": "Key Biscayne",
+   "state": "FL",
+   "lat": 25.6796,
+   "lon": -80.1545,
+   "depth": {
+    "to10ftYd": 547,
+    "to15ftYd": ">1891",
+    "confidence": "medium"
+   },
+   "faces": 100
   },
   {
    "name": "Islamorada",
@@ -2550,6 +3071,32 @@
    "faces": 245
   },
   {
+   "name": "Longboat Key",
+   "state": "FL",
+   "lat": 27.3927,
+   "lon": -82.6456,
+   "speciesRegion": "FL-SW",
+   "depth": {
+    "to10ftYd": 191,
+    "to15ftYd": 246,
+    "confidence": "high"
+   },
+   "faces": 240
+  },
+  {
+   "name": "Lido Key",
+   "state": "FL",
+   "lat": 27.3111,
+   "lon": -82.5775,
+   "speciesRegion": "FL-SW",
+   "depth": {
+    "to10ftYd": 109,
+    "to15ftYd": 410,
+    "confidence": "high"
+   },
+   "faces": 250
+  },
+  {
    "name": "Honeymoon Island",
    "state": "FL",
    "lat": 28.065,
@@ -2574,6 +3121,61 @@
     "confidence": "high"
    },
    "faces": 273
+  },
+  {
+   "name": "Belleair Shore",
+   "state": "FL",
+   "lat": 27.9275,
+   "lon": -82.8439,
+   "localBan": "Belleair Shore: shore-based shark fishing banned by town ordinance (2026)",
+   "speciesRegion": "FL-SW",
+   "depth": {
+    "to10ftYd": 137,
+    "to15ftYd": 191,
+    "confidence": "high"
+   },
+   "faces": 265
+  },
+  {
+   "name": "Indian Rocks Beach",
+   "state": "FL",
+   "lat": 27.8784,
+   "lon": -82.8519,
+   "speciesRegion": "FL-SW",
+   "depth": {
+    "to10ftYd": 164,
+    "to15ftYd": 875,
+    "confidence": "high"
+   },
+   "faces": 255
+  },
+  {
+   "name": "Indian Shores",
+   "state": "FL",
+   "lat": 27.8477,
+   "lon": -82.845,
+   "localBan": "Indian Shores: shore-based shark fishing banned by town ordinance (2023)",
+   "speciesRegion": "FL-SW",
+   "depth": {
+    "to10ftYd": 164,
+    "to15ftYd": 1394,
+    "confidence": "high"
+   },
+   "faces": 250
+  },
+  {
+   "name": "Redington Shores",
+   "state": "FL",
+   "lat": 27.8225,
+   "lon": -82.8299,
+   "localBan": "Redington Shores: shore-based shark fishing banned by town ordinance",
+   "speciesRegion": "FL-SW",
+   "depth": {
+    "to10ftYd": 246,
+    "to15ftYd": 1148,
+    "confidence": "high"
+   },
+   "faces": 240
   },
   {
    "name": "Madeira Beach",
@@ -2642,6 +3244,19 @@
    "faces": 240
   },
   {
+   "name": "Casey Key",
+   "state": "FL",
+   "lat": 27.122,
+   "lon": -82.4713,
+   "speciesRegion": "FL-SW",
+   "depth": {
+    "to10ftYd": 164,
+    "to15ftYd": 246,
+    "confidence": "high"
+   },
+   "faces": 260
+  },
+  {
    "name": "Venice",
    "state": "FL",
    "lat": 27.08,
@@ -2655,6 +3270,19 @@
    "faces": 243
   },
   {
+   "name": "Manasota Key",
+   "state": "FL",
+   "lat": 26.9262,
+   "lon": -82.3634,
+   "speciesRegion": "FL-SW",
+   "depth": {
+    "to10ftYd": 219,
+    "to15ftYd": 301,
+    "confidence": "high"
+   },
+   "faces": 240
+  },
+  {
    "name": "Boca Grande",
    "state": "FL",
    "lat": 26.75,
@@ -2666,6 +3294,19 @@
     "confidence": "high"
    },
    "faces": 252
+  },
+  {
+   "name": "Captiva",
+   "state": "FL",
+   "lat": 26.52,
+   "lon": -82.1937,
+   "speciesRegion": "FL-SW",
+   "depth": {
+    "to10ftYd": 82,
+    "to15ftYd": 191,
+    "confidence": "high"
+   },
+   "faces": 270
   },
   {
    "name": "Sanibel",
@@ -2692,6 +3333,19 @@
     "confidence": "high"
    },
    "faces": 216
+  },
+  {
+   "name": "Bonita Beach",
+   "state": "FL",
+   "lat": 26.3303,
+   "lon": -81.8461,
+   "speciesRegion": "FL-SW",
+   "depth": {
+    "to10ftYd": 191,
+    "to15ftYd": 711,
+    "confidence": "high"
+   },
+   "faces": 260
   },
   {
    "name": "Naples",
@@ -3039,6 +3693,19 @@
    "clarityBase": 0.6
   },
   {
+   "name": "Jamaica Beach",
+   "state": "TX",
+   "lat": 29.177,
+   "lon": -94.9781,
+   "speciesRegion": "TX",
+   "depth": {
+    "to10ftYd": 465,
+    "to15ftYd": 930,
+    "confidence": "high"
+   },
+   "faces": 140
+  },
+  {
    "name": "San Luis Pass",
    "state": "TX",
    "lat": 29.085,
@@ -3053,6 +3720,19 @@
    "clarityBase": 0.6
   },
   {
+   "name": "Follets Island",
+   "state": "TX",
+   "lat": 29.0724,
+   "lon": -95.1233,
+   "speciesRegion": "TX",
+   "depth": {
+    "to10ftYd": 930,
+    "to15ftYd": 1476,
+    "confidence": "high"
+   },
+   "faces": 140
+  },
+  {
    "name": "Quintana Beach",
    "state": "TX",
    "lat": 28.925,
@@ -3065,6 +3745,19 @@
    },
    "faces": 140,
    "clarityBase": 0.7
+  },
+  {
+   "name": "Bryan Beach",
+   "state": "TX",
+   "lat": 28.9127,
+   "lon": -95.3327,
+   "speciesRegion": "TX",
+   "depth": {
+    "to10ftYd": 738,
+    "to15ftYd": 1312,
+    "confidence": "high"
+   },
+   "faces": 150
   },
   {
    "name": "Surfside Beach",
