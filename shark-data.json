@@ -1,5 +1,5 @@
 {
- "_readme": "SharkLeash data for the laws map, conditions panel and Shark Water. Edit text, then set lastVerified (YYYY-MM-DD) on anything you checked. States: category must be a key in categories; drone.status is ban, limit or none. Beaches: state is the 2-letter code; depth is yards from the low-tide waterline to 10 ft and 15 ft (write \">2543\" when it never gets that deep within that distance; confidence is high, medium, low or inlet; noDrones names the park where drones are banned and keeps the beach out of the Best Beaches Top 5, unless privateLaunch is true, meaning anglers can launch from private property next to the park, so the beach stays in with a private-property note). speciesByMonth: per state, [species code, 12 digits Jan..Dec] where 0 absent, 1 occasional, 2 common, 3 peak. Gulf beaches carry speciesRegion (key in speciesByRegion; falls back to the state in speciesByMonth). Any beach can carry optional localBan (shark fishing banned there; kept out of Top 5). protected lists species each state bans from harvest beyond the coast-wide sandbar, sand tiger and dusky. faces: compass direction (degrees) the beach looks out to open water; Drop Assist uses it near the beach. baitByRegion: per region, [bait code, 12 digits Jan..Dec] with 0 absent, 1 occasional, 2 common, 3 peak (estimates, not survey data); codes are in baitSpecies. baitRules: bait-catching rules shown to anglers only; they never change the Drop Score. Season strings taper: a month at 0 next to a month at 2 or 3 should be 1 (migrations don't stop in one month). Apply any season or temperature fix to every state and region, not just the beach that exposed it.",
+ "_readme": "SharkLeash data for the laws map, conditions panel and Shark Water. Edit text, then set lastVerified (YYYY-MM-DD) on anything you checked. States: category must be a key in categories; drone.status is ban, limit or none. Beaches: state is the 2-letter code; depth is yards from the low-tide waterline to 10 ft and 15 ft (write \">2543\" when it never gets that deep within that distance; confidence is high, medium, low or inlet; noDrones names the park where drones are banned and keeps the beach out of the Best Beaches Top 5, unless privateLaunch is true, meaning anglers can launch from private property next to the park, so the beach stays in with a private-property note). speciesByMonth: per state, [species code, 12 digits Jan..Dec] where 0 absent, 1 occasional, 2 common, 3 peak. Gulf beaches carry speciesRegion (key in speciesByRegion; falls back to the state in speciesByMonth). Any beach can carry optional localBan (shark fishing banned there; kept out of Top 5). protected lists species each state bans from harvest beyond the coast-wide sandbar, sand tiger and dusky. faces: compass direction (degrees) the beach looks out to open water; Drop Assist uses it near the beach. baitByRegion: per region, [bait code, 12 digits Jan..Dec] with 0 absent, 1 occasional, 2 common, 3 peak (estimates, not survey data); codes are in baitSpecies. baitRules: bait-catching rules shown to anglers only; they never change the Drop Score. Season strings taper: a month at 0 next to a month at 2 or 3 should be 1 (migrations don't stop in one month). Apply any season or temperature fix to every state and region, not just the beach that exposed it. nws: [land forecast zone, county zone] for the beach, used to look up NWS alerts (floods, rip currents, surf) because many beach points sit just offshore in a marine zone; offshore islands with no land zone have none.",
  "lastVerified": "2026-11-18",
  "coastWide": "most states require non-offset, non-stainless (corrodible) circle hooks when fishing sharks with natural bait, and it's good practice everywhere. Shortfin mako can't be kept. Sandbar, sand tiger and dusky are prohibited and the most common from shore. Keep any shark you're releasing in the water. Drones are banned in every National Seashore, and FAA drone rules apply everywhere.",
  "categories": {
@@ -963,7 +963,11 @@
     "confidence": "high"
    },
    "noDrones": "Acadia NP",
-   "faces": 135
+   "faces": 135,
+   "nws": [
+    "MEZ029",
+    "MEC009"
+   ]
   },
   {
    "name": "Reid State Park",
@@ -976,7 +980,11 @@
     "to15ftYd": 164,
     "confidence": "medium"
    },
-   "faces": 140
+   "faces": 140,
+   "nws": [
+    "MEZ025",
+    "MEC023"
+   ]
   },
   {
    "name": "Popham Beach",
@@ -989,7 +997,11 @@
     "to15ftYd": 1750,
     "confidence": "low"
    },
-   "faces": 153
+   "faces": 153,
+   "nws": [
+    "MEZ025",
+    "MEC023"
+   ]
   },
   {
    "name": "Higgins Beach",
@@ -1002,7 +1014,11 @@
     "to15ftYd": 492,
     "confidence": "high"
    },
-   "faces": 165
+   "faces": 165,
+   "nws": [
+    "MEZ024",
+    "MEC005"
+   ]
   },
   {
    "name": "Old Orchard Beach",
@@ -1015,7 +1031,11 @@
     "to15ftYd": 519,
     "confidence": "high"
    },
-   "faces": 123
+   "faces": 123,
+   "nws": [
+    "MEZ023",
+    "MEC031"
+   ]
   },
   {
    "name": "Ogunquit",
@@ -1028,7 +1048,11 @@
     "to15ftYd": 519,
     "confidence": "high"
    },
-   "faces": 103
+   "faces": 103,
+   "nws": [
+    "MEZ023",
+    "MEC031"
+   ]
   },
   {
    "name": "Rye Harbor",
@@ -1040,7 +1064,11 @@
     "to15ftYd": 547,
     "confidence": "low"
    },
-   "faces": 98
+   "faces": 98,
+   "nws": [
+    "NHZ014",
+    "NHC015"
+   ]
   },
   {
    "name": "Hampton Beach",
@@ -1052,7 +1080,11 @@
     "to15ftYd": 383,
     "confidence": "high"
    },
-   "faces": 90
+   "faces": 90,
+   "nws": [
+    "NHZ014",
+    "NHC015"
+   ]
   },
   {
    "name": "Salisbury Beach",
@@ -1064,7 +1096,11 @@
     "to15ftYd": 383,
     "confidence": "high"
    },
-   "faces": 90
+   "faces": 90,
+   "nws": [
+    "MAZ007",
+    "MAC009"
+   ]
   },
   {
    "name": "Plum Island",
@@ -1076,7 +1112,11 @@
     "to15ftYd": 410,
     "confidence": "high"
    },
-   "faces": 73
+   "faces": 73,
+   "nws": [
+    "MAZ007",
+    "MAC009"
+   ]
   },
   {
    "name": "Nantasket Beach",
@@ -1088,7 +1128,11 @@
     "to15ftYd": 629,
     "confidence": "high"
    },
-   "faces": 80
+   "faces": 80,
+   "nws": [
+    "MAZ019",
+    "MAC023"
+   ]
   },
   {
    "name": "Duxbury Beach",
@@ -1100,7 +1144,11 @@
     "to15ftYd": 519,
     "confidence": "high"
    },
-   "faces": 95
+   "faces": 95,
+   "nws": [
+    "MAZ019",
+    "MAC023"
+   ]
   },
   {
    "name": "Race Point",
@@ -1113,7 +1161,11 @@
     "confidence": "medium"
    },
    "noDrones": "Cape Cod NS",
-   "faces": 23
+   "faces": 23,
+   "nws": [
+    "MAZ022",
+    "MAC001"
+   ]
   },
   {
    "name": "Nauset Beach",
@@ -1126,7 +1178,11 @@
     "confidence": "high"
    },
    "noDrones": "Cape Cod NS",
-   "faces": 85
+   "faces": 85,
+   "nws": [
+    "MAZ022",
+    "MAC001"
+   ]
   },
   {
    "name": "Sandy Neck",
@@ -1138,7 +1194,11 @@
     "to15ftYd": 301,
     "confidence": "high"
    },
-   "faces": 6
+   "faces": 6,
+   "nws": [
+    "MAZ022",
+    "MAC001"
+   ]
   },
   {
    "name": "Chatham",
@@ -1150,7 +1210,11 @@
     "to15ftYd": 355,
     "confidence": "low"
    },
-   "faces": 111
+   "faces": 111,
+   "nws": [
+    "MAZ022",
+    "MAC001"
+   ]
   },
   {
    "name": "Horseneck Beach",
@@ -1162,7 +1226,11 @@
     "to15ftYd": 246,
     "confidence": "high"
    },
-   "faces": 196
+   "faces": 196,
+   "nws": [
+    "MAZ020",
+    "MAC005"
+   ]
   },
   {
    "name": "Great Point (Nantucket)",
@@ -1174,7 +1242,11 @@
     "to15ftYd": 55,
     "confidence": "low"
    },
-   "faces": 79
+   "faces": 79,
+   "nws": [
+    "MAZ024",
+    "MAC019"
+   ]
   },
   {
    "name": "Wasque (Martha's Vineyard)",
@@ -1186,7 +1258,11 @@
     "to15ftYd": 437,
     "confidence": "low"
    },
-   "faces": 167
+   "faces": 167,
+   "nws": [
+    "MAZ023",
+    "MAC007"
+   ]
   },
   {
    "name": "Narragansett",
@@ -1198,7 +1274,11 @@
     "to15ftYd": 164,
     "confidence": "high"
    },
-   "faces": 147
+   "faces": 147,
+   "nws": [
+    "RIZ006",
+    "RIC009"
+   ]
   },
   {
    "name": "East Matunuck",
@@ -1210,7 +1290,11 @@
     "to15ftYd": 519,
     "confidence": "medium"
    },
-   "faces": 170
+   "faces": 170,
+   "nws": [
+    "RIZ006",
+    "RIC009"
+   ]
   },
   {
    "name": "Charlestown Breachway",
@@ -1222,7 +1306,11 @@
     "to15ftYd": 246,
     "confidence": "high"
    },
-   "faces": 148
+   "faces": 148,
+   "nws": [
+    "RIZ006",
+    "RIC009"
+   ]
   },
   {
    "name": "Misquamicut",
@@ -1234,7 +1322,11 @@
     "to15ftYd": 137,
     "confidence": "high"
    },
-   "faces": 149
+   "faces": 149,
+   "nws": [
+    "RIZ006",
+    "RIC009"
+   ]
   },
   {
    "name": "Block Island (Crescent Beach)",
@@ -1246,7 +1338,11 @@
     "to15ftYd": 219,
     "confidence": "high"
    },
-   "faces": 75
+   "faces": 75,
+   "nws": [
+    "RIZ008",
+    "RIC009"
+   ]
   },
   {
    "name": "Ocean Beach Park",
@@ -1259,7 +1355,11 @@
     "to15ftYd": 82,
     "confidence": "medium"
    },
-   "faces": 176
+   "faces": 176,
+   "nws": [
+    "CTZ012",
+    "CTC011"
+   ]
   },
   {
    "name": "Hammonasset",
@@ -1272,7 +1372,11 @@
     "to15ftYd": 246,
     "confidence": "high"
    },
-   "faces": 166
+   "faces": 166,
+   "nws": [
+    "CTZ010",
+    "CTC009"
+   ]
   },
   {
    "name": "Silver Sands",
@@ -1285,7 +1389,11 @@
     "to15ftYd": 820,
     "confidence": "high"
    },
-   "faces": 90
+   "faces": 90,
+   "nws": [
+    "CTZ010",
+    "CTC009"
+   ]
   },
   {
    "name": "Montauk",
@@ -1297,7 +1405,11 @@
     "to15ftYd": 219,
     "confidence": "high"
    },
-   "faces": 143
+   "faces": 143,
+   "nws": [
+    "NYZ081",
+    "NYC103"
+   ]
   },
   {
    "name": "Shinnecock Inlet",
@@ -1307,7 +1419,11 @@
    "depth": {
     "confidence": "inlet"
    },
-   "faces": 158
+   "faces": 158,
+   "nws": [
+    "NYZ081",
+    "NYC103"
+   ]
   },
   {
    "name": "Moriches Inlet",
@@ -1317,7 +1433,11 @@
    "depth": {
     "confidence": "inlet"
    },
-   "faces": 160
+   "faces": 160,
+   "nws": [
+    "NYZ081",
+    "NYC103"
+   ]
   },
   {
    "name": "Smith Point",
@@ -1329,7 +1449,11 @@
     "to15ftYd": 383,
     "confidence": "high"
    },
-   "faces": 158
+   "faces": 158,
+   "nws": [
+    "NYZ081",
+    "NYC103"
+   ]
   },
   {
    "name": "Robert Moses SP",
@@ -1341,7 +1465,11 @@
     "to15ftYd": 574,
     "confidence": "high"
    },
-   "faces": 164
+   "faces": 164,
+   "nws": [
+    "NYZ080",
+    "NYC103"
+   ]
   },
   {
    "name": "Long Beach",
@@ -1353,7 +1481,11 @@
     "to15ftYd": 355,
     "confidence": "high"
    },
-   "faces": 150
+   "faces": 150,
+   "nws": [
+    "NYZ179",
+    "NYC059"
+   ]
   },
   {
    "name": "Jones Beach",
@@ -1365,7 +1497,11 @@
     "to15ftYd": 328,
     "confidence": "medium"
    },
-   "faces": 150
+   "faces": 150,
+   "nws": [
+    "NYZ179",
+    "NYC059"
+   ]
   },
   {
    "name": "Rockaway Beach",
@@ -1377,7 +1513,11 @@
     "to15ftYd": 301,
     "confidence": "high"
    },
-   "faces": 143
+   "faces": 143,
+   "nws": [
+    "NYZ178",
+    "NYC081"
+   ]
   },
   {
    "name": "Fort Tilden",
@@ -1390,7 +1530,11 @@
     "confidence": "medium"
    },
    "noDrones": "Gateway NRA",
-   "faces": 165
+   "faces": 165,
+   "nws": [
+    "NYZ178",
+    "NYC081"
+   ]
   },
   {
    "name": "Breezy Point",
@@ -1403,7 +1547,11 @@
     "confidence": "low"
    },
    "noDrones": "Gateway NRA",
-   "faces": 135
+   "faces": 135,
+   "nws": [
+    "NYZ178",
+    "NYC081"
+   ]
   },
   {
    "name": "Sandy Hook",
@@ -1416,7 +1564,11 @@
     "confidence": "high"
    },
    "noDrones": "Gateway NRA",
-   "faces": 118
+   "faces": 118,
+   "nws": [
+    "NJZ014",
+    "NJC025"
+   ]
   },
   {
    "name": "Asbury Park",
@@ -1428,7 +1580,11 @@
     "to15ftYd": 82,
     "confidence": "high"
    },
-   "faces": 118
+   "faces": 118,
+   "nws": [
+    "NJZ014",
+    "NJC025"
+   ]
   },
   {
    "name": "Manasquan Inlet",
@@ -1440,7 +1596,11 @@
     "to15ftYd": 246,
     "confidence": "medium"
    },
-   "faces": 113
+   "faces": 113,
+   "nws": [
+    "NJZ014",
+    "NJC025"
+   ]
   },
   {
    "name": "Point Pleasant Beach",
@@ -1452,7 +1612,11 @@
     "to15ftYd": 137,
     "confidence": "high"
    },
-   "faces": 95
+   "faces": 95,
+   "nws": [
+    "NJZ026",
+    "NJC029"
+   ]
   },
   {
    "name": "Seaside Heights",
@@ -1464,7 +1628,11 @@
     "to15ftYd": 137,
     "confidence": "high"
    },
-   "faces": 101
+   "faces": 101,
+   "nws": [
+    "NJZ026",
+    "NJC029"
+   ]
   },
   {
    "name": "Island Beach SP",
@@ -1476,7 +1644,11 @@
     "to15ftYd": 246,
     "confidence": "high"
    },
-   "faces": 98
+   "faces": 98,
+   "nws": [
+    "NJZ026",
+    "NJC029"
+   ]
   },
   {
    "name": "Barnegat Light",
@@ -1488,7 +1660,11 @@
     "to15ftYd": 246,
     "confidence": "high"
    },
-   "faces": 108
+   "faces": 108,
+   "nws": [
+    "NJZ026",
+    "NJC029"
+   ]
   },
   {
    "name": "Beach Haven (LBI)",
@@ -1500,7 +1676,11 @@
     "to15ftYd": 191,
     "confidence": "high"
    },
-   "faces": 125
+   "faces": 125,
+   "nws": [
+    "NJZ026",
+    "NJC029"
+   ]
   },
   {
    "name": "Holgate (LBI)",
@@ -1512,7 +1692,11 @@
     "to15ftYd": 273,
     "confidence": "low"
    },
-   "faces": 125
+   "faces": 125,
+   "nws": [
+    "NJZ026",
+    "NJC029"
+   ]
   },
   {
    "name": "Brigantine",
@@ -1524,7 +1708,11 @@
     "to15ftYd": 437,
     "confidence": "high"
    },
-   "faces": 130
+   "faces": 130,
+   "nws": [
+    "NJZ025",
+    "NJC001"
+   ]
   },
   {
    "name": "Atlantic City",
@@ -1536,7 +1724,11 @@
     "to15ftYd": 766,
     "confidence": "high"
    },
-   "faces": 130
+   "faces": 130,
+   "nws": [
+    "NJZ025",
+    "NJC001"
+   ]
   },
   {
    "name": "Ocean City",
@@ -1548,7 +1740,11 @@
     "to15ftYd": 383,
     "confidence": "medium"
    },
-   "faces": 133
+   "faces": 133,
+   "nws": [
+    "NJZ024",
+    "NJC009"
+   ]
   },
   {
    "name": "Sea Isle City",
@@ -1560,7 +1756,11 @@
     "to15ftYd": 301,
     "confidence": "high"
    },
-   "faces": 130
+   "faces": 130,
+   "nws": [
+    "NJZ024",
+    "NJC009"
+   ]
   },
   {
    "name": "Avalon",
@@ -1572,7 +1772,11 @@
     "to15ftYd": 492,
     "confidence": "high"
    },
-   "faces": 125
+   "faces": 125,
+   "nws": [
+    "NJZ024",
+    "NJC009"
+   ]
   },
   {
    "name": "Wildwood",
@@ -1584,7 +1788,11 @@
     "to15ftYd": 902,
     "confidence": "high"
    },
-   "faces": 123
+   "faces": 123,
+   "nws": [
+    "NJZ024",
+    "NJC009"
+   ]
   },
   {
    "name": "Cape May",
@@ -1596,7 +1804,11 @@
     "to15ftYd": 301,
     "confidence": "high"
    },
-   "faces": 135
+   "faces": 135,
+   "nws": [
+    "NJZ024",
+    "NJC009"
+   ]
   },
   {
    "name": "Cape Henlopen",
@@ -1608,7 +1820,11 @@
     "to15ftYd": 109,
     "confidence": "high"
    },
-   "faces": 105
+   "faces": 105,
+   "nws": [
+    "DEZ004",
+    "DEC005"
+   ]
   },
   {
    "name": "Rehoboth Beach",
@@ -1620,7 +1836,11 @@
     "to15ftYd": 82,
     "confidence": "high"
    },
-   "faces": 105
+   "faces": 105,
+   "nws": [
+    "DEZ004",
+    "DEC005"
+   ]
   },
   {
    "name": "Dewey Beach",
@@ -1632,7 +1852,11 @@
     "to15ftYd": 109,
     "confidence": "high"
    },
-   "faces": 90
+   "faces": 90,
+   "nws": [
+    "DEZ004",
+    "DEC005"
+   ]
   },
   {
    "name": "Indian River Inlet",
@@ -1644,7 +1868,11 @@
     "to15ftYd": 137,
     "confidence": "high"
    },
-   "faces": 100
+   "faces": 100,
+   "nws": [
+    "DEZ004",
+    "DEC005"
+   ]
   },
   {
    "name": "Bethany Beach",
@@ -1656,7 +1884,11 @@
     "to15ftYd": 109,
     "confidence": "high"
    },
-   "faces": 90
+   "faces": 90,
+   "nws": [
+    "DEZ004",
+    "DEC005"
+   ]
   },
   {
    "name": "Fenwick Island",
@@ -1668,7 +1900,11 @@
     "to15ftYd": 109,
     "confidence": "high"
    },
-   "faces": 97
+   "faces": 97,
+   "nws": [
+    "DEZ004",
+    "DEC005"
+   ]
   },
   {
    "name": "Ocean City",
@@ -1681,7 +1917,11 @@
     "confidence": "high"
    },
    "noDrones": "Ocean City: baits must be cast (no drones or kayaks)",
-   "faces": 108
+   "faces": 108,
+   "nws": [
+    "MDZ025",
+    "MDC047"
+   ]
   },
   {
    "name": "Assateague",
@@ -1694,7 +1934,11 @@
     "confidence": "high"
    },
    "noDrones": "Assateague NS",
-   "faces": 108
+   "faces": 108,
+   "nws": [
+    "MDZ025",
+    "MDC047"
+   ]
   },
   {
    "name": "Chincoteague",
@@ -1707,7 +1951,11 @@
     "confidence": "high"
    },
    "noDrones": "Chincoteague NWR",
-   "faces": 118
+   "faces": 118,
+   "nws": [
+    "VAZ099",
+    "VAC001"
+   ]
   },
   {
    "name": "Buckroe Beach",
@@ -1719,7 +1967,11 @@
     "to15ftYd": 1476,
     "confidence": "high"
    },
-   "faces": 80
+   "faces": 80,
+   "nws": [
+    "VAZ525",
+    "VAC650"
+   ]
   },
   {
    "name": "Ocean View (Norfolk)",
@@ -1731,7 +1983,11 @@
     "to15ftYd": 875,
     "confidence": "medium"
    },
-   "faces": 52
+   "faces": 52,
+   "nws": [
+    "VAZ530",
+    "VAC710"
+   ]
   },
   {
    "name": "Virginia Beach Oceanfront",
@@ -1744,7 +2000,11 @@
     "to15ftYd": 246,
     "confidence": "medium"
    },
-   "faces": 90
+   "faces": 90,
+   "nws": [
+    "VAZ098",
+    "VAC810"
+   ]
   },
   {
    "name": "Sandbridge",
@@ -1757,7 +2017,11 @@
     "to15ftYd": 273,
     "confidence": "high"
    },
-   "faces": 83
+   "faces": 83,
+   "nws": [
+    "VAZ098",
+    "VAC810"
+   ]
   },
   {
    "name": "False Cape",
@@ -1770,7 +2034,11 @@
     "confidence": "high"
    },
    "noDrones": "False Cape SP",
-   "faces": 80
+   "faces": 80,
+   "nws": [
+    "VAZ098",
+    "VAC810"
+   ]
   },
   {
    "name": "Corolla",
@@ -1782,7 +2050,11 @@
     "to15ftYd": 273,
     "confidence": "high"
    },
-   "faces": 78
+   "faces": 78,
+   "nws": [
+    "NCZ102",
+    "NCC053"
+   ]
   },
   {
    "name": "Duck",
@@ -1794,7 +2066,11 @@
     "to15ftYd": 465,
     "confidence": "high"
    },
-   "faces": 75
+   "faces": 75,
+   "nws": [
+    "NCZ203",
+    "NCC055"
+   ]
   },
   {
    "name": "Kill Devil Hills",
@@ -1806,7 +2082,11 @@
     "to15ftYd": 273,
     "confidence": "high"
    },
-   "faces": 65
+   "faces": 65,
+   "nws": [
+    "NCZ203",
+    "NCC055"
+   ]
   },
   {
    "name": "Nags Head",
@@ -1818,7 +2098,11 @@
     "to15ftYd": 246,
     "confidence": "high"
    },
-   "faces": 69
+   "faces": 69,
+   "nws": [
+    "NCZ203",
+    "NCC055"
+   ]
   },
   {
    "name": "Oregon Inlet",
@@ -1831,7 +2115,11 @@
     "confidence": "high"
    },
    "noDrones": "Cape Hatteras NS",
-   "faces": 63
+   "faces": 63,
+   "nws": [
+    "NCZ205",
+    "NCC055"
+   ]
   },
   {
    "name": "Rodanthe",
@@ -1843,7 +2131,11 @@
     "to15ftYd": 273,
     "confidence": "high"
    },
-   "faces": 95
+   "faces": 95,
+   "nws": [
+    "NCZ205",
+    "NCC055"
+   ]
   },
   {
    "name": "Avon",
@@ -1857,7 +2149,11 @@
    },
    "noDrones": "Cape Hatteras NS",
    "privateLaunch": true,
-   "faces": 103
+   "faces": 103,
+   "nws": [
+    "NCZ205",
+    "NCC055"
+   ]
   },
   {
    "name": "Buxton",
@@ -1871,7 +2167,11 @@
    },
    "noDrones": "Cape Hatteras NS",
    "privateLaunch": true,
-   "faces": 107
+   "faces": 107,
+   "nws": [
+    "NCZ205",
+    "NCC055"
+   ]
   },
   {
    "name": "Frisco",
@@ -1885,7 +2185,11 @@
    },
    "noDrones": "Cape Hatteras NS",
    "privateLaunch": true,
-   "faces": 172
+   "faces": 172,
+   "nws": [
+    "NCZ205",
+    "NCC055"
+   ]
   },
   {
    "name": "Cape Hatteras",
@@ -1898,7 +2202,11 @@
     "confidence": "low"
    },
    "noDrones": "Cape Hatteras NS",
-   "faces": 137
+   "faces": 137,
+   "nws": [
+    "NCZ205",
+    "NCC055"
+   ]
   },
   {
    "name": "Ocracoke",
@@ -1911,7 +2219,11 @@
     "confidence": "high"
    },
    "noDrones": "Cape Hatteras NS",
-   "faces": 139
+   "faces": 139,
+   "nws": [
+    "NCZ204",
+    "NCC095"
+   ]
   },
   {
    "name": "Cape Lookout",
@@ -1924,7 +2236,11 @@
     "confidence": "high"
    },
    "noDrones": "Cape Lookout NS",
-   "faces": 134
+   "faces": 134,
+   "nws": [
+    "NCZ196",
+    "NCC031"
+   ]
   },
   {
    "name": "Atlantic Beach",
@@ -1936,7 +2252,11 @@
     "to15ftYd": 410,
     "confidence": "high"
    },
-   "faces": 183
+   "faces": 183,
+   "nws": [
+    "NCZ195",
+    "NCC031"
+   ]
   },
   {
    "name": "Pine Knoll Shores",
@@ -1948,7 +2268,11 @@
     "to15ftYd": 465,
     "confidence": "high"
    },
-   "faces": 170
+   "faces": 170,
+   "nws": [
+    "NCZ195",
+    "NCC031"
+   ]
   },
   {
    "name": "Emerald Isle",
@@ -1960,7 +2284,11 @@
     "to15ftYd": 301,
     "confidence": "high"
    },
-   "faces": 165
+   "faces": 165,
+   "nws": [
+    "NCZ195",
+    "NCC031"
+   ]
   },
   {
    "name": "North Topsail Beach",
@@ -1972,7 +2300,11 @@
     "to15ftYd": 410,
     "confidence": "high"
    },
-   "faces": 145
+   "faces": 145,
+   "nws": [
+    "NCZ199",
+    "NCC133"
+   ]
   },
   {
    "name": "Topsail Beach",
@@ -1984,7 +2316,11 @@
     "to15ftYd": 273,
     "confidence": "high"
    },
-   "faces": 135
+   "faces": 135,
+   "nws": [
+    "NCZ106",
+    "NCC141"
+   ]
   },
   {
    "name": "Surf City",
@@ -1996,7 +2332,11 @@
     "to15ftYd": 363,
     "confidence": "high"
    },
-   "faces": 140
+   "faces": 140,
+   "nws": [
+    "NCZ106",
+    "NCC141"
+   ]
   },
   {
    "name": "Wrightsville Beach",
@@ -2009,7 +2349,11 @@
     "to15ftYd": 328,
     "confidence": "high"
    },
-   "faces": 128
+   "faces": 128,
+   "nws": [
+    "NCZ108",
+    "NCC129"
+   ]
   },
   {
    "name": "Carolina Beach",
@@ -2021,7 +2365,11 @@
     "to15ftYd": 437,
     "confidence": "high"
    },
-   "faces": 118
+   "faces": 118,
+   "nws": [
+    "NCZ108",
+    "NCC129"
+   ]
   },
   {
    "name": "Kure Beach",
@@ -2033,7 +2381,11 @@
     "to15ftYd": 273,
     "confidence": "high"
    },
-   "faces": 118
+   "faces": 118,
+   "nws": [
+    "NCZ108",
+    "NCC129"
+   ]
   },
   {
    "name": "Fort Fisher",
@@ -2045,7 +2397,11 @@
     "to15ftYd": 711,
     "confidence": "low"
    },
-   "faces": 118
+   "faces": 118,
+   "nws": [
+    "NCZ108",
+    "NCC129"
+   ]
   },
   {
    "name": "Bald Head Island",
@@ -2057,7 +2413,11 @@
     "to15ftYd": 383,
     "confidence": "high"
    },
-   "faces": 190
+   "faces": 190,
+   "nws": [
+    "NCZ110",
+    "NCC019"
+   ]
   },
   {
    "name": "Caswell Beach",
@@ -2069,7 +2429,11 @@
     "to15ftYd": 1531,
     "confidence": "low"
    },
-   "faces": 175
+   "faces": 175,
+   "nws": [
+    "NCZ110",
+    "NCC019"
+   ]
   },
   {
    "name": "Holden Beach",
@@ -2081,7 +2445,11 @@
     "to15ftYd": 301,
     "confidence": "high"
    },
-   "faces": 172
+   "faces": 172,
+   "nws": [
+    "NCZ110",
+    "NCC019"
+   ]
   },
   {
    "name": "Oak Island",
@@ -2093,7 +2461,11 @@
     "to15ftYd": 328,
     "confidence": "medium"
    },
-   "faces": 180
+   "faces": 180,
+   "nws": [
+    "NCZ110",
+    "NCC019"
+   ]
   },
   {
    "name": "Ocean Isle Beach",
@@ -2105,7 +2477,11 @@
     "to15ftYd": 301,
     "confidence": "high"
    },
-   "faces": 165
+   "faces": 165,
+   "nws": [
+    "NCZ110",
+    "NCC019"
+   ]
   },
   {
    "name": "Sunset Beach",
@@ -2117,7 +2493,11 @@
     "to15ftYd": 301,
     "confidence": "high"
    },
-   "faces": 170
+   "faces": 170,
+   "nws": [
+    "NCZ110",
+    "NCC019"
+   ]
   },
   {
    "name": "North Myrtle Beach",
@@ -2130,7 +2510,11 @@
     "to15ftYd": 301,
     "confidence": "high"
    },
-   "faces": 130
+   "faces": 130,
+   "nws": [
+    "SCZ054",
+    "SCC051"
+   ]
   },
   {
    "name": "Myrtle Beach",
@@ -2143,7 +2527,11 @@
     "to15ftYd": 246,
     "confidence": "high"
    },
-   "faces": 138
+   "faces": 138,
+   "nws": [
+    "SCZ054",
+    "SCC051"
+   ]
   },
   {
    "name": "Surfside Beach",
@@ -2156,7 +2544,11 @@
     "to15ftYd": 137,
     "confidence": "high"
    },
-   "faces": 133
+   "faces": 133,
+   "nws": [
+    "SCZ054",
+    "SCC051"
+   ]
   },
   {
    "name": "Garden City Beach",
@@ -2169,7 +2561,11 @@
     "to15ftYd": 191,
     "confidence": "high"
    },
-   "faces": 120
+   "faces": 120,
+   "nws": [
+    "SCZ054",
+    "SCC051"
+   ]
   },
   {
    "name": "Huntington Beach State Park",
@@ -2181,7 +2577,11 @@
     "to15ftYd": 1012,
     "confidence": "high"
    },
-   "faces": 110
+   "faces": 110,
+   "nws": [
+    "SCZ056",
+    "SCC043"
+   ]
   },
   {
    "name": "Litchfield Beach",
@@ -2193,7 +2593,11 @@
     "to15ftYd": 246,
     "confidence": "high"
    },
-   "faces": 120
+   "faces": 120,
+   "nws": [
+    "SCZ056",
+    "SCC043"
+   ]
   },
   {
    "name": "Pawleys Island",
@@ -2206,7 +2610,11 @@
     "to15ftYd": 273,
     "confidence": "medium"
    },
-   "faces": 120
+   "faces": 120,
+   "nws": [
+    "SCZ056",
+    "SCC043"
+   ]
   },
   {
    "name": "Isle of Palms",
@@ -2219,7 +2627,11 @@
     "to15ftYd": 1941,
     "confidence": "high"
    },
-   "faces": 145
+   "faces": 145,
+   "nws": [
+    "SCZ150",
+    "SCC019"
+   ]
   },
   {
    "name": "Sullivan's Island",
@@ -2231,7 +2643,11 @@
     "to15ftYd": 1968,
     "confidence": "low"
    },
-   "faces": 138
+   "faces": 138,
+   "nws": [
+    "SCZ150",
+    "SCC019"
+   ]
   },
   {
    "name": "Folly Beach",
@@ -2243,7 +2659,11 @@
     "to15ftYd": ">2543",
     "confidence": "high"
    },
-   "faces": 143
+   "faces": 143,
+   "nws": [
+    "SCZ150",
+    "SCC019"
+   ]
   },
   {
    "name": "Kiawah Island",
@@ -2255,7 +2675,11 @@
     "to15ftYd": 1449,
     "confidence": "medium"
    },
-   "faces": 155
+   "faces": 155,
+   "nws": [
+    "SCZ150",
+    "SCC019"
+   ]
   },
   {
    "name": "Edisto Beach",
@@ -2267,7 +2691,11 @@
     "to15ftYd": 2625,
     "confidence": "medium"
    },
-   "faces": 140
+   "faces": 140,
+   "nws": [
+    "SCZ149",
+    "SCC029"
+   ]
   },
   {
    "name": "Hunting Island",
@@ -2279,7 +2707,11 @@
     "to15ftYd": ">2707",
     "confidence": "medium"
    },
-   "faces": 130
+   "faces": 130,
+   "nws": [
+    "SCZ148",
+    "SCC013"
+   ]
   },
   {
    "name": "Hilton Head",
@@ -2292,7 +2724,11 @@
     "to15ftYd": ">2187",
     "confidence": "high"
    },
-   "faces": 135
+   "faces": 135,
+   "nws": [
+    "SCZ148",
+    "SCC013"
+   ]
   },
   {
    "name": "Tybee Island",
@@ -2305,7 +2741,11 @@
     "to15ftYd": 2160,
     "confidence": "high"
    },
-   "faces": 125
+   "faces": 125,
+   "nws": [
+    "GAZ219",
+    "GAC051"
+   ]
   },
   {
    "name": "St. Simons Island",
@@ -2317,7 +2757,11 @@
     "to15ftYd": 1449,
     "confidence": "low"
    },
-   "faces": 117
+   "faces": 117,
+   "nws": [
+    "GAZ154",
+    "GAC127"
+   ]
   },
   {
    "name": "Jekyll Island",
@@ -2330,7 +2774,11 @@
     "to15ftYd": ">2078",
     "confidence": "high"
    },
-   "faces": 105
+   "faces": 105,
+   "nws": [
+    "GAZ154",
+    "GAC127"
+   ]
   },
   {
    "name": "Cumberland Island",
@@ -2343,7 +2791,11 @@
     "confidence": "high"
    },
    "noDrones": "Cumberland Island NS",
-   "faces": 95
+   "faces": 95,
+   "nws": [
+    "GAZ166",
+    "GAC039"
+   ]
   },
   {
    "name": "Amelia Island",
@@ -2355,7 +2807,11 @@
     "to15ftYd": 1640,
     "confidence": "high"
    },
-   "faces": 93
+   "faces": 93,
+   "nws": [
+    "FLZ124",
+    "FLC089"
+   ]
   },
   {
    "name": "Little Talbot Island",
@@ -2367,7 +2823,11 @@
     "to15ftYd": 164,
     "confidence": "high"
    },
-   "faces": 85
+   "faces": 85,
+   "nws": [
+    "FLZ125",
+    "FLC031"
+   ]
   },
   {
    "name": "Jacksonville Beach",
@@ -2379,7 +2839,11 @@
     "to15ftYd": 383,
     "confidence": "high"
    },
-   "faces": 80
+   "faces": 80,
+   "nws": [
+    "FLZ125",
+    "FLC031"
+   ]
   },
   {
    "name": "Ponte Vedra Beach",
@@ -2391,7 +2855,11 @@
     "to15ftYd": 383,
     "confidence": "high"
    },
-   "faces": 90
+   "faces": 90,
+   "nws": [
+    "FLZ233",
+    "FLC109"
+   ]
   },
   {
    "name": "Vilano Beach",
@@ -2403,7 +2871,11 @@
     "to15ftYd": 930,
     "confidence": "high"
    },
-   "faces": 90
+   "faces": 90,
+   "nws": [
+    "FLZ233",
+    "FLC109"
+   ]
   },
   {
    "name": "St. Augustine Beach",
@@ -2415,7 +2887,11 @@
     "to15ftYd": 301,
     "confidence": "medium"
    },
-   "faces": 75
+   "faces": 75,
+   "nws": [
+    "FLZ333",
+    "FLC109"
+   ]
   },
   {
    "name": "Crescent Beach",
@@ -2427,7 +2903,11 @@
     "to15ftYd": 355,
     "confidence": "high"
    },
-   "faces": 85
+   "faces": 85,
+   "nws": [
+    "FLZ333",
+    "FLC109"
+   ]
   },
   {
    "name": "Matanzas Inlet",
@@ -2439,7 +2919,11 @@
     "to15ftYd": 301,
     "confidence": "high"
    },
-   "faces": 73
+   "faces": 73,
+   "nws": [
+    "FLZ333",
+    "FLC109"
+   ]
   },
   {
    "name": "Flagler Beach",
@@ -2451,7 +2935,11 @@
     "to15ftYd": 301,
     "confidence": "high"
    },
-   "faces": 68
+   "faces": 68,
+   "nws": [
+    "FLZ138",
+    "FLC035"
+   ]
   },
   {
    "name": "Ormond Beach",
@@ -2463,7 +2951,11 @@
     "to15ftYd": 355,
     "confidence": "high"
    },
-   "faces": 75
+   "faces": 75,
+   "nws": [
+    "FLZ141",
+    "FLC127"
+   ]
   },
   {
    "name": "Daytona Beach",
@@ -2475,7 +2967,11 @@
     "to15ftYd": 437,
     "confidence": "medium"
    },
-   "faces": 65
+   "faces": 65,
+   "nws": [
+    "FLZ141",
+    "FLC127"
+   ]
   },
   {
    "name": "Ponce Inlet",
@@ -2485,7 +2981,11 @@
    "depth": {
     "confidence": "inlet"
    },
-   "faces": 80
+   "faces": 80,
+   "nws": [
+    "FLZ141",
+    "FLC127"
+   ]
   },
   {
    "name": "New Smyrna Beach",
@@ -2495,7 +2995,11 @@
    "depth": {
     "confidence": "inlet"
    },
-   "faces": 60
+   "faces": 60,
+   "nws": [
+    "FLZ141",
+    "FLC127"
+   ]
   },
   {
    "name": "Playalinda Beach",
@@ -2508,7 +3012,11 @@
     "confidence": "high"
    },
    "noDrones": "Canaveral NS",
-   "faces": 58
+   "faces": 58,
+   "nws": [
+    "FLZ447",
+    "FLC009"
+   ]
   },
   {
    "name": "Cocoa Beach",
@@ -2520,7 +3028,11 @@
     "to15ftYd": 383,
     "confidence": "high"
    },
-   "faces": 95
+   "faces": 95,
+   "nws": [
+    "FLZ747",
+    "FLC009"
+   ]
   },
   {
    "name": "Satellite Beach",
@@ -2532,7 +3044,11 @@
     "to15ftYd": 383,
     "confidence": "high"
    },
-   "faces": 80
+   "faces": 80,
+   "nws": [
+    "FLZ747",
+    "FLC009"
+   ]
   },
   {
    "name": "Indialantic",
@@ -2544,7 +3060,11 @@
     "to15ftYd": 355,
     "confidence": "high"
    },
-   "faces": 80
+   "faces": 80,
+   "nws": [
+    "FLZ747",
+    "FLC009"
+   ]
   },
   {
    "name": "Melbourne Beach",
@@ -2556,7 +3076,11 @@
     "to15ftYd": 355,
     "confidence": "high"
    },
-   "faces": 80
+   "faces": 80,
+   "nws": [
+    "FLZ747",
+    "FLC009"
+   ]
   },
   {
    "name": "Sebastian Inlet",
@@ -2568,7 +3092,11 @@
     "to15ftYd": 683,
     "confidence": "low"
    },
-   "faces": 75
+   "faces": 75,
+   "nws": [
+    "FLZ747",
+    "FLC009"
+   ]
   },
   {
    "name": "Vero Beach",
@@ -2580,7 +3108,11 @@
     "to15ftYd": 383,
     "confidence": "medium"
    },
-   "faces": 73
+   "faces": 73,
+   "nws": [
+    "FLZ154",
+    "FLC061"
+   ]
   },
   {
    "name": "Fort Pierce",
@@ -2590,7 +3122,11 @@
    "depth": {
     "confidence": "inlet"
    },
-   "faces": 73
+   "faces": 73,
+   "nws": [
+    "FLZ159",
+    "FLC111"
+   ]
   },
   {
    "name": "Hutchinson Island",
@@ -2602,7 +3138,11 @@
     "to15ftYd": 355,
     "confidence": "medium"
    },
-   "faces": 65
+   "faces": 65,
+   "nws": [
+    "FLZ164",
+    "FLC085"
+   ]
   },
   {
    "name": "Jensen Beach",
@@ -2615,7 +3155,11 @@
     "to15ftYd": 301,
     "confidence": "high"
    },
-   "faces": 70
+   "faces": 70,
+   "nws": [
+    "FLZ164",
+    "FLC085"
+   ]
   },
   {
    "name": "Stuart Beach",
@@ -2628,7 +3172,11 @@
     "to15ftYd": 219,
     "confidence": "high"
    },
-   "faces": 75
+   "faces": 75,
+   "nws": [
+    "FLZ164",
+    "FLC085"
+   ]
   },
   {
    "name": "Hobe Sound Beach",
@@ -2640,7 +3188,11 @@
     "to15ftYd": 437,
     "confidence": "high"
    },
-   "faces": 75
+   "faces": 75,
+   "nws": [
+    "FLZ164",
+    "FLC085"
+   ]
   },
   {
    "name": "Jupiter Inlet",
@@ -2650,7 +3202,11 @@
    "depth": {
     "confidence": "inlet"
    },
-   "faces": 78
+   "faces": 78,
+   "nws": [
+    "FLZ168",
+    "FLC099"
+   ]
   },
   {
    "name": "Juno Beach",
@@ -2662,7 +3218,11 @@
     "to15ftYd": 410,
     "confidence": "high"
    },
-   "faces": 78
+   "faces": 78,
+   "nws": [
+    "FLZ168",
+    "FLC099"
+   ]
   },
   {
    "name": "Singer Island",
@@ -2674,7 +3234,11 @@
     "to15ftYd": 328,
     "confidence": "high"
    },
-   "faces": 90
+   "faces": 90,
+   "nws": [
+    "FLZ168",
+    "FLC099"
+   ]
   },
   {
    "name": "Palm Beach",
@@ -2686,7 +3250,11 @@
     "to15ftYd": 355,
     "confidence": "high"
    },
-   "faces": 93
+   "faces": 93,
+   "nws": [
+    "FLZ168",
+    "FLC099"
+   ]
   },
   {
    "name": "Lake Worth Beach",
@@ -2698,7 +3266,11 @@
     "to15ftYd": 383,
     "confidence": "high"
    },
-   "faces": 90
+   "faces": 90,
+   "nws": [
+    "FLZ168",
+    "FLC099"
+   ]
   },
   {
    "name": "Delray Beach",
@@ -2711,7 +3283,11 @@
     "to15ftYd": 246,
     "confidence": "high"
    },
-   "faces": 90
+   "faces": 90,
+   "nws": [
+    "FLZ168",
+    "FLC099"
+   ]
   },
   {
    "name": "Boca Raton",
@@ -2723,7 +3299,11 @@
     "to15ftYd": 191,
     "confidence": "high"
    },
-   "faces": 98
+   "faces": 98,
+   "nws": [
+    "FLZ168",
+    "FLC099"
+   ]
   },
   {
    "name": "Deerfield Beach",
@@ -2735,7 +3315,11 @@
     "to15ftYd": 246,
     "confidence": "high"
    },
-   "faces": 90
+   "faces": 90,
+   "nws": [
+    "FLZ172",
+    "FLC011"
+   ]
   },
   {
    "name": "Pompano Beach",
@@ -2747,7 +3331,11 @@
     "to15ftYd": 246,
     "confidence": "high"
    },
-   "faces": 98
+   "faces": 98,
+   "nws": [
+    "FLZ172",
+    "FLC011"
+   ]
   },
   {
    "name": "Fort Lauderdale",
@@ -2759,7 +3347,11 @@
     "to15ftYd": 82,
     "confidence": "high"
    },
-   "faces": 95
+   "faces": 95,
+   "nws": [
+    "FLZ172",
+    "FLC011"
+   ]
   },
   {
    "name": "Hollywood Beach",
@@ -2771,7 +3363,11 @@
     "to15ftYd": 246,
     "confidence": "high"
    },
-   "faces": 90
+   "faces": 90,
+   "nws": [
+    "FLZ172",
+    "FLC011"
+   ]
   },
   {
    "name": "Haulover",
@@ -2781,7 +3377,11 @@
    "depth": {
     "confidence": "inlet"
    },
-   "faces": 93
+   "faces": 93,
+   "nws": [
+    "FLZ173",
+    "FLC086"
+   ]
   },
   {
    "name": "Miami Beach",
@@ -2794,7 +3394,11 @@
     "to15ftYd": 219,
     "confidence": "high"
    },
-   "faces": 98
+   "faces": 98,
+   "nws": [
+    "FLZ173",
+    "FLC086"
+   ]
   },
   {
    "name": "Key Biscayne",
@@ -2806,7 +3410,11 @@
     "to15ftYd": ">1891",
     "confidence": "medium"
    },
-   "faces": 100
+   "faces": 100,
+   "nws": [
+    "FLZ173",
+    "FLC086"
+   ]
   },
   {
    "name": "Islamorada",
@@ -2818,7 +3426,11 @@
     "to15ftYd": 2215,
     "confidence": "low"
    },
-   "faces": 160
+   "faces": 160,
+   "nws": [
+    "FLZ076",
+    "FLC087"
+   ]
   },
   {
    "name": "Marathon",
@@ -2830,7 +3442,11 @@
     "to15ftYd": ">2734",
     "confidence": "low"
    },
-   "faces": 165
+   "faces": 165,
+   "nws": [
+    "FLZ077",
+    "FLC087"
+   ]
   },
   {
    "name": "Bahia Honda",
@@ -2842,7 +3458,11 @@
     "to15ftYd": 547,
     "confidence": "low"
    },
-   "faces": 165
+   "faces": 165,
+   "nws": [
+    "FLZ078",
+    "FLC087"
+   ]
   },
   {
    "name": "Key West",
@@ -2854,7 +3474,11 @@
     "to15ftYd": 875,
     "confidence": "low"
    },
-   "faces": 180
+   "faces": 180,
+   "nws": [
+    "FLZ078",
+    "FLC087"
+   ]
   },
   {
    "name": "Perdido Key",
@@ -2869,7 +3493,11 @@
     "to15ftYd": 246,
     "confidence": "high"
    },
-   "faces": 170
+   "faces": 170,
+   "nws": [
+    "FLZ202",
+    "FLC033"
+   ]
   },
   {
    "name": "Pensacola Beach",
@@ -2882,7 +3510,11 @@
     "to15ftYd": 273,
     "confidence": "high"
    },
-   "faces": 173
+   "faces": 173,
+   "nws": [
+    "FLZ202",
+    "FLC033"
+   ]
   },
   {
    "name": "Opal Beach (Santa Rosa Island)",
@@ -2896,7 +3528,11 @@
     "to15ftYd": 301,
     "confidence": "high"
    },
-   "faces": 170
+   "faces": 170,
+   "nws": [
+    "FLZ204",
+    "FLC113"
+   ]
   },
   {
    "name": "Fort Pickens",
@@ -2910,7 +3546,11 @@
     "to15ftYd": 383,
     "confidence": "high"
    },
-   "faces": 175
+   "faces": 175,
+   "nws": [
+    "FLZ202",
+    "FLC033"
+   ]
   },
   {
    "name": "Navarre Beach",
@@ -2923,7 +3563,11 @@
     "to15ftYd": 246,
     "confidence": "high"
    },
-   "faces": 178
+   "faces": 178,
+   "nws": [
+    "FLZ204",
+    "FLC113"
+   ]
   },
   {
    "name": "Okaloosa Island",
@@ -2937,7 +3581,11 @@
     "to15ftYd": 301,
     "confidence": "high"
    },
-   "faces": 185
+   "faces": 185,
+   "nws": [
+    "FLZ206",
+    "FLC091"
+   ]
   },
   {
    "name": "Destin",
@@ -2950,7 +3598,11 @@
     "to15ftYd": 219,
     "confidence": "high"
    },
-   "faces": 188
+   "faces": 188,
+   "nws": [
+    "FLZ206",
+    "FLC091"
+   ]
   },
   {
    "name": "Walton County beaches",
@@ -2964,7 +3616,11 @@
     "to15ftYd": 273,
     "confidence": "high"
    },
-   "faces": 200
+   "faces": 200,
+   "nws": [
+    "FLZ108",
+    "FLC131"
+   ]
   },
   {
    "name": "Panama City Beach",
@@ -2977,7 +3633,11 @@
     "to15ftYd": 383,
     "confidence": "high"
    },
-   "faces": 215
+   "faces": 215,
+   "nws": [
+    "FLZ112",
+    "FLC005"
+   ]
   },
   {
    "name": "Mexico Beach",
@@ -2990,7 +3650,11 @@
     "to15ftYd": 191,
     "confidence": "high"
    },
-   "faces": 235
+   "faces": 235,
+   "nws": [
+    "FLZ112",
+    "FLC005"
+   ]
   },
   {
    "name": "Cape San Blas",
@@ -3003,7 +3667,11 @@
     "to15ftYd": 848,
     "confidence": "low"
    },
-   "faces": 215
+   "faces": 215,
+   "nws": [
+    "FLZ114",
+    "FLC045"
+   ]
   },
   {
    "name": "St. George Island",
@@ -3016,7 +3684,11 @@
     "to15ftYd": 191,
     "confidence": "medium"
    },
-   "faces": 155
+   "faces": 155,
+   "nws": [
+    "FLZ115",
+    "FLC037"
+   ]
   },
   {
    "name": "St. Joseph Peninsula",
@@ -3042,7 +3714,11 @@
     "to15ftYd": 766,
     "confidence": "high"
    },
-   "faces": 188
+   "faces": 188,
+   "nws": [
+    "FLZ114",
+    "FLC045"
+   ]
   },
   {
    "name": "Alligator Point",
@@ -3055,7 +3731,11 @@
     "to15ftYd": 2051,
     "confidence": "high"
    },
-   "faces": 168
+   "faces": 168,
+   "nws": [
+    "FLZ115",
+    "FLC037"
+   ]
   },
   {
    "name": "Anna Maria Island",
@@ -3068,7 +3748,11 @@
     "to15ftYd": 574,
     "confidence": "medium"
    },
-   "faces": 245
+   "faces": 245,
+   "nws": [
+    "FLZ155",
+    "FLC081"
+   ]
   },
   {
    "name": "Longboat Key",
@@ -3081,7 +3765,11 @@
     "to15ftYd": 246,
     "confidence": "high"
    },
-   "faces": 240
+   "faces": 240,
+   "nws": [
+    "FLZ155",
+    "FLC081"
+   ]
   },
   {
    "name": "Lido Key",
@@ -3094,7 +3782,11 @@
     "to15ftYd": 410,
     "confidence": "high"
    },
-   "faces": 250
+   "faces": 250,
+   "nws": [
+    "FLZ160",
+    "FLC115"
+   ]
   },
   {
    "name": "Honeymoon Island",
@@ -3107,7 +3799,11 @@
     "to15ftYd": 1941,
     "confidence": "high"
    },
-   "faces": 263
+   "faces": 263,
+   "nws": [
+    "FLZ050",
+    "FLC103"
+   ]
   },
   {
    "name": "Clearwater Beach",
@@ -3120,7 +3816,11 @@
     "to15ftYd": 1121,
     "confidence": "high"
    },
-   "faces": 273
+   "faces": 273,
+   "nws": [
+    "FLZ050",
+    "FLC103"
+   ]
   },
   {
    "name": "Belleair Shore",
@@ -3134,7 +3834,11 @@
     "to15ftYd": 191,
     "confidence": "high"
    },
-   "faces": 265
+   "faces": 265,
+   "nws": [
+    "FLZ050",
+    "FLC103"
+   ]
   },
   {
    "name": "Indian Rocks Beach",
@@ -3147,7 +3851,11 @@
     "to15ftYd": 875,
     "confidence": "high"
    },
-   "faces": 255
+   "faces": 255,
+   "nws": [
+    "FLZ050",
+    "FLC103"
+   ]
   },
   {
    "name": "Indian Shores",
@@ -3161,7 +3869,11 @@
     "to15ftYd": 1394,
     "confidence": "high"
    },
-   "faces": 250
+   "faces": 250,
+   "nws": [
+    "FLZ050",
+    "FLC103"
+   ]
   },
   {
    "name": "Redington Shores",
@@ -3175,7 +3887,11 @@
     "to15ftYd": 1148,
     "confidence": "high"
    },
-   "faces": 240
+   "faces": 240,
+   "nws": [
+    "FLZ050",
+    "FLC103"
+   ]
   },
   {
    "name": "Madeira Beach",
@@ -3188,7 +3904,11 @@
     "to15ftYd": 1449,
     "confidence": "high"
    },
-   "faces": 220
+   "faces": 220,
+   "nws": [
+    "FLZ050",
+    "FLC103"
+   ]
   },
   {
    "name": "Treasure Island",
@@ -3202,7 +3922,11 @@
     "to15ftYd": 875,
     "confidence": "high"
    },
-   "faces": 243
+   "faces": 243,
+   "nws": [
+    "FLZ050",
+    "FLC103"
+   ]
   },
   {
    "name": "St. Pete Beach",
@@ -3215,7 +3939,11 @@
     "to15ftYd": 547,
     "confidence": "high"
    },
-   "faces": 253
+   "faces": 253,
+   "nws": [
+    "FLZ050",
+    "FLC103"
+   ]
   },
   {
    "name": "Fort De Soto",
@@ -3228,7 +3956,11 @@
     "to15ftYd": 1121,
     "confidence": "high"
    },
-   "faces": 257
+   "faces": 257,
+   "nws": [
+    "FLZ050",
+    "FLC103"
+   ]
   },
   {
    "name": "Siesta Key",
@@ -3241,7 +3973,11 @@
     "to15ftYd": 684,
     "confidence": "high"
    },
-   "faces": 240
+   "faces": 240,
+   "nws": [
+    "FLZ160",
+    "FLC115"
+   ]
   },
   {
    "name": "Casey Key",
@@ -3254,7 +3990,11 @@
     "to15ftYd": 246,
     "confidence": "high"
    },
-   "faces": 260
+   "faces": 260,
+   "nws": [
+    "FLZ160",
+    "FLC115"
+   ]
   },
   {
    "name": "Venice",
@@ -3267,7 +4007,11 @@
     "to15ftYd": 164,
     "confidence": "high"
    },
-   "faces": 243
+   "faces": 243,
+   "nws": [
+    "FLZ160",
+    "FLC115"
+   ]
   },
   {
    "name": "Manasota Key",
@@ -3280,7 +4024,11 @@
     "to15ftYd": 301,
     "confidence": "high"
    },
-   "faces": 240
+   "faces": 240,
+   "nws": [
+    "FLZ162",
+    "FLC015"
+   ]
   },
   {
    "name": "Boca Grande",
@@ -3293,7 +4041,11 @@
     "to15ftYd": 246,
     "confidence": "high"
    },
-   "faces": 252
+   "faces": 252,
+   "nws": [
+    "FLZ165",
+    "FLC071"
+   ]
   },
   {
    "name": "Captiva",
@@ -3306,7 +4058,11 @@
     "to15ftYd": 191,
     "confidence": "high"
    },
-   "faces": 270
+   "faces": 270,
+   "nws": [
+    "FLZ165",
+    "FLC071"
+   ]
   },
   {
    "name": "Sanibel",
@@ -3319,7 +4075,11 @@
     "to15ftYd": 848,
     "confidence": "high"
    },
-   "faces": 218
+   "faces": 218,
+   "nws": [
+    "FLZ165",
+    "FLC071"
+   ]
   },
   {
    "name": "Fort Myers Beach",
@@ -3332,7 +4092,11 @@
     "to15ftYd": ">2761",
     "confidence": "high"
    },
-   "faces": 216
+   "faces": 216,
+   "nws": [
+    "FLZ165",
+    "FLC071"
+   ]
   },
   {
    "name": "Bonita Beach",
@@ -3345,7 +4109,11 @@
     "to15ftYd": 711,
     "confidence": "high"
    },
-   "faces": 260
+   "faces": 260,
+   "nws": [
+    "FLZ165",
+    "FLC071"
+   ]
   },
   {
    "name": "Naples",
@@ -3358,7 +4126,11 @@
     "to15ftYd": 273,
     "confidence": "high"
    },
-   "faces": 243
+   "faces": 243,
+   "nws": [
+    "FLZ069",
+    "FLC021"
+   ]
   },
   {
    "name": "Marco Island",
@@ -3371,7 +4143,11 @@
     "to15ftYd": 1203,
     "confidence": "high"
    },
-   "faces": 245
+   "faces": 245,
+   "nws": [
+    "FLZ069",
+    "FLC021"
+   ]
   },
   {
    "name": "Dauphin Island",
@@ -3384,7 +4160,11 @@
     "to15ftYd": 410,
     "confidence": "high"
    },
-   "faces": 177
+   "faces": 177,
+   "nws": [
+    "ALZ265",
+    "ALC097"
+   ]
   },
   {
    "name": "Fort Morgan",
@@ -3397,7 +4177,11 @@
     "to15ftYd": 137,
     "confidence": "high"
    },
-   "faces": 178
+   "faces": 178,
+   "nws": [
+    "ALZ266",
+    "ALC003"
+   ]
   },
   {
    "name": "Gulf Shores public beach",
@@ -3410,7 +4194,11 @@
     "to15ftYd": 246,
     "confidence": "high"
    },
-   "faces": 170
+   "faces": 170,
+   "nws": [
+    "ALZ266",
+    "ALC003"
+   ]
   },
   {
    "name": "Gulf State Park",
@@ -3424,7 +4212,11 @@
     "to15ftYd": 191,
     "confidence": "high"
    },
-   "faces": 170
+   "faces": 170,
+   "nws": [
+    "ALZ266",
+    "ALC003"
+   ]
   },
   {
    "name": "Orange Beach",
@@ -3438,7 +4230,11 @@
     "to15ftYd": 219,
     "confidence": "high"
    },
-   "faces": 170
+   "faces": 170,
+   "nws": [
+    "ALZ266",
+    "ALC003"
+   ]
   },
   {
    "name": "Ship Island",
@@ -3508,7 +4304,11 @@
     "confidence": "medium"
    },
    "faces": 123,
-   "clarityBase": 1.0
+   "clarityBase": 1.0,
+   "nws": [
+    "MSZ086",
+    "MSC045"
+   ]
   },
   {
    "name": "Pass Christian",
@@ -3522,7 +4322,11 @@
     "confidence": "medium"
    },
    "faces": 134,
-   "clarityBase": 1.0
+   "clarityBase": 1.0,
+   "nws": [
+    "MSZ087",
+    "MSC047"
+   ]
   },
   {
    "name": "Long Beach",
@@ -3536,7 +4340,11 @@
     "confidence": "medium"
    },
    "faces": 133,
-   "clarityBase": 1.0
+   "clarityBase": 1.0,
+   "nws": [
+    "MSZ087",
+    "MSC047"
+   ]
   },
   {
    "name": "Biloxi beach",
@@ -3550,7 +4358,11 @@
     "confidence": "medium"
    },
    "faces": 174,
-   "clarityBase": 1.0
+   "clarityBase": 1.0,
+   "nws": [
+    "MSZ087",
+    "MSC047"
+   ]
   },
   {
    "name": "Grand Isle",
@@ -3564,7 +4376,11 @@
     "confidence": "medium"
    },
    "faces": 173,
-   "clarityBase": 0.6
+   "clarityBase": 0.6,
+   "nws": [
+    "LAZ093",
+    "LAC051"
+   ]
   },
   {
    "name": "Elmer's Island",
@@ -3578,7 +4394,11 @@
     "confidence": "medium"
    },
    "faces": 162,
-   "clarityBase": 0.6
+   "clarityBase": 0.6,
+   "nws": [
+    "LAZ095",
+    "LAC057"
+   ]
   },
   {
    "name": "Fourchon Beach",
@@ -3592,7 +4412,11 @@
     "confidence": "medium"
    },
    "faces": 161,
-   "clarityBase": 0.6
+   "clarityBase": 0.6,
+   "nws": [
+    "LAZ095",
+    "LAC057"
+   ]
   },
   {
    "name": "Holly Beach",
@@ -3606,7 +4430,11 @@
     "confidence": "high"
    },
    "faces": 180,
-   "clarityBase": 0.8
+   "clarityBase": 0.8,
+   "nws": [
+    "LAZ073",
+    "LAC023"
+   ]
   },
   {
    "name": "Constance Beach",
@@ -3620,7 +4448,11 @@
     "confidence": "high"
    },
    "faces": 182,
-   "clarityBase": 0.8
+   "clarityBase": 0.8,
+   "nws": [
+    "LAZ073",
+    "LAC023"
+   ]
   },
   {
    "name": "Rutherford Beach",
@@ -3634,7 +4466,11 @@
     "confidence": "high"
    },
    "faces": 188,
-   "clarityBase": 0.8
+   "clarityBase": 0.8,
+   "nws": [
+    "LAZ074",
+    "LAC023"
+   ]
   },
   {
    "name": "Isles Dernieres",
@@ -3662,7 +4498,11 @@
     "confidence": "high"
    },
    "faces": 167,
-   "clarityBase": 0.8
+   "clarityBase": 0.8,
+   "nws": [
+    "TXZ615",
+    "TXC245"
+   ]
   },
   {
    "name": "Crystal Beach (Bolivar)",
@@ -3676,7 +4516,11 @@
     "confidence": "high"
    },
    "faces": 148,
-   "clarityBase": 0.7
+   "clarityBase": 0.7,
+   "nws": [
+    "TXZ439",
+    "TXC167"
+   ]
   },
   {
    "name": "Galveston",
@@ -3690,7 +4534,11 @@
     "confidence": "medium"
    },
    "faces": 145,
-   "clarityBase": 0.6
+   "clarityBase": 0.6,
+   "nws": [
+    "TXZ438",
+    "TXC167"
+   ]
   },
   {
    "name": "Jamaica Beach",
@@ -3703,7 +4551,11 @@
     "to15ftYd": 930,
     "confidence": "high"
    },
-   "faces": 140
+   "faces": 140,
+   "nws": [
+    "TXZ438",
+    "TXC167"
+   ]
   },
   {
    "name": "San Luis Pass",
@@ -3717,7 +4569,11 @@
     "confidence": "high"
    },
    "faces": 133,
-   "clarityBase": 0.6
+   "clarityBase": 0.6,
+   "nws": [
+    "TXZ437",
+    "TXC039"
+   ]
   },
   {
    "name": "Follets Island",
@@ -3730,7 +4586,11 @@
     "to15ftYd": 1476,
     "confidence": "high"
    },
-   "faces": 140
+   "faces": 140,
+   "nws": [
+    "TXZ437",
+    "TXC039"
+   ]
   },
   {
    "name": "Quintana Beach",
@@ -3744,7 +4604,11 @@
     "confidence": "high"
    },
    "faces": 140,
-   "clarityBase": 0.7
+   "clarityBase": 0.7,
+   "nws": [
+    "TXZ437",
+    "TXC039"
+   ]
   },
   {
    "name": "Bryan Beach",
@@ -3757,7 +4621,11 @@
     "to15ftYd": 1312,
     "confidence": "high"
    },
-   "faces": 150
+   "faces": 150,
+   "nws": [
+    "TXZ437",
+    "TXC039"
+   ]
   },
   {
    "name": "Surfside Beach",
@@ -3771,7 +4639,11 @@
     "confidence": "high"
    },
    "faces": 140,
-   "clarityBase": 0.7
+   "clarityBase": 0.7,
+   "nws": [
+    "TXZ437",
+    "TXC039"
+   ]
   },
   {
    "name": "Sargent Beach",
@@ -3785,7 +4657,11 @@
     "confidence": "high"
    },
    "faces": 150,
-   "clarityBase": 0.5
+   "clarityBase": 0.5,
+   "nws": [
+    "TXZ436",
+    "TXC321"
+   ]
   },
   {
    "name": "Matagorda Beach",
@@ -3799,7 +4675,11 @@
     "confidence": "high"
    },
    "faces": 153,
-   "clarityBase": 0.6
+   "clarityBase": 0.6,
+   "nws": [
+    "TXZ436",
+    "TXC321"
+   ]
   },
   {
    "name": "Port Aransas",
@@ -3812,7 +4692,11 @@
     "to15ftYd": 1039,
     "confidence": "high"
    },
-   "faces": 125
+   "faces": 125,
+   "nws": [
+    "TXZ443",
+    "TXC355"
+   ]
   },
   {
    "name": "Mustang Island State Park",
@@ -3825,7 +4709,11 @@
     "to15ftYd": 656,
     "confidence": "high"
    },
-   "faces": 118
+   "faces": 118,
+   "nws": [
+    "TXZ443",
+    "TXC355"
+   ]
   },
   {
    "name": "Bob Hall Pier / North Padre",
@@ -3838,7 +4726,11 @@
     "to15ftYd": 629,
     "confidence": "high"
    },
-   "faces": 117
+   "faces": 117,
+   "nws": [
+    "TXZ443",
+    "TXC355"
+   ]
   },
   {
    "name": "Padre Island NS",
@@ -3852,7 +4744,11 @@
     "to15ftYd": 684,
     "confidence": "high"
    },
-   "faces": 105
+   "faces": 105,
+   "nws": [
+    "TXZ442",
+    "TXC273"
+   ]
   },
   {
    "name": "Padre Island NS – Mile 5",
@@ -3866,7 +4762,11 @@
     "to15ftYd": 738,
     "confidence": "high"
    },
-   "faces": 105
+   "faces": 105,
+   "nws": [
+    "TXZ442",
+    "TXC273"
+   ]
   },
   {
    "name": "Padre Island NS – Mile 15",
@@ -3880,7 +4780,11 @@
     "to15ftYd": 738,
     "confidence": "high"
    },
-   "faces": 98
+   "faces": 98,
+   "nws": [
+    "TXZ451",
+    "TXC261"
+   ]
   },
   {
    "name": "Padre Island NS – Mile 30 (Big Shell)",
@@ -3894,7 +4798,11 @@
     "to15ftYd": 711,
     "confidence": "high"
    },
-   "faces": 90
+   "faces": 90,
+   "nws": [
+    "TXZ451",
+    "TXC261"
+   ]
   },
   {
    "name": "Padre Island NS – Mile 45",
@@ -3908,7 +4816,11 @@
     "to15ftYd": 629,
     "confidence": "high"
    },
-   "faces": 83
+   "faces": 83,
+   "nws": [
+    "TXZ451",
+    "TXC261"
+   ]
   },
   {
    "name": "Padre Island NS – Mile 55",
@@ -3922,7 +4834,11 @@
     "to15ftYd": 711,
     "confidence": "high"
    },
-   "faces": 80
+   "faces": 80,
+   "nws": [
+    "TXZ451",
+    "TXC261"
+   ]
   },
   {
    "name": "South Padre Island",
@@ -3935,7 +4851,11 @@
     "to15ftYd": 410,
     "confidence": "high"
    },
-   "faces": 83
+   "faces": 83,
+   "nws": [
+    "TXZ455",
+    "TXC061"
+   ]
   },
   {
    "name": "Boca Chica Beach",
@@ -3948,7 +4868,11 @@
     "to15ftYd": 656,
     "confidence": "high"
    },
-   "faces": 83
+   "faces": 83,
+   "nws": [
+    "TXZ455",
+    "TXC061"
+   ]
   }
  ],
  "speciesByMonth": {
