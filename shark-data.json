@@ -1,6 +1,6 @@
 {
- "_readme": "SharkLeash data for the laws map, conditions panel and Shark Water. Edit text, then set lastVerified (YYYY-MM-DD) on anything you checked. States: category must be a key in categories; drone.status is ban, limit or none. Beaches: state is the 2-letter code; depth is yards from the low-tide waterline to 10 ft and 15 ft (write \">2543\" when it never gets that deep within that distance; confidence is high, medium, low or inlet; noDrones names the park where drones are banned and keeps the beach out of the Best Beaches Top 5, unless privateLaunch is true, meaning anglers can launch from private property next to the park, so the beach stays in with a private-property note). speciesByMonth: per state, [species code, 12 digits Jan..Dec] where 0 absent, 1 occasional, 2 common, 3 peak. Gulf beaches carry speciesRegion (key in speciesByRegion; falls back to the state in speciesByMonth). Any beach can carry optional localBan (shark fishing banned there; kept out of Top 5). protected lists species each state bans from harvest beyond the coast-wide sandbar, sand tiger and dusky. faces: compass direction (degrees) the beach looks out to open water; Drop Assist uses it near the beach. baitByRegion: per region, [bait code, 12 digits Jan..Dec] with 0 absent, 1 occasional, 2 common, 3 peak (estimates, not survey data); codes are in baitSpecies. baitRules: bait-catching rules shown to anglers only; they never change the Drop Score.",
- "lastVerified": "2026-11-09",
+ "_readme": "SharkLeash data for the laws map, conditions panel and Shark Water. Edit text, then set lastVerified (YYYY-MM-DD) on anything you checked. States: category must be a key in categories; drone.status is ban, limit or none. Beaches: state is the 2-letter code; depth is yards from the low-tide waterline to 10 ft and 15 ft (write \">2543\" when it never gets that deep within that distance; confidence is high, medium, low or inlet; noDrones names the park where drones are banned and keeps the beach out of the Best Beaches Top 5, unless privateLaunch is true, meaning anglers can launch from private property next to the park, so the beach stays in with a private-property note). speciesByMonth: per state, [species code, 12 digits Jan..Dec] where 0 absent, 1 occasional, 2 common, 3 peak. Gulf beaches carry speciesRegion (key in speciesByRegion; falls back to the state in speciesByMonth). Any beach can carry optional localBan (shark fishing banned there; kept out of Top 5). protected lists species each state bans from harvest beyond the coast-wide sandbar, sand tiger and dusky. faces: compass direction (degrees) the beach looks out to open water; Drop Assist uses it near the beach. baitByRegion: per region, [bait code, 12 digits Jan..Dec] with 0 absent, 1 occasional, 2 common, 3 peak (estimates, not survey data); codes are in baitSpecies. baitRules: bait-catching rules shown to anglers only; they never change the Drop Score. Season strings taper: a month at 0 next to a month at 2 or 3 should be 1 (migrations don't stop in one month). Apply any season or temperature fix to every state and region, not just the beach that exposed it.",
+ "lastVerified": "2026-11-18",
  "coastWide": "most states require non-offset, non-stainless (corrodible) circle hooks when fishing sharks with natural bait, and it's good practice everywhere. Shortfin mako can't be kept. Sandbar, sand tiger and dusky are prohibited and the most common from shore. Keep any shark you're releasing in the water. Drones are banned in every National Seashore, and FAA drone rules apply everywhere.",
  "categories": {
   "strict": {
@@ -3975,7 +3975,7 @@
   "MA": [
    [
     "sb",
-    "000002332000"
+    "000012332100"
    ],
    [
     "st",
@@ -3983,7 +3983,7 @@
    ],
    [
     "du",
-    "000000221000"
+    "000001221000"
    ],
    [
     "sm",
@@ -3997,11 +3997,11 @@
   "RI": [
    [
     "sb",
-    "000001332000"
+    "000001332100"
    ],
    [
     "sm",
-    "000023332100"
+    "000123332100"
    ],
    [
     "st",
@@ -4027,7 +4027,7 @@
    ],
    [
     "sm",
-    "000022222100"
+    "000122222100"
    ],
    [
     "du",
@@ -4053,7 +4053,7 @@
    ],
    [
     "sm",
-    "000222222110"
+    "001222222110"
    ],
    [
     "bt",
@@ -4061,7 +4061,7 @@
    ],
    [
     "sd",
-    "211200000112"
+    "211210000112"
    ]
   ],
   "NJ": [
@@ -4079,7 +4079,7 @@
    ],
    [
     "sm",
-    "000222222110"
+    "001222222110"
    ],
    [
     "bt",
@@ -4091,7 +4091,7 @@
    ],
    [
     "sd",
-    "221200000122"
+    "221210000122"
    ]
   ],
   "DE": [
@@ -4225,7 +4225,7 @@
   "SC": [
    [
     "sn",
-    "000233333320"
+    "001233333321"
    ],
    [
     "bt",
@@ -4237,7 +4237,7 @@
    ],
    [
     "bo",
-    "000222222210"
+    "001222222210"
    ],
    [
     "sp",
@@ -4271,7 +4271,7 @@
   "GA": [
    [
     "sn",
-    "000233333320"
+    "001233333321"
    ],
    [
     "bo",
@@ -4365,7 +4365,7 @@
    ],
    [
     "sp",
-    "000123332100"
+    "000123333210"
    ],
    [
     "bu",
@@ -4373,7 +4373,7 @@
    ],
    [
     "ti",
-    "000112222100"
+    "000112222210"
    ],
    [
     "le",
@@ -4393,15 +4393,15 @@
    ],
    [
     "sn",
-    "001233333210"
+    "001233333321"
    ],
    [
     "ft",
-    "000122332100"
+    "000122333210"
    ],
    [
     "bn",
-    "000123332100"
+    "000123332210"
    ],
    [
     "sb",
@@ -4473,7 +4473,7 @@
    ],
    [
     "sp",
-    "000123332100"
+    "000123333210"
    ],
    [
     "bu",
@@ -4481,7 +4481,7 @@
    ],
    [
     "ti",
-    "000112222100"
+    "000112222210"
    ],
    [
     "le",
@@ -4501,15 +4501,15 @@
    ],
    [
     "sn",
-    "001233333210"
+    "001233333321"
    ],
    [
     "ft",
-    "000122332100"
+    "000122333210"
    ],
    [
     "bn",
-    "000123332100"
+    "000123332210"
    ],
    [
     "sb",
@@ -4527,7 +4527,7 @@
    ],
    [
     "sp",
-    "000012221000"
+    "000012222210"
    ],
    [
     "bu",
@@ -4535,7 +4535,7 @@
    ],
    [
     "ti",
-    "000001111000"
+    "000001111100"
    ],
    [
     "gh",
@@ -4555,7 +4555,7 @@
    ],
    [
     "ft",
-    "000123332100"
+    "000123333210"
    ],
    [
     "bn",
@@ -4573,7 +4573,7 @@
    ],
    [
     "sp",
-    "000123332100"
+    "000123333210"
    ],
    [
     "bu",
@@ -4581,7 +4581,7 @@
    ],
    [
     "ti",
-    "000012221000"
+    "000012222100"
    ],
    [
     "gh",
@@ -4601,7 +4601,7 @@
    ],
    [
     "ft",
-    "000123332100"
+    "000123333210"
    ],
    [
     "bn",
@@ -5794,7 +5794,7 @@
    "Bluefish 15 per day, 12 in fork length, closed March and April. Croaker 25 and spot 25 per day. No state whiting limit listed."
   ],
   "FL": [
-   "Mullet 50 per person (striped and silver combined); boat limit 50 Sept 1-Jan 31. Ladyfish, bonito, menhaden, whiting, croaker, jacks, southern stingray: 2 fish or 100 lb per person, whichever is more. Spotted eagle ray: no harvest."
+   "Mullet 50 per person (striped and silver combined); boat limit 50 Sept 1-Jan 31. Croaker and spot: 50 each per person on the Atlantic coast, 100 lb per person in the Gulf. Blue runner 100 per person. Ladyfish, bonito, menhaden, whiting, jack crevalle, southern stingray: 2 fish or 100 lb per person, whichever is more. Spotted eagle ray: no harvest."
   ],
   "AL": [
    "Mullet 25 per person from shore, Oct 24-Dec 31. Cast nets up to 30 ft diameter; no cast-netting mullet in or within 300 ft of Theodore Industrial Canal, Dog River or Fowl River. Cast nets can't be used for game fish."
