@@ -221,7 +221,7 @@ function clTile(beachKey,o){if(!o&&!REPORT_URL)return '';
   var h='<div class="tile" id="slmc-cl"><div class="lab">Water clarity <span style="opacity:.6">· outlook</span></div>';
   h+=o?'<div class="big" style="color:'+CL[o.rating][1]+'">'+CL[o.rating][0]+'</div><div class="small">~'+o.vis[0]+'–'+o.vis[1]+' ft visibility · '+esc(o.why)+'</div>':'<div class="big">--</div><div class="small">No outlook for this spot yet</div>';
   h+='<div class="small clr" style="color:#6ee7ff"></div>';
-  if(REPORT_URL&&beachKey)h+='<div class="clq">How’s the water right now?</div><div class="clb"><button type="button" data-v="clean">Clean</button><button type="button" data-v="stained">Stained</button><button type="button" data-v="dirty">Dirty</button></div><div class="clt"></div>';
+  if(REPORT_URL&&beachKey)h+='<div class="clq">How’s the water right now?</div><div class="clb"><button type="button" data-v="clean">Clean</button><button type="button" data-v="stained">Stained</button><button type="button" data-v="dirty">Dirty</button></div><div class="clt"></div><div class="small" style="margin-top:6px;opacity:.65">&#128274; Shared under the beach name only. Never your exact spot or your name.</div>';
   return h+'</div>';}
 function clWire(beachKey,o){var el=out&&out.querySelector('#slmc-cl');if(!el||!beachKey)return;
   clReports().then(function(j){var r=j&&j.beaches?j.beaches[beachKey]:null,d=clDecide(o,r);if(!d||!el.isConnected)return;
