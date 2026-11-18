@@ -269,8 +269,8 @@ var P=[wp,tides(st),wp.then(function(w){return waves(lat,lon,w.grid);}),Promise.
 Promise.allSettled(P).then(function(r){clearTimeout(slowT);
 var w=r[0].status==='fulfilled'?r[0].value:null,t=r[1].status==='fulfilled'?r[1].value:null,wv=r[2].status==='fulfilled'?r[2].value:null,wt=r[3].status==='fulfilled'?r[3].value:null,rc=r[4].status==='fulfilled'?r[4].value:null,bb=r[5].status==='fulfilled'?r[5].value:null;
 var BM=bbMatch(lat,lon,label,bb),bm=BM.match,bkey=BM.near?BM.near.name+', '+BM.near.state:null,bwv=!wv&&bm&&bm.wv!=null?bm.wv:null;
-/* a sensor more than 6F off the scoring job's ocean reading (offshore buoy or satellite) is likely in a harbor or bay: show the ocean reading instead */
-if(wt&&!wt.sat&&bm&&bm.wt!=null&&Math.abs(wt.f-bm.wt)>6){var src=bm.tsrc||'';wt={f:+bm.wt,name:/^buoy/.test(src)?'Offshore buoy '+src.replace(/^buoy\s*/,''):'Nearshore satellite',job:1,ref:{name:wt.name,f:wt.f,mi:wt.mi}};}
+/* show the scoring job's ocean reading for this beach (seaward buoy or nearshore satellite) instead of a sensor that is far away (over 15 mi, often up a bay) or more than 6F off it (harbor or bay water) */
+if(wt&&!wt.sat&&bm&&bm.wt!=null&&(wt.mi>15||Math.abs(wt.f-bm.wt)>6)){var src=bm.tsrc||'';wt={f:+bm.wt,name:/^buoy/.test(src)?'Offshore buoy '+src.replace(/^buoy\s*/,''):'Nearshore satellite',job:1,ref:{name:wt.name,f:wt.f,mi:wt.mi}};}
 var where=label||(w&&w.town?'Near '+w.town:'Your location');
 var h='<p class="where">'+esc(where)+'</p>';
 BAN_NOW=banNear(lat,lon,label);if(BAN_NOW){h+='<div class="ban">🚫 Shark fishing is banned '+(BAN_NOW.exact?'here':'near you ('+esc(BAN_NOW.name)+')')+'<small>'+esc(BAN_NOW.rule)+'. '+(BAN_NOW.exact?'':'Check exactly where the boundary is before you set up. ')+'Regular surf fishing rules may still apply.</small></div>';if(window.gtag)gtag('event','local_ban_view',{beach:BAN_NOW.name});}
