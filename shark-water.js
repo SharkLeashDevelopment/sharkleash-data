@@ -337,9 +337,9 @@ sm.addEventListener('click',function(ev){ev.stopPropagation();var e=document.get
 window.addEventListener('sl:nps',function(){if(info.querySelector('.slsw-sum'))drawSum();});
 window.addEventListener('slsw:data',function(){if(info.querySelector('.slsw-sum'))drawSum();});
 window.addEventListener('slmc:conditions',function(){if(!info.querySelector('.slsw-sum'))return;setTimeout(drawSum,80);setTimeout(drawSum,1800);});
-function pick(p,extra,from){if(!p)return;focus(p.q[2],p.q[3]);pickT=from==='conditions'?0:Date.now();if(from!=='conditions')pinMap(9000);show(p.q,p.v,extra,p.st);if(from==='conditions')setTimeout(drawSum,80);syncing=true;
+function pick(p,extra,from){if(!p)return;if(from!=='laws')focus(p.q[2],p.q[3]);pickT=from==='conditions'?0:Date.now();if(from!=='conditions')pinMap(9000);show(p.q,p.v,extra,p.st);if(from==='conditions')setTimeout(drawSum,80);syncing=true;
 if(from!=='laws'&&p.st&&window.slmSelectState&&AB[p.st])window.slmSelectState(AB[p.st]);
-if(from!=='conditions'&&window.slmcRun){window.slmcRun(p.q[2],p.q[3]);upBtn();}
+if(from!=='conditions'&&window.slmcRun){window.slmcRun(p.q[2],p.q[3],undefined,from==='laws'?{noMem:1,src:'laws'}:{src:'map'});upBtn();}
 setTimeout(function(){syncing=false;},50);}
 function inland(p,d){shownPick=true;mark.style.display='none';info.style.display='block';
 info.innerHTML='📍 You\u2019re about '+Math.round(d*0.621)+' miles from the nearest shoreline, so there are no sharks to show where you are.'+
