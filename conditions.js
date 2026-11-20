@@ -196,6 +196,59 @@ function fcDays(P){var now=Date.now(),out=[],seen={};
 function fcWhy(b,v,wv,wt){if(!b)return '';var r=[['wind',b.wind/25],['waves',wv==null?1:b.waves/15],['temp',wt==null?1:b.temp/20],['sharks',b.sharks/25],['deep',b.deep/15]].sort(function(x,y){return x[1]-y[1];})[0];if(r[1]>=0.6)return '';
   return r[0]==='wind'?(v!=null&&v<5?'🍃 very light wind':'💨 windy'):r[0]==='waves'?(wv!=null&&wv<1?'🏖️ flat surf':'🌊 rough surf'):r[0]==='temp'?(wt!=null&&wt>82?'🔥 hot water':'🥶 cold water'):r[0]==='sharks'?'🦈 few sharks':'📏 deep water far';}
 function fcCol(v){return v>=80?'#7ee787':v>=60?'#ffb020':'#ff6a6a';}
+/* ===== Past years (TEST): this night in past seasons + best weeks, from the backfill files in the public repo (data/past/<beach>.json) ===== */
+var PAST_BASE='https://raw.githubusercontent.com/SharkLeashDevelopment/sharkleash-best-beaches/main/data/past/',PAST_C={};
+var PAST_MON=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+function pastSlug(n){return String(n).toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'');}
+function pastGet(k){if(!PAST_C[k])PAST_C[k]=fetch(PAST_BASE+pastSlug(k)+'.json?t='+Math.floor(Date.now()/36e5)).then(function(r){return r.ok?r.json():null;}).catch(function(){return null;});return PAST_C[k];}
+/* week of the year, 0-51 (Dec 31 and Feb 29 fold into their neighbors) */
+function pastWk(md){var m=+md.slice(0,2),d=+md.slice(3,5),doy=Math.round((Date.UTC(2025,m-1,Math.min(d,m===2?28:31))-Date.UTC(2025,0,1))/864e5);return Math.min(51,Math.floor(doy/7));}
+function pastWkLabel(w){var a=new Date(Date.UTC(2025,0,1+w*7)),b=new Date(Date.UTC(2025,0,1+w*7+6));if(w===51)b=new Date(Date.UTC(2025,11,31));
+  return PAST_MON[a.getUTCMonth()]+' '+a.getUTCDate()+'–'+(b.getUTCMonth()!==a.getUTCMonth()?PAST_MON[b.getUTCMonth()]+' ':'')+b.getUTCDate();}
+/* pure math, no page access: what the panel shows */
+function pastCalc(p,now){if(!p||!p.days)return null;var D=p.days,md=('0'+(now.getMonth()+1)).slice(-2)+'-'+('0'+now.getDate()).slice(-2);
+  var y0=+p.from.slice(0,4),y1=+p.to.slice(0,4),nights=[];
+  for(var y=y1;y>=y0;y--){var r=D[y+'-'+md];if(r)nights.push({y:y,sc:r[0],mph:r[1],dir:r[2],wv:r[3],wt:r[4],hi:r[5]});}
+  var S=[],N=[];for(var i=0;i<52;i++){S.push(0);N.push(0);}
+  for(var k in D){var w=pastWk(k.slice(5)),v=D[k][0];if(v==null)continue;S[w]+=v;N[w]++;}
+  var avg=S.map(function(s,i){return N[i]?Math.round(s/N[i]):null;}),cur=pastWk(md);
+  var order=avg.map(function(v,i){return [i,v];}).filter(function(x){return x[1]!=null;}).sort(function(a,b){return b[1]-a[1];});
+  var rank=0;order.forEach(function(x,i){if(x[0]===cur)rank=i+1;});
+  return {md:md,nights:nights,avg:avg,cur:cur,curAvg:avg[cur],rank:rank,of:order.length,best:order.slice(0,3),years:Math.round((Date.parse(p.to)-Date.parse(p.from))/(365.25*864e5))};}
+(function(){if(document.getElementById('slmc-past-css'))return;var s=document.createElement('style');s.id='slmc-past-css';
+  s.textContent='#slmc .ph .phr{display:flex;flex-direction:column;gap:6px;margin:0 0 10px}'
+  +'#slmc .ph .phy{display:flex;align-items:center;gap:10px;background:var(--card);border:1px solid var(--line);border-radius:12px;flex-wrap:wrap;row-gap:2px;padding:8px 12px;font-size:13px;font-weight:700;color:rgba(255,255,255,.82)}'
+  +'#slmc .ph .phy b{font-size:13px;color:rgba(255,255,255,.6);min-width:38px}'
+  +'#slmc .ph .phy .phs{font-size:22px;font-weight:900;min-width:44px;text-align:right}'
+  +'#slmc .ph .phy span{white-space:nowrap}'
+  +'#slmc .ph .phb{display:flex;align-items:flex-end;gap:2px;height:56px;margin:6px 0 2px}'
+  +'#slmc .ph .phb i{flex:1;border-radius:2px 2px 0 0;opacity:.55;min-height:2px}'
+  +'#slmc .ph .phb i.now{opacity:1;outline:2px solid #6ee7ff;outline-offset:1px}'
+  +'#slmc .ph .phm{display:flex;justify-content:space-between;font-size:10.5px;color:rgba(255,255,255,.45);font-weight:800;margin:0 0 10px}'
+  +'#slmc .ph .phw{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 6px}'
+  +'#slmc .ph .phw span{background:rgba(126,231,135,.1);border:1px solid rgba(126,231,135,.4);border-radius:999px;padding:5px 11px;font-size:12.5px;font-weight:800;color:#fff}'
+  +'#slmc .ph .phw span b{color:#7ee787;margin-left:4px}'
+  +'#slmc .ph h4{margin:12px 0 6px;font-size:12px;font-weight:900;text-transform:uppercase;letter-spacing:.12em;color:#ff4444}';
+  document.head.appendChild(s);})();
+function pastPanel(key){
+  if(!key||BAN_NOW||!out)return;
+  var box=document.createElement('div');box.className='fc ph';box.innerHTML='<p class="msg"><i class="sp"></i>Loading past years…</p>';
+  var rig=out.querySelector('.rig');if(rig)out.insertBefore(box,rig);else out.appendChild(box);
+  pastGet(key).then(function(p){if(!box.isConnected)return;var c=pastCalc(p,new Date());if(!c||!c.of){box.remove();return;}
+    var nm=esc(key.replace(/,\s*[A-Z]{2}$/,'')),today=PAST_MON[+c.md.slice(0,2)-1]+' '+(+c.md.slice(3,5));
+    var h='<div class="fch"><b>📅 Past years at '+nm+'</b></div>';
+    if(c.nights.length){h+='<h4>'+today+' in past years</h4><div class="phr">'+c.nights.map(function(n){
+        return '<div class="phy"><b>'+n.y+'</b><span class="phs" style="color:'+fcCol(n.sc)+'">'+n.sc+'</span>'
+          +'<span>'+(n.mph==null?'wind n/a':(n.mph<2||!n.dir?'Calm':esc(n.dir)+' '+n.mph+' mph'))+'</span>'
+          +'<span>'+(n.wv!=null?ftTxt(n.wv)+' ft':'surf n/a')+'</span>'
+          +'<span>'+(n.wt!=null?n.wt+'°F':'')+'</span>'+(n.hi?'<span>⬆️ high tide</span>':'')+'</div>';}).join('')+'</div>';}
+    h+='<h4>Best weeks of the year</h4><div class="phw">'+c.best.map(function(x){return '<span>'+pastWkLabel(x[0])+'<b>'+x[1]+'</b></span>';}).join('')+'</div>';
+    var lo=Math.min.apply(null,c.avg.filter(function(v){return v!=null;})),hi=Math.max.apply(null,c.avg.filter(function(v){return v!=null;})),hp=function(v){return hi>lo?Math.round(15+85*(v-lo)/(hi-lo)):60;};
+    h+='<div class="phb">'+c.avg.map(function(v,i){return '<i'+(i===c.cur?' class="now"':'')+' title="'+pastWkLabel(i)+': '+(v==null?'no data':v)+'" style="height:'+(v==null?2:hp(v))+'%;background:'+(v==null?'rgba(255,255,255,.15)':fcCol(v))+'"></i>';}).join('')+'</div>';
+    h+='<div class="phm"><span>Jan</span><span>Apr</span><span>Jul</span><span>Oct</span><span>Dec</span></div>';
+    if(c.curAvg!=null)h+='<p class="fcx">This week ('+pastWkLabel(c.cur)+') averages <b style="color:'+fcCol(c.curAvg)+'">'+c.curAvg+'</b> here, #'+c.rank+' of '+c.of+' weeks.</p>';
+    h+='<p class="fcn">Average Drop Score by week over '+c.years+' years ('+esc(p.from)+' to '+esc(p.to)+'), re-scored with today’s Drop Score math from archived wind, buoy and satellite readings. Past fronts and tides are counted; bait reports and water clarity didn’t exist yet. A guide to when this beach usually lines up, not a forecast.</p>';
+    box.innerHTML=h;if(window.gtag)gtag('event','past_years_view',{beach:key});});}
 /* Local shark-fishing bans (localBan in shark-data.json). A beach picked from the list matches exactly; a GPS or map spot uses the nearest listed beach within 8 km. */
 var BAN_NOW=null;function banNear(lat,lon,label){var b=null;if(label)FC_BEACH.forEach(function(x){if(x.name+', '+x.state===label)b=x;});
   if(!b){var bd=1e9,nb=null;FC_BEACH.forEach(function(x){var d=km(lat,lon,x.lat,x.lon);if(d<bd){bd=d;nb=x;}});if(nb&&bd<=8)b=nb;else return null;}
@@ -298,6 +351,7 @@ h+='<a class="rig" href="/#buy-anchor" onclick="if(window.gtag)gtag(\'event\',\'
 out.innerHTML=h;
 try{clWire(bkey,bm&&bm.clarity);}catch(e){}
 try{fcStrip(lat,lon,w,wv,wt,t,label);}catch(e){}
+try{pastPanel(bkey);}catch(e){}
 var nl=$('slmc-noaa');if(nl)nl.href='https://forecast.weather.gov/MapClick.php?lat='+(+lat).toFixed(4)+'&lon='+(+lon).toFixed(4);
 try{if(window.gtag)gtag('event','beach_view',{beach:bkey||'unlisted',beach_state:BM.near?BM.near.state:(w&&w.state)||'',pick_source:SRC});}catch(e){}
 try{window.SLMC_LAST={gps:!label&&!fromMap,fromMapSync:!!fromMap,where:where,town:w&&w.town,lat:lat,lon:lon,at:Date.now(),w:w,wv:wv,wt:wt,t:t,mo:mo,bw:bw,rc:rc,beach:bkey,ds:bm&&bm.score!=null?bm.score:null,cl:bm&&bm.clarity?bm.clarity.rating:null,state:BM.near?BM.near.state:(w&&w.state)||null};window.dispatchEvent(new Event('slmc:conditions'));}catch(e){}
