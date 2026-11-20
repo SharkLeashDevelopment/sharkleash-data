@@ -409,10 +409,37 @@ stSel.innerHTML='<option value="">…or pick a state</option>';
 STATES.forEach(function(k){var o=document.createElement('option');o.value=k;o.textContent=STN[k]||k;stSel.appendChild(o);});
 fillSpots('');
 stSel.addEventListener('change',function(){fillSpots(stSel.value);if(stSel.value&&window.gtag)gtag('event','state_pick',{state:stSel.value});});
+/* ===== Use my location: when it fails, show this phone's own fix-it steps, plus a way to pick from the list instead ===== */
+function locPlat(){var u=navigator.userAgent||'';if(/iPhone|iPad|iPod/.test(u)||(/Macintosh/.test(u)&&navigator.maxTouchPoints>1))return /CriOS/.test(u)?'ios-chrome':'ios';if(/Android/.test(u))return /SamsungBrowser/.test(u)?'android-samsung':'android';return 'desktop';}
+function locEvt(r){try{if(window.gtag)gtag('event','location_result',{result:r,platform:locPlat()});}catch(e){}}
+function locHelp(code){
+  if(!document.getElementById('slmc-lch-css')){var c=document.createElement('style');c.id='slmc-lch-css';
+    c.textContent='#slmc .lch{padding:14px 16px;border:1px solid rgba(255,138,138,.45);border-radius:16px;background:rgba(255,43,43,.07)}'
+      +'#slmc .lch ol{margin:6px 0 12px;padding:0 0 0 20px}#slmc .lch li{margin:0 0 6px;font-size:14px;font-weight:600;color:rgba(255,255,255,.88);line-height:1.4}#slmc .lch li b{color:#fff}'
+      +'#slmc .lch .lcp{width:100%;min-height:46px;font-size:15px;border-radius:12px;background:rgba(110,231,255,.12);border:1px solid rgba(110,231,255,.55);color:#6ee7ff;cursor:pointer}';
+    document.head.appendChild(c);}
+  var pf=locPlat(),k=code===1?'denied':code===3?'timeout':code===0?'unsupported':'unavailable';locEvt(k);
+  var on={ios:'Open the <b>Settings</b> app → <b>Privacy &amp; Security</b> → <b>Location Services</b> and make sure it’s <b>On</b>.',
+    'ios-chrome':'Open the <b>Settings</b> app → <b>Privacy &amp; Security</b> → <b>Location Services</b> and make sure it’s <b>On</b>.',
+    android:'Swipe down from the top of the screen and make sure <b>Location</b> is <b>on</b>.','android-samsung':'Swipe down from the top of the screen and make sure <b>Location</b> is <b>on</b>.',
+    desktop:'Make sure location is turned on for your computer.'}[pf];
+  var allow={ios:'In that same screen, scroll down to <b>Safari Websites</b> and choose <b>While Using the App</b>.',
+    'ios-chrome':'Go back to <b>Settings</b>, scroll down to <b>Chrome</b> → <b>Location</b> → <b>While Using the App</b>.',
+    android:'In Chrome, tap the icon just left of the web address → <b>Permissions</b> (or <b>Site settings</b>) → <b>Location</b> → <b>Allow</b>.',
+    'android-samsung':'In Samsung Internet, tap the lock icon by the web address → <b>Permissions</b> → turn on <b>Location</b>.',
+    desktop:'Click the icon just left of the web address (a lock or sliders) and set <b>Location</b> to <b>Allow</b>.'}[pf];
+  var again='Reload this page and tap <b>Use my location</b> again'+(pf==='ios'?'. Tap <b>Allow</b> when Safari asks.':'.');
+  var head={denied:'Location is turned off for this site.',timeout:'Your phone couldn’t find its location in time.',unavailable:'Your phone couldn’t find its location.',unsupported:'This browser can’t share its location.'}[k];
+  var steps=k==='denied'?[on,allow,again]:k==='timeout'?['Step outside or away from tall buildings.','Tap <b>Use my location</b> again.']:k==='unavailable'?[on,'Tap <b>Use my location</b> again.']:[];
+  out.innerHTML='<div class="lch"><p class="msg err" style="margin:0 0 4px;padding:0"><b>'+head+'</b>'+(steps.length?' Here’s how to fix it:':'')+'</p>'
+    +(steps.length?'<ol>'+steps.map(function(x){return '<li>'+x+'</li>';}).join('')+'</ol>':'')
+    +'<button type="button" class="lcp">Or pick your beach from the list →</button></div>';
+  var b=out.querySelector('.lcp');if(b)b.onclick=function(){locEvt('picked_instead');stSel.scrollIntoView({behavior:'smooth',block:'center'});
+    setTimeout(function(){try{stSel.focus();if(stSel.showPicker)stSel.showPicker();}catch(e){}},450);};}
 loc.addEventListener('click',function(){
-if(!navigator.geolocation){out.innerHTML='<p class="msg err">Location isn\'t available here. Pick a spot instead.</p>';return;}
+if(!navigator.geolocation){locHelp(0);return;}
 out.innerHTML='<p class="msg"><i class="sp"></i>Finding you…</p>';
-navigator.geolocation.getCurrentPosition(function(p){sel.value='';SRC='gps';NOMEM=false;run(p.coords.latitude,p.coords.longitude);},function(e){var m=e&&e.code===1?'Location is blocked for this site. iPhone: Settings → Privacy &amp; Security → Location Services → Safari Websites → While Using. Then reload and tap again, or pick a spot.':(e&&e.code===3?'Location timed out. Step outside or try again, or pick a spot.':'Couldn\'t get your location. Try again or pick a spot.');out.innerHTML='<p class="msg err">'+m+'</p>';},{enableHighAccuracy:false,timeout:15000,maximumAge:300000});
+navigator.geolocation.getCurrentPosition(function(p){locEvt('ok');sel.value='';SRC='gps';NOMEM=false;run(p.coords.latitude,p.coords.longitude);},function(e){locHelp(e&&e.code||2);},{enableHighAccuracy:false,timeout:15000,maximumAge:300000});
 });
 sel.addEventListener('change',function(){if(sel.value==='')return;var s=SPOTS[+sel.value];SRC='list';NOMEM=false;memBeach(s[0]);run(s[1],s[2],s[0]);});
 }
