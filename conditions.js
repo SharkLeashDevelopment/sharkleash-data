@@ -200,7 +200,7 @@ function fcCol(v){return v>=80?'#7ee787':v>=60?'#ffb020':'#ff6a6a';}
 var PAST_BASE='https://raw.githubusercontent.com/SharkLeashDevelopment/sharkleash-best-beaches/main/data/past/',PAST_C={};
 var PAST_MON=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
 function pastSlug(n){return String(n).toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'');}
-function pastGet(k){if(!PAST_C[k])PAST_C[k]=fetch(PAST_BASE+pastSlug(k)+'.json?t='+Math.floor(Date.now()/36e5)).then(function(r){return r.ok?r.json():null;}).catch(function(){return null;});return PAST_C[k];}
+function pastGet(fid){if(!PAST_C[fid])PAST_C[fid]=fetch(PAST_BASE+fid+'.json?t='+Math.floor(Date.now()/36e5)).then(function(r){return r.ok?r.json():null;}).catch(function(){return null;});return PAST_C[fid];}
 /* week of the year, 0-51 (Dec 31 and Feb 29 fold into their neighbors) */
 function pastWk(md){var m=+md.slice(0,2),d=+md.slice(3,5),doy=Math.round((Date.UTC(2025,m-1,Math.min(d,m===2?28:31))-Date.UTC(2025,0,1))/864e5);return Math.min(51,Math.floor(doy/7));}
 function pastWkLabel(w){var a=new Date(Date.UTC(2025,0,1+w*7)),b=new Date(Date.UTC(2025,0,1+w*7+6));if(w===51)b=new Date(Date.UTC(2025,11,31));
@@ -208,7 +208,7 @@ function pastWkLabel(w){var a=new Date(Date.UTC(2025,0,1+w*7)),b=new Date(Date.U
 /* pure math, no page access: what the panel shows */
 function pastCalc(p,now){if(!p||!p.days)return null;var D=p.days,md=('0'+(now.getMonth()+1)).slice(-2)+'-'+('0'+now.getDate()).slice(-2);
   var y0=+p.from.slice(0,4),y1=+p.to.slice(0,4),nights=[];
-  for(var y=y1;y>=y0;y--){var r=D[y+'-'+md];if(r)nights.push({y:y,sc:r[0],mph:r[1],dir:r[2],wv:r[3],wt:r[4],hi:r[5]});}
+  var tk=now.getFullYear()+'-'+md;for(var y=y1;y>=y0;y--){var r=D[y+'-'+md];if(r&&y+'-'+md!==tk)nights.push({y:y,sc:r[0],mph:r[1],dir:r[2],wv:r[3],wt:r[4],hi:r[5]});}
   var S=[],N=[];for(var i=0;i<52;i++){S.push(0);N.push(0);}
   var W={};for(var k in D){var w=pastWk(k.slice(5)),v=D[k][0];(W[w]=W[w]||[]).push(k);if(v==null)continue;S[w]+=v;N[w]++;}
   var avg=S.map(function(s,i){return N[i]?Math.round(s/N[i]):null;}),cur=pastWk(md);
@@ -249,11 +249,11 @@ function pastCalc(p,now){if(!p||!p.days)return null;var D=p.days,md=('0'+(now.ge
   +'#slmc .ph .pwn{font-size:12.5px;color:rgba(255,255,255,.82);font-weight:600;margin:6px 0 10px;min-height:1.2em}'
   +'#slmc .ph h4{margin:12px 0 6px;font-size:12px;font-weight:900;text-transform:uppercase;letter-spacing:.12em;color:#ff4444}';
   document.head.appendChild(s);})();
-function pastPanel(key){
+function pastPanel(key,id){
   if(!key||BAN_NOW||!out)return;
   var box=document.createElement('div');box.className='fc ph';box.innerHTML='<p class="msg"><i class="sp"></i>Loading past years…</p>';
   var rig=out.querySelector('.rig');if(rig)out.insertBefore(box,rig);else out.appendChild(box);
-  pastGet(key).then(function(p){if(!box.isConnected)return;var c=pastCalc(p,new Date());if(!c||!c.of){box.remove();return;}
+  pastGet(id||pastSlug(key)).then(function(p){if(!box.isConnected)return;var c=pastCalc(p,new Date());if(!c||!c.of){box.remove();return;}
     var nm=esc(key.replace(/,\s*[A-Z]{2}$/,'')),today=PAST_MON[+c.md.slice(0,2)-1]+' '+(+c.md.slice(3,5));
     var po=clStore('slmc_past_open')==='1',teaser=c.curAvg!=null?'This week usually <b style="color:'+fcCol(c.curAvg)+'">'+c.curAvg+'</b> · best '+pastWkLabel(c.best[0][0]):'';
     var h='<details class="phd"'+(po?' open':'')+'><summary><span class="pht">📅 Past years at '+nm+'</span><span class="phs2">'+teaser+'</span><span class="phx"><span class="phl"></span><i aria-hidden="true"><svg viewBox="0 0 12 12" width="15" height="15" style="display:block"><path d="M2.5 4.5l3.5 3.5 3.5-3.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></i></span></summary><div class="phc">';
@@ -386,10 +386,11 @@ h+='<a class="rig" href="/#buy-anchor" onclick="if(window.gtag)gtag(\'event\',\'
 out.innerHTML=h;
 try{clWire(bkey,bm&&bm.clarity);}catch(e){}
 try{fcStrip(lat,lon,w,wv,wt,t,label);}catch(e){}
-try{pastPanel(bkey);}catch(e){}
+try{pastPanel(bkey,BM.near&&BM.near.id);}catch(e){}
 var nl=$('slmc-noaa');if(nl)nl.href='https://forecast.weather.gov/MapClick.php?lat='+(+lat).toFixed(4)+'&lon='+(+lon).toFixed(4);
 try{if(window.gtag)gtag('event','beach_view',{beach:bkey||'unlisted',beach_state:BM.near?BM.near.state:(w&&w.state)||'',pick_source:SRC});}catch(e){}
-try{window.SLMC_LAST={gps:!label&&!fromMap,fromMapSync:!!fromMap,where:where,town:w&&w.town,lat:lat,lon:lon,at:Date.now(),w:w,wv:wv,wt:wt,t:t,mo:mo,bw:bw,rc:rc,beach:bkey,ds:bm&&bm.score!=null?bm.score:null,cl:bm&&bm.clarity?bm.clarity.rating:null,state:BM.near?BM.near.state:(w&&w.state)||null};window.dispatchEvent(new Event('slmc:conditions'));}catch(e){}
+var NB=null;if(!bkey&&FC_BEACH.length){var nd=1e9;FC_BEACH.forEach(function(x){var d=km(lat,lon,x.lat,x.lon);if(d<nd){nd=d;NB={beach:x.name+', '+x.state,id:x.id||pastSlug(x.name+', '+x.state),mi:Math.round(d*0.621)};}});}
+try{window.SLMC_LAST={beachId:BM.near?(BM.near.id||pastSlug(bkey)):null,near:NB?NB.beach:null,nearId:NB?NB.id:null,nearMi:NB?NB.mi:null,gps:!label&&!fromMap,fromMapSync:!!fromMap,where:where,town:w&&w.town,lat:lat,lon:lon,at:Date.now(),w:w,wv:wv,wt:wt,t:t,mo:mo,bw:bw,rc:rc,beach:bkey,ds:bm&&bm.score!=null?bm.score:null,cl:bm&&bm.clarity?bm.clarity.rating:null,state:BM.near?BM.near.state:(w&&w.state)||null};window.dispatchEvent(new Event('slmc:conditions'));}catch(e){}
 if(w&&w.state&&window.slmSelectState)window.slmSelectState(w.state);
 if(!label)syncPicker(lat,lon,w&&w.state);
 });
