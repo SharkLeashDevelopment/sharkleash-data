@@ -1,5 +1,42 @@
 {
  "_readme": "Version badge and What's new list for the Beach Conditions panel. To announce an update: add an entry at the TOP of updates, then set version and date to match. Notes are for anglers: one short line each, no code talk. The panel shows the newest 5 entries. Bumping version shows a NEW dot to everyone until they open the list.",
+ "version": "41",
+ "date": "2026-11-20",
+ "updates": [
+  {
+   "date": "2026-11-20",
+   "notes": [
+    "Gulf Coast beaches (Florida's Gulf side to Texas) now get the high-tide bonus in the Drop Score, like the Atlantic always has.",
+    "New: Past Years. See how tonight's date fished over the last 5 years and the best weeks of the year at your beach.",
+    "Tap any week on the Past Years chart to see every night that week, then tap a night for its wind, surf, water temp and tide.",
+    "Past Years now adds a new night every day."
+   ]
+  },
+  {
+   "date": "2026-11-18",
+   "notes": [
+    "Weather alerts: every active NWS flood, storm, marine and surf alert for your beach's area.",
+    "Tonight's rank: see where your beach places among all the beaches we score.",
+    "Water temp now uses your beach's ocean reading instead of far-off bay sensors."
+   ]
+  },
+  {
+   "date": "2026-11-17",
+   "notes": [
+    "56 more beaches: 237 from Maine to Texas."
+   ]
+  },
+  {
+   "date": "2026-11-13",
+   "notes": [
+    "The Drop Score now counts bait running and a high tide in the evening window.",
+    "Too windy to fly: evenings averaging 25 mph or more are capped.",
+    "\"Bait showing tonight?\" Your yes/no reports now update the score."
+   ]
+  }
+ ]
+}{
+ "_readme": "Version badge and What's new list for the Beach Conditions panel. To announce an update: add an entry at the TOP of updates, then set version and date to match. Notes are for anglers: one short line each, no code talk. The panel shows the newest 5 entries. Bumping version shows a NEW dot to everyone until they open the list.",
  "version": "40",
  "date": "2026-11-20",
  "updates": [
