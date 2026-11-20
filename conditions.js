@@ -1,349 +1,350 @@
-// SharkLeash Drop Score history backfill (runs in the PRIVATE repo, sharkleash-private).
-// Re-scores every beach for every day in the window below with the SAME math as the live score.js,
-// using what actually happened instead of the evening forecast:
-//   wind + fronts  -> Open-Meteo hourly archive (ERA5), 4-10 PM Eastern
-//   waves + temp   -> nearest seaward NDBC buoy (same rules as live: waves within 80 km, temp within 40 km),
-//                     read at 20:00 UTC (last reading in the 6 h before), like the afternoon live run
-//   temp backup    -> MUR satellite (and the live "drop the buoy if it disagrees by more than 6F" check)
-//   wave backup    -> Open-Meteo marine model, like live falls back to WaveWatch III
-//   tide           -> NOAA hi/lo predictions, nearest station within 30 km, high tide 4-10 PM
-//   no bait reports or clarity existed back then, so bait comes from the calendar and clarity is blank.
-// Writes:
-//   history/<beach>.csv  full rows, same columns as the live history (run_utc = "backfill")  -> stays private
-//   past/<beach>.json    small per-beach file for the website's "this night in past years"   -> copied to public
-// v2: satellite water temp now comes from a whole-coast MUR cache (sat/YYYY-MM.json), built one month per request, the same
-//     0.2 degree grid the live job uses. v1 asked for a year per beach, which timed out, so ~1 in 3 beaches had no backup temp.
-//     Beaches already done are patched from the cache (water temp filled, live 6F buoy check applied, score recomputed).
-// Resumable: a beach whose CSV already exists is skipped, so if a run stops (time cap or the weather
-// archive's daily limit) the next run picks up where it left off.
-const fs = require('fs'), zlib = require('zlib');
+(function(){
+var ST=[];
+var SPOTS=[];
+var $=function(id){return document.getElementById(id)};
+var STN={ME:'Maine',NH:'New Hampshire',MA:'Massachusetts',RI:'Rhode Island',CT:'Connecticut',NY:'New York',NJ:'New Jersey',DE:'Delaware',MD:'Maryland',VA:'Virginia',NC:'North Carolina',SC:'South Carolina',GA:'Georgia',FL:'Florida',AL:'Alabama',MS:'Mississippi',LA:'Louisiana',TX:'Texas'};
+/* Remembers the last beach on this phone so the picker opens there next time */
+var SRC='list',NOMEM=false;
+function memBeach(n){if(NOMEM)return;try{localStorage.setItem('slmc_beach',n);}catch(e){}}
+function lastBeach(){try{var n=localStorage.getItem('slmc_beach');if(!n)return -1;for(var i=0;i<SPOTS.length;i++)if(SPOTS[i][0]===n)return i;}catch(e){}return -1;}
+function spotSt(s){var m=/,\s*([A-Z]{2})$/.exec(s[0]);return m?m[1]:'';}
+var STATES=[];
+var stSel;
+function fillSpots(st,pick){sel.innerHTML='<option value="">'+(st?'Pick a beach in '+(STN[st]||st):'Then a beach')+'</option>';
+  SPOTS.forEach(function(s,i){if(spotSt(s)!==st)return;var o=document.createElement('option');o.value=i;o.textContent=s[0].replace(/,\s*[A-Z]{2}$/,'');sel.appendChild(o);});
+  sel.disabled=!st;sel.value=pick!==undefined&&pick!==null?pick:'';}
+function syncPicker(lat,lon,state){if(!stSel)return;var st=STATES.indexOf(state)>-1?state:'';
+  var bi=null,bd=1e9;SPOTS.forEach(function(s,i){var d=km(lat,lon,s[1],s[2]);if(d<bd){bd=d;bi=i;}});
+  if(bi!==null&&bd<25&&(!st||spotSt(SPOTS[bi])===st))st=spotSt(SPOTS[bi]);else bi=null;
+  if(!st)return;stSel.value=st;fillSpots(st,bi===null?'':String(bi));if(bi!==null)memBeach(SPOTS[bi][0]);}
+var ROOT=(function(){var a=document.querySelectorAll('[id="slmc"]');return a[a.length-1];})();
+var out,sel;
+var DIRS=['N','NNE','NE','ENE','E','ESE','SE','SSE','S','SSW','SW','WSW','W','WNW','NW','NNW'];
+function km(a,b,c,d){var r=Math.PI/180,x=Math.sin((c-a)*r/2),y=Math.sin((d-b)*r/2);var h=x*x+Math.cos(a*r)*Math.cos(c*r)*y*y;return 12742*Math.asin(Math.sqrt(h));}
+function nearest(lat,lon){var best=null,bd=1e9;for(var i=0;i<ST.length;i++){var d=km(lat,lon,ST[i][2],ST[i][3]);if(d<bd){bd=d;best=ST[i];}}return [best,bd];}
+function ymd(d){return d.getFullYear()+('0'+(d.getMonth()+1)).slice(-2)+('0'+d.getDate()).slice(-2);}
+function fmtT(s){var p=s.split(/[- :]/),h=+p[3],m=p[4],ap=h>=12?'PM':'AM',h12=h%12||12;var d=new Date(+p[0],p[1]-1,+p[2]),t=new Date();var day=(d.toDateString()===t.toDateString())?'Today':(d.getDate()===new Date(t.getTime()+864e5).getDate()?'Tomorrow':d.toLocaleDateString(undefined,{weekday:'short'}));return {t:h12+':'+m+' '+ap,day:day,date:new Date(+p[0],p[1]-1,+p[2],h,+m)};}
+function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;');}
+function getJSON(u,o){return fetch(u,o).then(function(r){if(!r.ok)throw new Error(r.status);return r.json();});}
+function wind(lat,lon){
+return getJSON('https://api.weather.gov/points/'+lat.toFixed(4)+','+lon.toFixed(4),{headers:{Accept:'application/geo+json'}}).then(function(p){
+var rl=p.properties.relativeLocation&&p.properties.relativeLocation.properties;
+return getJSON(p.properties.forecastHourly,{headers:{Accept:'application/geo+json'}}).then(function(f){
+var now=Date.now(),per=f.properties.periods.find(function(x){return new Date(x.endTime).getTime()>now;})||f.properties.periods[0];
+var nxt=f.properties.periods[f.properties.periods.indexOf(per)+3];
+var pop=per.probabilityOfPrecipitation&&per.probabilityOfPrecipitation.value;return {temp:per.temperature,unit:per.temperatureUnit||'F',sky:per.shortForecast||'',day:per.isDaytime!==false,pop:(pop===null||pop===undefined)?null:pop,dir:per.windDirection,spd:per.windSpeed,next:nxt?{dir:nxt.windDirection,spd:nxt.windSpeed,t:new Date(nxt.startTime)}:null,town:rl?rl.city+', '+rl.state:'',state:rl?rl.state:'',grid:p.properties.forecastGridData,cwa:p.properties.cwa||p.properties.gridId,zone:(p.properties.forecastZone||'').split('/').pop(),P:f.properties.periods};
+});
+});
+}
+function durMs(d){var m=/P(?:(\d+)D)?(?:T(?:(\d+)H)?(?:(\d+)M)?)?/.exec(d)||[];return ((+m[1]||0)*24*36e5)+((+m[2]||0)*36e5)+((+m[3]||0)*6e4);}
+function waveAt(vals,t){for(var i=0;i<vals.length;i++){var p=vals[i].validTime.split('/'),s0=new Date(p[0]).getTime(),e=s0+durMs(p[1]);if(t>=s0&&t<e)return vals[i].value;}return null;}
+function waveFrom(grid){return getJSON(grid,{headers:{Accept:'application/geo+json'}}).then(function(g){var wh=g.properties.waveHeight;var k=(wh&&wh.uom&&/ft|foot/i.test(wh.uom))?1:3.28084;var vals=wh&&wh.values?wh.values.filter(function(v){return v.value!==null;}):[];if(!vals.length||vals.every(function(v){return v.value<=0;}))return null;var now=Date.now(),a=waveAt(vals,now),b=waveAt(vals,now+3*36e5);if(a===null||a<=0)return null;if(b!==null&&b<=0)b=null;return {now:a*k,in3:b===null?null:b*k,vals:vals,k:k};});}
+function gridFor(lat,lon){return getJSON('https://api.weather.gov/points/'+lat.toFixed(4)+','+lon.toFixed(4),{headers:{Accept:'application/geo+json'}}).then(function(p){return p.properties.forecastGridData;});}
+function waves(lat,lon,grid){
+return waveFrom(grid).then(function(r){if(r)return r;
+var OFF=[[0,0.05],[-0.05,0],[0,-0.05],[0,0.12],[-0.12,0],[0,-0.12]];
+return Promise.all(OFF.map(function(o){return gridFor(lat+o[0],lon+o[1]).then(waveFrom).catch(function(){return null;});})).then(function(rs){
+for(var i=0;i<rs.length;i++){if(rs[i]){rs[i].off=true;return rs[i];}}return null;});
+}).catch(function(){return null;});
+}
+function ftTxt(f){if(f<0.5)return '<1';return f<10?(Math.round(f*2)/2).toFixed(1).replace('.0',''):Math.round(f)+'';}
+function tides(st){
+var b=new Date();b.setHours(0,0,0,0);
+var u='https://api.tidesandcurrents.noaa.gov/api/prod/datagetter?product=predictions&application=SharkLeash&datum=MLLW&interval=hilo&units=english&time_zone=lst_ldt&format=json&range=192&station='+st[0]+'&begin_date='+ymd(b);
+return getJSON(u).then(function(j){
+if(!j.predictions)throw new Error('no predictions');
+var now=new Date(),up=j.predictions.map(function(p){var f=fmtT(p.t);f.type=p.type;f.v=(+p.v).toFixed(1);return f;}).filter(function(p){return p.date>now;});
+return {hi:up.find(function(p){return p.type==='H'}),lo:up.find(function(p){return p.type==='L'}),first:up[0],all:up};
+});
+}
+var WT=null;
+function wtStations(){
+if(WT)return Promise.resolve(WT);
+try{var c=sessionStorage.getItem('slmc_wt');if(c){WT=JSON.parse(c);return Promise.resolve(WT);}}catch(e){}
+return getJSON('https://api.tidesandcurrents.noaa.gov/mdapi/prod/webapi/stations.json?type=watertemp').then(function(j){
+WT=(j.stations||j.stationList||[]).map(function(s){return [s.id,s.name,+s.lat,+s.lng];}).filter(function(s){return !isNaN(s[2])&&!isNaN(s[3]);});
+try{sessionStorage.setItem('slmc_wt',JSON.stringify(WT));}catch(e){}
+return WT;
+});
+}
+function waterTemp(lat,lon){
+return wtStations().then(function(list){
+var c=list.map(function(s){return [s,km(lat,lon,s[2],s[3])];}).filter(function(x){return x[1]<150;}).sort(function(a,b){return a[1]-b[1];}).slice(0,6);
+return Promise.all(c.map(function(x){
+var s=x[0];
+return getJSON('https://api.tidesandcurrents.noaa.gov/api/prod/datagetter?product=water_temperature&application=SharkLeash&units=english&time_zone=lst_ldt&format=json&range=24&station='+s[0]).then(function(j){
+var d=(j.data||[]).filter(function(r){return r.v!==''&&!isNaN(parseFloat(r.v))&&parseFloat(r.v)>32&&parseFloat(r.v)<90;});
+if(!d.length)return null;
+var last=d[d.length-1],ft=fmtT(last.t),age=(Date.now()-ft.date.getTime())/36e5;
+return {f:parseFloat(last.v),name:s[1],mi:Math.round(x[1]*0.621),at:(age>3?(ft.day==='Today'?'':ft.day+' ')+ft.t:ft.t),old:age>3};
+}).catch(function(){return null;});
+})).then(function(rs){for(var k=0;k<rs.length;k++){if(rs[k])return rs[k];}return null;});
+}).catch(function(){return null;});
+}
+function jsonp(u){return new Promise(function(res,rej){var cb='slmcJ'+Date.now()+Math.floor(Math.random()*1e4),sc=document.createElement('script'),done=false;
+function end(){try{delete window[cb];}catch(e){window[cb]=undefined;}if(sc.parentNode)sc.parentNode.removeChild(sc);}
+window[cb]=function(d){done=true;end();res(d);};
+sc.onerror=function(){if(!done){done=true;end();rej(new Error('jsonp'));}};
+setTimeout(function(){if(!done){done=true;end();rej(new Error('timeout'));}},12000);
+sc.src=u+'&.jsonp='+cb;document.head.appendChild(sc);});}
+function buoyTemp(lat,lon){
+var q=['station,latitude,longitude,time,WTMP','time>=now-1days','latitude>='+(lat-1.3).toFixed(2),'latitude<='+(lat+1.3).toFixed(2),'longitude>='+(lon-1.3).toFixed(2),'longitude<='+(lon+1.3).toFixed(2),'WTMP!=NaN','orderByMax("station,time")'].map(encodeURIComponent).join('&');
+return jsonp('https://coastwatch.pfeg.noaa.gov/erddap/tabledap/cwwcNDBCMet.json?'+q).then(function(j){
+var cn=j.table.columnNames,ix=function(n){return cn.indexOf(n);},best=null,bd=1e9;
+j.table.rows.forEach(function(r){var v=r[ix('WTMP')];if(v===null||isNaN(v))return;var vf=v*9/5+32;if(vf<=32||vf>=90)return;var d=km(lat,lon,r[ix('latitude')],r[ix('longitude')]);if(d<bd&&d<150){bd=d;best=r;}});
+if(!best)return null;
+var t=new Date(best[ix('time')]),age=(Date.now()-t.getTime())/36e5,today=t.toDateString()===new Date().toDateString();
+var tt=t.toLocaleTimeString([], {hour:'numeric',minute:'2-digit'});
+return {f:best[ix('WTMP')]*9/5+32,name:'Buoy '+best[ix('station')],mi:Math.round(bd*0.621),at:(today?'':t.toLocaleDateString([], {weekday:'short'})+' ')+tt,old:age>3};
+}).catch(function(){return null;});
+}
+function satTemp(lat,lon){var d=.12,q='analysed_sst[(last)][('+(lat-d).toFixed(2)+'):1:('+(lat+d).toFixed(2)+')][('+(lon-d).toFixed(2)+'):1:('+(lon+d).toFixed(2)+')]';
+return jsonp('https://coastwatch.pfeg.noaa.gov/erddap/griddap/jplMURSST41F.json?'+encodeURIComponent(q)).then(function(j){var c=j.table.columnNames,I=function(n){return c.indexOf(n);},b=null,bd=1e9;
+j.table.rows.forEach(function(r){var v=r[I('analysed_sst')];if(v===null||isNaN(v)||v<40||v>95)return;var k=km(lat,lon,r[I('latitude')],r[I('longitude')]);if(k<bd){bd=k;b=r;}});
+return b?{f:b[I('analysed_sst')],name:'Nearshore satellite',mi:Math.max(1,Math.round(bd*.621)),at:new Date(b[I('time')]).toLocaleDateString([],{month:'short',day:'numeric'}),sat:1}:null;}).catch(function(){return null;});}
+function wxIcon(t,day){
+t=(t||'').toLowerCase();
+if(/thunder|t-storm|tstorm/.test(t))return '⛈️';
+if(/snow|flurr|sleet|freezing|ice|wintry/.test(t))return '🌨️';
+if(/rain|shower|drizzle/.test(t))return /chance|slight|partly|isolated|scattered/.test(t)&&day?'🌦️':'🌧️';
+if(/fog|haze|smoke|mist/.test(t))return '🌫️';
+if(/mostly cloudy|overcast|^cloudy/.test(t))return '☁️';
+if(/partly/.test(t))return day?'⛅':'☁️';
+if(/mostly sunny|mostly clear/.test(t))return day?'🌤️':'🌙';
+if(/sunny|clear|fair/.test(t))return day?'☀️':'🌙';
+if(/wind|breez|blustery/.test(t))return '🌬️';
+return day?'🌤️':'🌙';
+}
+function ugcHas(txt,zone){ var m=/^([A-Z]{2})Z(\d{3})$/.exec(zone);if(!m)return false;var st=m[1],n=+m[2],cur=null,ok=false;
+txt.replace(/\s/g,'').split('-').forEach(function(t){var a=/^([A-Z]{2})Z(\d{3})(?:>(\d{3}))?$/.exec(t),b=/^(\d{3})(?:>(\d{3}))?$/.exec(t);
+if(a){cur=a[1];if(cur===st&&n>=+a[2]&&n<=+(a[3]||a[2]))ok=true;}else if(b&&cur===st&&n>=+b[1]&&n<=+(b[2]||b[1]))ok=true;});return ok;}
+var ALERTS=[];
+/* many beach points sit just offshore in a marine zone, which misses land alerts (floods, rip currents); shark-data.json gives each beach its land zone + county (nws) */
+function nwsZones(lat,lon){var b=null,bd=15;(FC_BEACH||[]).forEach(function(x){if(!x.nws)return;var d=km(lat,lon,x.lat,x.lon);if(d<bd){bd=d;b=x;}});return b?b.nws:null;}
+function rip(lat,lon,w){
+var H={headers:{Accept:'application/geo+json'}},nz=nwsZones(lat,lon),zone=nz?nz[0]:(w&&w.zone);ALERTS=[];
+var q=function(u){return getJSON('https://api.weather.gov/alerts/active?'+u,H).catch(function(){return {features:[]};});};
+return Promise.all([q('point='+lat.toFixed(4)+','+lon.toFixed(4)),nz?q('zone='+nz.join(',')):{features:[]}]).then(function(rs){
+var a={features:(rs[0].features||[]).concat(rs[1].features||[])};
+var seen={};(a.features||[]).forEach(function(x){var p=x.properties||{};if(!p.event||seen[p.event])return;seen[p.event]=1;ALERTS.push({ev:p.event,sev:/extreme|severe/i.test(p.severity||'')});});
+var f=(a.features||[]).map(function(x){return x.properties.event;}).filter(function(e){return /rip current|beach hazard|high surf/i.test(e);});
+if(f.some(function(e){return /rip current/i.test(e);}))return {risk:'High',src:'NWS '+f[0]+' in effect'};
+return null;}).catch(function(){return null;}).then(function(al){
+if(al)return al;if(!w||!w.cwa)return null;
+return getJSON('https://api.weather.gov/products/types/SRF/locations/'+w.cwa+'/latest',H).then(function(p){
+var txt=p.productText||'',segs=txt.split('$$'),seg=null;
+for(var i=0;i<segs.length;i++){var head=(segs[i].match(/^[A-Z]{2}Z[\d>\-\s]+?-\d{6}-/m)||[''])[0];if(head&&ugcHas(head,zone)){seg=segs[i];break;}}
+if(!seg)return {risk:null,src:'NWS '+w.cwa+' surf forecast doesn\u2019t cover this exact spot',old:(Date.now()-new Date(p.issuanceTime))/864e5>2};
+var m=/rip current risk[^\n.]*?\.{2,}\s*([a-z]+)/i.exec(seg);
+var age=(Date.now()-new Date(p.issuanceTime))/864e5;
+if(!m)return null;return {risk:m[1].charAt(0).toUpperCase()+m[1].slice(1).toLowerCase(),src:'NWS surf zone forecast',old:age>2};
+}).catch(function(){return null;});});
+}
+function sunTimes(d,lat,lon){var R=Math.PI/180,J=Date.UTC(d.getFullYear(),d.getMonth(),d.getDate(),12)/864e5+2440587.5,n=Math.round(J-2451545+0.0008-lon/360),
+Js=2451545+0.0009-lon/360+n,M=(357.5291+0.98560028*(Js-2451545))%360,C=1.9148*Math.sin(M*R)+0.02*Math.sin(2*M*R)+0.0003*Math.sin(3*M*R),L=(M+C+180+102.9372)%360,
+Jt=Js+0.0053*Math.sin(M*R)-0.0069*Math.sin(2*L*R),dec=Math.asin(Math.sin(L*R)*Math.sin(23.44*R)),
+w=Math.acos((Math.sin(-0.833*R)-Math.sin(lat*R)*Math.sin(dec))/(Math.cos(lat*R)*Math.cos(dec)))/R/360,toD=function(j){return new Date((j-2440587.5)*864e5);};
+return {rise:toD(Jt-w),set:toD(Jt+w)};}
+function bestWindow(tl,lat,lon){
+if(!tl||!tl.all||!tl.all.length)return null;var now=Date.now(),end=now+30*36e5,sun=[];
+for(var k=-1;k<=2;k++){var d=new Date(now+k*864e5);sun.push(sunTimes(d,lat,lon));}
+function dark(t){for(var i=0;i<sun.length-1;i++){if(t>sun[i].set.getTime()&&t<sun[i+1].rise.getTime())return true;}return false;}
+function nearDusk(t){return sun.some(function(s){return Math.abs(t-s.set.getTime())<75*6e4||Math.abs(t-s.rise.getTime())<75*6e4;});}
+var best=null;
+tl.all.forEach(function(p){var turn=p.date.getTime();if(turn>end)return;var a=Math.max(turn-2*36e5,now),b=turn+1*36e5;if(b<=now)return;
+var sc=0;for(var t=a;t<b;t+=15*6e4){sc+=dark(t)?2:0;sc+=nearDusk(t)?1.5:0;}sc+=1;
+if(!best||sc>best.sc)best={sc:sc,a:a,b:b,p:p,dark:dark((a+b)/2)||dark(turn),dusk:nearDusk(a)||nearDusk(turn)||nearDusk(b)};});
+return best;}
+function hmr(a,b){var x=hm(a),y=hm(b),pa=x.slice(-2),pb=y.slice(-2);return (pa===pb&&/[AP]M$/.test(pa)?x.slice(0,-3):x)+'–'+y;}
+function hm(t){return new Date(t).toLocaleTimeString([], {hour:'numeric',minute:'2-digit'}).replace(':00','').replace(' ','\u00a0');}
+function moon(d){
+var SYN=29.530588853,ref=Date.UTC(2000,0,6,18,14),age=((d.getTime()-ref)/864e5)%SYN;if(age<0)age+=SYN;
+var ill=Math.round((1-Math.cos(2*Math.PI*age/SYN))/2*100);
+var names=['New moon','Waxing crescent','First quarter','Waxing gibbous','Full moon','Waning gibbous','Last quarter','Waning crescent'],icons=['🌑','🌒','🌓','🌔','🌕','🌖','🌗','🌘'];
+var k=Math.floor((age/SYN)*8+0.5)%8;
+var toFull=(SYN/2-age+SYN)%SYN,toNew=SYN-age;
+var fmt=function(n){var x=new Date(d.getTime()+n*864e5);return x.toLocaleDateString([], {month:'short',day:'numeric'});};
+var next=toFull<toNew?'Full moon ~'+fmt(toFull):'New moon ~'+fmt(toNew);
+if(k===4)next='New moon ~'+fmt(toNew);if(k===0)next='Full moon ~'+fmt(toFull);
+return {name:names[k],icon:icons[k],ill:ill,next:next,age:age,syn:SYN};
+}
+function arrowSVG(dir){var i=DIRS.indexOf(dir);var deg=i<0?0:i*22.5+180;return '<svg class="arrow" viewBox="0 0 24 24" style="transform:rotate('+deg+'deg)" aria-hidden="true"><path d="M12 2l6 14-6-3-6 3z" fill="#e4572e"/></svg>';}
 
-const START = '2021-11-17', END = '2026-11-16';       // live history in the public repo starts 2026-11-17
-const TIME_CAP_MIN = 300;                             // stop starting new beaches after 5 h (GitHub's limit is 6 h)
-const DATA_URL = 'https://raw.githubusercontent.com/SharkLeashDevelopment/sharkleash-data/main/shark-data.json';
-const TIDE_URL = 'https://raw.githubusercontent.com/SharkLeashDevelopment/sharkleash-data/main/tide-stations.json';
-const UA = { 'User-Agent': 'SharkLeash history backfill (sharkleashfishing.com)' };
-const T0 = Date.now();
-const sleep = ms => new Promise(r => setTimeout(r, ms));
-
-/* ---------------- copied verbatim from score.js (keep in sync) ---------------- */
-var SPX={sk:{n:'Silky',t:[70,88]},bn:{n:'Blacknose',t:[70,88]},sb:{n:'Sandbar',t:[58,82]},st:{n:'Sand tiger',t:[55,76]},du:{n:'Dusky',t:[62,80]},bt:{n:'Blacktip',t:[68,86]},sp:{n:'Spinner',t:[68,86]},
-  sn:{n:'Atlantic sharpnose',t:[66,88]},bo:{n:'Bonnethead',t:[68,90]},ft:{n:'Finetooth',t:[70,88]},bu:{n:'Bull',t:[70,92]},le:{n:'Lemon',t:[70,90]},
-  ti:{n:'Tiger',t:[72,90]},nu:{n:'Nurse',t:[72,90]},sh:{n:'Scalloped hammerhead',t:[72,88]},gh:{n:'Great hammerhead',t:[72,88]},
-  sm:{n:'Smooth dogfish',t:[50,72]},sd:{n:'Spiny dogfish',t:[40,64]}};
-var PROT_ALL=['sb','st','du'],PROT_ST={FL:['le','ti','sh','gh']};
-var SPOTS=[],SPM={},DEEP=[],BAN={},REG=[],LBAN=[],CLB=[],BAIT={},BAITN={},PARK={},PRIV={};
-const NOFLY_MPH=25,NOFLY_CAP=40;
-const DIRS=['N','NNE','NE','ENE','E','ESE','SE','SSE','S','SSW','SW','WSW','W','WNW','NW','NNW'];
-function km(a,b,c,d){var r=Math.PI/180,x=Math.sin((c-a)*r/2),y=Math.sin((d-b)*r/2);return 12742*Math.asin(Math.sqrt(x*x+Math.cos(a*r)*Math.cos(c*r)*y*y));}
-function st(s){var m=/,\s*([A-Z]{2})$/.exec(s[0]);return m?m[1]:'';}
-function brg(a,b,c,d){var r=Math.PI/180,y=Math.sin((d-b)*r)*Math.cos(c*r),x=Math.cos(a*r)*Math.sin(c*r)-Math.sin(a*r)*Math.cos(c*r)*Math.cos((d-b)*r);return (Math.atan2(y,x)/r+360)%360;}
-var OCEAN_PIERS={LKWF1:1,MROS1:1,JMPN7:1,DUKN7:1};
-function seaward(lat,lon,faces,p){if(faces==null||OCEAN_PIERS[p.id])return true;if(km(lat,lon,p.lat,p.lon)<=3)return true;var d=Math.abs(brg(lat,lon,p.lat,p.lon)-faces)%360;if(d>180)d=360-d;return d<=(/^\d{5}$/.test(String(p.id))?110:75);}
-function lv(code,s,MO,rk){var rows=SPM[rk]||[];for(var i=0;i<rows.length;i++)if(rows[i][0]===code){var P=rows[i][1];if(code==='bu'&&rk==='FL'&&s[1]<27.6)P='222333333222';return +P.charAt(MO);}return 0;}
-function score(s,w,wv,wt,dp,MO,rk,tide,brep){var b={};rk=rk||st(s);
+/* ===== 7-evening outlook: same scoring as Best Beaches (wind, surf, water temp, sharks running, deep water, front) ===== */
+var FC_SPM={},FC_BEACH=[],FC_BBP=null,FC_DIRS=['N','NNE','NE','ENE','E','ESE','SE','SSE','S','SSW','SW','WSW','W','WNW','NW','NNW'];
+var FC_SPX={sk:[70,88],bn:[70,88],sb:[58,82],st:[55,76],du:[62,80],bt:[68,86],sp:[68,86],sn:[66,88],bo:[68,90],ft:[70,88],bu:[70,92],le:[70,90],ti:[72,90],nu:[72,90],sh:[72,88],gh:[72,88],sm:[50,72],sd:[40,64]};
+var FC_ROWS=null,FC_REG={};function fcLv(code,st,mo,lat){var rows=FC_ROWS||FC_SPM[st]||[];for(var i=0;i<rows.length;i++)if(rows[i][0]===code){var P=rows[i][1];if(code==='bu'&&st==='FL'&&lat<27.6)P='222333333222';return +P.charAt(mo);}return 0;}
+function fcScore(st,lat,w,wv,wt,dp,mo){var b={};
   var v=w?w.avg:null;b.wind=v===null?10:v<5?10+3*v:v<=12?25:v>=29?0:Math.round(25*(29-v)/17);
   b.waves=wv==null?8:wv<1?9:wv<=3?15:wv<=5?Math.round(15-5*(wv-3)):wv<=6?3:0;
   b.temp=wt==null?8:(wt>=66&&wt<=82)?20:Math.max(0,Math.round(20-2*(wt<66?66-wt:wt-82)));
-  var sum=0,got=[],prot=PROT_ALL.concat(PROT_ST[st(s)]||[]);(SPM[rk]||[]).forEach((r,ix)=>{var l=lv(r[0],s,MO,rk),sp=SPX[r[0]];if(!l||!sp)return;var fit=wt==null||(wt>=sp.t[0]&&wt<=sp.t[1]);if(!fit)return;sum+=l===3?3:l===2?2:0.5;got.push({n:sp.n,l:l,ix:ix,p:prot.indexOf(r[0])>=0});});
-  got.sort((a,b)=>b.l-a.l||a.ix-b.ix);var list=got.filter(g=>g.l>=2).map(g=>g.n),maybe=got.filter(g=>g.l===1).map(g=>g.n),rel=got.filter(g=>g.p).map(g=>g.n);
-  var bt=BAIT[rk]||BAIT[st(s)],bsum=0,blist=[];
-  if(bt){bt.forEach((r,ix)=>{var l=+r[1].charAt(MO);if(!l)return;bsum+=l===3?3:l===2?2:0.5;if(l>=2)blist.push({n:BAITN[r[0]]||r[0],l:l,ix:ix});});
-    blist.sort((a,c)=>c.l-a.l||a.ix-c.ix);
-    var bf=Math.min(1,bsum/8),y=brep&&brep.counts?brep.counts.yes||0:0,nn=brep&&brep.counts?brep.counts.no||0:0;
-    if((y>=2&&y>nn)||(brep&&brep.trusted==='yes'))bf=1;else if((nn>=2&&nn>y)||(brep&&brep.trusted==='no'))bf=0;
-    b.sharks=Math.round(15*Math.min(1,sum/10));b.bait=Math.round(10*bf*b.temp/20);}
-  else b.sharks=Math.round(25*Math.min(1,sum/10));
+  var sum=0;(FC_ROWS||FC_SPM[st]||[]).forEach(function(r){var l=fcLv(r[0],st,mo,lat),t=FC_SPX[r[0]];if(!l||!t)return;if(wt!=null&&(wt<t[0]||wt>t[1]))return;sum+=l===3?3:l===2?2:0.5;});
+  b.sharks=Math.round(25*Math.min(1,sum/10));
   var d=dp?dp.d10:'';b.deep=dp&&dp.c==='i'?12:!d?7:d.charAt(0)==='+'||+d>800?2:+d<=150?15:Math.round(15-10*Math.min(1,(+d-150)/450));
-  b.front=w&&w.front?5:0;
-  b.tide=tide&&tide.high?5:0;
-  var tot=b.wind+b.waves+b.temp+b.sharks+(b.bait||0)+b.deep+b.front+b.tide;
-  if(w&&w.avg>=NOFLY_MPH){b.nofly=1;tot=Math.min(tot,NOFLY_CAP);}
-  return {b:b,tot:tot,list:list,maybe:maybe,rel:rel,bait:blist.map(x=>[x.n,x.l])};}
-function loadSharedFrom(j){
-  var C={high:'h',medium:'m',low:'l',inlet:'i'},f=v=>v==null?'':String(v).replace(/^>\s*/,'+');
-  SPOTS=j.beaches.map(b=>[b.name+', '+b.state,b.lat,b.lon]);
-  DEEP=j.beaches.map(b=>{var d=b.depth||{};return {d10:f(d.to10ftYd),c:C[d.confidence]||'m'};});
-  SPM=Object.assign({},j.speciesByMonth||{},j.speciesByRegion||{});
-  REG=j.beaches.map(b=>b.speciesRegion&&SPM[b.speciesRegion]?b.speciesRegion:b.state);
-  LBAN=j.beaches.map(b=>b.localBan||'');
-  CLB=j.beaches.map(b=>({faces:b.faces,clarityBase:b.clarityBase||0}));
-  PARK={};PRIV={};j.beaches.forEach(b=>{var k=b.name+', '+b.state;if(b.noDrones)PARK[k]=b.noDrones;if(b.privateLaunch)PRIV[k]=1;});
-  if(j.protected)PROT_ST=j.protected;
-  BAIT=j.baitByRegion||{};BAITN={};(j.baitSpecies||[]).forEach(b=>{BAITN[b.code]=b.short||b.name;});
-  BAN={};(j.states||[]).forEach(s=>{if(s.drone&&s.drone.status==='ban')BAN[s.ab]=1;});}
-/* ------------------------------------------------------------------------------ */
-
-async function get(u, as = 'json', tries = 4, timeoutMs = 120000) {
-  let why = '';
-  for (let k = 0; k < tries; k++) {
-    try {
-      const r = await fetch(u, { headers: UA, signal: AbortSignal.timeout(timeoutMs) });
-      if (r.status === 404) return null;
-      if (r.status === 429) {
-        const t = await r.text();
-        if (/daily/i.test(t)) throw Object.assign(new Error('Open-Meteo daily limit reached'), { daily: true });
-        why = 'HTTP 429'; await sleep(65000); continue;
-      }
-      if (r.ok) return as === 'json' ? await r.json() : as === 'buf' ? Buffer.from(await r.arrayBuffer()) : await r.text();
-      why = 'HTTP ' + r.status + ' ' + (await r.text().catch(() => '')).replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim().slice(0, 160);
-    } catch (e) { if (e.daily) throw e; why = e.message; }
-    await sleep(3000 * (k + 1));
-  }
-  throw new Error(why || 'failed');
+  b.front=w&&w.front?5:0;return {tot:b.wind+b.waves+b.temp+b.sharks+b.deep+b.front,b:b};}
+function fcNearBeach(lat,lon){var b=null,bd=1e9;FC_BEACH.forEach(function(x){var d=km(lat,lon,x.lat,x.lon);if(d<bd){bd=d;b=x;}});return bd<=15?b:null;}
+function fcDeep(b){if(!b||!b.depth)return null;var d=b.depth,C={high:'h',medium:'m',low:'l',inlet:'i'};return {d10:d.to10ftYd==null?'':String(d.to10ftYd).replace(/^>\s*/,'+'),c:C[d.confidence]||'m'};}
+function fcBB(){if(!FC_BBP)FC_BBP=fetch('https://raw.githubusercontent.com/SharkLeashDevelopment/sharkleash-best-beaches/main/data/best-beaches.json?t='+Math.floor(Date.now()/3e5)).then(function(r){return r.ok?r.json():null;}).catch(function(){return null;});return FC_BBP;}
+function fcMax(p){var m=String(p.windSpeed).match(/\d+/g)||[0];return Math.max.apply(null,m.map(Number));}
+function fcDays(P){var now=Date.now(),out=[],seen={};
+  for(var i=0;i<P.length&&out.length<7;i++){var t=new Date(P[i].startTime);if(t.getTime()<now-36e5||+String(P[i].startTime).slice(11,13)<16)continue;var key=t.toDateString();if(seen[key])continue;seen[key]=1;
+    var W=P.slice(i,i+6);if(W.length<3)break;var sp=W.map(fcMax),avg=sp.reduce(function(a,b){return a+b;},0)/sp.length;
+    var A=P.slice(i,i+36),t0=A[0].temperature,n=0;A.forEach(function(p){var d=FC_DIRS.indexOf(p.windDirection);if((d>=13||d<=2)&&t0-p.temperature>=8)n++;});
+    var before=P.slice(i,i+4).every(function(p){var d=FC_DIRS.indexOf(p.windDirection);return d>=5&&d<=11;});
+    out.push({start:t,avg:Math.round(avg),dir:W[0].windDirection,front:n>=2&&before});}
+  return out;}
+function fcWhy(b,v,wv,wt){if(!b)return '';var r=[['wind',b.wind/25],['waves',wv==null?1:b.waves/15],['temp',wt==null?1:b.temp/20],['sharks',b.sharks/25],['deep',b.deep/15]].sort(function(x,y){return x[1]-y[1];})[0];if(r[1]>=0.6)return '';
+  return r[0]==='wind'?(v!=null&&v<5?'🍃 very light wind':'💨 windy'):r[0]==='waves'?(wv!=null&&wv<1?'🏖️ flat surf':'🌊 rough surf'):r[0]==='temp'?(wt!=null&&wt>82?'🔥 hot water':'🥶 cold water'):r[0]==='sharks'?'🦈 few sharks':'📏 deep water far';}
+function fcCol(v){return v>=80?'#7ee787':v>=60?'#ffb020':'#ff6a6a';}
+/* Local shark-fishing bans (localBan in shark-data.json). A beach picked from the list matches exactly; a GPS or map spot uses the nearest listed beach within 8 km. */
+var BAN_NOW=null;function banNear(lat,lon,label){var b=null;if(label)FC_BEACH.forEach(function(x){if(x.name+', '+x.state===label)b=x;});
+  if(!b){var bd=1e9,nb=null;FC_BEACH.forEach(function(x){var d=km(lat,lon,x.lat,x.lon);if(d<bd){bd=d;nb=x;}});if(nb&&bd<=8)b=nb;else return null;}
+  return b&&b.localBan?{name:b.name,rule:b.localBan,exact:!!label}:null;}
+function bbRank(bb,bm){if(!bb||!bm)return null;if(bm.flag||bm.redtide)return {out:bm.flag?bm.flag.replace(/\s*\(.*\)\s*$/,''):'red tide reported '+bm.redtide.mi+' mi away'};var rv=function(x){return x.raw!=null?x.raw:x.score;};
+  var ok=(bb.beaches||[]).filter(function(x){return !x.flag&&!x.redtide&&rv(x)!=null;}).sort(function(a,b){return rv(b)-rv(a);}),i=ok.indexOf(bm);return i<0?null:{n:i+1,of:ok.length};}
+function bbMatch(lat,lon,label,bb){var near=null;if(label)FC_BEACH.forEach(function(x){if(x.name+', '+x.state===label)near=x;});if(!near)near=fcNearBeach(lat,lon);
+  var m=null;if(bb&&near){var nm=near.name+', '+near.state;(bb.beaches||[]).forEach(function(x){if(x.name===nm)m=x;});}return {near:near,match:m};}
+/* ===== Water clarity: outlook from the scoring job; angler reports override it (see REPORT_URL) ===== */
+var SL_APP=!!window.SL_APP;/* set site-wide in the head code */
+var REPORT_URL='https://script.google.com/macros/s/AKfycbzO-9-krA8DIvmFRk1N-uIw6rYV1O75beHxxIi9IRthrOnoGBBSci6MONJU9apbPecACA/exec';/* paste the Apps Script /exec URL here to turn on the report buttons */
+var CL={clean:['Clean','#7ee787'],stained:['Stained','#ffb020'],dirty:['Dirty','#ff6a6a']},CL_REP=null;
+function clStore(k,v){try{if(v===undefined)return localStorage.getItem(k);localStorage.setItem(k,v);}catch(e){return null;}}
+function clDevice(){var d=clStore('sl_device');if(!d){d=Math.random().toString(36).slice(2)+Date.now().toString(36);clStore('sl_device',d);}return d;}
+(function(){var m=location.search.match(/[?&]tester=([^&]+)/);if(m)clStore('sl_tester',decodeURIComponent(m[1]));})();
+function clReports(){if(!REPORT_URL)return Promise.resolve(null);if(!CL_REP)CL_REP=getJSON(REPORT_URL+'?type=clarity').catch(function(){return null;});return CL_REP;}
+function clAgo(t){var m=Math.round((Date.now()-t)/6e4);return m<60?m+' min ago':Math.round(m/60)+' hr ago';}
+function clDecide(o,r){if(!r||!r.counts)return null;var top=null,n=0;for(var k in r.counts)if(r.counts[k]>n){top=k;n=r.counts[k];}if(r.trusted){top=r.trusted;n=Math.max(n,1);}if(!CL[top])return null;
+  if(o&&top===o.rating)return {rating:top,line:'Confirmed by '+n+(n>1?' anglers':' angler')+' · '+clAgo(r.latest),strong:true};
+  if(r.trusted||n>=2)return {rating:top,line:'Reported by '+(r.trusted?'a SharkLeash tester':n+' anglers')+' · '+clAgo(r.latest)+(o?' · outlook said '+CL[o.rating][0]:''),strong:true};
+  return {rating:o?o.rating:top,line:'1 angler says '+CL[top][0]+' ('+clAgo(r.latest)+')',strong:false};}
+function clTile(beachKey,o){if(!o&&!REPORT_URL)return '';
+  var h='<div class="tile" id="slmc-cl"><div class="lab">Water clarity <span style="opacity:.6">· outlook</span></div>';
+  h+=o?'<div class="big" style="color:'+CL[o.rating][1]+'">'+CL[o.rating][0]+'</div><div class="small">~'+o.vis[0]+'–'+o.vis[1]+' ft visibility · '+esc(o.why)+'</div>':'<div class="big">--</div><div class="small">No outlook for this spot yet</div>';
+  h+='<div class="small clr" style="color:#6ee7ff"></div>';
+  if(REPORT_URL&&beachKey)h+='<div class="clq">How’s the water right now?</div><div class="clb"><button type="button" data-v="clean">Clean</button><button type="button" data-v="stained">Stained</button><button type="button" data-v="dirty">Dirty</button></div><div class="clt"></div><div class="small" style="margin-top:6px;opacity:.65">&#128274; Shared under the beach name only. Never your exact spot or your name.</div>';
+  return h+'</div>';}
+function clWire(beachKey,o){var el=out&&out.querySelector('#slmc-cl');if(!el||!beachKey)return;
+  clReports().then(function(j){var r=j&&j.beaches?j.beaches[beachKey]:null,d=clDecide(o,r);if(!d||!el.isConnected)return;
+    if(d.strong){var b=el.querySelector('.big');b.textContent=CL[d.rating][0];b.style.color=CL[d.rating][1];el.querySelector('.lab span').textContent=' · angler reports';if(o&&d.rating!==o.rating){var sm=el.querySelector('.small');if(sm)sm.style.display='none';}}
+    el.querySelector('.clr').textContent=d.line;});
+  el.querySelectorAll('.clb button').forEach(function(btn){btn.addEventListener('click',function(){
+    el.querySelectorAll('.clb button').forEach(function(x){x.disabled=true;});var msg=el.querySelector('.clt');
+    var p={type:'clarity',beach:beachKey,value:btn.getAttribute('data-v'),device:clDevice(),tester:clStore('sl_tester')||'',predicted:o?o.rating:'',predictedVisFt:o?(o.vis[0]+o.vis[1])/2:'',app:SL_APP,extra:{app:SL_APP}};
+    fetch(REPORT_URL,{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify(p)}).then(function(r){return r.json();})
+      .then(function(j){msg.textContent=j.ok?'Thanks! Anglers checking '+beachKey.replace(/,\s*[A-Z]{2}$/,'')+' will see your report for the next 8 hours.':(j.error==='already reported'?(SL_APP?'You already reported this beach in the last hour.':'You already reported this beach recently.'):'Couldn’t log that. Try again later.');CL_REP=null;})
+      .catch(function(){msg.textContent='Couldn’t log that. Try again later.';});
+    if(window.gtag)gtag('event','clarity_report',{beach:beachKey,reported:p.value,predicted:p.predicted||'none'});});});}
+function fcStrip(lat,lon,w,wv,wt,t,label){
+  var g=out&&out.querySelector('.grid');if(!g||!w||!w.P)return;
+  if(BAN_NOW){var bx=document.createElement('div');bx.className='fc';bx.innerHTML='<p class="fcn">🚫 No SharkLeash Drop Score here: shark fishing is banned at '+esc(BAN_NOW.name)+'. It\u2019s also left out of Top 5 Drop Spots.</p>';g.parentNode.insertBefore(bx,g.nextSibling);return;}
+  /* too far from any listed beach (inland or offshore tap): no Drop Score, point them to the nearest beach instead */
+  if(!label){var nb=null,nd=1e9;FC_BEACH.forEach(function(x){var d=km(lat,lon,x.lat,x.lon);if(d<nd){nd=d;nb=x;}});
+    if(nb&&nd>25){var ix=document.createElement('div');ix.className='fc';ix.innerHTML='<p class="fcn">🦈 No SharkLeash Drop Score here: you\u2019re about '+Math.round(nd*0.621)+' miles from the nearest beach we score ('+esc(nb.name+', '+nb.state)+'). Pick a beach above to see its score.</p>';g.parentNode.insertBefore(ix,g.nextSibling);return;}}
+  var box=document.createElement('div');box.className='fc';box.innerHTML='<p class="msg"><i class="sp"></i>Loading the 7-evening outlook…</p>';g.parentNode.insertBefore(box,g.nextSibling);
+  fcBB().then(function(bb){if(!box.isConnected)return;
+    var days=fcDays(w.P);if(!days.length){box.remove();return;}
+    var st=w.state||'',BM=bbMatch(lat,lon,label,bb),near=BM.near;FC_ROWS=near&&near.speciesRegion?(FC_REG[near.speciesRegion]||null):null;var dp=fcDeep(near),wtf=wt&&wt.f!=null?+wt.f:null,match=null,wtJob=false;
+    match=BM.match;if(match&&match.wt!=null){wtf=+match.wt;wtJob=true;}
+    var today=new Date().toDateString(),tiles=days.map(function(d,i){
+      var mid=d.start.getTime()+3*36e5,wf=wv&&wv.vals?waveAt(wv.vals,mid):null;wf=wf!=null&&wf>0?wf*wv.k:null;var wfb=false;if(wf==null&&i===0&&match&&match.wv!=null&&match.w&&new Date(match.w.start).toDateString()===d.start.toDateString()){wf=match.wv;wfb=true;}
+      var S=fcScore(st,lat,d,wf,wtf,dp,d.start.getMonth()),sc=S.tot,why=fcWhy(S.b,d.avg,wf,wtf),useBB=false;
+      if(i===0&&match&&match.w&&new Date(match.w.start).toDateString()===d.start.toDateString()){sc=match.score;useBB=true;why=fcWhy(match.parts,match.w&&match.w.avg,match.wv,match.wt);}
+      var tc=null;(t&&t.all||[]).some(function(e){if(e.date.getTime()>=d.start.getTime()&&e.date.getTime()<=d.start.getTime()+6*36e5){tc=e;return true;}return false;});
+      var lbl=d.start.toDateString()===today?'Tonight':i===0||(i===1&&days[0].start.toDateString()===today)?'Tomorrow':d.start.toLocaleDateString(undefined,{weekday:'short'});
+      return '<div class="fcd'+(i>=3?' early':'')+'"><div class="fdn">'+lbl+'</div><div class="fdd">'+d.start.toLocaleDateString(undefined,{month:'short',day:'numeric'})+'</div>'
+        +'<div class="fsc" style="color:'+fcCol(sc)+'">'+sc+'</div><div class="fsl">drop score</div>'
+        +'<div class="fx">'+(d.avg<2||!d.dir?'Calm':esc(d.dir)+' '+d.avg+' mph')+'</div>'
+        +'<div class="fx">'+(wf!=null?ftTxt(wf)+' ft '+(wfb?'(offshore)':'surf'):'surf n/a')+'</div>'
+        +(tc?'<div class="fx">'+(tc.type==='H'?'⬆️ High ':'⬇️ Low ')+tc.t.replace(':00','').replace(' PM','p').replace(' AM','a')+'</div>':'')
+        +(why?'<div class="fwy">'+why+'</div>':'')+(d.front?'<div class="ffr">⚡ front</div>':'')+(useBB?'<div class="fce" style="color:#6ee7ff">live</div>':i>=3?'<div class="fce">early look</div>':'<div class="fce">forecast</div>')+'</div>';});
+    box.innerHTML='<div class="fch"><b>🎯 SharkLeash Drop Score · next 7 evenings, 4–10 PM</b></div><p class="fcx">The SharkLeash Drop Score rates each evening for a drone drop, out of 100 (a front coming can push it higher). <b>100</b> = light wind, fishable surf, warm water, sharks running and deep water close. Tonight is live from the latest Top 5 run; the other evenings are forecasts.</p><div class="fcr">'+tiles.join('')+'</div>'
+      +'<p class="fcn">Wind: NWS hourly forecast. Surf: NWS wave model (Tonight falls back to the nearest buoy or NOAA wave model). Water temp: '+(wtJob?'today’s offshore buoy/satellite reading (same as Top 5)':'today’s reading')+'. Days 4–7 are an early look; forecasts get shakier past 3 days.'+(near?' Deep water from '+esc(near.name)+'.':'')+'</p>';
+    FC_ROWS=null;if(window.gtag)gtag('event','forecast_strip_view');
+  });}
+function run(lat,lon,label,fromMap){
+var LD=[['w','Weather & wind'],['t','Tides'],['v','Waves'],['tp','Water temp'],['r','Rip current risk'],['bb','SharkLeash Drop Score & water clarity']];
+out.innerHTML='<div class="ld"><b><i class="sp"></i>Pulling live data'+(label?' for '+esc(label.replace(/,\s*[A-Z]{2}$/,'')):'')+'…</b><ul>'+LD.map(function(x){return '<li data-k="'+x[0]+'">○ '+x[1]+'</li>';}).join('')+'</ul><div class="small sl" style="margin-top:6px;color:#ffb020"></div></div>';
+function tk(k,ok){var li=out.querySelector('.ld li[data-k="'+k+'"]');if(li){li.className=ok?'ok':'';li.textContent=(ok?'✓ ':'– ')+li.textContent.slice(2);}}
+var slowT=setTimeout(function(){var e=out.querySelector('.ld .sl');if(e)e.textContent='NOAA is slow right now. Hang tight…';},8000);
+var n=nearest(lat,lon),st=n[0],mi=(n[1]*0.621).toFixed(0);
+var wp=wind(lat,lon);
+var P=[wp,tides(st),wp.then(function(w){return waves(lat,lon,w.grid);}),Promise.all([waterTemp(lat,lon),buoyTemp(lat,lon).catch(function(){return null;}),satTemp(lat,lon)]).then(function(a){var x=a[0],y=a[1],z=a[2],s=x&&y?((y.mi<x.mi&&!y.old)?y:x):x||y;if(z&&(!s||s.mi>20||Math.abs(s.f-z.f)>6)){if(s&&Math.abs(s.f-z.f)>6)s.odd=1;z.ref=s;return z;}return s;}),wp.then(function(w){return rip(lat,lon,w);}),fcBB()],KK=['w','t','v','tp','r','bb'];P.forEach(function(p,i){if(KK[i])p.then(function(v){tk(KK[i],v!=null);},function(){tk(KK[i],false);});});
+Promise.allSettled(P).then(function(r){clearTimeout(slowT);
+var w=r[0].status==='fulfilled'?r[0].value:null,t=r[1].status==='fulfilled'?r[1].value:null,wv=r[2].status==='fulfilled'?r[2].value:null,wt=r[3].status==='fulfilled'?r[3].value:null,rc=r[4].status==='fulfilled'?r[4].value:null,bb=r[5].status==='fulfilled'?r[5].value:null;
+var BM=bbMatch(lat,lon,label,bb),bm=BM.match,bkey=BM.near?BM.near.name+', '+BM.near.state:null,bwv=!wv&&bm&&bm.wv!=null?bm.wv:null;
+/* show the scoring job's ocean reading for this beach (seaward buoy or nearshore satellite) instead of a sensor that is far away (over 15 mi, often up a bay) or more than 6F off it (harbor or bay water) */
+if(bm&&bm.wt!=null&&(!wt||!wt.sat&&(wt.mi>15||Math.abs(wt.f-bm.wt)>6))){var src=bm.tsrc||'';wt={f:+bm.wt,name:/^buoy/.test(src)?'Offshore buoy '+src.replace(/^buoy\s*/,''):'Nearshore satellite',job:1,ref:wt?{name:wt.name,f:wt.f,mi:wt.mi}:null};}
+var where=label||(w&&w.town?'Near '+w.town:'Your location');
+var h='<p class="where">'+esc(where)+'</p>';
+BAN_NOW=banNear(lat,lon,label);if(BAN_NOW){h+='<div class="ban">🚫 Shark fishing is banned '+(BAN_NOW.exact?'here':'near you ('+esc(BAN_NOW.name)+')')+'<small>'+esc(BAN_NOW.rule)+'. '+(BAN_NOW.exact?'':'Check exactly where the boundary is before you set up. ')+'Regular surf fishing rules may still apply.</small></div>';if(window.gtag)gtag('event','local_ban_view',{beach:BAN_NOW.name});}
+/* tonight's place on the Drop Score list: same order as the Top 5 (raw score, beaches with a fishing ban or red tide left out) */
+var RK=bbRank(bb,bm);if(RK&&RK.out)h+='<div class="rank" style="color:rgba(255,255,255,.7)">Not on tonight’s Drop Score list · '+esc(RK.out)+'</div>';else if(RK)h+='<a class="rank" href="#slbb">🏆 <b>#'+RK.n+'</b> of '+RK.of+' beaches tonight'+(label?'':' ('+esc(bm.name.replace(/,\s*[A-Z]{2}$/,''))+')')+'<small>See the list →</small></a>';
+if(ALERTS.length){var sv=ALERTS.some(function(x){return x.sev;});h+='<div class="nws'+(sv?' sev':'')+'">⚠️ NWS: '+ALERTS.slice(0,4).map(function(x){return esc(x.ev);}).join(' · ')+'<small>Active now for this beach’s area. <a href="https://forecast.weather.gov/MapClick.php?lat='+(+lat).toFixed(4)+'&lon='+(+lon).toFixed(4)+'" target="_blank" rel="noopener">Details at weather.gov ↗</a></small></div>';if(window.gtag)gtag('event','nws_alert_view',{beach:bkey||'unlisted',alerts:ALERTS.map(function(x){return x.ev;}).join(', ').slice(0,100)});}
+h+='<div class="grid">';
+h+='<div class="tile"><div class="lab">Weather <span style="opacity:.6">· NWS forecast</span></div>'+(w&&w.temp!==undefined&&w.temp!==null?'<div class="big"><span aria-hidden="true">'+wxIcon(w.sky,w.day)+'</span>'+esc(w.temp)+'<span style="font-size:16px">°'+esc(w.unit)+'</span></div><div class="small">'+esc(w.sky)+(w.pop!==null?' · '+w.pop+'% rain':'')+'</div>':'<div class="big">--</div><div class="small err">Weather unavailable</div>')+'</div>';
+h+='<div class="tile"><div class="lab">Wind <span style="opacity:.6">· NWS forecast</span></div>'+(w?'<div class="big">'+arrowSVG(w.dir)+esc(w.dir)+' '+esc(w.spd.replace(' mph',''))+'<span style="font-size:16px">mph</span></div><div class="small">'+(w.next?'In 3 hrs: '+esc(w.next.dir)+' '+esc(w.next.spd):'')+'</div>':'<div class="big">--</div><div class="small err">Wind unavailable</div>')+'</div>';
+h+='<div class="tile"><div class="lab">Waves <span style="opacity:.6">· '+(wv||bwv==null?'NWS forecast':(bm.wsrc==='model'?'NOAA wave model':'nearest buoy'))+'</span></div>'+(!wv&&bwv!=null?'<div class="big">'+ftTxt(bwv)+'<span style="font-size:16px">ft</span></div><div class="small">'+(bm.wp?Math.round(bm.wp)+'s period · ':'')+'measured offshore, updated every 2 hrs</div>':wv?'<div class="big">'+ftTxt(wv.now)+'<span style="font-size:16px">ft</span></div><div class="small">'+(wv.in3!==null?'In 3 hrs: '+ftTxt(wv.in3)+' ft':'')+(wv.off?' · just offshore':'')+'</div>':'<div class="big">--</div><div class="small">No wave forecast for this spot</div>')+'</div>';
+h+=clTile(bkey,bm&&bm.clarity);
+h+='<div class="tile"><div class="lab">Water temp'+(wt?' <span style="color:'+(wt.job?'#2ecc71">· ocean reading':wt.sat?'#ffb020">· satellite, daily':wt.old?'#ffb020">· sensor, older':'#2ecc71">· live sensor')+'</span>':'')+'</div>'+(wt?'<div class="big">'+Math.round(wt.f)+'<span style="font-size:16px">°F</span></div><div class="small">'+esc(wt.name)+' · '+(wt.job?'updated every 2 hrs'+(wt.ref?' · skipped '+esc(wt.ref.name)+' '+Math.round(wt.ref.f)+'°F, '+wt.ref.mi+' mi ('+(wt.ref.mi>15?'too far away':'likely a harbor or bay sensor')+')':''):wt.sat?wt.at+(wt.ref?' · nearest sensor '+esc(wt.ref.name)+' '+Math.round(wt.ref.f)+'°F, '+wt.ref.mi+' mi'+(wt.ref.odd?' (skipped: far off the satellite, likely a harbor or bay sensor)':''):''):wt.mi+' mi · '+(wt.old?'as of ':'')+wt.at)+'</div>':'<div class="big">--</div><div class="small">No water temp reading nearby</div>')+'</div>';
+['hi','lo'].forEach(function(k){var p=t&&t[k];h+='<div class="tile"><div class="lab">Next '+(k==='hi'?'high':'low')+' tide <span style="opacity:.6">· predicted</span></div>'+(p?'<div class="big">'+p.t+'</div><div class="small">'+p.day+' · '+p.v+' ft</div>':'<div class="big">--</div><div class="small err">Tide unavailable</div>')+'</div>';});
+var mo=moon(new Date()),spring=Math.min(mo.age,Math.abs(mo.age-mo.syn/2),mo.syn-mo.age)<2.5;
+var RC={Low:['#2ecc71','🟢'],Moderate:['#ffb020','🟡'],High:['#ff4444','🔴']},rk=rc&&rc.risk&&RC[rc.risk]?rc.risk:null;
+h+='<div class="tile"><div class="lab">Rip current risk</div>'+(rk?'<div class="big" style="color:'+RC[rk][0]+'">'+RC[rk][1]+' '+rk+'</div><div class="small">'+esc(rc.src)+(rc.old?' · may be out of date':'')+'</div>':'<div class="big">--</div><div class="small">'+(rc&&rc.src?esc(rc.src):'No NWS surf forecast for this spot right now (many offices only issue it in beach season)')+'</div>')+'</div>';
+var bw=bestWindow(t,lat,lon);
+h+='<div class="tile"><div class="lab">Best window</div>'+(bw?'<div class="big" style="font-size:clamp(22px,2.1vw,30px);white-space:normal;flex-wrap:wrap">'+hmr(bw.a,bw.b)+'</div><div class="small">'+(new Date(bw.a).toDateString()===new Date().toDateString()?'Today':'Tomorrow')+' · around '+(bw.p.type==='H'?'high':'low')+' tide '+bw.p.t+(bw.dark?' · after dark':bw.dusk?' · at dusk/dawn':'')+(spring?' · strong '+(mo.age<5||mo.age>24?'new':'full')+'-moon tides':'')+'</div>':'<div class="big">--</div><div class="small">Needs tide data</div>')+'</div>';
+var mo=moon(new Date());h+='<div class="tile"><div class="lab">Moon</div><div class="big">'+mo.icon+' '+mo.ill+'<span style="font-size:16px">%</span></div><div class="small">'+mo.name+' · '+mo.next+'</div></div>';
+h+='</div><p class="small" style="margin:8px 0 0">Tide station: '+esc(st[1])+' ('+mi+' mi away)</p>';
+h+='<a class="rig" href="/#buy-anchor" onclick="if(window.gtag)gtag(\'event\',\'rig_up_click\',{event_category:\'Conditions\'})"><span>Fishing here? Rig up right.</span><b>Get Gen 2 →</b></a>';
+out.innerHTML=h;
+try{clWire(bkey,bm&&bm.clarity);}catch(e){}
+try{fcStrip(lat,lon,w,wv,wt,t,label);}catch(e){}
+var nl=$('slmc-noaa');if(nl)nl.href='https://forecast.weather.gov/MapClick.php?lat='+(+lat).toFixed(4)+'&lon='+(+lon).toFixed(4);
+try{if(window.gtag)gtag('event','beach_view',{beach:bkey||'unlisted',beach_state:BM.near?BM.near.state:(w&&w.state)||'',pick_source:SRC});}catch(e){}
+try{window.SLMC_LAST={gps:!label&&!fromMap,fromMapSync:!!fromMap,where:where,town:w&&w.town,lat:lat,lon:lon,at:Date.now(),w:w,wv:wv,wt:wt,t:t,mo:mo,bw:bw,rc:rc,beach:bkey,ds:bm&&bm.score!=null?bm.score:null,cl:bm&&bm.clarity?bm.clarity.rating:null,state:BM.near?BM.near.state:(w&&w.state)||null};window.dispatchEvent(new Event('slmc:conditions'));}catch(e){}
+if(w&&w.state&&window.slmSelectState)window.slmSelectState(w.state);
+if(!label)syncPicker(lat,lon,w&&w.state);
+});
 }
-const ymd = d => d.toISOString().slice(0, 10);
-const DAYS = []; for (let d = new Date(START + 'T00:00:00Z'); ymd(d) <= END; d.setUTCDate(d.getUTCDate() + 1)) DAYS.push(ymd(d));
-const Y0 = +START.slice(0, 4), Y1 = +END.slice(0, 4);
-const slug = name => name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
-const dirOf = deg => deg == null ? null : DIRS[Math.round(deg / 22.5) % 16];
-/* the hour that starts 4 PM Eastern on a day, in UTC ms (handles daylight saving) */
-function fourPmEt(day) {
-  for (const off of [4, 5]) { const t = Date.parse(day + 'T' + String(16 + off).padStart(2, '0') + ':00:00Z');
-    if (+new Intl.DateTimeFormat('en-US', { hour: 'numeric', hour12: false, timeZone: 'America/New_York' }).format(t) % 24 === 16) return t; }
-  return Date.parse(day + 'T21:00:00Z');
+function setup(){
+if(!ROOT||!ROOT.parentNode)return;
+var all=document.querySelectorAll('[id="slmc"]');
+for(var i=0;i<all.length;i++){if(all[i]!==ROOT&&all[i].parentNode)all[i].parentNode.removeChild(all[i]);}
+var oldSel=ROOT.querySelector('#slmc-spot'),oldLoc=ROOT.querySelector('#slmc-loc'),oldSt=ROOT.querySelector('#slmc-st'),keep=oldSel?oldSel.value:'';
+stSel=oldSt.cloneNode(false);oldSt.parentNode.replaceChild(stSel,oldSt);
+sel=oldSel.cloneNode(false);oldSel.parentNode.replaceChild(sel,oldSel);
+var loc=oldLoc.cloneNode(false);loc.innerHTML=oldLoc.innerHTML;oldLoc.parentNode.replaceChild(loc,oldLoc);
+out=ROOT.querySelector('#slmc-out');
+stSel.innerHTML='<option value="">…or pick a state</option>';
+STATES.forEach(function(k){var o=document.createElement('option');o.value=k;o.textContent=STN[k]||k;stSel.appendChild(o);});
+fillSpots('');
+stSel.addEventListener('change',function(){fillSpots(stSel.value);if(stSel.value&&window.gtag)gtag('event','state_pick',{state:stSel.value});});
+loc.addEventListener('click',function(){
+if(!navigator.geolocation){out.innerHTML='<p class="msg err">Location isn\'t available here. Pick a spot instead.</p>';return;}
+out.innerHTML='<p class="msg"><i class="sp"></i>Finding you…</p>';
+navigator.geolocation.getCurrentPosition(function(p){sel.value='';SRC='gps';NOMEM=false;run(p.coords.latitude,p.coords.longitude);},function(e){var m=e&&e.code===1?'Location is blocked for this site. iPhone: Settings → Privacy &amp; Security → Location Services → Safari Websites → While Using. Then reload and tap again, or pick a spot.':(e&&e.code===3?'Location timed out. Step outside or try again, or pick a spot.':'Couldn\'t get your location. Try again or pick a spot.');out.innerHTML='<p class="msg err">'+m+'</p>';},{enableHighAccuracy:false,timeout:15000,maximumAge:300000});
+});
+sel.addEventListener('change',function(){if(sel.value==='')return;var s=SPOTS[+sel.value];SRC='list';NOMEM=false;memBeach(s[0]);run(s[1],s[2],s[0]);});
 }
-function lastIn(arr, t1, hours, pick) { // newest non-null value in (t1 - hours, t1]; arr sorted by time
-  let lo = 0, hi = arr.length - 1, b = -1; const t0 = t1 - hours * 36e5;
-  while (lo <= hi) { const m = (lo + hi) >> 1; if (arr[m][0] <= t1) { b = m; lo = m + 1; } else hi = m - 1; }
-  for (let k = b; k >= 0 && arr[k][0] >= t0; k--) { const v = pick(arr[k]); if (v != null) return v; }
-  return null;
-}
-
-/* ---- wind: Open-Meteo ERA5 archive, one call per 0.25 degree cell (ERA5's own grid) ---- */
-const cell = (lat, lon) => (Math.round(lat * 4) / 4) + ',' + (Math.round(lon * 4) / 4);
-const OM = {};
-async function windSeries(lat, lon) {
-  const k = cell(lat, lon); if (OM[k]) return OM[k];
-  const [a, o] = k.split(',');
-  const j = await get('https://archive-api.open-meteo.com/v1/archive?latitude=' + a + '&longitude=' + o + '&start_date=' + START + '&end_date=' +
-    ymd(new Date(Date.parse(END) + 2 * 864e5)) + '&hourly=temperature_2m,wind_speed_10m,wind_direction_10m&models=era5&wind_speed_unit=mph&temperature_unit=fahrenheit&timezone=GMT');
-  if (!j || !j.hourly) throw new Error('no wind archive for ' + k);
-  const H = j.hourly, idx = {}; H.time.forEach((t, i) => idx[Date.parse(t + ':00Z')] = i);
-  await sleep(1500);
-  return OM[k] = { H, idx };
-}
-function windDay(W, day) {
-  const t0 = fourPmEt(day), i0 = W.idx[t0]; if (i0 == null) return null;
-  const H = W.H, sp = [];
-  for (let k = 0; k < 6; k++) { const v = H.wind_speed_10m[i0 + k]; if (v == null) return null; sp.push(Math.round(v)); }
-  const tt = H.temperature_2m[i0]; let n = 0;
-  for (let k = 0; k < 36; k++) { const t = H.temperature_2m[i0 + k], d = DIRS.indexOf(dirOf(H.wind_direction_10m[i0 + k])); if (t == null) continue; if ((d >= 13 || d <= 2) && tt - t >= 8) n++; }
-  let before = true; for (let k = 0; k < 4; k++) { const d = DIRS.indexOf(dirOf(H.wind_direction_10m[i0 + k])); if (!(d >= 5 && d <= 11)) before = false; }
-  return { avg: Math.round(sp.reduce((a, b) => a + b, 0) / 6), dir: dirOf(H.wind_direction_10m[i0]), front: n >= 2 && before, start: new Date(t0).toISOString() };
-}
-
-/* ---- buoys: NDBC station list + yearly/monthly/realtime files, cached per station ---- */
-let STATIONS = [];
-async function loadStations() {
-  const x = await get('https://www.ndbc.noaa.gov/activestations.xml', 'text');
-  STATIONS = [...x.matchAll(/<station\s+id="([^"]+)"\s+lat="([-\d.]+)"\s+lon="([-\d.]+)"/g)]
-    .map(m => ({ id: m[1].toUpperCase(), lat: +m[2], lon: +m[3] })).filter(s => s.lat >= 24 && s.lat <= 45.5 && s.lon >= -98 && s.lon <= -66);
-  console.log('NDBC stations in range: ' + STATIONS.length);
-}
-const BUOY = {};
-function parseStd(txt, out) {
-  const L = txt.split('\n'); if (!L.length) return;
-  const h = L[0].replace('#', '').trim().split(/\s+/), I = n => h.indexOf(n);
-  const iY = I('YY') >= 0 ? I('YY') : I('YYYY'), iW = I('WVHT'), iT = I('WTMP'), iMin = I('mm');
-  L.forEach(l => { if (!l || l[0] === '#') return; const a = l.trim().split(/\s+/); if (a.length < 5) return;
-    let y = +a[iY]; if (y < 100) y += 1900;
-    const t = Date.UTC(y, +a[iY + 1] - 1, +a[iY + 2], +a[iY + 3], iMin >= 0 ? +a[iMin] : 0);
-    const n = (v, bad) => v == null || v === 'MM' || +v >= bad ? null : +v;
-    out.push([t, iW >= 0 ? n(a[iW], 99) : null, iT >= 0 ? n(a[iT], 999) : null]); });
-}
-async function buoySeries(id) {
-  if (BUOY[id]) return BUOY[id];
-  const rows = [], low = id.toLowerCase(), gz = async u => { const b = await get(u, 'buf', 2).catch(() => null); if (!b) return ''; try { return zlib.gunzipSync(b).toString(); } catch (e) { return b.toString(); } };
-  for (let y = Y0; y <= Y1; y++) parseStd(await gz('https://www.ndbc.noaa.gov/data/historical/stdmet/' + low + 'h' + y + '.txt.gz'), rows);
-  // the current year's months that are not in a yearly file yet
-  const MON = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'], CODE = '123456789abc';
-  const have = new Set(rows.map(r => new Date(r[0]).toISOString().slice(0, 7)));
-  for (let m = 0; m < 12; m++) { const ym = Y1 + '-' + String(m + 1).padStart(2, '0'); if (ym > END.slice(0, 7) || have.has(ym)) continue;
-    parseStd(await gz('https://www.ndbc.noaa.gov/data/stdmet/' + MON[m] + '/' + low + CODE[m] + Y1 + '.txt.gz'), rows); }
-  parseStd((await get('https://www.ndbc.noaa.gov/data/realtime2/' + id + '.txt', 'text', 2).catch(() => '')) || '', rows);
-  const M = {}; rows.forEach(r => { M[r[0]] = r; });
-  return BUOY[id] = Object.values(M).sort((a, b) => a[0] - b[0]);
-}
-
-/* ---- MUR satellite water temp: whole-coast cache, one file per month (same grid as the live job) ---- */
-const SAT_DIR = 'sat', SAT_KEEP_KM = 40;
-let NEED = null;                       // grid cells within 40 km of any beach
-const cellKey = (la, lo) => la.toFixed(2) + ',' + lo.toFixed(2);
-function needCell(la, lo) {
-  const k = cellKey(la, lo); if (k in NEED) return NEED[k];
-  return NEED[k] = SPOTS.some(s => km(s[1], s[2], la, lo) <= SAT_KEEP_KM);
-}
-const MONTHS = (() => { const out = []; let y = +START.slice(0, 4), m = +START.slice(5, 7);
-  while (y * 100 + m <= +END.slice(0, 4) * 100 + +END.slice(5, 7)) { out.push(y + '-' + String(m).padStart(2, '0')); if (++m > 12) { m = 1; y++; } } return out; })();
-async function buildSatCache() {
-  fs.mkdirSync(SAT_DIR, { recursive: true }); NEED = {};
-  let built = 0;
-  for (const ym of MONTHS) {
-    const f = SAT_DIR + '/' + ym + '.json'; if (fs.existsSync(f)) continue;
-    if ((Date.now() - T0) / 60000 > TIME_CAP_MIN) { console.log('Time cap reached while building the satellite cache.'); return false; }
-    const y = +ym.slice(0, 4), m = +ym.slice(5, 7), last = new Date(Date.UTC(y, m, 0)).getUTCDate();
-    let a = ym + '-01', b = ym + '-' + String(last).padStart(2, '0'); if (a < START) a = START; if (b > END) b = END;
-    const t0 = Date.now(), cells = {}, days = {};
-    /* about 10 days per request (smaller answers), coastwatch first, then the upwell mirror */
-    const spans = []; for (let d = new Date(a + 'T00:00:00Z'); ymd(d) <= b; d.setUTCDate(d.getUTCDate() + 10)) {
-      const e = new Date(d); e.setUTCDate(e.getUTCDate() + 9); spans.push([ymd(d), ymd(e) > b ? b : ymd(e)]); }
-    let ok = true;
-    for (const [x, y] of spans) {
-      const q = 'analysed_sst[(' + x + 'T09:00:00Z):1:(' + y + 'T09:00:00Z)][(24.4):20:(45)][(-98):20:(-66.5)]';
-      let txt = null, why = [];
-      for (const host of ['https://coastwatch.pfeg.noaa.gov', 'https://upwell.pfeg.noaa.gov']) {
-        txt = await get(host + '/erddap/griddap/jplMURSST41F.csv?' + encodeURIComponent(q), 'text', 2, 300000).catch(e => { why.push(host.split('//')[1].split('.')[0] + ': ' + e.message); return null; });
-        if (txt) break;
-        if (txt === null && !why.length) why.push(host.split('//')[1].split('.')[0] + ': HTTP 404 (no data)');
-      }
-      if (!txt) { console.log('Satellite ' + x + ' to ' + y + ' failed: ' + why.join(' | ')); ok = false; break; }
-      txt.split('\n').slice(2).forEach(l => { const p = l.split(','); if (p.length < 4) return;
-        const v = parseFloat(p[3]); if (isNaN(v)) return; const la = +p[1], lo = +p[2]; if (!needCell(la, lo)) return;
-        const k = cellKey(la, lo), d = p[0].slice(0, 10); (days[d] = days[d] || {})[k] = Math.round(v * 10) / 10; cells[k] = 1; });
-    }
-    if (!ok) { console.log('Satellite ' + ym + ': not saved (will retry next run)'); if (built === 0 && MONTHS.indexOf(ym) < 2) { console.log('Satellite source is failing; stopping the cache for this run.'); return false; } continue; }
-    fs.writeFileSync(f, JSON.stringify({ days }));
-    built++; console.log('Satellite ' + ym + ': ' + Object.keys(days).length + ' days, ' + Object.keys(cells).length + ' cells (' + Math.round((Date.now() - t0) / 1000) + 's)');
-  }
-  console.log('Satellite cache: ' + built + ' months added, ' + MONTHS.filter(ym => fs.existsSync(SAT_DIR + '/' + ym + '.json')).length + ' of ' + MONTHS.length + ' ready');
-  return MONTHS.every(ym => fs.existsSync(SAT_DIR + '/' + ym + '.json'));
-}
-let SAT = null;
-function loadSat() { if (SAT) return SAT; SAT = {}; MONTHS.forEach(ym => { const f = SAT_DIR + '/' + ym + '.json'; if (fs.existsSync(f)) Object.assign(SAT, JSON.parse(fs.readFileSync(f, 'utf8')).days); }); return SAT; }
-/* per day: the nearest grid cell within 40 km that has a reading (live job: near(S, 40 km)) */
-function satSeries(lat, lon) {
-  const S = loadSat(), cand = {};
-  const out = {};
-  for (const d in S) { let best = null, bd = 1e9; for (const k in S[d]) {
-      let dist = cand[k]; if (dist === undefined) { const [la, lo] = k.split(',').map(Number); dist = cand[k] = km(lat, lon, la, lo); }
-      if (dist <= SAT_KEEP_KM && dist < bd) { bd = dist; best = S[d][k]; } }
-    if (best != null) out[d] = [best, bd]; }
-  return out;
-}
-
-/* ---- patch beaches done before v2: fill water temp from the cache, apply the live 6F buoy check, re-score changed rows ---- */
-function csvSplit(l) { const out = []; let cur = '', q = false; for (let i = 0; i < l.length; i++) { const c = l[i];
-    if (q) { if (c === '"' && l[i + 1] === '"') { cur += '"'; i++; } else if (c === '"') q = false; else cur += c; }
-    else if (c === '"') q = true; else if (c === ',') { out.push(cur); cur = ''; } else cur += c; }
-  out.push(cur); return out; }
-function patchBeach(i) {
-  const s = SPOTS[i], name = s[0], f = 'history/' + slug(name) + '.csv'; if (!fs.existsSync(f)) return null;
-  const sat = satSeries(s[1], s[2]), L = fs.readFileSync(f, 'utf8').split('\n'), H = csvSplit(L[0]), I = n => H.indexOf(n);
-  const pf = 'past/' + slug(name) + '.json', past = fs.existsSync(pf) ? JSON.parse(fs.readFileSync(pf, 'utf8')) : null;
-  let filled = 0, swapped = 0;
-  const rows = L.slice(1).filter(Boolean).map(l => { const r = csvSplit(l), day = r[I('date')], sx = sat[day] ? sat[day][0] : null;
-    const old = r[I('water_f')] === '' ? null : +r[I('water_f')]; let wt = old;
-    if (sx != null && old == null) { wt = sx; filled++; } else if (sx != null && Math.abs(old - sx) > 6) { wt = sx; swapped++; }
-    if (wt === old) return l;
-    const w = { avg: +r[I('wind_mph')], front: r[I('front')] === '1' }, wv = r[I('waves_ft')] === '' ? null : +r[I('waves_ft')];
-    const sc = score(s, w, wv, wt, DEEP[i], +day.slice(5, 7) - 1, REG[i], { high: r[I('tide_high')] || null }, null), b = sc.b;
-    r[I('score')] = sc.tot; r[I('raw')] = sc.tot; r[I('water_f')] = rd(wt, 0);
-    ['wind', 'waves', 'temp', 'sharks', 'bait', 'deep', 'front', 'tide'].forEach(k => { r[I('pts_' + k)] = b[k]; });
-    r[I('sharks_running')] = sc.list.join('; '); r[I('bait_running')] = sc.bait.map(x => x[0]).join('; ');
-    if (past && past.days[day]) { past.days[day][0] = sc.tot; past.days[day][4] = Math.round(wt); }
-    return r.map(q).join(','); });
-  fs.writeFileSync(f, [L[0]].concat(rows).join('\n') + '\n');
-  if (past) fs.writeFileSync(pf, JSON.stringify(past));
-  const miss = rows.filter(l => csvSplit(l)[I('water_f')] === '').length;
-  console.log('Patched ' + name + ': ' + filled + ' temps filled, ' + swapped + ' buoy temps replaced (6F off the satellite), ' + miss + ' days still without a temp');
-  return true;
-}
-
-/* ---- backup waves: Open-Meteo marine model, nearest sea cell ---- */
-const MAR = {};
-async function marineSeries(lat, lon) {
-  const k = cell(lat, lon); if (MAR[k] !== undefined) return MAR[k];
-  const [a, o] = k.split(',');
-  const j = await get('https://marine-api.open-meteo.com/v1/marine?latitude=' + a + '&longitude=' + o + '&start_date=' + START + '&end_date=' + END + '&hourly=wave_height&cell_selection=sea&timezone=GMT').catch(e => { if (e.daily) throw e; return null; });
-  await sleep(1500);
-  if (!j || !j.hourly) return MAR[k] = null;
-  const idx = {}; j.hourly.time.forEach((t, i) => idx[Date.parse(t + ':00Z')] = i);
-  return MAR[k] = { v: j.hourly.wave_height, idx };
-}
-
-/* ---- tides: hi/lo predictions per station per year ---- */
-let TST = []; const TIDE = {};
-async function tideSeries(stn) {
-  if (TIDE[stn.id]) return TIDE[stn.id];
-  const P = [];
-  for (let y = Y0; y <= Y1; y++) {
-    const j = await get('https://api.tidesandcurrents.noaa.gov/api/prod/datagetter?product=predictions&interval=hilo&datum=MLLW&time_zone=gmt&units=english&format=json&application=SharkLeash&station=' + stn.id + '&begin_date=' + y + '0101&end_date=' + y + '1231', 'json', 2).catch(() => null);
-    (j && j.predictions || []).forEach(p => P.push({ t: Date.parse(p.t.replace(' ', 'T') + 'Z'), type: p.type }));
-  }
-  return TIDE[stn.id] = P;
-}
-
-const HDR = 'date,beach,score,raw,wind_mph,wind_dir,front,waves_ft,water_f,clarity,tide_high,pts_wind,pts_waves,pts_temp,pts_sharks,pts_bait,pts_deep,pts_front,pts_tide,sharks_running,bait_running,flagged,run_utc';
-const q = v => { v = v == null ? '' : String(v); return /[",\n]/.test(v) ? '"' + v.replace(/"/g, '""') + '"' : v; }, rd = (v, n) => v == null || isNaN(v) ? '' : (+v).toFixed(n);
-
-async function doBeach(i) {
-  const s = SPOTS[i], [name, lat, lon] = s, fc = CLB[i] && CLB[i].faces, stt = st(s);
-  const W = await windSeries(lat, lon);
-  // candidate buoys, nearest first, that pass the live seaward rule
-  const cand = STATIONS.filter(p => seaward(lat, lon, fc, p)).map(p => Object.assign({ d: km(lat, lon, p.lat, p.lon) }, p)).filter(p => p.d <= 80).sort((a, b) => a.d - b.d);
-  const series = []; for (const p of cand) series.push({ p, rows: await buoySeries(p.id) });
-  const sat = satSeries(lat, lon);
-  const tst = (() => { let b = null, bd = 1e9; TST.forEach(t => { const d = km(lat, lon, t.lat, t.lon); if (d < bd) { bd = d; b = t; } }); return bd <= 30 ? b : null; })();
-  const tides = tst ? await tideSeries(tst) : null;
-  let mar = null, needMar = false;
-  const flag = LBAN[i] ? 'x' : BAN[stt] ? 'x' : PARK[name] && !PRIV[name] ? 'x' : '';
-  const rows = [], past = {}, src = { buoyWv: 0, modelWv: 0, buoyWt: 0, satWt: 0, noWt: 0, noWind: 0 };
-  for (const day of DAYS) {
-    const w = windDay(W, day); if (!w) { src.noWind++; continue; }
-    const t1 = Date.parse(day + 'T20:00:00Z'), MO = +day.slice(5, 7) - 1;
-    let wv = null, wt = null, bt = null;
-    for (const x of series) { const v = lastIn(x.rows, t1, 6, r => r[1]); if (v != null) { wv = v * 3.28084; break; } }
-    for (const x of series) { if (x.p.d > 40) break; const v = lastIn(x.rows, t1, 6, r => r[2]); if (v != null) { bt = v * 9 / 5 + 32; break; } }
-    const sx = sat[day] ? sat[day][0] : null;
-    if (bt != null && sx != null && Math.abs(bt - sx) > 6) bt = null;      // live rule: buoy disagrees with satellite by 6F+
-    wt = bt != null ? bt : sx;
-    if (wv != null) src.buoyWv++;
-    else { if (!needMar) { needMar = true; mar = await marineSeries(lat, lon); }
-      const k = mar && mar.idx[t1]; if (k != null && mar.v[k] != null) { wv = mar.v[k] * 3.28084; src.modelWv++; } }
-    if (bt != null) src.buoyWt++; else if (sx != null) src.satWt++; else src.noWt++;
-    const ts = Date.parse(w.start), hi = tides && tides.find(p => p.type === 'H' && p.t >= ts && p.t <= ts + 6 * 36e5);
-    const tide = tst ? { station: tst.name, high: hi ? new Date(hi.t).toISOString() : null } : null;
-    const sc = score(s, w, wv, wt, DEEP[i], MO, REG[i], tide, null), b = sc.b;
-    rows.push([day, name, sc.tot, sc.tot, w.avg, w.dir, w.front ? 1 : 0, rd(wv, 1), rd(wt, 0), '', tide && tide.high ? tide.high : '',
-      b.wind, b.waves, b.temp, b.sharks, b.bait, b.deep, b.front, b.tide, sc.list.join('; '), sc.bait.map(x => x[0]).join('; '), flag ? 1 : 0, 'backfill'].map(q).join(','));
-    past[day] = [sc.tot, w.avg, w.dir, wv == null ? null : Math.round(wv * 10) / 10, wt == null ? null : Math.round(wt), tide && tide.high ? 1 : 0];
-  }
-  fs.mkdirSync('history', { recursive: true }); fs.mkdirSync('past', { recursive: true });
-  fs.writeFileSync('history/' + slug(name) + '.csv', [HDR].concat(rows).join('\n') + '\n');
-  fs.writeFileSync('past/' + slug(name) + '.json', JSON.stringify({ beach: name, source: 'backfill', from: START, to: END,
-    fields: ['score', 'wind_mph', 'wind_dir', 'waves_ft', 'water_f', 'high_tide_in_window'], days: past }));
-  const avg = rows.length ? Math.round(Object.values(past).reduce((a, x) => a + x[0], 0) / rows.length) : 0;
-  console.log(name + ': ' + rows.length + ' days, avg ' + avg + ' | waves buoy ' + src.buoyWv + ' / model ' + src.modelWv + ' | temp buoy ' + src.buoyWt + ' / satellite ' + src.satWt + ' / none ' + src.noWt +
-    (cand.length ? ' | buoys ' + cand.slice(0, 3).map(p => p.id + ' ' + Math.round(p.d) + 'km').join(', ') : ' | no buoy in range') + (tst ? ' | tide ' + tst.id : ' | no tide station'));
-}
-
-(async function () {
-  const j = await get(DATA_URL); loadSharedFrom(j);
-  TST = ((await get(TIDE_URL)).stations || []).map(x => ({ id: x[0], name: x[1], lat: x[2], lon: x[3] }));
-  await loadStations();
-  const only = (process.env.ONLY || '').trim().toLowerCase();
-  // group beaches by weather cell so each archive call is used for all its beaches in the same run
-  const order = SPOTS.map((s, i) => i).filter(i => !only || SPOTS[i][0].toLowerCase().includes(only))
-    .sort((a, b) => cell(SPOTS[a][1], SPOTS[a][2]).localeCompare(cell(SPOTS[b][1], SPOTS[b][2])));
-  const satReady = await buildSatCache();
-  const patched = fs.existsSync(SAT_DIR + '/patched.json') ? JSON.parse(fs.readFileSync(SAT_DIR + '/patched.json', 'utf8')) : [];
-  if (satReady) {
-    SPOTS.forEach((s, i) => { if (patched.indexOf(s[0]) >= 0) return; if (patchBeach(i)) patched.push(s[0]); });
-    fs.writeFileSync(SAT_DIR + '/patched.json', JSON.stringify(patched));
-  } else console.log('Satellite cache not finished: scoring beaches without the satellite backup for now; they get patched once the cache is complete.');
-  let done = 0, skipped = 0, failed = [];
-  for (const i of order) {
-    const name = SPOTS[i][0];
-    if (!only && fs.existsSync('history/' + slug(name) + '.csv')) { skipped++; continue; }
-    if ((Date.now() - T0) / 60000 > TIME_CAP_MIN) { console.log('Time cap reached; the next run continues from here.'); break; }
-    try { await doBeach(i); done++; if (satReady) { patched.push(name); fs.writeFileSync(SAT_DIR + '/patched.json', JSON.stringify(patched)); } }
-    catch (e) {
-      if (e.daily) { console.log('Weather archive daily limit reached after ' + done + ' beaches; the next run continues from here.'); break; }
-      console.log(name + ': FAILED (' + e.message + ')'); failed.push(name);
-    }
-  }
-  const left = SPOTS.filter(s => !fs.existsSync('history/' + slug(s[0]) + '.csv')).length;
-  console.log('\nThis run: ' + done + ' beaches done, ' + skipped + ' already done, ' + failed.length + ' failed. Beaches still to do: ' + left + ' of ' + SPOTS.length + '.');
-  fs.writeFileSync('progress.json', JSON.stringify({ updated: new Date().toISOString(), done: SPOTS.length - left, total: SPOTS.length, satelliteMonths: MONTHS.filter(ym => fs.existsSync(SAT_DIR + '/' + ym + '.json')).length + ' of ' + MONTHS.length, patched: patched.length, failed }, null, 1));
-})().catch(e => { console.error('Backfill stopped: ' + e.message); process.exit(1); });
+/* ===== Where the beach list and tide stations live. Change only these lines if the repo moves. ===== */
+var DATA_URL="https://sharkleashdevelopment.github.io/sharkleash-data/shark-data.json";
+var STATIONS_URL="https://sharkleashdevelopment.github.io/sharkleash-data/tide-stations.json";
+var READY=false,PENDING=null;
+function afterLoad(){setup();var L=window.SLMC_LAST;if(L&&L.lat!=null){syncPicker(L.lat,L.lon,L.w&&L.w.state);return;}if(/Pulling|Finding/.test(out.textContent))return;
+  var bi=lastBeach();if(bi>-1){var s=SPOTS[bi],st=spotSt(s);stSel.value=st;fillSpots(st,String(bi));SRC='saved';NOMEM=false;run(s[1],s[2],s[0]);return;}
+  out.innerHTML='<p class="msg">Tap <b>Use my location</b> on the beach, or pick a state and beach.</p>';}
+window.slmcRun=function(a,b,lb,o){if(!READY){PENDING=[a,b,lb,o];return;}SRC=o&&o.src?o.src:'map';NOMEM=!!(o&&o.noMem);if(sel)sel.value='';if(lb){syncPicker(a,b,'');run(a,b,lb);}else run(a,b,null,1);};
+window.slmcStates=STATES;
+Promise.all([getJSON(DATA_URL,{cache:'no-cache'}),getJSON(STATIONS_URL),getJSON('https://api.tidesandcurrents.noaa.gov/mdapi/prod/webapi/stations.json?type=tidepredictions').catch(function(){return null;})]).then(function(r){
+  FC_REG=r[0].speciesByRegion||{};
+  /* Gulf tide stations come live from NOAA (Florida's Gulf side west to Texas) */
+  if(r[2]&&r[2].stations){r[2].stations.forEach(function(x){var la=+x.lat,lo=+x.lng;if(la<31.5&&la>25.3&&lo>-98&&(lo<-82.5||(lo<-81.65&&la<28.5)))r[1].stations.push([x.id,x.name,la,lo]);});}
+  r[0].beaches.forEach(function(b){SPOTS.push([b.name+', '+b.state,b.lat,b.lon]);});FC_SPM=r[0].speciesByMonth||{};FC_BEACH=r[0].beaches;
+  r[1].stations.forEach(function(s){ST.push(s);});
+  SPOTS.forEach(function(s){var k=spotSt(s);if(k&&STATES.indexOf(k)<0)STATES.push(k);});
+  READY=true;setup();
+  if(document.readyState==='complete')afterLoad();else window.addEventListener('load',afterLoad);
+  if(PENDING){var p=PENDING;PENDING=null;window.slmcRun(p[0],p[1],p[2],p[3]);}
+}).catch(function(){var o=document.getElementById('slmc-out');if(o)o.innerHTML='<p class="msg err">Couldn\'t load the beach list right now. Refresh the page to try again.</p>';});
+document.addEventListener('click',function(e){if(!e.target.closest||!e.target.closest('#slmc-map'))return;var m=$('slm-map');if(!m)return;m.scrollIntoView({behavior:'smooth',block:'center'});if(window.gtag)gtag('event','map_pick_click');});
+window.addEventListener('load',function(){if(!$('slm-map')){var mb=$('slmc-map');if(mb)mb.style.display='none';}});
+})();
