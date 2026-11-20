@@ -210,11 +210,11 @@ function pastCalc(p,now){if(!p||!p.days)return null;var D=p.days,md=('0'+(now.ge
   var y0=+p.from.slice(0,4),y1=+p.to.slice(0,4),nights=[];
   var tk=now.getFullYear()+'-'+md;for(var y=y1;y>=y0;y--){var r=D[y+'-'+md];if(r&&y+'-'+md!==tk)nights.push({y:y,sc:r[0],mph:r[1],dir:r[2],wv:r[3],wt:r[4],hi:r[5]});}
   var S=[],N=[];for(var i=0;i<52;i++){S.push(0);N.push(0);}
-  var W={};for(var k in D){var w=pastWk(k.slice(5)),v=D[k][0];(W[w]=W[w]||[]).push(k);if(v==null)continue;S[w]+=v;N[w]++;}
+  var W={},tideFrom=null;for(var k in D){if(D[k][5]&&(!tideFrom||k<tideFrom))tideFrom=k;var w=pastWk(k.slice(5)),v=D[k][0];(W[w]=W[w]||[]).push(k);if(v==null)continue;S[w]+=v;N[w]++;}
   var avg=S.map(function(s,i){return N[i]?Math.round(s/N[i]):null;}),cur=pastWk(md);
   var order=avg.map(function(v,i){return [i,v];}).filter(function(x){return x[1]!=null;}).sort(function(a,b){return b[1]-a[1];});
   var rank=0;order.forEach(function(x,i){if(x[0]===cur)rank=i+1;});
-  return {md:md,nights:nights,avg:avg,cur:cur,curAvg:avg[cur],rank:rank,of:order.length,best:order.slice(0,3),W:W,years:Math.round((Date.parse(p.to)-Date.parse(p.from))/(365.25*864e5))};}
+  return {md:md,nights:nights,avg:avg,cur:cur,curAvg:avg[cur],rank:rank,of:order.length,best:order.slice(0,3),W:W,tideFrom:tideFrom,years:Math.round((Date.parse(p.to)-Date.parse(p.from))/(365.25*864e5))};}
 (function(){if(document.getElementById('slmc-past-css'))return;var s=document.createElement('style');s.id='slmc-past-css';
   s.textContent='#slmc .ph .phr{display:flex;flex-direction:column;gap:6px;margin:0 0 10px}'
   +'#slmc .ph .phy{display:flex;align-items:center;gap:10px;background:var(--card);border:1px solid var(--line);border-radius:12px;flex-wrap:wrap;row-gap:2px;padding:8px 12px;font-size:13px;font-weight:700;color:rgba(255,255,255,.82)}'
@@ -274,10 +274,10 @@ function pastPanel(key,id){
     function dl(k){return PAST_MON[+k.slice(5,7)-1]+' '+(+k.slice(8,10));}
     function night(k){var r=p.days[k];return '<b>'+dl(k)+', '+k.slice(0,4)+'</b> · <span style="color:'+fcCol(r[0])+';font-weight:900">'+r[0]+'</span> · '+(r[1]==null?'wind n/a':(r[1]<2||!r[2]?'Calm':esc(r[2])+' '+r[1]+' mph'))+' · '+(r[3]!=null?ftTxt(r[3])+' ft surf':'surf n/a')+(r[4]!=null?' · '+r[4]+'°F water':'')+(r[5]?' · ⬆️ high tide in the window':'');}
     function showWk(w){if(w<0)w=51;if(w>51)w=0;sel=w;bars.querySelectorAll('i').forEach(function(b,i){b.classList.toggle('pick',i===w);});
-      var ks=(c.W[w]||[]).slice().sort(),Y={},n=0,sw=0,nw=0,sv=0,nv=0,stt=0,nt=0,hi=0;
-      ks.forEach(function(k){var r=p.days[k];(Y[k.slice(0,4)]=Y[k.slice(0,4)]||[]).push(k);n++;if(r[1]!=null){sw+=r[1];nw++;}if(r[3]!=null){sv+=r[3];nv++;}if(r[4]!=null){stt+=r[4];nt++;}if(r[5])hi++;});
+      var ks=(c.W[w]||[]).slice().sort(),Y={},n=0,sw=0,nw=0,sv=0,nv=0,stt=0,nt=0,hi=0,th=0;
+      ks.forEach(function(k){var r=p.days[k];(Y[k.slice(0,4)]=Y[k.slice(0,4)]||[]).push(k);n++;if(r[1]!=null){sw+=r[1];nw++;}if(r[3]!=null){sv+=r[3];nv++;}if(r[4]!=null){stt+=r[4];nt++;}if(c.tideFrom&&k>=c.tideFrom){th++;if(r[5])hi++;}});
       var q='<div class="pwh"><button type="button" data-d="-1" aria-label="Previous week">‹</button><span><b>'+pastWkLabel(w)+'</b>'+(c.avg[w]!=null?' · avg <b style="color:'+fcCol(c.avg[w])+'">'+c.avg[w]+'</b>':'')+'</span><button type="button" data-d="1" aria-label="Next week">›</button></div>';
-      if(n)q+='<p class="fcx" style="margin:4px 0 8px">Typical: '+(nw?Math.round(sw/nw)+' mph wind':'')+(nv?' · '+ftTxt(sv/nv)+' ft surf':'')+(nt?' · '+Math.round(stt/nt)+'°F water':'')+' · high tide in the window '+Math.round(100*hi/n)+'% of nights</p>';
+      if(n)q+='<p class="fcx" style="margin:4px 0 8px">Typical: '+(nw?Math.round(sw/nw)+' mph wind':'')+(nv?' · '+ftTxt(sv/nv)+' ft surf':'')+(nt?' · '+Math.round(stt/nt)+'°F water':'')+(th>=10?' · high tide in the window '+Math.round(100*hi/th)+'% of nights':'')+'</p>';
       q+=Object.keys(Y).sort().reverse().map(function(y){return '<div class="pwr"><b>'+y+'</b>'+Y[y].map(function(k){var v=p.days[k][0];return '<button type="button" data-k="'+k+'" style="color:'+fcCol(v)+'"><small>'+dl(k)+'</small>'+v+'</button>';}).join('')+'</div>';}).join('')||'<p class="fcn">No nights on record for this week.</p>';
       pw.innerHTML=q+'<div class="pwn">Tap a score for that night’s conditions.</div>';}
     bars.addEventListener('click',function(e){var r=bars.getBoundingClientRect();showWk(Math.max(0,Math.min(51,Math.floor((e.clientX-r.left)/r.width*52))));if(window.gtag)gtag('event','past_week_tap',{beach:key});});
