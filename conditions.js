@@ -435,6 +435,41 @@ Promise.all([getJSON(DATA_URL,{cache:'no-cache'}),getJSON(STATIONS_URL),getJSON(
   if(document.readyState==='complete')afterLoad();else window.addEventListener('load',afterLoad);
   if(PENDING){var p=PENDING;PENDING=null;window.slmcRun(p[0],p[1],p[2],p[3]);}
 }).catch(function(){var o=document.getElementById('slmc-out');if(o)o.innerHTML='<p class="msg err">Couldn\'t load the beach list right now. Refresh the page to try again.</p>';});
+/* ===== Version badge + What's new (changelog.json in sharkleash-data; edit that file to announce updates, no code change) ===== */
+var CHANGELOG_URL="https://sharkleashdevelopment.github.io/sharkleash-data/changelog.json";
+(function(){
+  if(!ROOT||ROOT.querySelector('.slv'))return;
+  var MO=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  var fd=function(d){var m=/^(\d{4})-(\d{2})-(\d{2})$/.exec(d||'');return m?MO[+m[2]-1]+' '+(+m[3]):esc(d||'');};
+  var st=document.createElement('style');
+  st.textContent='#slmc .slv{position:relative;display:inline-block;margin:0 0 12px 8px;vertical-align:top}'
+    +'#slmc .slv>button{min-height:0;padding:7px 12px;border-radius:999px;font-size:12px;font-weight:800;letter-spacing:.04em;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.22);color:rgba(255,255,255,.85);cursor:pointer;display:inline-flex;align-items:center;gap:6px}'
+    +'#slmc .slv>button:hover{border-color:#6ee7ff;color:#fff}'
+    +'#slmc .slv .dot{display:inline-block;background:#ff2b2b;color:#fff;border-radius:999px;padding:1px 6px;font-size:10px;font-weight:900;letter-spacing:.06em}'
+    +'#slmc .slvp{position:absolute;left:0;top:calc(100% + 6px);z-index:50;width:min(340px,86vw);max-height:60vh;overflow:auto;background:#061923;border:1px solid rgba(110,231,255,.45);border-radius:14px;padding:12px 14px;box-shadow:0 18px 44px rgba(0,0,0,.55);text-align:left}'
+    +'#slmc .slvp h5{margin:0 0 8px;font-size:12px;font-weight:900;letter-spacing:.12em;text-transform:uppercase;color:#6ee7ff}'
+    +'#slmc .slvp b{display:block;margin:10px 0 4px;font-size:12px;font-weight:900;color:#ff4444;text-transform:uppercase;letter-spacing:.08em}'
+    +'#slmc .slvp ul{margin:0;padding:0 0 0 16px}#slmc .slvp li{margin:0 0 4px;font-size:13px;font-weight:600;color:rgba(255,255,255,.85);line-height:1.35}';
+  document.head.appendChild(st);
+  getJSON(CHANGELOG_URL,{cache:'no-cache'}).then(function(c){
+    if(!c||!c.version)return;
+    var seen=null;try{seen=localStorage.getItem('slmc_seen_ver');}catch(e){}
+    var isNew=seen!==String(c.version);
+    var w=document.createElement('span');w.className='slv';
+    w.innerHTML='<button type="button" aria-expanded="false">v'+esc(c.version)+' · Updated '+fd(c.date)+(isNew?' <span class="dot">NEW</span>':'')+' · What’s new ›</button>';
+    var ups=(c.updates||[]).slice(0,5);
+    var p=document.createElement('div');p.className='slvp';p.style.display='none';
+    p.innerHTML='<h5>What’s new</h5>'+ups.map(function(u){return '<b>'+fd(u.date)+'</b><ul>'+(u.notes||[]).map(function(n){return '<li>'+esc(n)+'</li>';}).join('')+'</ul>';}).join('');
+    w.appendChild(p);
+    var eb=ROOT.querySelector('.eyebrow');if(eb&&eb.parentNode)eb.parentNode.insertBefore(w,eb.nextSibling);else ROOT.insertBefore(w,ROOT.firstChild);
+    var btn=w.querySelector('button');
+    btn.addEventListener('click',function(e){e.stopPropagation();var o=p.style.display==='none';p.style.display=o?'':'none';btn.setAttribute('aria-expanded',o);
+      if(o){try{localStorage.setItem('slmc_seen_ver',String(c.version));}catch(err){}var d=btn.querySelector('.dot');if(d)d.remove();if(window.gtag)gtag('event','whats_new_open',{version:String(c.version)});}});
+    document.addEventListener('click',function(e){if(p.style.display!=='none'&&!w.contains(e.target)){p.style.display='none';btn.setAttribute('aria-expanded','false');}});
+    /* the footer's old version tag follows the badge */
+    var ft=ROOT.querySelector('.foot span');if(ft&&/^v\d+$/.test(ft.textContent.trim()))ft.textContent='v'+c.version;
+  }).catch(function(){});
+})();
 document.addEventListener('click',function(e){if(!e.target.closest||!e.target.closest('#slmc-map'))return;var m=$('slm-map');if(!m)return;m.scrollIntoView({behavior:'smooth',block:'center'});if(window.gtag)gtag('event','map_pick_click');});
 window.addEventListener('load',function(){if(!$('slm-map')){var mb=$('slmc-map');if(mb)mb.style.display='none';}});
 })();
