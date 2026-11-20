@@ -237,6 +237,9 @@ function clWire(beachKey,o){var el=out&&out.querySelector('#slmc-cl');if(!el||!b
 function fcStrip(lat,lon,w,wv,wt,t,label){
   var g=out&&out.querySelector('.grid');if(!g||!w||!w.P)return;
   if(BAN_NOW){var bx=document.createElement('div');bx.className='fc';bx.innerHTML='<p class="fcn">🚫 No SharkLeash Drop Score here: shark fishing is banned at '+esc(BAN_NOW.name)+'. It\u2019s also left out of Top 5 Drop Spots.</p>';g.parentNode.insertBefore(bx,g.nextSibling);return;}
+  /* too far from any listed beach (inland or offshore tap): no Drop Score, point them to the nearest beach instead */
+  if(!label){var nb=null,nd=1e9;FC_BEACH.forEach(function(x){var d=km(lat,lon,x.lat,x.lon);if(d<nd){nd=d;nb=x;}});
+    if(nb&&nd>25){var ix=document.createElement('div');ix.className='fc';ix.innerHTML='<p class="fcn">🦈 No SharkLeash Drop Score here: you\u2019re about '+Math.round(nd*0.621)+' miles from the nearest beach we score ('+esc(nb.name+', '+nb.state)+'). Pick a beach above to see its score.</p>';g.parentNode.insertBefore(ix,g.nextSibling);return;}}
   var box=document.createElement('div');box.className='fc';box.innerHTML='<p class="msg"><i class="sp"></i>Loading the 7-evening outlook…</p>';g.parentNode.insertBefore(box,g.nextSibling);
   fcBB().then(function(bb){if(!box.isConnected)return;
     var days=fcDays(w.P);if(!days.length){box.remove();return;}
