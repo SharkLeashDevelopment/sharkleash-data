@@ -228,6 +228,14 @@ function pastCalc(p,now){if(!p||!p.days)return null;var D=p.days,md=('0'+(now.ge
   +'#slmc .ph .phw{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 6px}'
   +'#slmc .ph .phw span{background:rgba(126,231,135,.1);border:1px solid rgba(126,231,135,.4);border-radius:999px;padding:5px 11px;font-size:12.5px;font-weight:800;color:#fff}'
   +'#slmc .ph .phw span b{color:#7ee787;margin-left:4px}'
+  +'#slmc .ph details{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:0 14px}'
+  +'#slmc .ph summary{list-style:none;cursor:pointer;display:flex;align-items:center;gap:10px;flex-wrap:wrap;padding:13px 0;min-height:48px}'
+  +'#slmc .ph summary::-webkit-details-marker{display:none}'
+  +'#slmc .ph .pht{font-size:12px;font-weight:900;text-transform:uppercase;letter-spacing:.12em;color:#ff4444}'
+  +'#slmc .ph .phs2{font-size:12.5px;font-weight:700;color:rgba(255,255,255,.7);flex:1}'
+  +'#slmc .ph .phx{margin-left:auto;color:#6ee7ff;font-size:16px;transition:transform .2s}'
+  +'#slmc .ph details[open] .phx{transform:rotate(180deg)}'
+  +'#slmc .ph .phc{padding:0 0 12px}'
   +'#slmc .ph h4{margin:12px 0 6px;font-size:12px;font-weight:900;text-transform:uppercase;letter-spacing:.12em;color:#ff4444}';
   document.head.appendChild(s);})();
 function pastPanel(key){
@@ -236,7 +244,8 @@ function pastPanel(key){
   var rig=out.querySelector('.rig');if(rig)out.insertBefore(box,rig);else out.appendChild(box);
   pastGet(key).then(function(p){if(!box.isConnected)return;var c=pastCalc(p,new Date());if(!c||!c.of){box.remove();return;}
     var nm=esc(key.replace(/,\s*[A-Z]{2}$/,'')),today=PAST_MON[+c.md.slice(0,2)-1]+' '+(+c.md.slice(3,5));
-    var h='<div class="fch"><b>📅 Past years at '+nm+'</b></div>';
+    var po=clStore('slmc_past_open')==='1',teaser=c.curAvg!=null?'This week usually <b style="color:'+fcCol(c.curAvg)+'">'+c.curAvg+'</b> · best '+pastWkLabel(c.best[0][0]):'';
+    var h='<details class="phd"'+(po?' open':'')+'><summary><span class="pht">📅 Past years at '+nm+'</span><span class="phs2">'+teaser+'</span><span class="phx" aria-hidden="true">▾</span></summary><div class="phc">';
     if(c.nights.length){h+='<h4>'+today+' in past years</h4><div class="phr">'+c.nights.map(function(n){
         return '<div class="phy"><b>'+n.y+'</b><span class="phs" style="color:'+fcCol(n.sc)+'">'+n.sc+'</span>'
           +'<span>'+(n.mph==null?'wind n/a':(n.mph<2||!n.dir?'Calm':esc(n.dir)+' '+n.mph+' mph'))+'</span>'
@@ -248,7 +257,9 @@ function pastPanel(key){
     h+='<div class="phm"><span>Jan</span><span>Apr</span><span>Jul</span><span>Oct</span><span>Dec</span></div>';
     if(c.curAvg!=null)h+='<p class="fcx">This week ('+pastWkLabel(c.cur)+') averages <b style="color:'+fcCol(c.curAvg)+'">'+c.curAvg+'</b> here, #'+c.rank+' of '+c.of+' weeks.</p>';
     h+='<p class="fcn">Average Drop Score by week over '+c.years+' years ('+esc(p.from)+' to '+esc(p.to)+'), re-scored with today’s Drop Score math from archived wind, buoy and satellite readings. Past fronts and tides are counted; bait reports and water clarity didn’t exist yet. A guide to when this beach usually lines up, not a forecast.</p>';
-    box.innerHTML=h;if(window.gtag)gtag('event','past_years_view',{beach:key});});}
+    h+='</div></details>';box.innerHTML=h;var dt=box.querySelector('details');
+    dt.addEventListener('toggle',function(){clStore('slmc_past_open',dt.open?'1':'0');if(dt.open&&window.gtag)gtag('event','past_years_open',{beach:key});});
+    if(window.gtag)gtag('event','past_years_view',{beach:key,open:po?1:0});});}
 /* Local shark-fishing bans (localBan in shark-data.json). A beach picked from the list matches exactly; a GPS or map spot uses the nearest listed beach within 8 km. */
 var BAN_NOW=null;function banNear(lat,lon,label){var b=null;if(label)FC_BEACH.forEach(function(x){if(x.name+', '+x.state===label)b=x;});
   if(!b){var bd=1e9,nb=null;FC_BEACH.forEach(function(x){var d=km(lat,lon,x.lat,x.lon);if(d<bd){bd=d;nb=x;}});if(nb&&bd<=8)b=nb;else return null;}
