@@ -247,6 +247,7 @@ function pastCalc(p,now){if(!p||!p.days)return null;var D=p.days,md=('0'+(now.ge
   +'#slmc .ph .pwr button small{font-size:9.5px;color:rgba(255,255,255,.5);font-weight:700;white-space:nowrap}'
   +'#slmc .ph .pwr button.on{border-color:#6ee7ff;background:rgba(110,231,255,.14)}'
   +'#slmc .ph .pwn{font-size:12.5px;color:rgba(255,255,255,.82);font-weight:600;margin:6px 0 10px;min-height:1.2em}'
+  +'#slmc .ph .phv{margin:16px 0 0;font-size:15px;font-weight:900;color:#fff}'
   +'#slmc .ph h4{margin:12px 0 6px;font-size:12px;font-weight:900;text-transform:uppercase;letter-spacing:.12em;color:#ff4444}';
   document.head.appendChild(s);})();
 function pastPanel(key,id){
@@ -262,7 +263,7 @@ function pastPanel(key,id){
           +'<span>'+(n.mph==null?'wind n/a':(n.mph<2||!n.dir?'Calm':esc(n.dir)+' '+n.mph+' mph'))+'</span>'
           +'<span>'+(n.wv!=null?ftTxt(n.wv)+' ft':'surf n/a')+'</span>'
           +'<span>'+(n.wt!=null?n.wt+'°F':'')+'</span>'+(n.hi?'<span>⬆️ high tide</span>':'')+'</div>';}).join('')+'</div>';}
-    h+='<h4>Best weeks of the year</h4><div class="phw">'+c.best.map(function(x){return '<span>'+pastWkLabel(x[0])+'<b>'+x[1]+'</b></span>';}).join('')+'</div>';
+    h+='<p class="phv">Planning a vacation? 🏖️✈️</p><h4 style="margin-top:4px">Best weeks of the year</h4><div class="phw">'+c.best.map(function(x){return '<span>'+pastWkLabel(x[0])+'<b>'+x[1]+'</b></span>';}).join('')+'</div>';
     var lo=Math.min.apply(null,c.avg.filter(function(v){return v!=null;})),hi=Math.max.apply(null,c.avg.filter(function(v){return v!=null;})),hp=function(v){return hi>lo?Math.round(15+85*(v-lo)/(hi-lo)):60;};
     h+='<div class="phb">'+c.avg.map(function(v,i){return '<i'+(i===c.cur?' class="now"':'')+' title="'+pastWkLabel(i)+': '+(v==null?'no data':v)+'" style="height:'+(v==null?2:hp(v))+'%;background:'+(v==null?'rgba(255,255,255,.15)':fcCol(v))+'"></i>';}).join('')+'</div>';
     h+='<div class="phm"><span>Jan</span><span>Apr</span><span>Jul</span><span>Oct</span><span>Dec</span></div><div class="pwk"></div>';
