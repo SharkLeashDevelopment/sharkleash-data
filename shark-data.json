@@ -1,5 +1,5 @@
 {
- "_readme": "SharkLeash data for the laws map, conditions panel and Shark Water. Edit text, then set lastVerified (YYYY-MM-DD) on anything you checked. States: category must be a key in categories; drone.status is ban, limit or none. Beaches: state is the 2-letter code; depth is yards from the low-tide waterline to 10 ft and 15 ft (write \">2543\" when it never gets that deep within that distance; confidence is high, medium, low or inlet; noDrones names the park where drones are banned and keeps the beach out of the Best Beaches Top 5, unless privateLaunch is true, meaning anglers can launch from private property next to the park, so the beach stays in with a private-property note). speciesByMonth: per state, [species code, 12 digits Jan..Dec] where 0 absent, 1 occasional, 2 common, 3 peak. Gulf beaches carry speciesRegion (key in speciesByRegion; falls back to the state in speciesByMonth). Any beach can carry optional localBan (shark fishing banned there; kept out of Top 5). protected lists species each state bans from harvest beyond the coast-wide sandbar, sand tiger and dusky. faces: compass direction (degrees) the beach looks out to open water; Drop Assist uses it near the beach. baitByRegion: per region, [bait code, 12 digits Jan..Dec] with 0 absent, 1 occasional, 2 common, 3 peak (estimates, not survey data); codes are in baitSpecies. baitRules: bait-catching rules shown to anglers only; they never change the Drop Score. Season strings taper: a month at 0 next to a month at 2 or 3 should be 1 (migrations don't stop in one month). Apply any season or temperature fix to every state and region, not just the beach that exposed it. nws: [land forecast zone, county zone] for the beach, used to look up NWS alerts (floods, rip currents, surf) because many beach points sit just offshore in a marine zone; offshore islands with no land zone have none.",
+ "_readme": "SharkLeash data for the laws map, conditions panel and Shark Water. Edit text, then set lastVerified (YYYY-MM-DD) on anything you checked. States: category must be a key in categories; drone.status is ban, limit or none. Beaches: state is the 2-letter code; depth is yards from the low-tide waterline to 10 ft and 15 ft (write \">2543\" when it never gets that deep within that distance; confidence is high, medium, low or inlet; noDrones names the park where drones are banned and keeps the beach out of the Best Beaches Top 5, unless privateLaunch is true, meaning anglers can launch from private property next to the park, so the beach stays in with a private-property note). speciesByMonth: per state, [species code, 12 digits Jan..Dec] where 0 absent, 1 occasional, 2 common, 3 peak. Gulf beaches carry speciesRegion (key in speciesByRegion; falls back to the state in speciesByMonth). Any beach can carry optional localBan (shark fishing banned there; kept out of Top 5). protected lists species each state bans from harvest beyond the coast-wide sandbar, sand tiger and dusky. faces: compass direction (degrees) the beach looks out to open water; Drop Assist uses it near the beach. baitByRegion: per region, [bait code, 12 digits Jan..Dec] with 0 absent, 1 occasional, 2 common, 3 peak (estimates, not survey data); codes are in baitSpecies. baitRules: bait-catching rules shown to anglers only; they never change the Drop Score. Season strings taper: a month at 0 next to a month at 2 or 3 should be 1 (migrations don't stop in one month). Apply any season or temperature fix to every state and region, not just the beach that exposed it. nws: [land forecast zone, county zone] for the beach, used to look up NWS alerts (floods, rip currents, surf) because many beach points sit just offshore in a marine zone; offshore islands with no land zone have none. id: each beach's PERMANENT id (lowercase name-state, e.g. nags-head-nc). Never change an id, even if you rename the beach; history, reports and the Past Years files are linked by it. A new beach gets a new id.",
  "lastVerified": "2026-11-18",
  "coastWide": "most states require non-offset, non-stainless (corrodible) circle hooks when fishing sharks with natural bait, and it's good practice everywhere. Shortfin mako can't be kept. Sandbar, sand tiger and dusky are prohibited and the most common from shore. Keep any shark you're releasing in the water. Drones are banned in every National Seashore, and FAA drone rules apply everywhere.",
  "categories": {
@@ -952,6 +952,7 @@
  ],
  "beaches": [
   {
+   "id": "sand-beach-acadia-me",
    "name": "Sand Beach (Acadia)",
    "state": "ME",
    "lat": 44.33,
@@ -970,6 +971,7 @@
    ]
   },
   {
+   "id": "reid-state-park-me",
    "name": "Reid State Park",
    "state": "ME",
    "lat": 43.776,
@@ -987,6 +989,7 @@
    ]
   },
   {
+   "id": "popham-beach-me",
    "name": "Popham Beach",
    "state": "ME",
    "lat": 43.737,
@@ -1004,6 +1007,7 @@
    ]
   },
   {
+   "id": "higgins-beach-me",
    "name": "Higgins Beach",
    "state": "ME",
    "lat": 43.563,
@@ -1021,6 +1025,7 @@
    ]
   },
   {
+   "id": "old-orchard-beach-me",
    "name": "Old Orchard Beach",
    "state": "ME",
    "lat": 43.514,
@@ -1038,6 +1043,7 @@
    ]
   },
   {
+   "id": "ogunquit-me",
    "name": "Ogunquit",
    "state": "ME",
    "lat": 43.249,
@@ -1055,6 +1061,7 @@
    ]
   },
   {
+   "id": "rye-harbor-nh",
    "name": "Rye Harbor",
    "state": "NH",
    "lat": 42.991,
@@ -1071,6 +1078,7 @@
    ]
   },
   {
+   "id": "hampton-beach-nh",
    "name": "Hampton Beach",
    "state": "NH",
    "lat": 42.909,
@@ -1087,6 +1095,7 @@
    ]
   },
   {
+   "id": "salisbury-beach-ma",
    "name": "Salisbury Beach",
    "state": "MA",
    "lat": 42.84,
@@ -1103,6 +1112,7 @@
    ]
   },
   {
+   "id": "plum-island-ma",
    "name": "Plum Island",
    "state": "MA",
    "lat": 42.76,
@@ -1119,6 +1129,7 @@
    ]
   },
   {
+   "id": "nantasket-beach-ma",
    "name": "Nantasket Beach",
    "state": "MA",
    "lat": 42.2724,
@@ -1135,6 +1146,7 @@
    ]
   },
   {
+   "id": "duxbury-beach-ma",
    "name": "Duxbury Beach",
    "state": "MA",
    "lat": 42.0398,
@@ -1151,6 +1163,7 @@
    ]
   },
   {
+   "id": "race-point-ma",
    "name": "Race Point",
    "state": "MA",
    "lat": 42.075,
@@ -1168,6 +1181,7 @@
    ]
   },
   {
+   "id": "nauset-beach-ma",
    "name": "Nauset Beach",
    "state": "MA",
    "lat": 41.787,
@@ -1185,6 +1199,7 @@
    ]
   },
   {
+   "id": "sandy-neck-ma",
    "name": "Sandy Neck",
    "state": "MA",
    "lat": 41.739,
@@ -1201,6 +1216,7 @@
    ]
   },
   {
+   "id": "chatham-ma",
    "name": "Chatham",
    "state": "MA",
    "lat": 41.669,
@@ -1217,6 +1233,7 @@
    ]
   },
   {
+   "id": "horseneck-beach-ma",
    "name": "Horseneck Beach",
    "state": "MA",
    "lat": 41.505,
@@ -1233,6 +1250,7 @@
    ]
   },
   {
+   "id": "great-point-nantucket-ma",
    "name": "Great Point (Nantucket)",
    "state": "MA",
    "lat": 41.39,
@@ -1249,6 +1267,7 @@
    ]
   },
   {
+   "id": "wasque-martha-s-vineyard-ma",
    "name": "Wasque (Martha's Vineyard)",
    "state": "MA",
    "lat": 41.351,
@@ -1265,6 +1284,7 @@
    ]
   },
   {
+   "id": "narragansett-ri",
    "name": "Narragansett",
    "state": "RI",
    "lat": 41.43,
@@ -1281,6 +1301,7 @@
    ]
   },
   {
+   "id": "east-matunuck-ri",
    "name": "East Matunuck",
    "state": "RI",
    "lat": 41.3749,
@@ -1297,6 +1318,7 @@
    ]
   },
   {
+   "id": "charlestown-breachway-ri",
    "name": "Charlestown Breachway",
    "state": "RI",
    "lat": 41.356,
@@ -1313,6 +1335,7 @@
    ]
   },
   {
+   "id": "misquamicut-ri",
    "name": "Misquamicut",
    "state": "RI",
    "lat": 41.322,
@@ -1329,6 +1352,7 @@
    ]
   },
   {
+   "id": "block-island-crescent-beach-ri",
    "name": "Block Island (Crescent Beach)",
    "state": "RI",
    "lat": 41.1824,
@@ -1345,6 +1369,7 @@
    ]
   },
   {
+   "id": "ocean-beach-park-ct",
    "name": "Ocean Beach Park",
    "state": "CT",
    "lat": 41.307,
@@ -1362,6 +1387,7 @@
    ]
   },
   {
+   "id": "hammonasset-ct",
    "name": "Hammonasset",
    "state": "CT",
    "lat": 41.258,
@@ -1379,6 +1405,7 @@
    ]
   },
   {
+   "id": "silver-sands-ct",
    "name": "Silver Sands",
    "state": "CT",
    "lat": 41.2,
@@ -1396,6 +1423,7 @@
    ]
   },
   {
+   "id": "montauk-ny",
    "name": "Montauk",
    "state": "NY",
    "lat": 41.071,
@@ -1412,6 +1440,7 @@
    ]
   },
   {
+   "id": "shinnecock-inlet-ny",
    "name": "Shinnecock Inlet",
    "state": "NY",
    "lat": 40.84,
@@ -1426,6 +1455,7 @@
    ]
   },
   {
+   "id": "moriches-inlet-ny",
    "name": "Moriches Inlet",
    "state": "NY",
    "lat": 40.7625,
@@ -1440,6 +1470,7 @@
    ]
   },
   {
+   "id": "smith-point-ny",
    "name": "Smith Point",
    "state": "NY",
    "lat": 40.733,
@@ -1456,6 +1487,7 @@
    ]
   },
   {
+   "id": "robert-moses-sp-ny",
    "name": "Robert Moses SP",
    "state": "NY",
    "lat": 40.625,
@@ -1472,6 +1504,7 @@
    ]
   },
   {
+   "id": "long-beach-ny",
    "name": "Long Beach",
    "state": "NY",
    "lat": 40.584,
@@ -1488,6 +1521,7 @@
    ]
   },
   {
+   "id": "jones-beach-ny",
    "name": "Jones Beach",
    "state": "NY",
    "lat": 40.583,
@@ -1504,6 +1538,7 @@
    ]
   },
   {
+   "id": "rockaway-beach-ny",
    "name": "Rockaway Beach",
    "state": "NY",
    "lat": 40.58,
@@ -1520,6 +1555,7 @@
    ]
   },
   {
+   "id": "fort-tilden-ny",
    "name": "Fort Tilden",
    "state": "NY",
    "lat": 40.5607,
@@ -1537,6 +1573,7 @@
    ]
   },
   {
+   "id": "breezy-point-ny",
    "name": "Breezy Point",
    "state": "NY",
    "lat": 40.556,
@@ -1554,6 +1591,7 @@
    ]
   },
   {
+   "id": "sandy-hook-nj",
    "name": "Sandy Hook",
    "state": "NJ",
    "lat": 40.43,
@@ -1571,6 +1609,7 @@
    ]
   },
   {
+   "id": "asbury-park-nj",
    "name": "Asbury Park",
    "state": "NJ",
    "lat": 40.22,
@@ -1587,6 +1626,7 @@
    ]
   },
   {
+   "id": "manasquan-inlet-nj",
    "name": "Manasquan Inlet",
    "state": "NJ",
    "lat": 40.103,
@@ -1603,6 +1643,7 @@
    ]
   },
   {
+   "id": "point-pleasant-beach-nj",
    "name": "Point Pleasant Beach",
    "state": "NJ",
    "lat": 40.0871,
@@ -1619,6 +1660,7 @@
    ]
   },
   {
+   "id": "seaside-heights-nj",
    "name": "Seaside Heights",
    "state": "NJ",
    "lat": 39.944,
@@ -1635,6 +1677,7 @@
    ]
   },
   {
+   "id": "island-beach-sp-nj",
    "name": "Island Beach SP",
    "state": "NJ",
    "lat": 39.866,
@@ -1651,6 +1694,7 @@
    ]
   },
   {
+   "id": "barnegat-light-nj",
    "name": "Barnegat Light",
    "state": "NJ",
    "lat": 39.763,
@@ -1667,6 +1711,7 @@
    ]
   },
   {
+   "id": "beach-haven-lbi-nj",
    "name": "Beach Haven (LBI)",
    "state": "NJ",
    "lat": 39.5584,
@@ -1683,6 +1728,7 @@
    ]
   },
   {
+   "id": "holgate-lbi-nj",
    "name": "Holgate (LBI)",
    "state": "NJ",
    "lat": 39.546,
@@ -1699,6 +1745,7 @@
    ]
   },
   {
+   "id": "brigantine-nj",
    "name": "Brigantine",
    "state": "NJ",
    "lat": 39.4061,
@@ -1715,6 +1762,7 @@
    ]
   },
   {
+   "id": "atlantic-city-nj",
    "name": "Atlantic City",
    "state": "NJ",
    "lat": 39.355,
@@ -1731,6 +1779,7 @@
    ]
   },
   {
+   "id": "ocean-city-nj",
    "name": "Ocean City",
    "state": "NJ",
    "lat": 39.264,
@@ -1747,6 +1796,7 @@
    ]
   },
   {
+   "id": "sea-isle-city-nj",
    "name": "Sea Isle City",
    "state": "NJ",
    "lat": 39.1501,
@@ -1763,6 +1813,7 @@
    ]
   },
   {
+   "id": "avalon-nj",
    "name": "Avalon",
    "state": "NJ",
    "lat": 39.0908,
@@ -1779,6 +1830,7 @@
    ]
   },
   {
+   "id": "wildwood-nj",
    "name": "Wildwood",
    "state": "NJ",
    "lat": 38.983,
@@ -1795,6 +1847,7 @@
    ]
   },
   {
+   "id": "cape-may-nj",
    "name": "Cape May",
    "state": "NJ",
    "lat": 38.93,
@@ -1811,6 +1864,7 @@
    ]
   },
   {
+   "id": "cape-henlopen-de",
    "name": "Cape Henlopen",
    "state": "DE",
    "lat": 38.79,
@@ -1827,6 +1881,7 @@
    ]
   },
   {
+   "id": "rehoboth-beach-de",
    "name": "Rehoboth Beach",
    "state": "DE",
    "lat": 38.718,
@@ -1843,6 +1898,7 @@
    ]
   },
   {
+   "id": "dewey-beach-de",
    "name": "Dewey Beach",
    "state": "DE",
    "lat": 38.692,
@@ -1859,6 +1915,7 @@
    ]
   },
   {
+   "id": "indian-river-inlet-de",
    "name": "Indian River Inlet",
    "state": "DE",
    "lat": 38.61,
@@ -1875,6 +1932,7 @@
    ]
   },
   {
+   "id": "bethany-beach-de",
    "name": "Bethany Beach",
    "state": "DE",
    "lat": 38.538,
@@ -1891,6 +1949,7 @@
    ]
   },
   {
+   "id": "fenwick-island-de",
    "name": "Fenwick Island",
    "state": "DE",
    "lat": 38.462,
@@ -1907,6 +1966,7 @@
    ]
   },
   {
+   "id": "ocean-city-md",
    "name": "Ocean City",
    "state": "MD",
    "lat": 38.36,
@@ -1924,6 +1984,7 @@
    ]
   },
   {
+   "id": "assateague-md",
    "name": "Assateague",
    "state": "MD",
    "lat": 38.21,
@@ -1941,6 +2002,7 @@
    ]
   },
   {
+   "id": "chincoteague-va",
    "name": "Chincoteague",
    "state": "VA",
    "lat": 37.905,
@@ -1958,6 +2020,7 @@
    ]
   },
   {
+   "id": "buckroe-beach-va",
    "name": "Buckroe Beach",
    "state": "VA",
    "lat": 37.0397,
@@ -1974,6 +2037,7 @@
    ]
   },
   {
+   "id": "ocean-view-norfolk-va",
    "name": "Ocean View (Norfolk)",
    "state": "VA",
    "lat": 36.955,
@@ -1990,6 +2054,7 @@
    ]
   },
   {
+   "id": "virginia-beach-oceanfront-va",
    "name": "Virginia Beach Oceanfront",
    "state": "VA",
    "lat": 36.851,
@@ -2007,6 +2072,7 @@
    ]
   },
   {
+   "id": "sandbridge-va",
    "name": "Sandbridge",
    "state": "VA",
    "lat": 36.722,
@@ -2024,6 +2090,7 @@
    ]
   },
   {
+   "id": "false-cape-va",
    "name": "False Cape",
    "state": "VA",
    "lat": 36.59,
@@ -2041,6 +2108,7 @@
    ]
   },
   {
+   "id": "corolla-nc",
    "name": "Corolla",
    "state": "NC",
    "lat": 36.377,
@@ -2057,6 +2125,7 @@
    ]
   },
   {
+   "id": "duck-nc",
    "name": "Duck",
    "state": "NC",
    "lat": 36.1705,
@@ -2073,6 +2142,7 @@
    ]
   },
   {
+   "id": "kill-devil-hills-nc",
    "name": "Kill Devil Hills",
    "state": "NC",
    "lat": 36.03,
@@ -2089,6 +2159,7 @@
    ]
   },
   {
+   "id": "nags-head-nc",
    "name": "Nags Head",
    "state": "NC",
    "lat": 35.957,
@@ -2105,6 +2176,7 @@
    ]
   },
   {
+   "id": "oregon-inlet-nc",
    "name": "Oregon Inlet",
    "state": "NC",
    "lat": 35.774,
@@ -2122,6 +2194,7 @@
    ]
   },
   {
+   "id": "rodanthe-nc",
    "name": "Rodanthe",
    "state": "NC",
    "lat": 35.5927,
@@ -2138,6 +2211,7 @@
    ]
   },
   {
+   "id": "avon-nc",
    "name": "Avon",
    "state": "NC",
    "lat": 35.352,
@@ -2156,6 +2230,7 @@
    ]
   },
   {
+   "id": "buxton-nc",
    "name": "Buxton",
    "state": "NC",
    "lat": 35.268,
@@ -2174,6 +2249,7 @@
    ]
   },
   {
+   "id": "frisco-nc",
    "name": "Frisco",
    "state": "NC",
    "lat": 35.234,
@@ -2192,6 +2268,7 @@
    ]
   },
   {
+   "id": "cape-hatteras-nc",
    "name": "Cape Hatteras",
    "state": "NC",
    "lat": 35.23,
@@ -2209,6 +2286,7 @@
    ]
   },
   {
+   "id": "ocracoke-nc",
    "name": "Ocracoke",
    "state": "NC",
    "lat": 35.105,
@@ -2226,6 +2304,7 @@
    ]
   },
   {
+   "id": "cape-lookout-nc",
    "name": "Cape Lookout",
    "state": "NC",
    "lat": 34.6216,
@@ -2243,6 +2322,7 @@
    ]
   },
   {
+   "id": "atlantic-beach-nc",
    "name": "Atlantic Beach",
    "state": "NC",
    "lat": 34.698,
@@ -2259,6 +2339,7 @@
    ]
   },
   {
+   "id": "pine-knoll-shores-nc",
    "name": "Pine Knoll Shores",
    "state": "NC",
    "lat": 34.6933,
@@ -2275,6 +2356,7 @@
    ]
   },
   {
+   "id": "emerald-isle-nc",
    "name": "Emerald Isle",
    "state": "NC",
    "lat": 34.661,
@@ -2291,6 +2373,7 @@
    ]
   },
   {
+   "id": "north-topsail-beach-nc",
    "name": "North Topsail Beach",
    "state": "NC",
    "lat": 34.492,
@@ -2307,6 +2390,7 @@
    ]
   },
   {
+   "id": "topsail-beach-nc",
    "name": "Topsail Beach",
    "state": "NC",
    "lat": 34.366,
@@ -2323,6 +2407,7 @@
    ]
   },
   {
+   "id": "surf-city-nc",
    "name": "Surf City",
    "state": "NC",
    "lat": 34.427,
@@ -2339,6 +2424,7 @@
    ]
   },
   {
+   "id": "wrightsville-beach-nc",
    "name": "Wrightsville Beach",
    "state": "NC",
    "lat": 34.209,
@@ -2356,6 +2442,7 @@
    ]
   },
   {
+   "id": "carolina-beach-nc",
    "name": "Carolina Beach",
    "state": "NC",
    "lat": 34.035,
@@ -2372,6 +2459,7 @@
    ]
   },
   {
+   "id": "kure-beach-nc",
    "name": "Kure Beach",
    "state": "NC",
    "lat": 33.998,
@@ -2388,6 +2476,7 @@
    ]
   },
   {
+   "id": "fort-fisher-nc",
    "name": "Fort Fisher",
    "state": "NC",
    "lat": 33.955,
@@ -2404,6 +2493,7 @@
    ]
   },
   {
+   "id": "bald-head-island-nc",
    "name": "Bald Head Island",
    "state": "NC",
    "lat": 33.852,
@@ -2420,6 +2510,7 @@
    ]
   },
   {
+   "id": "caswell-beach-nc",
    "name": "Caswell Beach",
    "state": "NC",
    "lat": 33.8931,
@@ -2436,6 +2527,7 @@
    ]
   },
   {
+   "id": "holden-beach-nc",
    "name": "Holden Beach",
    "state": "NC",
    "lat": 33.912,
@@ -2452,6 +2544,7 @@
    ]
   },
   {
+   "id": "oak-island-nc",
    "name": "Oak Island",
    "state": "NC",
    "lat": 33.906,
@@ -2468,6 +2561,7 @@
    ]
   },
   {
+   "id": "ocean-isle-beach-nc",
    "name": "Ocean Isle Beach",
    "state": "NC",
    "lat": 33.889,
@@ -2484,6 +2578,7 @@
    ]
   },
   {
+   "id": "sunset-beach-nc",
    "name": "Sunset Beach",
    "state": "NC",
    "lat": 33.8632,
@@ -2500,6 +2595,7 @@
    ]
   },
   {
+   "id": "north-myrtle-beach-sc",
    "name": "North Myrtle Beach",
    "state": "SC",
    "lat": 33.8178,
@@ -2517,6 +2613,7 @@
    ]
   },
   {
+   "id": "myrtle-beach-sc",
    "name": "Myrtle Beach",
    "state": "SC",
    "lat": 33.689,
@@ -2534,6 +2631,7 @@
    ]
   },
   {
+   "id": "surfside-beach-sc",
    "name": "Surfside Beach",
    "state": "SC",
    "lat": 33.6037,
@@ -2551,6 +2649,7 @@
    ]
   },
   {
+   "id": "garden-city-beach-sc",
    "name": "Garden City Beach",
    "state": "SC",
    "lat": 33.5773,
@@ -2568,6 +2667,7 @@
    ]
   },
   {
+   "id": "huntington-beach-state-park-sc",
    "name": "Huntington Beach State Park",
    "state": "SC",
    "lat": 33.5075,
@@ -2584,6 +2684,7 @@
    ]
   },
   {
+   "id": "litchfield-beach-sc",
    "name": "Litchfield Beach",
    "state": "SC",
    "lat": 33.4687,
@@ -2600,6 +2701,7 @@
    ]
   },
   {
+   "id": "pawleys-island-sc",
    "name": "Pawleys Island",
    "state": "SC",
    "lat": 33.4307,
@@ -2617,6 +2719,7 @@
    ]
   },
   {
+   "id": "isle-of-palms-sc",
    "name": "Isle of Palms",
    "state": "SC",
    "lat": 32.786,
@@ -2634,6 +2737,7 @@
    ]
   },
   {
+   "id": "sullivan-s-island-sc",
    "name": "Sullivan's Island",
    "state": "SC",
    "lat": 32.761,
@@ -2650,6 +2754,7 @@
    ]
   },
   {
+   "id": "folly-beach-sc",
    "name": "Folly Beach",
    "state": "SC",
    "lat": 32.655,
@@ -2666,6 +2771,7 @@
    ]
   },
   {
+   "id": "kiawah-island-sc",
    "name": "Kiawah Island",
    "state": "SC",
    "lat": 32.597,
@@ -2682,6 +2788,7 @@
    ]
   },
   {
+   "id": "edisto-beach-sc",
    "name": "Edisto Beach",
    "state": "SC",
    "lat": 32.48,
@@ -2698,6 +2805,7 @@
    ]
   },
   {
+   "id": "hunting-island-sc",
    "name": "Hunting Island",
    "state": "SC",
    "lat": 32.375,
@@ -2714,6 +2822,7 @@
    ]
   },
   {
+   "id": "hilton-head-sc",
    "name": "Hilton Head",
    "state": "SC",
    "lat": 32.15,
@@ -2731,6 +2840,7 @@
    ]
   },
   {
+   "id": "tybee-island-ga",
    "name": "Tybee Island",
    "state": "GA",
    "lat": 32.006,
@@ -2748,6 +2858,7 @@
    ]
   },
   {
+   "id": "st-simons-island-ga",
    "name": "St. Simons Island",
    "state": "GA",
    "lat": 31.15,
@@ -2764,6 +2875,7 @@
    ]
   },
   {
+   "id": "jekyll-island-ga",
    "name": "Jekyll Island",
    "state": "GA",
    "lat": 31.064,
@@ -2781,6 +2893,7 @@
    ]
   },
   {
+   "id": "cumberland-island-ga",
    "name": "Cumberland Island",
    "state": "GA",
    "lat": 30.8003,
@@ -2798,6 +2911,7 @@
    ]
   },
   {
+   "id": "amelia-island-fl",
    "name": "Amelia Island",
    "state": "FL",
    "lat": 30.67,
@@ -2814,6 +2928,7 @@
    ]
   },
   {
+   "id": "little-talbot-island-fl",
    "name": "Little Talbot Island",
    "state": "FL",
    "lat": 30.405,
@@ -2830,6 +2945,7 @@
    ]
   },
   {
+   "id": "jacksonville-beach-fl",
    "name": "Jacksonville Beach",
    "state": "FL",
    "lat": 30.286,
@@ -2846,6 +2962,7 @@
    ]
   },
   {
+   "id": "ponte-vedra-beach-fl",
    "name": "Ponte Vedra Beach",
    "state": "FL",
    "lat": 30.24,
@@ -2862,6 +2979,7 @@
    ]
   },
   {
+   "id": "vilano-beach-fl",
    "name": "Vilano Beach",
    "state": "FL",
    "lat": 29.92,
@@ -2878,6 +2996,7 @@
    ]
   },
   {
+   "id": "st-augustine-beach-fl",
    "name": "St. Augustine Beach",
    "state": "FL",
    "lat": 29.857,
@@ -2894,6 +3013,7 @@
    ]
   },
   {
+   "id": "crescent-beach-fl",
    "name": "Crescent Beach",
    "state": "FL",
    "lat": 29.7705,
@@ -2910,6 +3030,7 @@
    ]
   },
   {
+   "id": "matanzas-inlet-fl",
    "name": "Matanzas Inlet",
    "state": "FL",
    "lat": 29.715,
@@ -2926,6 +3047,7 @@
    ]
   },
   {
+   "id": "flagler-beach-fl",
    "name": "Flagler Beach",
    "state": "FL",
    "lat": 29.475,
@@ -2942,6 +3064,7 @@
    ]
   },
   {
+   "id": "ormond-beach-fl",
    "name": "Ormond Beach",
    "state": "FL",
    "lat": 29.2866,
@@ -2958,6 +3081,7 @@
    ]
   },
   {
+   "id": "daytona-beach-fl",
    "name": "Daytona Beach",
    "state": "FL",
    "lat": 29.21,
@@ -2974,6 +3098,7 @@
    ]
   },
   {
+   "id": "ponce-inlet-fl",
    "name": "Ponce Inlet",
    "state": "FL",
    "lat": 29.0798,
@@ -2988,6 +3113,7 @@
    ]
   },
   {
+   "id": "new-smyrna-beach-fl",
    "name": "New Smyrna Beach",
    "state": "FL",
    "lat": 29.024,
@@ -3002,6 +3128,7 @@
    ]
   },
   {
+   "id": "playalinda-beach-fl",
    "name": "Playalinda Beach",
    "state": "FL",
    "lat": 28.655,
@@ -3019,6 +3146,7 @@
    ]
   },
   {
+   "id": "cocoa-beach-fl",
    "name": "Cocoa Beach",
    "state": "FL",
    "lat": 28.32,
@@ -3035,6 +3163,7 @@
    ]
   },
   {
+   "id": "satellite-beach-fl",
    "name": "Satellite Beach",
    "state": "FL",
    "lat": 28.1755,
@@ -3051,6 +3180,7 @@
    ]
   },
   {
+   "id": "indialantic-fl",
    "name": "Indialantic",
    "state": "FL",
    "lat": 28.0904,
@@ -3067,6 +3197,7 @@
    ]
   },
   {
+   "id": "melbourne-beach-fl",
    "name": "Melbourne Beach",
    "state": "FL",
    "lat": 28.065,
@@ -3083,6 +3214,7 @@
    ]
   },
   {
+   "id": "sebastian-inlet-fl",
    "name": "Sebastian Inlet",
    "state": "FL",
    "lat": 27.861,
@@ -3099,6 +3231,7 @@
    ]
   },
   {
+   "id": "vero-beach-fl",
    "name": "Vero Beach",
    "state": "FL",
    "lat": 27.638,
@@ -3115,6 +3248,7 @@
    ]
   },
   {
+   "id": "fort-pierce-fl",
    "name": "Fort Pierce",
    "state": "FL",
    "lat": 27.47,
@@ -3129,6 +3263,7 @@
    ]
   },
   {
+   "id": "hutchinson-island-fl",
    "name": "Hutchinson Island",
    "state": "FL",
    "lat": 27.248,
@@ -3145,6 +3280,7 @@
    ]
   },
   {
+   "id": "jensen-beach-fl",
    "name": "Jensen Beach",
    "state": "FL",
    "lat": 27.2556,
@@ -3162,6 +3298,7 @@
    ]
   },
   {
+   "id": "stuart-beach-fl",
    "name": "Stuart Beach",
    "state": "FL",
    "lat": 27.2003,
@@ -3179,6 +3316,7 @@
    ]
   },
   {
+   "id": "hobe-sound-beach-fl",
    "name": "Hobe Sound Beach",
    "state": "FL",
    "lat": 27.06,
@@ -3195,6 +3333,7 @@
    ]
   },
   {
+   "id": "jupiter-inlet-fl",
    "name": "Jupiter Inlet",
    "state": "FL",
    "lat": 26.944,
@@ -3209,6 +3348,7 @@
    ]
   },
   {
+   "id": "juno-beach-fl",
    "name": "Juno Beach",
    "state": "FL",
    "lat": 26.88,
@@ -3225,6 +3365,7 @@
    ]
   },
   {
+   "id": "singer-island-fl",
    "name": "Singer Island",
    "state": "FL",
    "lat": 26.79,
@@ -3241,6 +3382,7 @@
    ]
   },
   {
+   "id": "palm-beach-fl",
    "name": "Palm Beach",
    "state": "FL",
    "lat": 26.705,
@@ -3257,6 +3399,7 @@
    ]
   },
   {
+   "id": "lake-worth-beach-fl",
    "name": "Lake Worth Beach",
    "state": "FL",
    "lat": 26.612,
@@ -3273,6 +3416,7 @@
    ]
   },
   {
+   "id": "delray-beach-fl",
    "name": "Delray Beach",
    "state": "FL",
    "lat": 26.46,
@@ -3290,6 +3434,7 @@
    ]
   },
   {
+   "id": "boca-raton-fl",
    "name": "Boca Raton",
    "state": "FL",
    "lat": 26.35,
@@ -3306,6 +3451,7 @@
    ]
   },
   {
+   "id": "deerfield-beach-fl",
    "name": "Deerfield Beach",
    "state": "FL",
    "lat": 26.317,
@@ -3322,6 +3468,7 @@
    ]
   },
   {
+   "id": "pompano-beach-fl",
    "name": "Pompano Beach",
    "state": "FL",
    "lat": 26.233,
@@ -3338,6 +3485,7 @@
    ]
   },
   {
+   "id": "fort-lauderdale-fl",
    "name": "Fort Lauderdale",
    "state": "FL",
    "lat": 26.122,
@@ -3354,6 +3502,7 @@
    ]
   },
   {
+   "id": "hollywood-beach-fl",
    "name": "Hollywood Beach",
    "state": "FL",
    "lat": 26.01,
@@ -3370,6 +3519,7 @@
    ]
   },
   {
+   "id": "haulover-fl",
    "name": "Haulover",
    "state": "FL",
    "lat": 25.9,
@@ -3384,6 +3534,7 @@
    ]
   },
   {
+   "id": "miami-beach-fl",
    "name": "Miami Beach",
    "state": "FL",
    "lat": 25.79,
@@ -3401,6 +3552,7 @@
    ]
   },
   {
+   "id": "key-biscayne-fl",
    "name": "Key Biscayne",
    "state": "FL",
    "lat": 25.6796,
@@ -3417,6 +3569,7 @@
    ]
   },
   {
+   "id": "islamorada-fl",
    "name": "Islamorada",
    "state": "FL",
    "lat": 24.924,
@@ -3433,6 +3586,7 @@
    ]
   },
   {
+   "id": "marathon-fl",
    "name": "Marathon",
    "state": "FL",
    "lat": 24.71,
@@ -3449,6 +3603,7 @@
    ]
   },
   {
+   "id": "bahia-honda-fl",
    "name": "Bahia Honda",
    "state": "FL",
    "lat": 24.656,
@@ -3465,6 +3620,7 @@
    ]
   },
   {
+   "id": "key-west-fl",
    "name": "Key West",
    "state": "FL",
    "lat": 24.548,
@@ -3481,6 +3637,7 @@
    ]
   },
   {
+   "id": "perdido-key-fl",
    "name": "Perdido Key",
    "state": "FL",
    "lat": 30.287,
@@ -3500,6 +3657,7 @@
    ]
   },
   {
+   "id": "pensacola-beach-fl",
    "name": "Pensacola Beach",
    "state": "FL",
    "lat": 30.327,
@@ -3517,6 +3675,7 @@
    ]
   },
   {
+   "id": "opal-beach-santa-rosa-island-fl",
    "name": "Opal Beach (Santa Rosa Island)",
    "state": "FL",
    "lat": 30.365,
@@ -3535,6 +3694,7 @@
    ]
   },
   {
+   "id": "fort-pickens-fl",
    "name": "Fort Pickens",
    "state": "FL",
    "lat": 30.322,
@@ -3553,6 +3713,7 @@
    ]
   },
   {
+   "id": "navarre-beach-fl",
    "name": "Navarre Beach",
    "state": "FL",
    "lat": 30.376,
@@ -3570,6 +3731,7 @@
    ]
   },
   {
+   "id": "okaloosa-island-fl",
    "name": "Okaloosa Island",
    "state": "FL",
    "lat": 30.393,
@@ -3588,6 +3750,7 @@
    ]
   },
   {
+   "id": "destin-fl",
    "name": "Destin",
    "state": "FL",
    "lat": 30.381,
@@ -3605,6 +3768,7 @@
    ]
   },
   {
+   "id": "walton-county-beaches-fl",
    "name": "Walton County beaches",
    "state": "FL",
    "lat": 30.36,
@@ -3623,6 +3787,7 @@
    ]
   },
   {
+   "id": "panama-city-beach-fl",
    "name": "Panama City Beach",
    "state": "FL",
    "lat": 30.176,
@@ -3640,6 +3805,7 @@
    ]
   },
   {
+   "id": "mexico-beach-fl",
    "name": "Mexico Beach",
    "state": "FL",
    "lat": 29.94,
@@ -3657,6 +3823,7 @@
    ]
   },
   {
+   "id": "cape-san-blas-fl",
    "name": "Cape San Blas",
    "state": "FL",
    "lat": 29.67,
@@ -3674,6 +3841,7 @@
    ]
   },
   {
+   "id": "st-george-island-fl",
    "name": "St. George Island",
    "state": "FL",
    "lat": 29.64,
@@ -3691,6 +3859,7 @@
    ]
   },
   {
+   "id": "st-joseph-peninsula-fl",
    "name": "St. Joseph Peninsula",
    "state": "FL",
    "lat": 29.815,
@@ -3704,6 +3873,7 @@
    "faces": 250
   },
   {
+   "id": "indian-pass-fl",
    "name": "Indian Pass",
    "state": "FL",
    "lat": 29.684,
@@ -3721,6 +3891,7 @@
    ]
   },
   {
+   "id": "alligator-point-fl",
    "name": "Alligator Point",
    "state": "FL",
    "lat": 29.903,
@@ -3738,6 +3909,7 @@
    ]
   },
   {
+   "id": "anna-maria-island-fl",
    "name": "Anna Maria Island",
    "state": "FL",
    "lat": 27.52,
@@ -3755,6 +3927,7 @@
    ]
   },
   {
+   "id": "longboat-key-fl",
    "name": "Longboat Key",
    "state": "FL",
    "lat": 27.3927,
@@ -3772,6 +3945,7 @@
    ]
   },
   {
+   "id": "lido-key-fl",
    "name": "Lido Key",
    "state": "FL",
    "lat": 27.3111,
@@ -3789,6 +3963,7 @@
    ]
   },
   {
+   "id": "honeymoon-island-fl",
    "name": "Honeymoon Island",
    "state": "FL",
    "lat": 28.065,
@@ -3806,6 +3981,7 @@
    ]
   },
   {
+   "id": "clearwater-beach-fl",
    "name": "Clearwater Beach",
    "state": "FL",
    "lat": 27.978,
@@ -3823,6 +3999,7 @@
    ]
   },
   {
+   "id": "belleair-shore-fl",
    "name": "Belleair Shore",
    "state": "FL",
    "lat": 27.9275,
@@ -3841,6 +4018,7 @@
    ]
   },
   {
+   "id": "indian-rocks-beach-fl",
    "name": "Indian Rocks Beach",
    "state": "FL",
    "lat": 27.8784,
@@ -3858,6 +4036,7 @@
    ]
   },
   {
+   "id": "indian-shores-fl",
    "name": "Indian Shores",
    "state": "FL",
    "lat": 27.8477,
@@ -3876,6 +4055,7 @@
    ]
   },
   {
+   "id": "redington-shores-fl",
    "name": "Redington Shores",
    "state": "FL",
    "lat": 27.8225,
@@ -3894,6 +4074,7 @@
    ]
   },
   {
+   "id": "madeira-beach-fl",
    "name": "Madeira Beach",
    "state": "FL",
    "lat": 27.806,
@@ -3911,6 +4092,7 @@
    ]
   },
   {
+   "id": "treasure-island-fl",
    "name": "Treasure Island",
    "state": "FL",
    "lat": 27.77,
@@ -3929,6 +4111,7 @@
    ]
   },
   {
+   "id": "st-pete-beach-fl",
    "name": "St. Pete Beach",
    "state": "FL",
    "lat": 27.725,
@@ -3946,6 +4129,7 @@
    ]
   },
   {
+   "id": "fort-de-soto-fl",
    "name": "Fort De Soto",
    "state": "FL",
    "lat": 27.625,
@@ -3963,6 +4147,7 @@
    ]
   },
   {
+   "id": "siesta-key-fl",
    "name": "Siesta Key",
    "state": "FL",
    "lat": 27.265,
@@ -3980,6 +4165,7 @@
    ]
   },
   {
+   "id": "casey-key-fl",
    "name": "Casey Key",
    "state": "FL",
    "lat": 27.122,
@@ -3997,6 +4183,7 @@
    ]
   },
   {
+   "id": "venice-fl",
    "name": "Venice",
    "state": "FL",
    "lat": 27.08,
@@ -4014,6 +4201,7 @@
    ]
   },
   {
+   "id": "manasota-key-fl",
    "name": "Manasota Key",
    "state": "FL",
    "lat": 26.9262,
@@ -4031,6 +4219,7 @@
    ]
   },
   {
+   "id": "boca-grande-fl",
    "name": "Boca Grande",
    "state": "FL",
    "lat": 26.75,
@@ -4048,6 +4237,7 @@
    ]
   },
   {
+   "id": "captiva-fl",
    "name": "Captiva",
    "state": "FL",
    "lat": 26.52,
@@ -4065,6 +4255,7 @@
    ]
   },
   {
+   "id": "sanibel-fl",
    "name": "Sanibel",
    "state": "FL",
    "lat": 26.43,
@@ -4082,6 +4273,7 @@
    ]
   },
   {
+   "id": "fort-myers-beach-fl",
    "name": "Fort Myers Beach",
    "state": "FL",
    "lat": 26.44,
@@ -4099,6 +4291,7 @@
    ]
   },
   {
+   "id": "bonita-beach-fl",
    "name": "Bonita Beach",
    "state": "FL",
    "lat": 26.3303,
@@ -4116,6 +4309,7 @@
    ]
   },
   {
+   "id": "naples-fl",
    "name": "Naples",
    "state": "FL",
    "lat": 26.13,
@@ -4133,6 +4327,7 @@
    ]
   },
   {
+   "id": "marco-island-fl",
    "name": "Marco Island",
    "state": "FL",
    "lat": 25.94,
@@ -4150,6 +4345,7 @@
    ]
   },
   {
+   "id": "dauphin-island-al",
    "name": "Dauphin Island",
    "state": "AL",
    "lat": 30.25,
@@ -4167,6 +4363,7 @@
    ]
   },
   {
+   "id": "fort-morgan-al",
    "name": "Fort Morgan",
    "state": "AL",
    "lat": 30.232,
@@ -4184,6 +4381,7 @@
    ]
   },
   {
+   "id": "gulf-shores-public-beach-al",
    "name": "Gulf Shores public beach",
    "state": "AL",
    "lat": 30.246,
@@ -4201,6 +4399,7 @@
    ]
   },
   {
+   "id": "gulf-state-park-al",
    "name": "Gulf State Park",
    "state": "AL",
    "lat": 30.25,
@@ -4219,6 +4418,7 @@
    ]
   },
   {
+   "id": "orange-beach-al",
    "name": "Orange Beach",
    "state": "AL",
    "lat": 30.27,
@@ -4237,6 +4437,7 @@
    ]
   },
   {
+   "id": "ship-island-ms",
    "name": "Ship Island",
    "state": "MS",
    "lat": 30.215,
@@ -4251,6 +4452,7 @@
    "faces": 157
   },
   {
+   "id": "horn-island-ms",
    "name": "Horn Island",
    "state": "MS",
    "lat": 30.235,
@@ -4265,6 +4467,7 @@
    "faces": 166
   },
   {
+   "id": "petit-bois-island-ms",
    "name": "Petit Bois Island",
    "state": "MS",
    "lat": 30.205,
@@ -4279,6 +4482,7 @@
    "faces": 165
   },
   {
+   "id": "cat-island-ms",
    "name": "Cat Island",
    "state": "MS",
    "lat": 30.215,
@@ -4293,6 +4497,7 @@
    "faces": 150
   },
   {
+   "id": "bay-st-louis-ms",
    "name": "Bay St. Louis",
    "state": "MS",
    "lat": 30.3,
@@ -4311,6 +4516,7 @@
    ]
   },
   {
+   "id": "pass-christian-ms",
    "name": "Pass Christian",
    "state": "MS",
    "lat": 30.31,
@@ -4329,6 +4535,7 @@
    ]
   },
   {
+   "id": "long-beach-ms",
    "name": "Long Beach",
    "state": "MS",
    "lat": 30.345,
@@ -4347,6 +4554,7 @@
    ]
   },
   {
+   "id": "biloxi-beach-ms",
    "name": "Biloxi beach",
    "state": "MS",
    "lat": 30.392,
@@ -4365,6 +4573,7 @@
    ]
   },
   {
+   "id": "grand-isle-la",
    "name": "Grand Isle",
    "state": "LA",
    "lat": 29.225,
@@ -4383,6 +4592,7 @@
    ]
   },
   {
+   "id": "elmer-s-island-la",
    "name": "Elmer's Island",
    "state": "LA",
    "lat": 29.18,
@@ -4401,6 +4611,7 @@
    ]
   },
   {
+   "id": "fourchon-beach-la",
    "name": "Fourchon Beach",
    "state": "LA",
    "lat": 29.105,
@@ -4419,6 +4630,7 @@
    ]
   },
   {
+   "id": "holly-beach-la",
    "name": "Holly Beach",
    "state": "LA",
    "lat": 29.77,
@@ -4437,6 +4649,7 @@
    ]
   },
   {
+   "id": "constance-beach-la",
    "name": "Constance Beach",
    "state": "LA",
    "lat": 29.756,
@@ -4455,6 +4668,7 @@
    ]
   },
   {
+   "id": "rutherford-beach-la",
    "name": "Rutherford Beach",
    "state": "LA",
    "lat": 29.76,
@@ -4473,6 +4687,7 @@
    ]
   },
   {
+   "id": "isles-dernieres-la",
    "name": "Isles Dernieres",
    "state": "LA",
    "lat": 29.06,
@@ -4487,6 +4702,7 @@
    "clarityBase": 0.7
   },
   {
+   "id": "sea-rim-state-park-tx",
    "name": "Sea Rim State Park",
    "state": "TX",
    "lat": 29.675,
@@ -4505,6 +4721,7 @@
    ]
   },
   {
+   "id": "crystal-beach-bolivar-tx",
    "name": "Crystal Beach (Bolivar)",
    "state": "TX",
    "lat": 29.465,
@@ -4523,6 +4740,7 @@
    ]
   },
   {
+   "id": "galveston-tx",
    "name": "Galveston",
    "state": "TX",
    "lat": 29.28,
@@ -4541,6 +4759,7 @@
    ]
   },
   {
+   "id": "jamaica-beach-tx",
    "name": "Jamaica Beach",
    "state": "TX",
    "lat": 29.177,
@@ -4558,6 +4777,7 @@
    ]
   },
   {
+   "id": "san-luis-pass-tx",
    "name": "San Luis Pass",
    "state": "TX",
    "lat": 29.085,
@@ -4576,6 +4796,7 @@
    ]
   },
   {
+   "id": "follets-island-tx",
    "name": "Follets Island",
    "state": "TX",
    "lat": 29.0724,
@@ -4593,6 +4814,7 @@
    ]
   },
   {
+   "id": "quintana-beach-tx",
    "name": "Quintana Beach",
    "state": "TX",
    "lat": 28.925,
@@ -4611,6 +4833,7 @@
    ]
   },
   {
+   "id": "bryan-beach-tx",
    "name": "Bryan Beach",
    "state": "TX",
    "lat": 28.9127,
@@ -4628,6 +4851,7 @@
    ]
   },
   {
+   "id": "surfside-beach-tx",
    "name": "Surfside Beach",
    "state": "TX",
    "lat": 28.945,
@@ -4646,6 +4870,7 @@
    ]
   },
   {
+   "id": "sargent-beach-tx",
    "name": "Sargent Beach",
    "state": "TX",
    "lat": 28.765,
@@ -4664,6 +4889,7 @@
    ]
   },
   {
+   "id": "matagorda-beach-tx",
    "name": "Matagorda Beach",
    "state": "TX",
    "lat": 28.6,
@@ -4682,6 +4908,7 @@
    ]
   },
   {
+   "id": "port-aransas-tx",
    "name": "Port Aransas",
    "state": "TX",
    "lat": 27.82,
@@ -4699,6 +4926,7 @@
    ]
   },
   {
+   "id": "mustang-island-state-park-tx",
    "name": "Mustang Island State Park",
    "state": "TX",
    "lat": 27.67,
@@ -4716,6 +4944,7 @@
    ]
   },
   {
+   "id": "bob-hall-pier-north-padre-tx",
    "name": "Bob Hall Pier / North Padre",
    "state": "TX",
    "lat": 27.58,
@@ -4733,6 +4962,7 @@
    ]
   },
   {
+   "id": "padre-island-ns-tx",
    "name": "Padre Island NS",
    "state": "TX",
    "lat": 27.42,
@@ -4751,6 +4981,7 @@
    ]
   },
   {
+   "id": "padre-island-ns-mile-5-tx",
    "name": "Padre Island NS – Mile 5",
    "state": "TX",
    "lat": 27.3548,
@@ -4769,6 +5000,7 @@
    ]
   },
   {
+   "id": "padre-island-ns-mile-15-tx",
    "name": "Padre Island NS – Mile 15",
    "state": "TX",
    "lat": 27.2198,
@@ -4787,6 +5019,7 @@
    ]
   },
   {
+   "id": "padre-island-ns-mile-30-big-shell-tx",
    "name": "Padre Island NS – Mile 30 (Big Shell)",
    "state": "TX",
    "lat": 27.01,
@@ -4805,6 +5038,7 @@
    ]
   },
   {
+   "id": "padre-island-ns-mile-45-tx",
    "name": "Padre Island NS – Mile 45",
    "state": "TX",
    "lat": 26.7998,
@@ -4823,6 +5057,7 @@
    ]
   },
   {
+   "id": "padre-island-ns-mile-55-tx",
    "name": "Padre Island NS – Mile 55",
    "state": "TX",
    "lat": 26.6598,
@@ -4841,6 +5076,7 @@
    ]
   },
   {
+   "id": "south-padre-island-tx",
    "name": "South Padre Island",
    "state": "TX",
    "lat": 26.11,
@@ -4858,6 +5094,7 @@
    ]
   },
   {
+   "id": "boca-chica-beach-tx",
    "name": "Boca Chica Beach",
    "state": "TX",
    "lat": 25.995,
