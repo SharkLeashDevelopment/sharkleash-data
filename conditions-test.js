@@ -210,11 +210,11 @@ function pastCalc(p,now){if(!p||!p.days)return null;var D=p.days,md=('0'+(now.ge
   var y0=+p.from.slice(0,4),y1=+p.to.slice(0,4),nights=[];
   for(var y=y1;y>=y0;y--){var r=D[y+'-'+md];if(r)nights.push({y:y,sc:r[0],mph:r[1],dir:r[2],wv:r[3],wt:r[4],hi:r[5]});}
   var S=[],N=[];for(var i=0;i<52;i++){S.push(0);N.push(0);}
-  for(var k in D){var w=pastWk(k.slice(5)),v=D[k][0];if(v==null)continue;S[w]+=v;N[w]++;}
+  var W={};for(var k in D){var w=pastWk(k.slice(5)),v=D[k][0];(W[w]=W[w]||[]).push(k);if(v==null)continue;S[w]+=v;N[w]++;}
   var avg=S.map(function(s,i){return N[i]?Math.round(s/N[i]):null;}),cur=pastWk(md);
   var order=avg.map(function(v,i){return [i,v];}).filter(function(x){return x[1]!=null;}).sort(function(a,b){return b[1]-a[1];});
   var rank=0;order.forEach(function(x,i){if(x[0]===cur)rank=i+1;});
-  return {md:md,nights:nights,avg:avg,cur:cur,curAvg:avg[cur],rank:rank,of:order.length,best:order.slice(0,3),years:Math.round((Date.parse(p.to)-Date.parse(p.from))/(365.25*864e5))};}
+  return {md:md,nights:nights,avg:avg,cur:cur,curAvg:avg[cur],rank:rank,of:order.length,best:order.slice(0,3),W:W,years:Math.round((Date.parse(p.to)-Date.parse(p.from))/(365.25*864e5))};}
 (function(){if(document.getElementById('slmc-past-css'))return;var s=document.createElement('style');s.id='slmc-past-css';
   s.textContent='#slmc .ph .phr{display:flex;flex-direction:column;gap:6px;margin:0 0 10px}'
   +'#slmc .ph .phy{display:flex;align-items:center;gap:10px;background:var(--card);border:1px solid var(--line);border-radius:12px;flex-wrap:wrap;row-gap:2px;padding:8px 12px;font-size:13px;font-weight:700;color:rgba(255,255,255,.82)}'
@@ -236,6 +236,15 @@ function pastCalc(p,now){if(!p||!p.days)return null;var D=p.days,md=('0'+(now.ge
   +'#slmc .ph .phx{margin-left:auto;color:#6ee7ff;font-size:16px;transition:transform .2s}'
   +'#slmc .ph details[open] .phx{transform:rotate(180deg)}'
   +'#slmc .ph .phc{padding:0 0 12px}'
+  +'#slmc .ph .phb{cursor:pointer}#slmc .ph .phb i.pick{opacity:1;box-shadow:0 0 0 2px #fff}'
+  +'#slmc .ph .pwh{display:flex;align-items:center;justify-content:space-between;gap:8px;font-size:13.5px;font-weight:800;margin:6px 0 0}'
+  +'#slmc .ph .pwh button{min-height:38px;min-width:42px;padding:0;border-radius:10px;font-size:20px;line-height:1;cursor:pointer}'
+  +'#slmc .ph .pwr{display:flex;align-items:center;gap:4px;margin:0 0 4px}'
+  +'#slmc .ph .pwr b{font-size:12px;color:rgba(255,255,255,.55);min-width:38px;flex:none}'
+  +'#slmc .ph .pwr button{flex:1 1 0;min-width:0;min-height:42px;padding:3px 0;border-radius:8px;font-size:15px;font-weight:900;display:flex;flex-direction:column;align-items:center;justify-content:center;line-height:1.1;cursor:pointer}'
+  +'#slmc .ph .pwr button small{font-size:9.5px;color:rgba(255,255,255,.5);font-weight:700;white-space:nowrap}'
+  +'#slmc .ph .pwr button.on{border-color:#6ee7ff;background:rgba(110,231,255,.14)}'
+  +'#slmc .ph .pwn{font-size:12.5px;color:rgba(255,255,255,.82);font-weight:600;margin:6px 0 10px;min-height:1.2em}'
   +'#slmc .ph h4{margin:12px 0 6px;font-size:12px;font-weight:900;text-transform:uppercase;letter-spacing:.12em;color:#ff4444}';
   document.head.appendChild(s);})();
 function pastPanel(key){
@@ -254,10 +263,23 @@ function pastPanel(key){
     h+='<h4>Best weeks of the year</h4><div class="phw">'+c.best.map(function(x){return '<span>'+pastWkLabel(x[0])+'<b>'+x[1]+'</b></span>';}).join('')+'</div>';
     var lo=Math.min.apply(null,c.avg.filter(function(v){return v!=null;})),hi=Math.max.apply(null,c.avg.filter(function(v){return v!=null;})),hp=function(v){return hi>lo?Math.round(15+85*(v-lo)/(hi-lo)):60;};
     h+='<div class="phb">'+c.avg.map(function(v,i){return '<i'+(i===c.cur?' class="now"':'')+' title="'+pastWkLabel(i)+': '+(v==null?'no data':v)+'" style="height:'+(v==null?2:hp(v))+'%;background:'+(v==null?'rgba(255,255,255,.15)':fcCol(v))+'"></i>';}).join('')+'</div>';
-    h+='<div class="phm"><span>Jan</span><span>Apr</span><span>Jul</span><span>Oct</span><span>Dec</span></div>';
+    h+='<div class="phm"><span>Jan</span><span>Apr</span><span>Jul</span><span>Oct</span><span>Dec</span></div><div class="pwk"></div>';
     if(c.curAvg!=null)h+='<p class="fcx">This week ('+pastWkLabel(c.cur)+') averages <b style="color:'+fcCol(c.curAvg)+'">'+c.curAvg+'</b> here, #'+c.rank+' of '+c.of+' weeks.</p>';
     h+='<p class="fcn">Average Drop Score by week over '+c.years+' years ('+esc(p.from)+' to '+esc(p.to)+'), re-scored with today’s Drop Score math from archived wind, buoy and satellite readings. Past fronts and tides are counted; bait reports and water clarity didn’t exist yet. A guide to when this beach usually lines up, not a forecast.</p>';
     h+='</div></details>';box.innerHTML=h;var dt=box.querySelector('details');
+    var bars=box.querySelector('.phb'),pw=box.querySelector('.pwk'),sel=-1;
+    function dl(k){return PAST_MON[+k.slice(5,7)-1]+' '+(+k.slice(8,10));}
+    function night(k){var r=p.days[k];return '<b>'+dl(k)+', '+k.slice(0,4)+'</b> · <span style="color:'+fcCol(r[0])+';font-weight:900">'+r[0]+'</span> · '+(r[1]==null?'wind n/a':(r[1]<2||!r[2]?'Calm':esc(r[2])+' '+r[1]+' mph'))+' · '+(r[3]!=null?ftTxt(r[3])+' ft surf':'surf n/a')+(r[4]!=null?' · '+r[4]+'°F water':'')+(r[5]?' · ⬆️ high tide in the window':'');}
+    function showWk(w){if(w<0)w=51;if(w>51)w=0;sel=w;bars.querySelectorAll('i').forEach(function(b,i){b.classList.toggle('pick',i===w);});
+      var ks=(c.W[w]||[]).slice().sort(),Y={},n=0,sw=0,nw=0,sv=0,nv=0,stt=0,nt=0,hi=0;
+      ks.forEach(function(k){var r=p.days[k];(Y[k.slice(0,4)]=Y[k.slice(0,4)]||[]).push(k);n++;if(r[1]!=null){sw+=r[1];nw++;}if(r[3]!=null){sv+=r[3];nv++;}if(r[4]!=null){stt+=r[4];nt++;}if(r[5])hi++;});
+      var q='<div class="pwh"><button type="button" data-d="-1" aria-label="Previous week">‹</button><span><b>'+pastWkLabel(w)+'</b>'+(c.avg[w]!=null?' · avg <b style="color:'+fcCol(c.avg[w])+'">'+c.avg[w]+'</b>':'')+'</span><button type="button" data-d="1" aria-label="Next week">›</button></div>';
+      if(n)q+='<p class="fcx" style="margin:4px 0 8px">Typical: '+(nw?Math.round(sw/nw)+' mph wind':'')+(nv?' · '+ftTxt(sv/nv)+' ft surf':'')+(nt?' · '+Math.round(stt/nt)+'°F water':'')+' · high tide in the window '+Math.round(100*hi/n)+'% of nights</p>';
+      q+=Object.keys(Y).sort().reverse().map(function(y){return '<div class="pwr"><b>'+y+'</b>'+Y[y].map(function(k){var v=p.days[k][0];return '<button type="button" data-k="'+k+'" style="color:'+fcCol(v)+'"><small>'+dl(k)+'</small>'+v+'</button>';}).join('')+'</div>';}).join('')||'<p class="fcn">No nights on record for this week.</p>';
+      pw.innerHTML=q+'<div class="pwn">Tap a score for that night’s conditions.</div>';}
+    bars.addEventListener('click',function(e){var r=bars.getBoundingClientRect();showWk(Math.max(0,Math.min(51,Math.floor((e.clientX-r.left)/r.width*52))));if(window.gtag)gtag('event','past_week_tap',{beach:key});});
+    pw.addEventListener('click',function(e){var b=e.target.closest('button');if(!b)return;if(b.getAttribute('data-d'))showWk(sel+(+b.getAttribute('data-d')));else if(b.getAttribute('data-k')){pw.querySelectorAll('.pwr button').forEach(function(x){x.classList.toggle('on',x===b);});pw.querySelector('.pwn').innerHTML=night(b.getAttribute('data-k'));}});
+    showWk(c.cur);
     dt.addEventListener('toggle',function(){clStore('slmc_past_open',dt.open?'1':'0');if(dt.open&&window.gtag)gtag('event','past_years_open',{beach:key});});
     if(window.gtag)gtag('event','past_years_view',{beach:key,open:po?1:0});});}
 /* Local shark-fishing bans (localBan in shark-data.json). A beach picked from the list matches exactly; a GPS or map spot uses the nearest listed beach within 8 km. */
