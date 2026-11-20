@@ -228,13 +228,15 @@ function pastCalc(p,now){if(!p||!p.days)return null;var D=p.days,md=('0'+(now.ge
   +'#slmc .ph .phw{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 6px}'
   +'#slmc .ph .phw span{background:rgba(126,231,135,.1);border:1px solid rgba(126,231,135,.4);border-radius:999px;padding:5px 11px;font-size:12.5px;font-weight:800;color:#fff}'
   +'#slmc .ph .phw span b{color:#7ee787;margin-left:4px}'
-  +'#slmc .ph details{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:0 14px}'
+  +'#slmc .ph details{background:rgba(110,231,255,.06);border:1px solid rgba(110,231,255,.45);border-radius:16px;padding:0 14px;box-shadow:0 0 0 1px rgba(110,231,255,.08),0 10px 30px rgba(0,0,0,.25)}'
   +'#slmc .ph summary{list-style:none;cursor:pointer;display:flex;align-items:center;gap:10px;flex-wrap:wrap;padding:13px 0;min-height:48px}'
   +'#slmc .ph summary::-webkit-details-marker{display:none}'
-  +'#slmc .ph .pht{font-size:12px;font-weight:900;text-transform:uppercase;letter-spacing:.12em;color:#ff4444}'
+  +'#slmc .ph .pht{font-size:13.5px;font-weight:900;text-transform:uppercase;letter-spacing:.12em;color:#ff4444}'
   +'#slmc .ph .phs2{font-size:12.5px;font-weight:700;color:rgba(255,255,255,.7);flex:1}'
-  +'#slmc .ph .phx{margin-left:auto;color:#6ee7ff;font-size:16px;transition:transform .2s}'
-  +'#slmc .ph details[open] .phx{transform:rotate(180deg)}'
+  +'#slmc .ph .phx{margin-left:auto;display:inline-flex;align-items:center;gap:6px;background:rgba(110,231,255,.16);border:1px solid rgba(110,231,255,.6);color:#6ee7ff;border-radius:999px;padding:7px 14px;font-size:13px;font-weight:900;white-space:nowrap}'
+  +'#slmc .ph summary:hover .phx{background:rgba(110,231,255,.28)}'
+  +'#slmc .ph .phx i{font-style:normal;display:inline-block;font-size:17px;line-height:1;transition:transform .2s}#slmc .ph details[open] .phx i{transform:rotate(180deg)}'
+  +'#slmc .ph details:not([open]) .phl::before{content:"Show history"}#slmc .ph details[open] .phl::before{content:"Hide"}'
   +'#slmc .ph .phc{padding:0 0 12px}'
   +'#slmc .ph .phb{cursor:pointer}#slmc .ph .phb i.pick{opacity:1;box-shadow:0 0 0 2px #fff}'
   +'#slmc .ph .pwh{display:flex;align-items:center;justify-content:space-between;gap:8px;font-size:13.5px;font-weight:800;margin:6px 0 0}'
@@ -254,7 +256,7 @@ function pastPanel(key){
   pastGet(key).then(function(p){if(!box.isConnected)return;var c=pastCalc(p,new Date());if(!c||!c.of){box.remove();return;}
     var nm=esc(key.replace(/,\s*[A-Z]{2}$/,'')),today=PAST_MON[+c.md.slice(0,2)-1]+' '+(+c.md.slice(3,5));
     var po=clStore('slmc_past_open')==='1',teaser=c.curAvg!=null?'This week usually <b style="color:'+fcCol(c.curAvg)+'">'+c.curAvg+'</b> · best '+pastWkLabel(c.best[0][0]):'';
-    var h='<details class="phd"'+(po?' open':'')+'><summary><span class="pht">📅 Past years at '+nm+'</span><span class="phs2">'+teaser+'</span><span class="phx" aria-hidden="true">▾</span></summary><div class="phc">';
+    var h='<details class="phd"'+(po?' open':'')+'><summary><span class="pht">📅 Past years at '+nm+'</span><span class="phs2">'+teaser+'</span><span class="phx"><span class="phl"></span><i aria-hidden="true"><svg viewBox="0 0 12 12" width="15" height="15" style="display:block"><path d="M2.5 4.5l3.5 3.5 3.5-3.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></i></span></summary><div class="phc">';
     if(c.nights.length){h+='<h4>'+today+' in past years</h4><div class="phr">'+c.nights.map(function(n){
         return '<div class="phy"><b>'+n.y+'</b><span class="phs" style="color:'+fcCol(n.sc)+'">'+n.sc+'</span>'
           +'<span>'+(n.mph==null?'wind n/a':(n.mph<2||!n.dir?'Calm':esc(n.dir)+' '+n.mph+' mph'))+'</span>'
