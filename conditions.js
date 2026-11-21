@@ -53,8 +53,8 @@ var b=new Date();b.setHours(0,0,0,0);
 var u='https://api.tidesandcurrents.noaa.gov/api/prod/datagetter?product=predictions&application=SharkLeash&datum=MLLW&interval=hilo&units=english&time_zone=lst_ldt&format=json&range=192&station='+st[0]+'&begin_date='+ymd(b);
 return getJSON(u).then(function(j){
 if(!j.predictions)throw new Error('no predictions');
-var now=new Date(),up=j.predictions.map(function(p){var f=fmtT(p.t);f.type=p.type;f.v=(+p.v).toFixed(1);return f;}).filter(function(p){return p.date>now;});
-return {hi:up.find(function(p){return p.type==='H'}),lo:up.find(function(p){return p.type==='L'}),first:up[0],all:up};
+var now=new Date(),full=j.predictions.map(function(p){var f=fmtT(p.t);f.type=p.type;f.v=(+p.v).toFixed(1);return f;}),up=full.filter(function(p){return p.date>now;});
+return {hi:up.find(function(p){return p.type==='H'}),lo:up.find(function(p){return p.type==='L'}),first:up[0],all:up,full:full};
 });
 }
 var WT=null;
@@ -140,6 +140,37 @@ var age=(Date.now()-new Date(p.issuanceTime))/864e5;
 if(!m)return null;return {risk:m[1].charAt(0).toUpperCase()+m[1].slice(1).toLowerCase(),src:'NWS surf zone forecast',old:age>2};
 }).catch(function(){return null;});});
 }
+/* ===== Tide curve: the day's rise and fall from NOAA's high/low predictions, tonight's 4-10 PM drop window shaded, a dot for now ===== */
+function tideTile(t){
+  if(!document.getElementById('slmc-tide-css')){var c=document.createElement('style');c.id='slmc-tide-css';
+    c.textContent='#slmc .tile.tide{grid-column:span 2}@media(max-width:640px){#slmc .tile.tide{grid-column:auto}}'
+      +'#slmc .tide svg{display:block;width:100%;height:auto;margin:6px 0 2px}#slmc .tide .tdn{display:flex;flex-wrap:wrap;gap:4px 14px;font-size:13.5px;font-weight:700;color:rgba(255,255,255,.85)}#slmc .tide .tdn b{color:#fff}';
+    document.head.appendChild(c);}
+  var hi=t&&t.hi,lo=t&&t.lo,E=t&&(t.full||t.all)||[];
+  var lab='<div class="lab">Tides <span style="opacity:.6">· predicted</span></div>';
+  if(!E.length)return '<div class="tile tide">'+lab+'<div class="big">--</div><div class="small err">Tide unavailable</div></div>';
+  var now=Date.now(),t0=now-3*36e5,t1=now+21*36e5;
+  var P=E.map(function(e){return {x:e.date.getTime(),v:+e.v,type:e.type,t:e.t};}).sort(function(a,b){return a.x-b.x;});
+  /* before the first known turn: assume the opposite turn about 6.2 h earlier */
+  while(P[0].x>t0-36e5){var a=P[0],b=P[1]||P[0];P.unshift({x:a.x-6.21*36e5,v:a===b?a.v:b.v,type:a.type==='H'?'L':'H',est:1});}
+  var lv=function(x){for(var i=0;i<P.length-1;i++){var a=P[i],b=P[i+1];if(x>=a.x&&x<=b.x){var k=(x-a.x)/(b.x-a.x);return a.v+(b.v-a.v)*(1-Math.cos(Math.PI*k))/2;}}return P[P.length-1].v;};
+  var W=320,H=96,top=14,bot=80,vs=[];for(var x=t0;x<=t1;x+=12*6e4)vs.push(lv(x));
+  var mn=Math.min.apply(null,vs),mx=Math.max.apply(null,vs),pad=(mx-mn)*.12||.3;mn-=pad;mx+=pad;
+  var X=function(x){return (x-t0)/(t1-t0)*W;},Y=function(v){return bot-(v-mn)/(mx-mn)*(bot-top);};
+  var pts=[];for(var x2=t0;x2<=t1;x2+=12*6e4)pts.push(X(x2).toFixed(1)+','+Y(lv(x2)).toFixed(1));
+  var g='';
+  /* drop windows (4-10 PM local) that fall inside the chart */
+  for(var d=-1;d<=1;d++){var day=new Date(now+d*864e5);var w0=new Date(day.getFullYear(),day.getMonth(),day.getDate(),16).getTime(),w1=w0+6*36e5;
+    var a0=Math.max(w0,t0),a1=Math.min(w1,t1);if(a1>a0)g+='<rect x="'+X(a0).toFixed(1)+'" y="'+top+'" width="'+(X(a1)-X(a0)).toFixed(1)+'" height="'+(bot-top)+'" fill="rgba(126,231,135,.16)"/>'+(a1-a0>2*36e5?'<text x="'+((X(a0)+X(a1))/2).toFixed(1)+'" y="'+(top-4)+'" fill="#7ee787" font-size="9" font-weight="800" text-anchor="middle">4–10 PM</text>':'');}
+  g+='<polygon points="0,'+bot+' '+pts.join(' ')+' '+W+','+bot+'" fill="rgba(110,231,255,.18)"/><polyline points="'+pts.join(' ')+'" fill="none" stroke="#6ee7ff" stroke-width="2"/>';
+  /* turn labels */
+  P.forEach(function(p){if(p.est||p.x<t0+20*6e4||p.x>t1-20*6e4)return;var px=X(p.x),py=Y(p.v),up=p.type==='H';
+    g+='<circle cx="'+px.toFixed(1)+'" cy="'+py.toFixed(1)+'" r="2.6" fill="#fff"/><text x="'+px.toFixed(1)+'" y="'+(up?py-5:py+11).toFixed(1)+'" fill="#fff" font-size="9" font-weight="800" text-anchor="middle">'+(up?'H ':'L ')+p.t.replace(':00','').replace(' AM','a').replace(' PM','p')+'</text>';});
+  /* now */
+  var nx=X(now),ny=Y(lv(now)),rising=lv(now+15*6e4)>lv(now);
+  g+='<line x1="'+nx.toFixed(1)+'" y1="'+top+'" x2="'+nx.toFixed(1)+'" y2="'+bot+'" stroke="rgba(255,255,255,.35)" stroke-dasharray="2 3"/><circle cx="'+nx.toFixed(1)+'" cy="'+ny.toFixed(1)+'" r="4" fill="#ff4444" stroke="#fff" stroke-width="1.5"/><text x="'+nx.toFixed(1)+'" y="'+(H-2)+'" fill="rgba(255,255,255,.7)" font-size="9" font-weight="800" text-anchor="middle">now · '+(rising?'rising':'falling')+'</text>';
+  var nxt='';if(hi)nxt+='<span>⬆️ High <b>'+hi.t+'</b> '+(hi.day==='Today'?'':hi.day+' ')+'· '+hi.v+' ft</span>';if(lo)nxt+='<span>⬇️ Low <b>'+lo.t+'</b> '+(lo.day==='Today'?'':lo.day+' ')+'· '+lo.v+' ft</span>';
+  return '<div class="tile tide">'+lab+'<svg viewBox="0 0 '+W+' '+H+'" role="img" aria-label="Tide curve for the next day">'+g+'</svg><div class="tdn">'+nxt+'</div></div>';}
 function sunTimes(d,lat,lon){var R=Math.PI/180,J=Date.UTC(d.getFullYear(),d.getMonth(),d.getDate(),12)/864e5+2440587.5,n=Math.round(J-2451545+0.0008-lon/360),
 Js=2451545+0.0009-lon/360+n,M=(357.5291+0.98560028*(Js-2451545))%360,C=1.9148*Math.sin(M*R)+0.02*Math.sin(2*M*R)+0.0003*Math.sin(3*M*R),L=(M+C+180+102.9372)%360,
 Jt=Js+0.0053*Math.sin(M*R)-0.0069*Math.sin(2*L*R),dec=Math.asin(Math.sin(L*R)*Math.sin(23.44*R)),
@@ -375,7 +406,7 @@ h+='<div class="tile"><div class="lab">Wind <span style="opacity:.6">· NWS fore
 h+='<div class="tile"><div class="lab">Waves <span style="opacity:.6">· '+(wv||bwv==null?'NWS forecast':(bm.wsrc==='model'?'NOAA wave model':'nearest buoy'))+'</span></div>'+(!wv&&bwv!=null?'<div class="big">'+ftTxt(bwv)+'<span style="font-size:16px">ft</span></div><div class="small">'+(bm.wp?Math.round(bm.wp)+'s period · ':'')+'measured offshore, updated every 2 hrs</div>':wv?'<div class="big">'+ftTxt(wv.now)+'<span style="font-size:16px">ft</span></div><div class="small">'+(wv.in3!==null?'In 3 hrs: '+ftTxt(wv.in3)+' ft':'')+(wv.off?' · just offshore':'')+'</div>':'<div class="big">--</div><div class="small">No wave forecast for this spot</div>')+'</div>';
 h+=clTile(bkey,bm&&bm.clarity);
 h+='<div class="tile"><div class="lab">Water temp'+(wt?' <span style="color:'+(wt.job?'#2ecc71">· ocean reading':wt.sat?'#ffb020">· satellite, daily':wt.old?'#ffb020">· sensor, older':'#2ecc71">· live sensor')+'</span>':'')+'</div>'+(wt?'<div class="big">'+Math.round(wt.f)+'<span style="font-size:16px">°F</span></div><div class="small">'+esc(wt.name)+' · '+(wt.job?'updated every 2 hrs'+(wt.ref?' · skipped '+esc(wt.ref.name)+' '+Math.round(wt.ref.f)+'°F, '+wt.ref.mi+' mi ('+(wt.ref.mi>15?'too far away':'likely a harbor or bay sensor')+')':''):wt.sat?wt.at+(wt.ref?' · nearest sensor '+esc(wt.ref.name)+' '+Math.round(wt.ref.f)+'°F, '+wt.ref.mi+' mi'+(wt.ref.odd?' (skipped: far off the satellite, likely a harbor or bay sensor)':''):''):wt.mi+' mi · '+(wt.old?'as of ':'')+wt.at)+'</div>':'<div class="big">--</div><div class="small">No water temp reading nearby</div>')+'</div>';
-['hi','lo'].forEach(function(k){var p=t&&t[k];h+='<div class="tile"><div class="lab">Next '+(k==='hi'?'high':'low')+' tide <span style="opacity:.6">· predicted</span></div>'+(p?'<div class="big">'+p.t+'</div><div class="small">'+p.day+' · '+p.v+' ft</div>':'<div class="big">--</div><div class="small err">Tide unavailable</div>')+'</div>';});
+h+=tideTile(t);
 var mo=moon(new Date()),spring=Math.min(mo.age,Math.abs(mo.age-mo.syn/2),mo.syn-mo.age)<2.5;
 var RC={Low:['#2ecc71','🟢'],Moderate:['#ffb020','🟡'],High:['#ff4444','🔴']},rk=rc&&rc.risk&&RC[rc.risk]?rc.risk:null;
 h+='<div class="tile"><div class="lab">Rip current risk</div>'+(rk?'<div class="big" style="color:'+RC[rk][0]+'">'+RC[rk][1]+' '+rk+'</div><div class="small">'+esc(rc.src)+(rc.old?' · may be out of date':'')+'</div>':'<div class="big">--</div><div class="small">'+(rc&&rc.src?esc(rc.src):'No NWS surf forecast for this spot right now (many offices only issue it in beach season)')+'</div>')+'</div>';
@@ -428,9 +459,9 @@ function locHelp(code){
     android:'In Chrome, tap the icon just left of the web address → <b>Permissions</b> (or <b>Site settings</b>) → <b>Location</b> → <b>Allow</b>.',
     'android-samsung':'In Samsung Internet, tap the lock icon by the web address → <b>Permissions</b> → turn on <b>Location</b>.',
     desktop:'Click the icon just left of the web address (a lock or sliders) and set <b>Location</b> to <b>Allow</b>.'}[pf];
-  var again='Reload this page and tap <b>Use my location</b> again'+(pf==='ios'?'. Tap <b>Allow</b> when Safari asks.':'.');
+  var tp=pf==='desktop'?'click':'tap',again='Reload this page and '+tp+' <b>Use my location</b> again'+(pf==='ios'?'. Tap <b>Allow</b> when Safari asks.':'.');
   var head={denied:'Location is turned off for this site.',timeout:'Your phone couldn’t find its location in time.',unavailable:'Your phone couldn’t find its location.',unsupported:'This browser can’t share its location.'}[k];
-  var steps=k==='denied'?[on,allow,again]:k==='timeout'?['Step outside or away from tall buildings.','Tap <b>Use my location</b> again.']:k==='unavailable'?[on,'Tap <b>Use my location</b> again.']:[];
+  var steps=k==='denied'?[on,allow,again]:k==='timeout'?['Step outside or away from tall buildings.',(pf==='desktop'?'Click':'Tap')+' <b>Use my location</b> again.']:k==='unavailable'?[on,(pf==='desktop'?'Click':'Tap')+' <b>Use my location</b> again.']:[];
   out.innerHTML='<div class="lch"><p class="msg err" style="margin:0 0 4px;padding:0"><b>'+head+'</b>'+(steps.length?' Here’s how to fix it:':'')+'</p>'
     +(steps.length?'<ol>'+steps.map(function(x){return '<li>'+x+'</li>';}).join('')+'</ol>':'')
     +'<button type="button" class="lcp">Or pick your beach from the list →</button></div>';
