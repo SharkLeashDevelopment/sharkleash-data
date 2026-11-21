@@ -1,8 +1,14 @@
 {
  "_readme": "Version badge and What's new list for the Beach Conditions panel. To announce an update: add an entry at the TOP of updates, then set version and date to match. Notes are for anglers: one short line each, no code talk. The panel shows the newest 5 entries. Bumping version shows a NEW dot to everyone until they open the list.",
- "version": "41",
- "date": "2026-11-20",
+ "version": "42",
+ "date": "2026-11-21",
  "updates": [
+  {
+   "date": "2026-11-21",
+   "notes": [
+    "Tides now show as a curve for the next day, with your 4–10 PM drop window shaded and a dot for where the tide is right now."
+   ]
+  },
   {
    "date": "2026-11-20",
    "notes": [
