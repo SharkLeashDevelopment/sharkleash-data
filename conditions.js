@@ -557,6 +557,18 @@ var CHANGELOG_URL="https://sharkleashdevelopment.github.io/sharkleash-data/chang
     var ft=ROOT.querySelector('.foot span');if(ft&&/^v\d+$/.test(ft.textContent.trim()))ft.textContent='v'+c.version;
   }).catch(function(){});
 })();
+/* ===== "Share this beach" (its own embed) shares tonight's numbers instead of a generic line. Only touches shares titled "SharkLeash: <beach>" for the beach on screen. ===== */
+function shareLine(){var L=window.SLMC_LAST;if(!L||!L.beach||BAN_NOW)return null;var nm=String(L.beach).replace(/,\s*[A-Z]{2}$/,''),p=[];
+  var hr=new Date().getHours(),when=hr>=22?'tomorrow night':'tonight';
+  if(L.ds!=null)p.push('Drop Score '+L.ds);
+  if(L.w&&L.w.dir&&L.w.spd)p.push(L.w.dir+' '+String(L.w.spd).replace(/\s*mph/i,'')+' mph');
+  if(L.wv&&L.wv.now!=null)p.push(ftTxt(L.wv.now)+' ft surf');
+  if(L.wt&&L.wt.f!=null)p.push(Math.round(L.wt.f)+'°F water');
+  if(L.t&&L.t.hi)p.push('high tide '+L.t.hi.t+(L.t.hi.day&&L.t.hi.day!=='Today'?' '+L.t.hi.day:''));
+  if(!p.length)return null;
+  return nm+' '+when+': '+p.join(' · ')+' 🦈 Free shark fishing conditions + the local rules:';}
+(function(){if(!navigator.share||navigator.__slShare)return;var orig=navigator.share.bind(navigator);
+  try{navigator.share=function(d){try{var L=window.SLMC_LAST;if(d&&L&&L.beach&&String(d.title||'')==='SharkLeash: '+L.beach){var t=shareLine();if(t){d=Object.assign({},d,{text:t});if(window.gtag)gtag('event','share_numbers',{beach:L.beach});}}}catch(e){}return orig(d);};navigator.__slShare=1;}catch(e){}})();
 document.addEventListener('click',function(e){if(!e.target.closest||!e.target.closest('#slmc-map'))return;var m=$('slm-map');if(!m)return;m.scrollIntoView({behavior:'smooth',block:'center'});if(window.gtag)gtag('event','map_pick_click');});
 window.addEventListener('load',function(){if(!$('slm-map')){var mb=$('slmc-map');if(mb)mb.style.display='none';}});
 })();
