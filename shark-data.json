@@ -558,11 +558,11 @@
    "name": "South Carolina",
    "ab": "SC",
    "category": "local",
-   "lastVerified": "2026-11-09",
-   "summary": "Shark fishing banned on beaches in Horry County, Myrtle Beach, Surfside and Hilton Head; Isle of Palms restricts it.",
+   "lastVerified": "2026-11-22",
+   "summary": "Shark fishing is banned on beaches in Horry County (most of Garden City too), Myrtle Beach, North Myrtle, Surfside and Hilton Head. Isle of Palms bans drone and kayak drops.",
    "drone": {
     "status": "none",
-    "note": "No state drone rule found. Horry County and Myrtle Beach ban shark fishing entirely."
+    "note": "No state drone rule. Isle of Palms says no drone or kayak drops, but the state (SCDNR) says towns can't ban drone fishing. Your call there."
    },
    "rules": [
     {
@@ -579,11 +579,11 @@
     },
     {
      "label": "Horry County / Myrtle Beach",
-     "text": "Shark fishing from any pier, beach or shore is prohibited in unincorporated Horry County and Myrtle Beach; North Myrtle Beach and Surfside Beach also ban it. Release any shark caught right away. (County ban challenged in court in 2025; still in effect.)"
+     "text": "No shark fishing from any beach, pier or shore in Horry County, Myrtle Beach, North Myrtle Beach or Surfside Beach. Let any shark go right away. (Challenged in court in 2025, still in effect.) The south end of Garden City, toward Murrells Inlet, is in Georgetown County and has no ban."
     },
     {
      "label": "Pawleys Island",
-     "text": "No targeting sharks when surf fishing, May 1 – Sept 30. (Being confirmed with the town.)"
+     "text": "No shark fishing from the surf May 1 to Sept 30. Open the rest of the year. (Being confirmed with the town.)"
     },
     {
      "label": "Myrtle Beach State Park",
@@ -591,15 +591,15 @@
     },
     {
      "label": "Folly Beach",
-     "text": "No catching or attempting to catch sharks from the pier."
+     "text": "No shark fishing from the pier. A drone-drop ban was proposed but not passed (vote put off in July 2026)."
     },
     {
      "label": "Hilton Head Island",
-     "text": "Shark fishing is prohibited on town beaches (Town beach regulations)."
+     "text": "No shark fishing on town beaches."
     },
     {
      "label": "Isle of Palms",
-     "text": "Ord. 2025-07 (passed Sept 2025) restricts shark fishing from the beach and bans using drones to drop baits. Sullivan's Island is drafting a shark-fishing ordinance (2026)."
+     "text": "Town rule (Ord. 2025-07, Sept 2025) limits shark fishing and bans drone and kayak bait drops. The state says towns can't ban drone fishing, so the rule may not hold up, but the town still enforces it. Sullivan's Island's shark rule is on hold."
     }
    ],
    "sources": [
