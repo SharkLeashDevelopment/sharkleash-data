@@ -92,7 +92,9 @@ fetch(SW_DATA_URL,{cache:'no-cache'}).then(function(r){if(!r.ok)throw 0;return r
 var sp=J.speciesByMonth||{};for(var k in sp)SPM[k]=sp[k];sp=J.speciesByRegion||{};for(k in sp)SPM[k]=sp[k];var pr=J.protected||{};for(var a in pr){if(a==='FL'){PROT_ST['FL-PAN']=pr[a];PROT_ST['FL-SW']=pr[a];}else PROT_ST[a]=pr[a];}
 BT=J.baitByRegion||{};BR=J.baitRules||{};(J.baitSpecies||[]).forEach(function(b){BN[b.code]=b.short||b.name;});
 var C={high:'h',medium:'m',low:'l',inlet:'i'},f=function(v){return v==null?'':String(v).replace(/^>\s*/,'+');};
-(J.beaches||[]).forEach(function(b){var d=b.depth;if(!d)return;DEEP.push([b.lat,b.lon,f(d.to10ftYd),f(d.to15ftYd),C[d.confidence]||'m',b.name+(b.state?', '+b.state:''),b.localBan||'']);});
+/* a local ban with banMonths (1-12) only applies in those months, Eastern time */
+function banOn(b){if(!b||!b.localBan)return false;var m=b.banMonths;if(!m||!m.length)return true;var mo=+new Intl.DateTimeFormat('en-US',{month:'numeric',timeZone:'America/New_York'}).format(new Date());return m.indexOf(mo)>=0;}
+(J.beaches||[]).forEach(function(b){var d=b.depth;if(!d)return;DEEP.push([b.lat,b.lon,f(d.to10ftYd),f(d.to15ftYd),C[d.confidence]||'m',b.name+(b.state?', '+b.state:''),banOn(b)?b.localBan:'']);});
 try{window.dispatchEvent(new Event('slsw:data'));}catch(e){}
 }).catch(function(){});
 var SHOW_ID=true,ID_URL='/shark-id';
