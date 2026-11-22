@@ -1,8 +1,14 @@
 {
  "_readme": "Version badge and What's new list for the Beach Conditions panel. To announce an update: add an entry at the TOP of updates, then set version and date to match. Notes are for anglers: one short line each, no code talk. The panel shows the newest 5 entries. Bumping version shows a NEW dot to everyone until they open the list.",
- "version": "42",
- "date": "2026-11-21",
+ "version": "43",
+ "date": "2026-11-22",
  "updates": [
+  {
+   "date": "2026-11-22",
+   "notes": [
+    "Seasonal beach rules: Pawleys Island's shark ban only runs May–September, so it now gets a Drop Score the rest of the year. New beach: Garden City Beach South (the Georgetown County end, no ban)."
+   ]
+  },
   {
    "date": "2026-11-21",
    "notes": [
