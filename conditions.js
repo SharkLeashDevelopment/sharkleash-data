@@ -330,8 +330,8 @@ function bbMatch(lat,lon,label,bb){var near=null;if(label)FC_BEACH.forEach(funct
 var FC_STATES=[],RULE_V=[['outdated','Rule is out of date'],['new_rule','There’s a new rule'],['drone','Drone rule is wrong'],['other','Something else']];
 function ruleDate(ab){var s=null;FC_STATES.forEach(function(x){if(x.ab===ab)s=x;});if(!s||!s.lastVerified)return null;var d=new Date(s.lastVerified+'T12:00:00');return {name:s.name,d:isNaN(d)?s.lastVerified:d.toLocaleDateString(undefined,{month:'short',day:'numeric',year:'numeric'})};}
 function ruleRow(ab){var r=ruleDate(ab);if(!r&&!REPORT_URL)return '';
-  return '<div id="slmc-rule" style="margin:10px 0 0;padding:10px 12px;border-radius:10px;background:rgba(255,255,255,.05);font-size:13.5px">'
-    +'<div>⚖️ '+(r?esc(r.name)+' rules last checked <b>'+esc(r.d)+'</b>':'Local rules')+(REPORT_URL?' · <a href="#" class="rlo" style="color:#6ee7ff;font-weight:800">Rule wrong or changed? Tell us</a>':'')+'</div>'
+  return '<div id="slmc-rule" style="margin:0 0 10px;padding:7px 12px;border-radius:10px;background:rgba(255,255,255,.05);font-size:13px">'
+    +'<div>⚖️ '+(r?esc(r.name)+' rules checked <b>'+esc(r.d)+'</b>':'Local rules')+(REPORT_URL?' · <a href="#" class="rlo" style="color:#6ee7ff;font-weight:800">Wrong? Tell us</a>':'')+'</div>'
     +(REPORT_URL?'<div class="rlf" style="display:none;margin-top:8px"><div class="clb rlb" style="flex-wrap:wrap">'+RULE_V.map(function(v){return '<button type="button" data-v="'+v[0]+'">'+v[1]+'</button>';}).join('')+'</div>'
       +'<textarea class="rlt" maxlength="300" rows="2" placeholder="What changed? A link to the new rule helps (optional)" style="width:100%;box-sizing:border-box;margin-top:8px;border-radius:8px;border:1px solid rgba(255,255,255,.2);background:rgba(0,0,0,.25);color:#fff;padding:8px;font:inherit"></textarea>'
       +'<button type="button" class="rls" disabled style="margin-top:6px;padding:8px 14px;border-radius:8px;border:0;background:#ff3b1f;color:#fff;font-weight:800">Send</button>'
@@ -422,6 +422,7 @@ else if(SEAS_NOW)h+='<div class="nws">📅 Seasonal rule '+(SEAS_NOW.exact?'here
 /* tonight's place on the Drop Score list: same order as the Top 5 (raw score, beaches with a fishing ban or red tide left out) */
 var RK=bbRank(bb,bm);if(RK&&RK.out)h+='<div class="rank" style="color:rgba(255,255,255,.7)">Not on tonight’s Drop Score list · '+esc(RK.out)+'</div>';else if(RK)h+='<a class="rank" href="#slbb">🏆 <b>#'+RK.n+'</b> of '+RK.of+' beaches tonight'+(label?'':' ('+esc(bm.name.replace(/,\s*[A-Z]{2}$/,''))+')')+'<small>See the list →</small></a>';
 if(ALERTS.length){var sv=ALERTS.some(function(x){return x.sev;});h+='<div class="nws'+(sv?' sev':'')+'">⚠️ NWS: '+ALERTS.slice(0,4).map(function(x){return esc(x.ev);}).join(' · ')+'<small>Active now for this beach’s area. <a href="https://forecast.weather.gov/MapClick.php?lat='+(+lat).toFixed(4)+'&lon='+(+lon).toFixed(4)+'" target="_blank" rel="noopener">Details at weather.gov ↗</a></small></div>';if(window.gtag)gtag('event','nws_alert_view',{beach:bkey||'unlisted',alerts:ALERTS.map(function(x){return x.ev;}).join(', ').slice(0,100)});}
+h+=ruleRow(BM.near?BM.near.state:(w&&w.state));
 h+='<div class="grid">';
 h+='<div class="tile"><div class="lab">Weather <span style="opacity:.6">· NWS forecast</span></div>'+(w&&w.temp!==undefined&&w.temp!==null?'<div class="big"><span aria-hidden="true">'+wxIcon(w.sky,w.day)+'</span>'+esc(w.temp)+'<span style="font-size:16px">°'+esc(w.unit)+'</span></div><div class="small">'+esc(w.sky)+(w.pop!==null?' · '+w.pop+'% rain':'')+'</div>':'<div class="big">--</div><div class="small err">Weather unavailable</div>')+'</div>';
 h+='<div class="tile"><div class="lab">Wind <span style="opacity:.6">· NWS forecast</span></div>'+(w?'<div class="big">'+arrowSVG(w.dir)+esc(w.dir)+' '+esc(w.spd.replace(' mph',''))+'<span style="font-size:16px">mph</span></div><div class="small">'+(w.next?'In 3 hrs: '+esc(w.next.dir)+' '+esc(w.next.spd):'')+'</div>':'<div class="big">--</div><div class="small err">Wind unavailable</div>')+'</div>';
@@ -436,7 +437,6 @@ var bw=bestWindow(t,lat,lon);
 h+='<div class="tile"><div class="lab">Best window</div>'+(bw?'<div class="big" style="font-size:clamp(22px,2.1vw,30px);white-space:normal;flex-wrap:wrap">'+hmr(bw.a,bw.b)+'</div><div class="small">'+(new Date(bw.a).toDateString()===new Date().toDateString()?'Today':'Tomorrow')+' · around '+(bw.p.type==='H'?'high':'low')+' tide '+bw.p.t+(bw.dark?' · after dark':bw.dusk?' · at dusk/dawn':'')+(spring?' · strong '+(mo.age<5||mo.age>24?'new':'full')+'-moon tides':'')+'</div>':'<div class="big">--</div><div class="small">Needs tide data</div>')+'</div>';
 var mo=moon(new Date());h+='<div class="tile"><div class="lab">Moon</div><div class="big">'+mo.icon+' '+mo.ill+'<span style="font-size:16px">%</span></div><div class="small">'+mo.name+' · '+mo.next+'</div></div>';
 h+='</div><p class="small" style="margin:8px 0 0">Tide station: '+esc(st[1])+' ('+mi+' mi away)</p>';
-h+=ruleRow(BM.near?BM.near.state:(w&&w.state));
 h+='<a class="rig" href="/#buy-anchor" onclick="if(window.gtag)gtag(\'event\',\'rig_up_click\',{event_category:\'Conditions\'})"><span>Fishing here? Rig up right.</span><b>Get Gen 2 →</b></a>';
 out.innerHTML=h;
 try{clWire(bkey,bm&&bm.clarity);}catch(e){}
