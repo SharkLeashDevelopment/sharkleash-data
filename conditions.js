@@ -564,7 +564,10 @@ function shareLine(){var L=window.SLMC_LAST;if(!L||!L.beach||BAN_NOW)return null
   if(L.w&&L.w.dir&&L.w.spd)p.push(L.w.dir+' '+String(L.w.spd).replace(/\s*mph/i,'')+' mph');
   if(L.wv&&L.wv.now!=null)p.push(ftTxt(L.wv.now)+' ft surf');
   if(L.wt&&L.wt.f!=null)p.push(Math.round(L.wt.f)+'°F water');
-  if(L.t&&L.t.hi)p.push('high tide '+L.t.hi.t+(L.t.hi.day&&L.t.hi.day!=='Today'?' '+L.t.hi.day:''));
+  /* the tide turn inside the 4-10 PM window the score covers (a high tide first); none in the window = no tide in the message */
+  var d0=new Date();if(hr>=22)d0=new Date(d0.getTime()+864e5);var w0=new Date(d0.getFullYear(),d0.getMonth(),d0.getDate(),16).getTime(),w1=w0+6*36e5;
+  var tw=((L.t&&L.t.all)||[]).filter(function(e){var x=e.date.getTime();return x>=w0&&x<=w1;}),tc=tw.filter(function(e){return e.type==='H';})[0]||tw[0];
+  if(tc)p.push((tc.type==='H'?'high':'low')+' tide '+tc.t);
   if(!p.length)return null;
   return nm+' '+when+': '+p.join(' · ')+' 🦈 Free shark fishing conditions + the local rules:';}
 (function(){if(!navigator.share||navigator.__slShare)return;var orig=navigator.share.bind(navigator);
