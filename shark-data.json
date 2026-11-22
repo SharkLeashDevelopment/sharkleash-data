@@ -2654,7 +2654,7 @@
    "state": "SC",
    "lat": 33.5773,
    "lon": -78.9966,
-   "localBan": "Horry County: shark fishing from the beach and piers prohibited (the Georgetown County end of Garden City has no ban)",
+   "localBan": "Horry County: shark fishing from the beach and piers prohibited (the Georgetown County end, south toward Murrells Inlet, has no ban: see Garden City Beach South)",
    "depth": {
     "to10ftYd": 137,
     "to15ftYd": 191,
@@ -2664,6 +2664,23 @@
    "nws": [
     "SCZ054",
     "SCC051"
+   ]
+  },
+  {
+   "id": "garden-city-beach-south-sc",
+   "name": "Garden City Beach South",
+   "state": "SC",
+   "lat": 33.5541,
+   "lon": -79.0162,
+   "depth": {
+    "to10ftYd": 164,
+    "to15ftYd": 273,
+    "confidence": "medium"
+   },
+   "faces": 120,
+   "nws": [
+    "SCZ056",
+    "SCC043"
    ]
   },
   {
@@ -2681,7 +2698,8 @@
    "nws": [
     "SCZ056",
     "SCC043"
-   ]
+   ],
+   "noDrones": "SC state park: drone permit likely needed, unconfirmed"
   },
   {
    "id": "litchfield-beach-sc",
