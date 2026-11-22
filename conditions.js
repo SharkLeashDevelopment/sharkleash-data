@@ -326,6 +326,25 @@ function bbRank(bb,bm){if(!bb||!bm)return null;if(bm.flag||bm.redtide)return {ou
   var ok=(bb.beaches||[]).filter(function(x){return !x.flag&&!x.redtide&&rv(x)!=null;}).sort(function(a,b){return rv(b)-rv(a);}),i=ok.indexOf(bm);return i<0?null:{n:i+1,of:ok.length};}
 function bbMatch(lat,lon,label,bb){var near=null;if(label)FC_BEACH.forEach(function(x){if(x.name+', '+x.state===label)near=x;});if(!near)near=fcNearBeach(lat,lon);
   var m=null;if(bb&&near){var nm=near.name+', '+near.state;(bb.beaches||[]).forEach(function(x){if(x.name===nm)m=x;});}return {near:near,match:m};}
+/* ===== Rules: when this state's rules were last checked, plus "Rule wrong or changed?" reports (type "rule" in the report Sheet) ===== */
+var FC_STATES=[],RULE_V=[['outdated','Rule is out of date'],['new_rule','There’s a new rule'],['drone','Drone rule is wrong'],['other','Something else']];
+function ruleDate(ab){var s=null;FC_STATES.forEach(function(x){if(x.ab===ab)s=x;});if(!s||!s.lastVerified)return null;var d=new Date(s.lastVerified+'T12:00:00');return {name:s.name,d:isNaN(d)?s.lastVerified:d.toLocaleDateString(undefined,{month:'short',day:'numeric',year:'numeric'})};}
+function ruleRow(ab){var r=ruleDate(ab);if(!r&&!REPORT_URL)return '';
+  return '<div id="slmc-rule" style="margin:10px 0 0;padding:10px 12px;border-radius:10px;background:rgba(255,255,255,.05);font-size:13.5px">'
+    +'<div>⚖️ '+(r?esc(r.name)+' rules last checked <b>'+esc(r.d)+'</b>':'Local rules')+(REPORT_URL?' · <a href="#" class="rlo" style="color:#6ee7ff;font-weight:800">Rule wrong or changed? Tell us</a>':'')+'</div>'
+    +(REPORT_URL?'<div class="rlf" style="display:none;margin-top:8px"><div class="clb rlb" style="flex-wrap:wrap">'+RULE_V.map(function(v){return '<button type="button" data-v="'+v[0]+'">'+v[1]+'</button>';}).join('')+'</div>'
+      +'<textarea class="rlt" maxlength="300" rows="2" placeholder="What changed? A link to the new rule helps (optional)" style="width:100%;box-sizing:border-box;margin-top:8px;border-radius:8px;border:1px solid rgba(255,255,255,.2);background:rgba(0,0,0,.25);color:#fff;padding:8px;font:inherit"></textarea>'
+      +'<button type="button" class="rls" disabled style="margin-top:6px;padding:8px 14px;border-radius:8px;border:0;background:#ff3b1f;color:#fff;font-weight:800">Send</button>'
+      +'<div class="small rlm" style="margin-top:6px;color:#6ee7ff"></div><div class="small" style="margin-top:4px;opacity:.65">&#128274; Sent under the beach name only. Never your location or your name.</div></div>':'')+'</div>';}
+function ruleWire(beachKey,ab){var el=out&&out.querySelector('#slmc-rule');if(!el||!REPORT_URL)return;var pick='',f=el.querySelector('.rlf'),send=el.querySelector('.rls');
+  el.querySelector('.rlo').addEventListener('click',function(e){e.preventDefault();f.style.display=f.style.display==='none'?'':'none';if(window.gtag)gtag('event','rule_report_open',{beach:beachKey||'unlisted'});});
+  el.querySelectorAll('.rlb button').forEach(function(b){b.addEventListener('click',function(){pick=b.getAttribute('data-v');el.querySelectorAll('.rlb button').forEach(function(x){x.style.outline=x===b?'2px solid #6ee7ff':'';});send.disabled=false;});});
+  send.addEventListener('click',function(){if(!pick)return;send.disabled=true;var m=el.querySelector('.rlm');
+    var p={type:'rule',beach:beachKey||'unlisted',value:pick,device:clDevice(),tester:clStore('sl_tester')||'',app:SL_APP,extra:{comment:String(el.querySelector('.rlt').value||'').slice(0,300),state:ab||'',app:SL_APP}};
+    fetch(REPORT_URL,{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify(p)}).then(function(r){return r.json();})
+      .then(function(j){m.textContent=j.ok?'Thanks! We check every rule report and fix the app when it’s confirmed.':(j.error==='already reported'?'You already sent a report for this beach today. Thanks!':'Couldn’t send that. Try again later.');if(!j.ok&&j.error!=='already reported')send.disabled=false;})
+      .catch(function(){m.textContent='Couldn’t send that. Try again later.';send.disabled=false;});
+    if(window.gtag)gtag('event','rule_report',{beach:beachKey||'unlisted',reason:pick,beach_state:ab||''});});}
 /* ===== Water clarity: outlook from the scoring job; angler reports override it (see REPORT_URL) ===== */
 var SL_APP=!!window.SL_APP;/* set site-wide in the head code */
 var REPORT_URL='https://script.google.com/macros/s/AKfycbzO-9-krA8DIvmFRk1N-uIw6rYV1O75beHxxIi9IRthrOnoGBBSci6MONJU9apbPecACA/exec';/* paste the Apps Script /exec URL here to turn on the report buttons */
@@ -417,9 +436,11 @@ var bw=bestWindow(t,lat,lon);
 h+='<div class="tile"><div class="lab">Best window</div>'+(bw?'<div class="big" style="font-size:clamp(22px,2.1vw,30px);white-space:normal;flex-wrap:wrap">'+hmr(bw.a,bw.b)+'</div><div class="small">'+(new Date(bw.a).toDateString()===new Date().toDateString()?'Today':'Tomorrow')+' · around '+(bw.p.type==='H'?'high':'low')+' tide '+bw.p.t+(bw.dark?' · after dark':bw.dusk?' · at dusk/dawn':'')+(spring?' · strong '+(mo.age<5||mo.age>24?'new':'full')+'-moon tides':'')+'</div>':'<div class="big">--</div><div class="small">Needs tide data</div>')+'</div>';
 var mo=moon(new Date());h+='<div class="tile"><div class="lab">Moon</div><div class="big">'+mo.icon+' '+mo.ill+'<span style="font-size:16px">%</span></div><div class="small">'+mo.name+' · '+mo.next+'</div></div>';
 h+='</div><p class="small" style="margin:8px 0 0">Tide station: '+esc(st[1])+' ('+mi+' mi away)</p>';
+h+=ruleRow(BM.near?BM.near.state:(w&&w.state));
 h+='<a class="rig" href="/#buy-anchor" onclick="if(window.gtag)gtag(\'event\',\'rig_up_click\',{event_category:\'Conditions\'})"><span>Fishing here? Rig up right.</span><b>Get Gen 2 →</b></a>';
 out.innerHTML=h;
 try{clWire(bkey,bm&&bm.clarity);}catch(e){}
+try{ruleWire(bkey,BM.near?BM.near.state:(w&&w.state));}catch(e){}
 try{fcStrip(lat,lon,w,wv,wt,t,label);}catch(e){}
 try{pastPanel(bkey,BM.near&&BM.near.id);}catch(e){}
 var nl=$('slmc-noaa');if(nl)nl.href='https://forecast.weather.gov/MapClick.php?lat='+(+lat).toFixed(4)+'&lon='+(+lon).toFixed(4);
@@ -487,7 +508,7 @@ function afterLoad(){setup();var L=window.SLMC_LAST;if(L&&L.lat!=null){syncPicke
 window.slmcRun=function(a,b,lb,o){if(!READY){PENDING=[a,b,lb,o];return;}SRC=o&&o.src?o.src:'map';NOMEM=!!(o&&o.noMem);if(sel)sel.value='';if(lb){syncPicker(a,b,'');run(a,b,lb);}else run(a,b,null,1);};
 window.slmcStates=STATES;
 Promise.all([getJSON(DATA_URL,{cache:'no-cache'}),getJSON(STATIONS_URL),getJSON('https://api.tidesandcurrents.noaa.gov/mdapi/prod/webapi/stations.json?type=tidepredictions').catch(function(){return null;})]).then(function(r){
-  FC_REG=r[0].speciesByRegion||{};
+  FC_REG=r[0].speciesByRegion||{};FC_STATES=r[0].states||[];
   /* Gulf tide stations come live from NOAA (Florida's Gulf side west to Texas) */
   if(r[2]&&r[2].stations){r[2].stations.forEach(function(x){var la=+x.lat,lo=+x.lng;if(la<31.5&&la>25.3&&lo>-98&&(lo<-82.5||(lo<-81.65&&la<28.5)))r[1].stations.push([x.id,x.name,la,lo]);});}
   r[0].beaches.forEach(function(b){SPOTS.push([b.name+', '+b.state,b.lat,b.lon]);});FC_SPM=r[0].speciesByMonth||{};FC_BEACH=r[0].beaches;
