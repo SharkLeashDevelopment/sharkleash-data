@@ -331,12 +331,16 @@ var FC_STATES=[],RULE_V=[['outdated','Rule is out of date'],['new_rule','There�
 function ruleDate(ab){var s=null;FC_STATES.forEach(function(x){if(x.ab===ab)s=x;});if(!s||!s.lastVerified)return null;var d=new Date(s.lastVerified+'T12:00:00');return {name:s.name,d:isNaN(d)?s.lastVerified:d.toLocaleDateString(undefined,{month:'short',day:'numeric',year:'numeric'})};}
 function ruleRow(ab){var r=ruleDate(ab);if(!r&&!REPORT_URL)return '';
   return '<div id="slmc-rule" style="margin:0 0 10px;padding:7px 12px;border-radius:10px;background:rgba(255,255,255,.05);font-size:13px">'
-    +'<div>⚖️ '+(r?esc(r.name)+' rules checked <b>'+esc(r.d)+'</b>':'Local rules')+(REPORT_URL?' · <a href="#" class="rlo" style="color:#6ee7ff;font-weight:800">Wrong? Tell us</a>':'')+'</div>'
+    +'<div>⚖️ '+(r?'<a href="#slm-panel" class="rll" style="color:#fff;font-weight:800;text-decoration:underline">'+esc(r.name)+' rules</a> checked <b>'+esc(r.d)+'</b>':'Local rules')+(REPORT_URL?' · <a href="#" class="rlo" style="color:#6ee7ff;font-weight:800">Wrong? Tell us</a>':'')+'</div>'
     +(REPORT_URL?'<div class="rlf" style="display:none;margin-top:8px"><div class="clb rlb" style="flex-wrap:wrap">'+RULE_V.map(function(v){return '<button type="button" data-v="'+v[0]+'">'+v[1]+'</button>';}).join('')+'</div>'
       +'<textarea class="rlt" maxlength="300" rows="2" placeholder="What changed? A link to the new rule helps (optional)" style="width:100%;box-sizing:border-box;margin-top:8px;border-radius:8px;border:1px solid rgba(255,255,255,.2);background:rgba(0,0,0,.25);color:#fff;padding:8px;font:inherit"></textarea>'
       +'<button type="button" class="rls" disabled style="margin-top:6px;padding:8px 14px;border-radius:8px;border:0;background:#ff3b1f;color:#fff;font-weight:800">Send</button>'
       +'<div class="small rlm" style="margin-top:6px;color:#6ee7ff"></div><div class="small" style="margin-top:4px;opacity:.65">&#128274; Sent under the beach name only. Never your location or your name.</div></div>':'')+'</div>';}
-function ruleWire(beachKey,ab){var el=out&&out.querySelector('#slmc-rule');if(!el||!REPORT_URL)return;var pick='',f=el.querySelector('.rlf'),send=el.querySelector('.rls');
+function ruleWire(beachKey,ab){var el=out&&out.querySelector('#slmc-rule');if(!el)return;
+  /* "<State> rules" opens that state on the laws map panel and scrolls to it */
+  var ll=el.querySelector('.rll');if(ll)ll.addEventListener('click',function(e){var p=$('slm-panel')||$('slm');if(!p)return;e.preventDefault();
+    try{if(ab&&window.slmSelectState)window.slmSelectState(ab);}catch(x){}window.scrollTo({top:p.getBoundingClientRect().top+window.pageYOffset-150,behavior:'smooth'});/* clears the sticky toolbar */if(window.gtag)gtag('event','rules_link_click',{beach_state:ab||''});});
+  if(!REPORT_URL)return;var pick='',f=el.querySelector('.rlf'),send=el.querySelector('.rls');
   el.querySelector('.rlo').addEventListener('click',function(e){e.preventDefault();f.style.display=f.style.display==='none'?'':'none';if(window.gtag)gtag('event','rule_report_open',{beach:beachKey||'unlisted'});});
   el.querySelectorAll('.rlb button').forEach(function(b){b.addEventListener('click',function(){pick=b.getAttribute('data-v');el.querySelectorAll('.rlb button').forEach(function(x){x.style.outline=x===b?'2px solid #6ee7ff':'';});send.disabled=false;});});
   send.addEventListener('click',function(){if(!pick)return;send.disabled=true;var m=el.querySelector('.rlm');
