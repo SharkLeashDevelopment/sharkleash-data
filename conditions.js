@@ -317,9 +317,11 @@ function pastPanel(key,id){
     dt.addEventListener('toggle',function(){clStore('slmc_past_open',dt.open?'1':'0');if(dt.open&&window.gtag)gtag('event','past_years_open',{beach:key});});
     if(window.gtag)gtag('event','past_years_view',{beach:key,open:po?1:0});});}
 /* Local shark-fishing bans (localBan in shark-data.json). A beach picked from the list matches exactly; a GPS or map spot uses the nearest listed beach within 8 km. */
-var BAN_NOW=null;function banNear(lat,lon,label){var b=null;if(label)FC_BEACH.forEach(function(x){if(x.name+', '+x.state===label)b=x;});
+/* a local ban with banMonths (1-12, e.g. [5,6,7,8,9]) only applies in those months, Eastern time */
+function banOn(b){if(!b||!b.localBan)return false;var m=b.banMonths;if(!m||!m.length)return true;var mo=+new Intl.DateTimeFormat('en-US',{month:'numeric',timeZone:'America/New_York'}).format(new Date());return m.indexOf(mo)>=0;}
+var BAN_NOW=null,SEAS_NOW=null;function banNear(lat,lon,label){SEAS_NOW=null;var b=null;if(label)FC_BEACH.forEach(function(x){if(x.name+', '+x.state===label)b=x;});
   if(!b){var bd=1e9,nb=null;FC_BEACH.forEach(function(x){var d=km(lat,lon,x.lat,x.lon);if(d<bd){bd=d;nb=x;}});if(nb&&bd<=8)b=nb;else return null;}
-  return b&&b.localBan?{name:b.name,rule:b.localBan,exact:!!label}:null;}
+  if(!b||!b.localBan)return null;var r={name:b.name,rule:b.localBan,exact:!!label};if(!banOn(b)){SEAS_NOW=r;return null;}return r;}
 function bbRank(bb,bm){if(!bb||!bm)return null;if(bm.flag||bm.redtide)return {out:bm.flag?bm.flag.replace(/\s*\(.*\)\s*$/,''):'red tide reported '+bm.redtide.mi+' mi away'};var rv=function(x){return x.raw!=null?x.raw:x.score;};
   var ok=(bb.beaches||[]).filter(function(x){return !x.flag&&!x.redtide&&rv(x)!=null;}).sort(function(a,b){return rv(b)-rv(a);}),i=ok.indexOf(bm);return i<0?null:{n:i+1,of:ok.length};}
 function bbMatch(lat,lon,label,bb){var near=null;if(label)FC_BEACH.forEach(function(x){if(x.name+', '+x.state===label)near=x;});if(!near)near=fcNearBeach(lat,lon);
@@ -397,6 +399,7 @@ if(bm&&bm.wt!=null&&(!wt||!wt.sat&&(wt.mi>15||Math.abs(wt.f-bm.wt)>6))){var src=
 var where=label||(w&&w.town?'Near '+w.town:'Your location');
 var h='<p class="where">'+esc(where)+'</p>';
 BAN_NOW=banNear(lat,lon,label);if(BAN_NOW){h+='<div class="ban">🚫 Shark fishing is banned '+(BAN_NOW.exact?'here':'near you ('+esc(BAN_NOW.name)+')')+'<small>'+esc(BAN_NOW.rule)+'. '+(BAN_NOW.exact?'':'Check exactly where the boundary is before you set up. ')+'Regular surf fishing rules may still apply.</small></div>';if(window.gtag)gtag('event','local_ban_view',{beach:BAN_NOW.name});}
+else if(SEAS_NOW)h+='<div class="nws">📅 Seasonal rule '+(SEAS_NOW.exact?'here':'near you ('+esc(SEAS_NOW.name)+')')+', not in effect right now<small>'+esc(SEAS_NOW.rule)+'.</small></div>';
 /* tonight's place on the Drop Score list: same order as the Top 5 (raw score, beaches with a fishing ban or red tide left out) */
 var RK=bbRank(bb,bm);if(RK&&RK.out)h+='<div class="rank" style="color:rgba(255,255,255,.7)">Not on tonight’s Drop Score list · '+esc(RK.out)+'</div>';else if(RK)h+='<a class="rank" href="#slbb">🏆 <b>#'+RK.n+'</b> of '+RK.of+' beaches tonight'+(label?'':' ('+esc(bm.name.replace(/,\s*[A-Z]{2}$/,''))+')')+'<small>See the list →</small></a>';
 if(ALERTS.length){var sv=ALERTS.some(function(x){return x.sev;});h+='<div class="nws'+(sv?' sev':'')+'">⚠️ NWS: '+ALERTS.slice(0,4).map(function(x){return esc(x.ev);}).join(' · ')+'<small>Active now for this beach’s area. <a href="https://forecast.weather.gov/MapClick.php?lat='+(+lat).toFixed(4)+'&lon='+(+lon).toFixed(4)+'" target="_blank" rel="noopener">Details at weather.gov ↗</a></small></div>';if(window.gtag)gtag('event','nws_alert_view',{beach:bkey||'unlisted',alerts:ALERTS.map(function(x){return x.ev;}).join(', ').slice(0,100)});}
