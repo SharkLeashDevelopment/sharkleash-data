@@ -154,14 +154,14 @@ function tideTile(t){
   /* before the first known turn: assume the opposite turn about 6.2 h earlier */
   while(P[0].x>t0-36e5){var a=P[0],b=P[1]||P[0];P.unshift({x:a.x-6.21*36e5,v:a===b?a.v:b.v,type:a.type==='H'?'L':'H',est:1});}
   var lv=function(x){for(var i=0;i<P.length-1;i++){var a=P[i],b=P[i+1];if(x>=a.x&&x<=b.x){var k=(x-a.x)/(b.x-a.x);return a.v+(b.v-a.v)*(1-Math.cos(Math.PI*k))/2;}}return P[P.length-1].v;};
-  var W=320,H=96,top=14,bot=80,vs=[];for(var x=t0;x<=t1;x+=12*6e4)vs.push(lv(x));
+  var W=320,H=96,top=26,bot=80,vs=[];/* top leaves a lane above the curve for the 4-10 PM label, so it never sits on a high-tide label */for(var x=t0;x<=t1;x+=12*6e4)vs.push(lv(x));
   var mn=Math.min.apply(null,vs),mx=Math.max.apply(null,vs),pad=(mx-mn)*.12||.3;mn-=pad;mx+=pad;
   var X=function(x){return (x-t0)/(t1-t0)*W;},Y=function(v){return bot-(v-mn)/(mx-mn)*(bot-top);};
   var pts=[];for(var x2=t0;x2<=t1;x2+=12*6e4)pts.push(X(x2).toFixed(1)+','+Y(lv(x2)).toFixed(1));
   var g='';
   /* drop windows (4-10 PM local) that fall inside the chart */
   for(var d=-1;d<=1;d++){var day=new Date(now+d*864e5);var w0=new Date(day.getFullYear(),day.getMonth(),day.getDate(),16).getTime(),w1=w0+6*36e5;
-    var a0=Math.max(w0,t0),a1=Math.min(w1,t1);if(a1>a0)g+='<rect x="'+X(a0).toFixed(1)+'" y="'+top+'" width="'+(X(a1)-X(a0)).toFixed(1)+'" height="'+(bot-top)+'" fill="rgba(126,231,135,.16)"/>'+(a1-a0>2*36e5?'<text x="'+((X(a0)+X(a1))/2).toFixed(1)+'" y="'+(top-4)+'" fill="#7ee787" font-size="9" font-weight="800" text-anchor="middle">4–10 PM</text>':'');}
+    var a0=Math.max(w0,t0),a1=Math.min(w1,t1);if(a1>a0)g+='<rect x="'+X(a0).toFixed(1)+'" y="'+top+'" width="'+(X(a1)-X(a0)).toFixed(1)+'" height="'+(bot-top)+'" fill="rgba(126,231,135,.16)"/>'+(a1-a0>2*36e5?'<text x="'+((X(a0)+X(a1))/2).toFixed(1)+'" y="10" fill="#7ee787" font-size="9" font-weight="800" text-anchor="middle">4–10 PM</text>':'');}
   g+='<polygon points="0,'+bot+' '+pts.join(' ')+' '+W+','+bot+'" fill="rgba(110,231,255,.18)"/><polyline points="'+pts.join(' ')+'" fill="none" stroke="#6ee7ff" stroke-width="2"/>';
   /* turn labels */
   P.forEach(function(p){if(p.est||p.x<t0+20*6e4||p.x>t1-20*6e4)return;var px=X(p.x),py=Y(p.v),up=p.type==='H';
