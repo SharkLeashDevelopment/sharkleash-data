@@ -1,8 +1,14 @@
 {
  "_readme": "Version badge and What's new list for the Beach Conditions panel. To announce an update: add an entry at the TOP of updates, then set version and date to match. Notes are for anglers: one short line each, no code talk. The panel shows the newest 5 entries. Bumping version shows a NEW dot to everyone until they open the list.",
- "version": "44",
- "date": "2026-11-22",
+ "version": "45",
+ "date": "2026-11-24",
  "updates": [
+  {
+   "date": "2026-11-24",
+   "notes": [
+    "New Drop Score map: flip the map from Shark water to Drop Score and the whole coast lights up by tonight's (or this morning's) conditions. Green is go, gray is banned or no drones. Tap the shoreline for the beach's score."
+   ]
+  },
   {
    "date": "2026-11-22",
    "notes": [
