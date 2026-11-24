@@ -1,8 +1,14 @@
 {
  "_readme": "Version badge and What's new list for the Beach Conditions panel. To announce an update: add an entry at the TOP of updates, then set version and date to match. Notes are for anglers: one short line each, no code talk. The panel shows the newest 5 entries. Bumping version shows a NEW dot to everyone until they open the list.",
- "version": "45",
+ "version": "46",
  "date": "2026-11-24",
  "updates": [
+  {
+   "date": "2026-11-24",
+   "notes": [
+    "7 new beaches fill gaps on the Drop Score map: Shell Point, Keaton Beach, Horseshoe Beach, Cedar Key and Fort Island Gulf Beach on Florida's Big Bend, Flamingo in the Everglades, and Rockport Beach, TX. The thin line on the map now means a stretch we don't score (marsh, bay or no beach access)."
+   ]
+  },
   {
    "date": "2026-11-24",
    "notes": [
