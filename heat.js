@@ -69,7 +69,7 @@ function P(d,stroke,w){var p=document.createElementNS(NS,'path');p.setAttribute(
 P(casing.join(''),'#02080d',BAND+4);
 [BANCOL].concat(BUCKETS.slice().reverse().map(function(b){return b.col;})).forEach(function(c){if(paths[c])P(paths[c].join(''),c,BAND);});
 var up=j.updated?new Date(j.updated).toLocaleTimeString([],{hour:'numeric',minute:'2-digit'}):'',ok=bs.filter(function(b){return !b.flag&&b.score!=null;}).sort(function(a,b){return b.score-a.score;});
-var h=leg.querySelector('.sub').outerHTML+'<div class="row">'+BUCKETS.map(function(b){return '<span class="k"><i style="background:'+b.col+'"></i>'+b.label+'</span>';}).join('')+'<span class="k"><i style="background:'+BANCOL+'"></i>Banned / no drones</span></div>';
+var h=leg.querySelector('.sub').outerHTML+'<div class="row">'+BUCKETS.map(function(b){return '<span class="k"><i style="background:'+b.col+'"></i>'+b.label+'</span>';}).join('')+'<span class="k"><i style="background:'+BANCOL+'"></i>Banned / no drones</span><span class="k"><i style="background:#7fa3b5;height:3px"></i>Not scored (marsh, bay or no beach access)</span></div>';
 if(ok.length)h+='<div class="n" style="color:#fff;font-weight:800">Best right now: '+ok.slice(0,3).map(function(b){return b.name.replace(/,\s*[A-Z]{2}$/,'')+' '+b.score;}).join(' · ')+'</div>';
 h+='<div class="n">Drop Score out of 100 for '+(win==='am'?'the morning window (5–11 AM)':'tonight (4–10 PM)')+(up?', updated '+up:'')+'. Tap the shoreline for a beach. Conditions only: the sharks still decide.</div>';
 leg.innerHTML=h;}
