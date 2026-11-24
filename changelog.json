@@ -1,8 +1,14 @@
 {
  "_readme": "Version badge and What's new list for the Beach Conditions panel. To announce an update: add an entry at the TOP of updates, then set version and date to match. Notes are for anglers: one short line each, no code talk. The panel shows the newest 5 entries. Bumping version shows a NEW dot to everyone until they open the list.",
- "version": "46",
+ "version": "47",
  "date": "2026-11-24",
  "updates": [
+  {
+   "date": "2026-11-24",
+   "notes": [
+    "Checked a beach last night? The next time you open the app, it asks how it went. One tap logs it under the night you fished, with that night's Drop Score, so every report helps the score learn your beach."
+   ]
+  },
   {
    "date": "2026-11-24",
    "notes": [
