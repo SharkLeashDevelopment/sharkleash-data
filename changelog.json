@@ -1,8 +1,14 @@
 {
  "_readme": "Version badge and What's new list for the Beach Conditions panel. To announce an update: add an entry at the TOP of updates, then set version and date to match. Notes are for anglers: one short line each, no code talk. The panel shows the newest 5 entries. Bumping version shows a NEW dot to everyone until they open the list.",
- "version": "47",
+ "version": "48",
  "date": "2026-11-24",
  "updates": [
+  {
+   "date": "2026-11-24",
+   "notes": [
+    "White sharks now show in the shark list where and when they typically pass by (Cape Cod in late summer, the Carolinas and Florida in winter). They're a prohibited species: never target one, and cut the leader if you hook one."
+   ]
+  },
   {
    "date": "2026-11-24",
    "notes": [
