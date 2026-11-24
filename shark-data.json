@@ -3662,6 +3662,25 @@
    ]
   },
   {
+   "id": "flamingo-everglades-fl",
+   "name": "Flamingo (Everglades)",
+   "state": "FL",
+   "lat": 25.1408,
+   "lon": -80.9238,
+   "speciesRegion": "FL-SW",
+   "depth": {
+    "to10ftYd": ">3828",
+    "to15ftYd": ">3828",
+    "confidence": "low"
+   },
+   "faces": 200,
+   "nws": [
+    "FLZ075",
+    "FLC087"
+   ],
+   "noDrones": "Everglades NP: no drones. No fishing at Flamingo Marina in daylight"
+  },
+  {
    "id": "perdido-key-fl",
    "name": "Perdido Key",
    "state": "FL",
@@ -3932,6 +3951,97 @@
     "FLZ115",
     "FLC037"
    ]
+  },
+  {
+   "id": "shell-point-beach-fl",
+   "name": "Shell Point Beach",
+   "state": "FL",
+   "lat": 30.0577,
+   "lon": -84.2898,
+   "speciesRegion": "FL-PAN",
+   "depth": {
+    "to10ftYd": 4265,
+    "to15ftYd": ">6560",
+    "confidence": "medium"
+   },
+   "faces": 120,
+   "nws": [
+    "FLZ127",
+    "FLC129"
+   ]
+  },
+  {
+   "id": "keaton-beach-fl",
+   "name": "Keaton Beach",
+   "state": "FL",
+   "lat": 29.8186,
+   "lon": -83.5937,
+   "speciesRegion": "FL-PAN",
+   "depth": {
+    "to10ftYd": ">6452",
+    "to15ftYd": ">6452",
+    "confidence": "medium"
+   },
+   "faces": 240,
+   "nws": [
+    "FLZ128",
+    "FLC123"
+   ]
+  },
+  {
+   "id": "horseshoe-beach-fl",
+   "name": "Horseshoe Beach",
+   "state": "FL",
+   "lat": 29.4396,
+   "lon": -83.2974,
+   "speciesRegion": "FL-PAN",
+   "depth": {
+    "to10ftYd": ">5468",
+    "to15ftYd": ">5468",
+    "confidence": "medium"
+   },
+   "faces": 255,
+   "nws": [
+    "FLZ134",
+    "FLC029"
+   ]
+  },
+  {
+   "id": "cedar-key-fl",
+   "name": "Cedar Key",
+   "state": "FL",
+   "lat": 29.1347,
+   "lon": -83.0357,
+   "speciesRegion": "FL-PAN",
+   "depth": {
+    "to10ftYd": 246,
+    "to15ftYd": 383,
+    "confidence": "low"
+   },
+   "faces": 180,
+   "nws": [
+    "FLZ139",
+    "FLC075"
+   ]
+  },
+  {
+   "id": "fort-island-gulf-beach-fl",
+   "name": "Fort Island Gulf Beach",
+   "state": "FL",
+   "lat": 28.906,
+   "lon": -82.6907,
+   "speciesRegion": "FL-SW",
+   "depth": {
+    "to10ftYd": ">6780",
+    "to15ftYd": ">6780",
+    "confidence": "medium"
+   },
+   "faces": 270,
+   "nws": [
+    "FLZ142",
+    "FLC017"
+   ],
+   "localBan": "Citrus County: no fishing from the beach or jetties at Fort Island Gulf Beach (the pier is open)"
   },
   {
    "id": "anna-maria-island-fl",
@@ -4930,6 +5040,24 @@
    "nws": [
     "TXZ436",
     "TXC321"
+   ]
+  },
+  {
+   "id": "rockport-beach-tx",
+   "name": "Rockport Beach",
+   "state": "TX",
+   "lat": 28.0337,
+   "lon": -97.0438,
+   "speciesRegion": "TX",
+   "depth": {
+    "to10ftYd": 1640,
+    "to15ftYd": 3828,
+    "confidence": "medium"
+   },
+   "faces": 120,
+   "nws": [
+    "TXZ245",
+    "TXC007"
    ]
   },
   {
