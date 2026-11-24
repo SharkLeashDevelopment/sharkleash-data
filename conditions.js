@@ -574,4 +574,46 @@ function shareLine(){var L=window.SLMC_LAST;if(!L||!L.beach||BAN_NOW)return null
   try{navigator.share=function(d){try{var L=window.SLMC_LAST;if(d&&L&&L.beach&&String(d.title||'')==='SharkLeash: '+L.beach){var t=shareLine();if(t){d=Object.assign({},d,{text:t});if(window.gtag)gtag('event','share_numbers',{beach:L.beach});}}}catch(e){}return orig(d);};navigator.__slShare=1;}catch(e){}})();
 document.addEventListener('click',function(e){if(!e.target.closest||!e.target.closest('#slmc-map'))return;var m=$('slm-map');if(!m)return;m.scrollIntoView({behavior:'smooth',block:'center'});if(window.gtag)gtag('event','map_pick_click');});
 window.addEventListener('load',function(){if(!$('slm-map')){var mb=$('slmc-map');if(mb)mb.style.display='none';}});
+/* ===== Next-visit trip question: "How'd it go at <beach> last night?" =====
+   Remembers the beach checked for tonight (noon to 3 AM). The next time this phone opens the page, from 5 AM the
+   next morning and within 40 hours, it asks once. One tap sends a trip report filed under the night it was fished
+   (night_of; Apps Script v13), with that night's saved Drop Score and conditions. Skipped if a trip report was
+   already sent for that night. Same privacy as the trip form: beach name only. */
+(function(){
+var K='sl_lastcheck',D='sl_tripask',LBL={landed:'Landed one',lost:'Hooked, lost it',no:'No bites',rig_broke:'Rig broke'};
+function pad(n){return ('0'+n).slice(-2);}
+function nightKey(t){var d=new Date(t-12*3600e3);return d.getFullYear()+'-'+pad(d.getMonth()+1)+'-'+pad(d.getDate());}
+function jget(k){try{return JSON.parse(localStorage.getItem(k)||'null');}catch(e){return null;}}
+function jset(k,v){try{localStorage.setItem(k,JSON.stringify(v));}catch(e){}}
+window.addEventListener('slmc:conditions',function(){var c=window.SLMC_LAST;if(!c||!c.beach||c.fromMapSync)return;var h=new Date().getHours();if(h>=3&&h<12)return;
+  var w=c.w||{};jset(K,{b:c.beach,at:Date.now(),n:nightKey(Date.now()),ds:c.ds!=null?c.ds:null,cl:c.cl||null,wt:c.wt&&c.wt.f!=null?Math.round(c.wt.f):null,
+    wv:c.wv&&c.wv.now!=null?Math.round(c.wv.now*2)/2:null,wind:String(w.spd||''),dir:String(w.dir||''),st:c.state||null});});
+/* any trip report (the form below or this question) closes that night */
+var rf=window.fetch;if(rf&&!window.__slTripHook){window.__slTripHook=1;window.fetch=function(u,o){try{if(typeof u==='string'&&u.indexOf('script.google.com/macros/s/')>=0&&o&&o.method==='POST'){var b=JSON.parse(o.body);if(b&&b.type==='session')jset(D,{n:b.night_of||nightKey(Date.now())});}}catch(e){}return rf.apply(this,arguments);};}
+function ask(){var L=jget(K);if(!L||!L.b||!REPORT_URL)return;var now=Date.now(),hr=new Date(now).getHours();if(now-L.at>40*3600e3||(L.n===nightKey(now)&&!(hr>=5&&hr<12)))return;var dn=jget(D);if(dn&&dn.n===L.n)return;
+  if(!ROOT||document.getElementById('sltq'))return;
+  var name=String(L.b).replace(/,\s*[A-Z]{2}$/,''),box=document.createElement('div');box.id='sltq';
+  box.style.cssText='position:fixed;left:50%;transform:translateX(-50%);bottom:calc(12px + env(safe-area-inset-bottom));width:calc(100% - 24px);max-width:520px;z-index:9998;box-sizing:border-box;padding:16px 16px 10px;border-radius:18px;border:1px solid rgba(110,231,255,.5);background:linear-gradient(135deg,#07202c,#1a0f14);box-shadow:0 12px 40px rgba(0,0,0,.6);color:#fff;font-family:-apple-system,Segoe UI,Arial,sans-serif';
+  box.innerHTML='<button type="button" data-v="later" aria-label="Not now" style="position:absolute;top:6px;right:8px;background:none;border:none;color:rgba(255,255,255,.55);font-size:20px;line-height:1;padding:8px;cursor:pointer">✕</button><div style="font-size:19px;font-weight:900;line-height:1.2;padding-right:26px">🦈 How’d it go at '+name.replace(/</g,'&lt;')+' last night?</div>'+
+    '<div style="margin:4px 0 12px;font-size:13px;color:rgba(255,255,255,.7)">One tap. It teaches the Drop Score what works there. Beach name only, never your spot.</div>'+
+    '<div class="g" style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px">'+['landed','lost','no','rig_broke'].map(function(v){return '<button type="button" data-v="'+v+'" style="min-height:48px;border-radius:12px;border:1px solid rgba(255,255,255,.2);background:#0f1c26;color:#fff;font:inherit;font-size:15px;font-weight:800;cursor:pointer">'+LBL[v]+'</button>';}).join('')+'</div>'+
+    '<button type="button" data-v="x" style="display:block;margin:8px auto 0;background:none;border:none;color:rgba(255,255,255,.6);font:inherit;font-size:13.5px;font-weight:700;cursor:pointer;padding:8px">Didn’t make it out</button>';
+  document.body.appendChild(box);if(window.gtag)gtag('event','trip_prompt_shown',{beach:L.b});
+  box.addEventListener('click',function(e){var b=e.target.closest&&e.target.closest('button');if(!b)return;var v=b.getAttribute('data-v');
+    if(v==='later'){box.remove();if(window.gtag)gtag('event','trip_prompt_later',{beach:L.b});return;}
+    jset(D,{n:L.n});
+    if(v==='x'){box.remove();if(window.gtag)gtag('event','trip_prompt_skip',{beach:L.b});return;}
+    var drone='';try{drone=localStorage.getItem('sldrop_drone')||'';}catch(x){}
+    var body={type:'session',beach:L.b,value:v,device:clDevice(),app:SL_APP,night_of:L.n,f:{species:v==='landed'?'skipped':'n/a',held:'skipped',
+      drop_score:L.ds!=null?L.ds:'none',clarity:L.cl||'none',water_f:L.wt!=null?L.wt:'none',waves_ft:L.wv!=null?L.wv:'none',wind:L.wind,wind_dir:L.dir,
+      used_oz:'skipped',suggested_oz:'none',drop_yd:'skipped',deep10_yd:'none',drift_ok:'skipped',current:'none',sl_rig:v==='rig_broke'?'skipped':'n/a',drone:drone||'none',state:L.st||'unknown'}};
+    var tk=clStore('sl_tester');if(tk)body.tester=tk;
+    if(window.gtag)gtag('event','trip_prompt_answer',{beach:L.b,outcome:v});
+    box.innerHTML='<div style="font-size:16px;font-weight:800;color:#7ee787">Sending…</div>';
+    function fin(t){box.innerHTML='<div style="font-size:16px;font-weight:800;color:#7ee787">'+t+'</div>'+(v==='landed'?'<a href="/shark-id" style="display:inline-block;margin-top:8px;color:#6ee7ff;font-weight:900">Identify your shark →</a>':'')+'<div style="margin-top:6px;font-size:13px;color:rgba(255,255,255,.7)">Reports like yours are how the Drop Score at '+name.replace(/</g,'&lt;')+' gets more accurate.</div>';setTimeout(function(){if(box.parentNode)box.remove();},v==='landed'?20000:8000);}
+    fetch(REPORT_URL,{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify(body)}).then(function(r){return r.json();})
+      .then(function(j){fin(j&&j.ok?'Thanks! Logged: '+LBL[v].toLowerCase()+'. Tight lines.':j&&j.error==='already reported'?'Thanks! You already reported this beach.':'Thanks! (Couldn’t save it this time.)');})
+      .catch(function(){try{var q=JSON.parse(localStorage.getItem('sl_q')||'[]');q.push({id:Date.now()+'_t',at:Date.now(),body:body});localStorage.setItem('sl_q',JSON.stringify(q));}catch(x){}fin('Thanks! Weak signal, so it’s saved on your phone and will send when you have signal.');});});}
+if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',function(){setTimeout(ask,600);});else setTimeout(ask,600);
+})();
 })();
