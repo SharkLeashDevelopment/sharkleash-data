@@ -80,9 +80,9 @@ if(lat>u[1])return ['away','not usually this far north'];if(lat>=u[0])return ['h
 function migText(k,mo){var g=MIG[k],c=g.m[mo];return c==='N'?g.who+': typically heading north this month':c==='S'?g.who+': typically heading south this month':c==='W'?g.who+': typically wintering in '+g.winter:g.who+': typically summering in '+g.summer;}
 var SPX={sk:{n:'Silky',t:[70,88]},bn:{n:'Blacknose',t:[70,88]},sb:{n:'Sandbar',t:[58,82]},st:{n:'Sand tiger',t:[55,76]},du:{n:'Dusky',t:[62,80]},bt:{n:'Blacktip',t:[68,86]},sp:{n:'Spinner',t:[68,86]},
 sn:{n:'Atlantic sharpnose',t:[62,88]},bo:{n:'Bonnethead',t:[62,90]},ft:{n:'Finetooth',t:[70,88]},bu:{n:'Bull',t:[64,92]},le:{n:'Lemon',t:[70,90]},
-ti:{n:'Tiger',t:[72,90]},nu:{n:'Nurse',t:[72,90]},sh:{n:'Scalloped hammerhead',t:[72,88]},gh:{n:'Great hammerhead',t:[72,88]},
+ti:{n:'Tiger',t:[72,90]},nu:{n:'Nurse',t:[72,90]},sh:{n:'Scalloped hammerhead',t:[72,88]},gh:{n:'Great hammerhead',t:[72,88]},wh:{n:'White shark',t:[54,75]},
 sm:{n:'Smooth dogfish',t:[50,72]},sd:{n:'Spiny dogfish',t:[40,64]}};
-var PROT_ALL=['sb','st','du'],PROT_ST={FL:['le','ti','sh','gh']};
+var PROT_ALL=['sb','st','du','wh'],PROT_ST={FL:['le','ti','sh','gh']};
 var SPM={},BT={},BN={},BR={};
 var SW_COAST_URL="https://sharkleashdevelopment.github.io/sharkleash-data/coastline.json";
 var SW_DATA_URL="https://sharkleashdevelopment.github.io/sharkleash-data/shark-data.json";
@@ -99,7 +99,7 @@ try{window.dispatchEvent(new Event('slsw:data'));}catch(e){}
 }).catch(function(){});
 var SHOW_ID=true,ID_URL='/shark-id';
 function idOn(){return SHOW_ID||/[?&]idtest=1/.test(location.search);}
-function idLink(ab,mo,r){var top=r.here.filter(function(s){return s.fit!==false;}).slice(0,3).map(function(s){return s.c;});
+function idLink(ab,mo,r){var top=r.here.filter(function(s){return s.fit!==false&&s.c!=='wh';}).slice(0,3).map(function(s){return s.c;});
 var c=window.SLMC_LAST||{},w=c.w||{},where=c.where||(w.town?w.town:'');
 return ID_URL+'?st='+ab+'&mo='+mo+(top.length?'&lk='+top.join(','):'')+(where?'&bw='+encodeURIComponent(where):'');}
 /* Temps in SPX are preferred ranges, not hard limits: within EDGE °F outside them a species still shows as possible (🟡). */
@@ -116,15 +116,16 @@ else{var fwd=0,back=0;
 for(var k=1;k<12;k++){if(+P.charAt((mo+k)%12)>0){fwd=k;break;}}
 for(var k2=1;k2<12;k2++){if(+P.charAt((mo-k2+12)%12)>0){back=k2;break;}}
 if(fwd)later.push({c:c,name:sp.n,back:MSH[(mo+fwd)%12],prot:pr,k:fwd,gone:!!back&&back<fwd});}});
-here.sort(function(a,b){return (b.fit===false?0:1)-(a.fit===false?0:1)||b.lvl-a.lvl||a.i-b.i;});
+/* white sharks: shown for awareness (prohibited, never a target), so they always sort to the bottom of the list */
+here.sort(function(a,b){return (a.c==='wh'?1:0)-(b.c==='wh'?1:0)||(b.fit===false?0:1)-(a.fit===false?0:1)||b.lvl-a.lvl||a.i-b.i;});
 later.sort(function(a,b){return a.k-b.k;});
 return {here:here,later:later};}
 function speciesHTML(ab,mo,t,lat,lon){var r=speciesAt(ab,mo,t,lat,lon),h='';
 if(idOn()&&r.here.length)h+='<a href="'+idLink(ab,mo,r)+'" onclick="if(window.gtag)gtag(\'event\',\'shark_id_open\',{state:\''+ab+'\'});" style="display:block;text-align:center;margin:8px 0 10px;font-size:16px;font-weight:900;color:#fff;background:linear-gradient(135deg,#ff2b2b,#ff6a00);border-radius:14px;padding:12px 16px;text-decoration:none;box-shadow:0 8px 22px rgba(0,0,0,.4)">🦈 Caught one? Identify your shark →</a>';
 if(!r.here.length)h+='<div style="margin-top:6px">⏸️ No sharks typically in from shore here this month.</div>';
-r.here.forEach(function(s){var ic=s.fit===false?'🌡️':s.fit==='edge'?'🟡':s.lvl>=2?'✅':'🟡';
+r.here.forEach(function(s){var ic=s.c==='wh'?'⚠️':s.fit===false?'🌡️':s.fit==='edge'?'🟡':s.lvl>=2?'✅':'🟡';
 h+='<div style="margin-top:4px">'+ic+' <b>'+s.name+'</b>'+(s.prot?' <span style="font-size:10px;font-weight:900;letter-spacing:.06em;color:#fff;background:#ff2b2b;border-radius:999px;padding:1px 6px">PROTECTED</span>':'')+
-' · '+s.lvlName+', '+s.trend+(s.why?' <span style="color:rgba(255,255,255,.6)">('+s.why+' right now)</span>':'')+'</div>';});
+' · '+s.lvlName+', '+s.trend+(s.c==='wh'?' <span style="color:#ffb3ad">(prohibited: never target; cut the leader if hooked)</span>':'')+(s.why?' <span style="color:rgba(255,255,255,.6)">('+s.why+' right now)</span>':'')+'</div>';});
 if(lat==null&&window.SLMC_LAST){lat=SLMC_LAST.lat;lon=SLMC_LAST.lon;}var br=BT[spRegion(ab,lat,lon)]||BT[ab]||[],pk=[],cm=[];
 br.forEach(function(x){var l=+x[1].charAt(mo);if(l>2)pk.push(BN[x[0]]);else if(l>1)cm.push(BN[x[0]]);});
 if(pk.length||cm.length)h+='<div style="margin-top:10px;font-size:11px;font-weight:900;letter-spacing:.1em;text-transform:uppercase;color:#6ee7ff">Bait running here in '+MSH[mo]+'</div><div style="margin-top:3px">'+(pk.length?'<b>'+pk.join(', ')+'</b> (peak)':'')+(pk.length&&cm.length?' · ':'')+cm.join(', ')+'</div>'+(BR[ab]?'<div style="margin-top:3px;font-size:12px;color:rgba(255,255,255,.6)">Catching bait in '+ab+': '+BR[ab][0]+'</div>':'');
