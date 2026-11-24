@@ -140,8 +140,8 @@ var age=(Date.now()-new Date(p.issuanceTime))/864e5;
 if(!m)return null;return {risk:m[1].charAt(0).toUpperCase()+m[1].slice(1).toLowerCase(),src:'NWS surf zone forecast',old:age>2};
 }).catch(function(){return null;});});
 }
-/* ===== Tide curve: the day's rise and fall from NOAA's high/low predictions, tonight's 4-10 PM drop window shaded, a dot for now ===== */
-function tideTile(t){
+/* ===== Tide curve: the day's rise and fall from NOAA's high/low predictions, tonight's drop window (2 h before sunset on) shaded, a dot for now ===== */
+function tideTile(t,lat,lon){
   if(!document.getElementById('slmc-tide-css')){var c=document.createElement('style');c.id='slmc-tide-css';
     c.textContent='#slmc .tile.tide{grid-column:span 2}@media(max-width:640px){#slmc .tile.tide{grid-column:auto}}'
       +'#slmc .tide svg{display:block;width:100%;height:auto;margin:6px 0 2px}#slmc .tide .tdn{display:flex;flex-wrap:wrap;gap:4px 14px;font-size:13.5px;font-weight:700;color:rgba(255,255,255,.85)}#slmc .tide .tdn b{color:#fff}';
@@ -154,14 +154,14 @@ function tideTile(t){
   /* before the first known turn: assume the opposite turn about 6.2 h earlier */
   while(P[0].x>t0-36e5){var a=P[0],b=P[1]||P[0];P.unshift({x:a.x-6.21*36e5,v:a===b?a.v:b.v,type:a.type==='H'?'L':'H',est:1});}
   var lv=function(x){for(var i=0;i<P.length-1;i++){var a=P[i],b=P[i+1];if(x>=a.x&&x<=b.x){var k=(x-a.x)/(b.x-a.x);return a.v+(b.v-a.v)*(1-Math.cos(Math.PI*k))/2;}}return P[P.length-1].v;};
-  var W=320,H=96,top=26,bot=80,vs=[];/* top leaves a lane above the curve for the 4-10 PM label, so it never sits on a high-tide label */for(var x=t0;x<=t1;x+=12*6e4)vs.push(lv(x));
+  var W=320,H=96,top=26,bot=80,vs=[];/* top leaves a lane above the curve for the drop window label, so it never sits on a high-tide label */for(var x=t0;x<=t1;x+=12*6e4)vs.push(lv(x));
   var mn=Math.min.apply(null,vs),mx=Math.max.apply(null,vs),pad=(mx-mn)*.12||.3;mn-=pad;mx+=pad;
   var X=function(x){return (x-t0)/(t1-t0)*W;},Y=function(v){return bot-(v-mn)/(mx-mn)*(bot-top);};
   var pts=[];for(var x2=t0;x2<=t1;x2+=12*6e4)pts.push(X(x2).toFixed(1)+','+Y(lv(x2)).toFixed(1));
   var g='';
-  /* drop windows (4-10 PM local) that fall inside the chart */
-  for(var d=-1;d<=1;d++){var day=new Date(now+d*864e5);var w0=new Date(day.getFullYear(),day.getMonth(),day.getDate(),16).getTime(),w1=w0+6*36e5;
-    var a0=Math.max(w0,t0),a1=Math.min(w1,t1);if(a1>a0)g+='<rect x="'+X(a0).toFixed(1)+'" y="'+top+'" width="'+(X(a1)-X(a0)).toFixed(1)+'" height="'+(bot-top)+'" fill="rgba(126,231,135,.16)"/>'+(a1-a0>2*36e5?'<text x="'+((X(a0)+X(a1))/2).toFixed(1)+'" y="10" fill="#7ee787" font-size="9" font-weight="800" text-anchor="middle">4–10 PM</text>':'');}
+  /* drop windows (2 h before sunset to ~4 h after) that fall inside the chart */
+  for(var d=-1;d<=1;d++){var day=new Date(now+d*864e5);var w0=eveS(lat,lon,day),w1=w0+6*36e5;
+    var a0=Math.max(w0,t0),a1=Math.min(w1,t1);if(a1>a0)g+='<rect x="'+X(a0).toFixed(1)+'" y="'+top+'" width="'+(X(a1)-X(a0)).toFixed(1)+'" height="'+(bot-top)+'" fill="rgba(126,231,135,.16)"/>'+(a1-a0>2*36e5?'<text x="'+((X(a0)+X(a1))/2).toFixed(1)+'" y="10" fill="#7ee787" font-size="9" font-weight="800" text-anchor="middle">'+eveLbl(w0).replace(/\u00a0/g,' ')+'</text>':'');}
   g+='<polygon points="0,'+bot+' '+pts.join(' ')+' '+W+','+bot+'" fill="rgba(110,231,255,.18)"/><polyline points="'+pts.join(' ')+'" fill="none" stroke="#6ee7ff" stroke-width="2"/>';
   /* turn labels */
   P.forEach(function(p){if(p.est||p.x<t0+20*6e4||p.x>t1-20*6e4)return;var px=X(p.x),py=Y(p.v),up=p.type==='H';
@@ -187,6 +187,10 @@ var sc=0;for(var t=a;t<b;t+=15*6e4){sc+=dark(t)?2:0;sc+=nearDusk(t)?1.5:0;}sc+=1
 if(!best||sc>best.sc)best={sc:sc,a:a,b:b,p:p,dark:dark((a+b)/2)||dark(turn),dusk:nearDusk(a)||nearDusk(turn)||nearDusk(b)};});
 return best;}
 function hmr(a,b){var x=hm(a),y=hm(b),pa=x.slice(-2),pb=y.slice(-2);return (pa===pb&&/[AP]M$/.test(pa)?x.slice(0,-3):x)+'–'+y;}
+/* evening drop window: from the hour nearest 2 h before sunset, 6 hours (same as the scoring job). Anglers set baits an hour or two before dark. */
+function eveS(lat,lon,day){var s=sunTimes(day,lat,lon).set.getTime();return Math.round((s-2*36e5)/36e5)*36e5;}
+function eveNext(lat,lon,now){now=now||Date.now();for(var k=-1;k<=3;k++){var S=eveS(lat,lon,new Date(now+k*864e5));if(S+6*36e5>now)return S;}return null;}
+function eveLbl(S){return hmr(S,S+6*36e5);}
 function hm(t){return new Date(t).toLocaleTimeString([], {hour:'numeric',minute:'2-digit'}).replace(':00','').replace(' ','\u00a0');}
 function moon(d){
 var SYN=29.530588853,ref=Date.UTC(2000,0,6,18,14),age=((d.getTime()-ref)/864e5)%SYN;if(age<0)age+=SYN;
@@ -217,8 +221,9 @@ function fcNearBeach(lat,lon){var b=null,bd=1e9;FC_BEACH.forEach(function(x){var
 function fcDeep(b){if(!b||!b.depth)return null;var d=b.depth,C={high:'h',medium:'m',low:'l',inlet:'i'};return {d10:d.to10ftYd==null?'':String(d.to10ftYd).replace(/^>\s*/,'+'),c:C[d.confidence]||'m'};}
 function fcBB(){if(!FC_BBP)FC_BBP=fetch('https://raw.githubusercontent.com/SharkLeashDevelopment/sharkleash-best-beaches/main/data/best-beaches.json?t='+Math.floor(Date.now()/3e5)).then(function(r){return r.ok?r.json():null;}).catch(function(){return null;});return FC_BBP;}
 function fcMax(p){var m=String(p.windSpeed).match(/\d+/g)||[0];return Math.max.apply(null,m.map(Number));}
-function fcDays(P){var now=Date.now(),out=[],seen={};
-  for(var i=0;i<P.length&&out.length<7;i++){var t=new Date(P[i].startTime);if(t.getTime()<now-36e5||+String(P[i].startTime).slice(11,13)<16)continue;var key=t.toDateString();if(seen[key])continue;seen[key]=1;
+function fcDays(P,lat,lon){var now=Date.now(),out=[],seen={},S0=eveNext(lat,lon,now);if(S0==null)return out;
+  for(var k=0;k<8&&out.length<7;k++){var S=eveS(lat,lon,new Date(S0+k*864e5+2*36e5)),i=-1;for(var j=0;j<P.length;j++){var tj=new Date(P[j].startTime).getTime();if(tj>=now-36e5&&tj>=S&&tj<S+6*36e5){i=j;break;}}if(i<0)continue;
+    var t=new Date(P[i].startTime),key=new Date(S).toDateString();if(seen[key])continue;seen[key]=1;
     var W=P.slice(i,i+6);if(W.length<3)break;var sp=W.map(fcMax),avg=sp.reduce(function(a,b){return a+b;},0)/sp.length;
     var A=P.slice(i,i+36),t0=A[0].temperature,n=0;A.forEach(function(p){var d=FC_DIRS.indexOf(p.windDirection);if((d>=13||d<=2)&&t0-p.temperature>=8)n++;});
     var before=P.slice(i,i+4).every(function(p){var d=FC_DIRS.indexOf(p.windDirection);return d>=5&&d<=11;});
@@ -387,7 +392,7 @@ function fcStrip(lat,lon,w,wv,wt,t,label){
     if(nb&&nd>25){var ix=document.createElement('div');ix.className='fc';ix.innerHTML='<p class="fcn">🦈 No SharkLeash Drop Score here: you\u2019re about '+Math.round(nd*0.621)+' miles from the nearest beach we score ('+esc(nb.name+', '+nb.state)+'). Pick a beach above to see its score.</p>';g.parentNode.insertBefore(ix,g.nextSibling);return;}}
   var box=document.createElement('div');box.className='fc';box.innerHTML='<p class="msg"><i class="sp"></i>Loading the 7-evening outlook…</p>';g.parentNode.insertBefore(box,g.nextSibling);
   fcBB().then(function(bb){if(!box.isConnected)return;
-    var days=fcDays(w.P);if(!days.length){box.remove();return;}
+    var days=fcDays(w.P,lat,lon);if(!days.length){box.remove();return;}
     var st=w.state||'',BM=bbMatch(lat,lon,label,bb),near=BM.near;FC_ROWS=near&&near.speciesRegion?(FC_REG[near.speciesRegion]||null):null;var dp=fcDeep(near),wtf=wt&&wt.f!=null?+wt.f:null,match=null,wtJob=false;
     match=BM.match;if(match&&match.wt!=null){wtf=+match.wt;wtJob=true;}
     var today=new Date().toDateString(),tiles=days.map(function(d,i){
@@ -402,7 +407,7 @@ function fcStrip(lat,lon,w,wv,wt,t,label){
         +'<div class="fx">'+(wf!=null?ftTxt(wf)+' ft '+(wfb?'(offshore)':'surf'):'surf n/a')+'</div>'
         +(tc?'<div class="fx">'+(tc.type==='H'?'⬆️ High ':'⬇️ Low ')+tc.t.replace(':00','').replace(' PM','p').replace(' AM','a')+'</div>':'')
         +(why?'<div class="fwy">'+why+'</div>':'')+(d.front?'<div class="ffr">⚡ front</div>':'')+(useBB?'<div class="fce" style="color:#6ee7ff">live</div>':i>=3?'<div class="fce">early look</div>':'<div class="fce">forecast</div>')+'</div>';});
-    box.innerHTML='<div class="fch"><b>🎯 SharkLeash Drop Score · next 7 evenings, 4–10 PM</b></div><p class="fcx">The SharkLeash Drop Score rates each evening for a drone drop, out of 100 (a front coming can push it higher). <b>100</b> = light wind, fishable surf, warm water, sharks running and deep water close. Tonight is live from the latest Top 5 run; the other evenings are forecasts.</p><div class="fcr">'+tiles.join('')+'</div>'
+    box.innerHTML='<div class="fch"><b>🎯 SharkLeash Drop Score · next 7 evenings</b><span>2 hrs before sunset to ~4 hrs after'+(days[0]?' · '+(days[0].start.toDateString()===today?'tonight ':'')+eveLbl(eveS(lat,lon,days[0].start)):'')+'</span></div><p class="fcx">The SharkLeash Drop Score rates each evening for a drone drop, out of 100 (a front coming can push it higher). <b>100</b> = light wind, fishable surf, warm water, sharks running and deep water close. Tonight is live from the latest Top 5 run; the other evenings are forecasts.</p><div class="fcr">'+tiles.join('')+'</div>'
       +'<p class="fcn">Wind: NWS hourly forecast. Surf: NWS wave model (Tonight falls back to the nearest buoy or NOAA wave model). Water temp: '+(wtJob?'today’s offshore buoy/satellite reading (same as Top 5)':'today’s reading')+'. Days 4–7 are an early look; forecasts get shakier past 3 days.'+(near?' Deep water from '+esc(near.name)+'.':'')+'</p>';
     FC_ROWS=null;if(window.gtag)gtag('event','forecast_strip_view');
   });}
@@ -433,7 +438,7 @@ h+='<div class="tile"><div class="lab">Wind <span style="opacity:.6">· NWS fore
 h+='<div class="tile"><div class="lab">Waves <span style="opacity:.6">· '+(wv||bwv==null?'NWS forecast':(bm.wsrc==='model'?'NOAA wave model':'nearest buoy'))+'</span></div>'+(!wv&&bwv!=null?'<div class="big">'+ftTxt(bwv)+'<span style="font-size:16px">ft</span></div><div class="small">'+(bm.wp?Math.round(bm.wp)+'s period · ':'')+'measured offshore, updated every 2 hrs</div>':wv?'<div class="big">'+ftTxt(wv.now)+'<span style="font-size:16px">ft</span></div><div class="small">'+(wv.in3!==null?'In 3 hrs: '+ftTxt(wv.in3)+' ft':'')+(wv.off?' · just offshore':'')+'</div>':'<div class="big">--</div><div class="small">No wave forecast for this spot</div>')+'</div>';
 h+=clTile(bkey,bm&&bm.clarity);
 h+='<div class="tile"><div class="lab">Water temp'+(wt?' <span style="color:'+(wt.job?'#2ecc71">· ocean reading':wt.sat?'#ffb020">· satellite, daily':wt.old?'#ffb020">· sensor, older':'#2ecc71">· live sensor')+'</span>':'')+'</div>'+(wt?'<div class="big">'+Math.round(wt.f)+'<span style="font-size:16px">°F</span></div><div class="small">'+esc(wt.name)+' · '+(wt.job?'updated every 2 hrs'+(wt.ref?' · skipped '+esc(wt.ref.name)+' '+Math.round(wt.ref.f)+'°F, '+wt.ref.mi+' mi ('+(wt.ref.mi>15?'too far away':'likely a harbor or bay sensor')+')':''):wt.sat?wt.at+(wt.ref?' · nearest sensor '+esc(wt.ref.name)+' '+Math.round(wt.ref.f)+'°F, '+wt.ref.mi+' mi'+(wt.ref.odd?' (skipped: far off the satellite, likely a harbor or bay sensor)':''):''):wt.mi+' mi · '+(wt.old?'as of ':'')+wt.at)+'</div>':'<div class="big">--</div><div class="small">No water temp reading nearby</div>')+'</div>';
-h+=tideTile(t);
+h+=tideTile(t,lat,lon);
 var mo=moon(new Date()),spring=Math.min(mo.age,Math.abs(mo.age-mo.syn/2),mo.syn-mo.age)<2.5;
 var RC={Low:['#2ecc71','🟢'],Moderate:['#ffb020','🟡'],High:['#ff4444','🔴']},rk=rc&&rc.risk&&RC[rc.risk]?rc.risk:null;
 h+='<div class="tile"><div class="lab">Rip current risk</div>'+(rk?'<div class="big" style="color:'+RC[rk][0]+'">'+RC[rk][1]+' '+rk+'</div><div class="small">'+esc(rc.src)+(rc.old?' · may be out of date':'')+'</div>':'<div class="big">--</div><div class="small">'+(rc&&rc.src?esc(rc.src):'No NWS surf forecast for this spot right now (many offices only issue it in beach season)')+'</div>')+'</div>';
@@ -559,13 +564,14 @@ var CHANGELOG_URL="https://sharkleashdevelopment.github.io/sharkleash-data/chang
 })();
 /* ===== "Share this beach" (its own embed) shares tonight's numbers instead of a generic line. Only touches shares titled "SharkLeash: <beach>" for the beach on screen. ===== */
 function shareLine(){var L=window.SLMC_LAST;if(!L||!L.beach||BAN_NOW)return null;var nm=String(L.beach).replace(/,\s*[A-Z]{2}$/,''),p=[];
-  var hr=new Date().getHours(),when=hr>=22?'tomorrow night':'tonight';
+  var when='tonight';
   if(L.ds!=null)p.push('Drop Score '+L.ds);
   if(L.w&&L.w.dir&&L.w.spd)p.push(L.w.dir+' '+String(L.w.spd).replace(/\s*mph/i,'')+' mph');
   if(L.wv&&L.wv.now!=null)p.push(ftTxt(L.wv.now)+' ft surf');
   if(L.wt&&L.wt.f!=null)p.push(Math.round(L.wt.f)+'°F water');
-  /* the tide turn inside the 4-10 PM window the score covers (a high tide first); none in the window = no tide in the message */
-  var d0=new Date();if(hr>=22)d0=new Date(d0.getTime()+864e5);var w0=new Date(d0.getFullYear(),d0.getMonth(),d0.getDate(),16).getTime(),w1=w0+6*36e5;
+  /* the tide turn inside the evening window the score covers (a high tide first); none in the window = no tide in the message */
+  var w0=eveNext(L.lat,L.lon)||Date.now(),w1=w0+6*36e5;
+  if(w0>Date.now()&&new Date(w0).toDateString()!==new Date().toDateString())when='tomorrow night';
   var tw=((L.t&&L.t.all)||[]).filter(function(e){var x=e.date.getTime();return x>=w0&&x<=w1;}),tc=tw.filter(function(e){return e.type==='H';})[0]||tw[0];
   if(tc)p.push((tc.type==='H'?'high':'low')+' tide '+tc.t);
   if(!p.length)return null;
