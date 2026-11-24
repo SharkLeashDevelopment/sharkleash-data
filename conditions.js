@@ -616,4 +616,40 @@ function ask(){var L=jget(K);if(!L||!L.b||!REPORT_URL)return;var now=Date.now(),
       .catch(function(){try{var q=JSON.parse(localStorage.getItem('sl_q')||'[]');q.push({id:Date.now()+'_t',at:Date.now(),body:body});localStorage.setItem('sl_q',JSON.stringify(q));}catch(x){}fin('Thanks! Weak signal, so it’s saved on your phone and will send when you have signal.');});});}
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',function(){setTimeout(ask,600);});else setTimeout(ask,600);
 })();
+/* ===== My beaches: up to 5 saved beaches on this phone, one tap to load (no account) ===== */
+(function(){
+  if(!ROOT)return;var K='sl_favs',MAX=5,CUR=null,NOTE='';
+  function get(){try{var a=JSON.parse(localStorage.getItem(K)||'[]');return Array.isArray(a)?a.filter(function(n){return typeof n==='string';}).slice(0,MAX):[];}catch(e){return [];}}
+  function put(a){try{localStorage.setItem(K,JSON.stringify(a.slice(0,MAX)));}catch(e){}}
+  function idx(n){for(var i=0;i<SPOTS.length;i++)if(SPOTS[i][0]===n)return i;return -1;}
+  function short(n){return n.replace(/,\s*[A-Z]{2}$/,'');}
+  function ev(n,p){try{if(window.gtag)gtag('event',n,p||{});}catch(e){}}
+  if(!document.getElementById('slfav-css')){var c=document.createElement('style');c.id='slfav-css';
+    c.textContent='#slfav{display:none;flex-wrap:wrap;align-items:center;gap:8px;margin:0 0 12px}#slfav.on{display:flex}'
+      +'#slfav .fl{font-size:12px;font-weight:900;text-transform:uppercase;letter-spacing:.12em;color:#ffb020;margin-right:2px}'
+      +'#slmc #slfav button{min-height:40px;padding:0 14px;font-size:14px;font-weight:800;border-radius:999px;cursor:pointer;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}'
+      +'#slmc #slfav button.cur{background:rgba(255,176,32,.16);border-color:rgba(255,176,32,.75);color:#fff}'
+      +'#slmc #slfav button.sv{background:transparent;border-style:dashed;border-color:rgba(255,176,32,.6);color:#ffb020}'
+      +'#slmc #slfav button.un{background:transparent;border-color:rgba(255,255,255,.18);color:rgba(255,255,255,.6);font-size:12.5px;min-height:34px;padding:0 10px}'
+      +'#slfav .fn{flex-basis:100%;font-size:12px;font-weight:700;color:rgba(255,255,255,.6)}';
+    document.head.appendChild(c);}
+  var row=document.createElement('div');row.id='slfav';var ctl=ROOT.querySelector('.ctl');if(!ctl)return;ctl.parentNode.insertBefore(row,ctl);
+  function draw(){var f=get().filter(function(n){return idx(n)>-1;}),saved=CUR&&f.indexOf(CUR)>-1,h='';
+    if(!f.length&&!CUR){row.className='';row.innerHTML='';return;}
+    h+='<span class="fl">⭐ My beaches</span>';
+    f.forEach(function(n){h+='<button type="button" class="'+(n===CUR?'cur':'')+'" data-o="'+esc(n).replace(/"/g,'&quot;')+'" title="'+esc(n).replace(/"/g,'&quot;')+'">'+esc(short(n))+'</button>';});
+    if(CUR&&saved)h+='<button type="button" class="un" data-u="1">★ Saved · remove</button>';
+    else if(CUR)h+='<button type="button" class="sv" data-s="1">☆ Save '+esc(short(CUR))+'</button>';
+    if(NOTE)h+='<span class="fn">'+NOTE+'</span>';
+    row.className='on';row.innerHTML=h;}
+  row.addEventListener('click',function(e){var b=e.target.closest&&e.target.closest('button');if(!b)return;var f=get();NOTE='';
+    if(b.getAttribute('data-s')){if(!CUR)return;if(f.length>=MAX){NOTE='You can save 5 beaches. Open one and tap “★ Saved · remove” to make room.';draw();return;}
+      f.push(CUR);put(f);ev('fav_save',{beach:CUR,count:f.length});NOTE='Saved. It’s one tap from here next time.';draw();return;}
+    if(b.getAttribute('data-u')){put(f.filter(function(n){return n!==CUR;}));ev('fav_remove',{beach:CUR});draw();return;}
+    var n=b.getAttribute('data-o'),i=idx(n);if(i<0)return;var s=SPOTS[i],st=spotSt(s);
+    if(stSel){stSel.value=st;fillSpots(st,String(i));}SRC='fav';NOMEM=false;memBeach(n);CUR=n;draw();ev('fav_open',{beach:n});run(s[1],s[2],n);});
+  window.addEventListener('slmc:conditions',function(){var L=window.SLMC_LAST;var n=L&&L.beach&&idx(L.beach)>-1?L.beach:null;if(n!==CUR){CUR=n;NOTE='';}draw();});
+  function boot(){if(!SPOTS.length){setTimeout(boot,400);return;}var L=window.SLMC_LAST;if(L&&L.beach&&idx(L.beach)>-1)CUR=L.beach;draw();}
+  boot();
+})();
 })();
