@@ -57,7 +57,7 @@ var mig=document.getElementById('slsw-mig'),chk=document.getElementById('slsw-mi
 var hd=ui.querySelector('.hd');if(hd){if(!hd.dataset.t)hd.dataset.t=hd.textContent;hd.textContent=sc?'🎯 Drop Score map · where conditions line up':hd.dataset.t;}
 var slm=document.getElementById('slm');if(slm)slm.classList.toggle('slh-on',sc);
 show(layer,sc);show(leg,sc);if(!sc)return;
-leg.innerHTML='<div class="sub seg"><button type="button" data-w="pm"'+(win==='pm'?' class="on"':'')+'>Tonight 4–10 PM</button><button type="button" data-w="am"'+(win==='am'?' class="on"':'')+'>Morning 5–11 AM</button></div><div class="n">Loading scores…</div>';
+leg.innerHTML='<div class="sub seg"><button type="button" data-w="pm"'+(win==='pm'?' class="on"':'')+'>Tonight · sunset window</button><button type="button" data-w="am"'+(win==='am'?' class="on"':'')+'>Morning 5–11 AM</button></div><div class="n">Loading scores…</div>';
 load(win).then(draw,function(){leg.querySelector('.n').textContent='Couldn’t load the scores right now. Refresh to try again.';});}
 function draw(j){if(mode!=='score')return;
 var bs=j.beaches||[],paths={},casing=[];
@@ -71,7 +71,7 @@ P(casing.join(''),'#02080d',BAND+4);
 var up=j.updated?new Date(j.updated).toLocaleTimeString([],{hour:'numeric',minute:'2-digit'}):'',ok=bs.filter(function(b){return !b.flag&&b.score!=null;}).sort(function(a,b){return b.score-a.score;});
 var h=leg.querySelector('.sub').outerHTML+'<div class="row">'+BUCKETS.map(function(b){return '<span class="k"><i style="background:'+b.col+'"></i>'+b.label+'</span>';}).join('')+'<span class="k"><i style="background:'+BANCOL+'"></i>Banned / no drones</span><span class="k"><i style="background:#7fa3b5;height:3px"></i>Not scored (marsh, bay or no beach access)</span></div>';
 if(ok.length)h+='<div class="n" style="color:#fff;font-weight:800">Best right now: '+ok.slice(0,3).map(function(b){return b.name.replace(/,\s*[A-Z]{2}$/,'')+' '+b.score;}).join(' · ')+'</div>';
-h+='<div class="n">Drop Score out of 100 for '+(win==='am'?'the morning window (5–11 AM)':'tonight (4–10 PM)')+(up?', updated '+up:'')+'. Tap the shoreline for a beach. Conditions only: the sharks still decide.</div>';
+h+='<div class="n">Drop Score out of 100 for '+(win==='am'?'the morning window (5–11 AM)':'tonight (2 hours before sunset to about 4 hours after)')+(up?', updated '+up:'')+'. Tap the shoreline for a beach. Conditions only: the sharks still decide.</div>';
 leg.innerHTML=h;}
 function onTap(e){if(mode!=='score'||!DATA[win])return;var m=svg.getScreenCTM();if(!m)return;var pt=svg.createSVGPoint();pt.x=e.clientX;pt.y=e.clientY;var s=pt.matrixTransform(m.inverse());
 var lim=36/(Math.abs(m.a)||1),best=null,bd=lim;LINES.forEach(function(l){l.forEach(function(q){var d=Math.hypot(q[0]-s.x,q[1]-s.y);if(d<bd){bd=d;best=q;}});});
