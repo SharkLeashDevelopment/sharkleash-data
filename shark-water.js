@@ -397,3 +397,5 @@ try{window.dispatchEvent(new Event('slsw:ready'));}catch(e){}
 }
 init();
 })();
+/* Drop Score map layer (heat.js): adds the Shark water / Drop Score map toggle */
+(function(){var s=document.createElement('script');s.src='https://sharkleashdevelopment.github.io/sharkleash-data/heat.js?v='+Math.floor(Date.now()/6e5);s.async=true;document.head.appendChild(s);})();
