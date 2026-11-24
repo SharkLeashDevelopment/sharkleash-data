@@ -1,11 +1,12 @@
 {
  "_readme": "Version badge and What's new list for the Beach Conditions panel. To announce an update: add an entry at the TOP of updates, then set version and date to match. Notes are for anglers: one short line each, no code talk. The panel shows the newest 5 entries. Bumping version shows a NEW dot to everyone until they open the list.",
- "version": "50",
+ "version": "51",
  "date": "2026-11-24",
  "updates": [
   {
    "date": "2026-11-24",
    "notes": [
+    "The Drop Score window now follows sunset: it starts about 2 hours before dark (when most anglers set baits) and runs about 4 hours after. In November that's about 3–9 PM; in June about 6 PM to midnight.",
     "Your drop plan (aim, line drag and spider weight) now shows right at the top of the beach conditions. Tap Full Drop Assist for the rest.",
     "Save up to 5 beaches with ☆ Save. They show as one-tap buttons under My beaches, so there's no need to pick the state every time.",
     "White sharks now show in the shark list where and when they typically pass by (Cape Cod in late summer, the Carolinas and Florida in winter). They're a prohibited species: never target one, and cut the leader if you hook one."
