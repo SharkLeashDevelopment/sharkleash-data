@@ -652,4 +652,37 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
   function boot(){if(!SPOTS.length){setTimeout(boot,400);return;}var L=window.SLMC_LAST;if(L&&L.beach&&idx(L.beach)>-1)CUR=L.beach;draw();}
   boot();
 })();
+/* ===== Drop plan card: mirrors Drop Assist (#sldrop, far down the page) at the top of the conditions results ===== */
+(function(){
+  if(!ROOT)return;
+  if(!document.getElementById('sldp-css')){var c=document.createElement('style');c.id='sldp-css';
+    c.textContent='#slmc .sldp{margin:0 0 12px;padding:12px 14px;border-radius:16px;border:1px solid rgba(110,231,255,.45);background:rgba(110,231,255,.07)}'
+      +'#slmc .sldp .h{display:flex;justify-content:space-between;align-items:center;gap:8px;margin:0 0 6px}'
+      +'#slmc .sldp .h b{font-size:12px;font-weight:900;text-transform:uppercase;letter-spacing:.12em;color:#ff4444}'
+      +'#slmc .sldp .h a{font-size:13px;font-weight:900;color:#6ee7ff;text-decoration:none;white-space:nowrap}'
+      +'#slmc .sldp .aim{margin:0 0 6px;font-size:17px;font-weight:900;line-height:1.3;color:#fff}#slmc .sldp .aim b{color:#6ee7ff}'
+      +'#slmc .sldp .row{font-size:14px;font-weight:600;color:rgba(255,255,255,.85);margin:2px 0}#slmc .sldp .row strong{color:#ff6a6a}'
+      +'#slmc .sldp .pill{display:inline-block;padding:1px 9px;border-radius:999px;font-size:12px;font-weight:900;color:#111;text-transform:uppercase}'
+      +'#slmc .sldp .alert{margin:6px 0 0;font-size:13px;font-weight:700}';
+    document.head.appendChild(c);}
+  function key(s){return String(s||'').replace(/^\W+/,'').replace(/\s*·.*$/,'').trim();}
+  var T=null;
+  function sync(){var src=document.getElementById('sldrop-out'),L=window.SLMC_LAST,old=out&&out.querySelector('.sldp');
+    if(!out||!src||!L||!L.beach){if(old)old.remove();return;}
+    var loc=src.querySelector('.loc'),aim=src.querySelector('.aim');
+    if(!loc||!aim||key(loc.textContent)!==L.beach||BAN_NOW){if(old)old.remove();return;}
+    var rows=[].filter.call(src.children,function(e){return e.classList.contains('row')&&/Line drag|Spider weight/.test(e.textContent);}).slice(0,2);
+    var al=[].filter.call(src.children,function(e){return e.classList.contains('alert');})[0];
+    var h='<div class="h"><b>🎯 Drop plan</b><a href="#sldrop">Full Drop Assist ↓</a></div>'+aim.outerHTML+rows.map(function(r){return r.outerHTML;}).join('')+(al?al.outerHTML:'');
+    if(old){if(old.__h===h)return;old.innerHTML=h;old.__h=h;return;}
+    var g=out.querySelector('.grid');if(!g)return;var d=document.createElement('div');d.className='sldp';d.innerHTML=h;d.__h=h;g.parentNode.insertBefore(d,g);
+    try{if(window.gtag)gtag('event','drop_plan_view',{beach:L.beach});}catch(e){}}
+  function soon(){clearTimeout(T);T=setTimeout(sync,250);}
+  window.addEventListener('slmc:conditions',soon);
+  function watch(){var src=document.getElementById('sldrop-out');if(!src){setTimeout(watch,1000);return;}
+    if(window.MutationObserver)new MutationObserver(soon).observe(src,{childList:true,subtree:true,characterData:true});soon();}
+  watch();
+  document.addEventListener('click',function(e){var a=e.target.closest&&e.target.closest('#slmc .sldp .h a');if(!a)return;var t=document.getElementById('sldrop');if(!t)return;e.preventDefault();
+    window.scrollTo({top:t.getBoundingClientRect().top+window.pageYOffset-140,behavior:'smooth'});try{if(window.gtag)gtag('event','drop_plan_click',{beach:(window.SLMC_LAST||{}).beach||''});}catch(x){}});
+})();
 })();
