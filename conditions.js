@@ -446,7 +446,9 @@ var bw=bestWindow(t,lat,lon);
 h+='<div class="tile"><div class="lab">Best window</div>'+(bw?'<div class="big" style="font-size:clamp(22px,2.1vw,30px);white-space:normal;flex-wrap:wrap">'+hmr(bw.a,bw.b)+'</div><div class="small">'+(new Date(bw.a).toDateString()===new Date().toDateString()?'Today':'Tomorrow')+' · around '+(bw.p.type==='H'?'high':'low')+' tide '+bw.p.t+(bw.dark?' · after dark':bw.dusk?' · at dusk/dawn':'')+(spring?' · strong '+(mo.age<5||mo.age>24?'new':'full')+'-moon tides':'')+'</div>':'<div class="big">--</div><div class="small">Needs tide data</div>')+'</div>';
 var mo=moon(new Date());h+='<div class="tile"><div class="lab">Moon</div><div class="big">'+mo.icon+' '+mo.ill+'<span style="font-size:16px">%</span></div><div class="small">'+mo.name+' · '+mo.next+'</div></div>';
 h+='</div><p class="small" style="margin:8px 0 0">Tide station: '+esc(st[1])+' ('+mi+' mi away)</p>';
-h+='<a class="rig" href="/#buy-anchor" onclick="if(window.gtag)gtag(\'event\',\'rig_up_click\',{event_category:\'Conditions\'})"><span>Fishing here? Rig up right.</span><b>Get Gen 2 →</b></a>';
+/* Black Friday: shows until Mon Nov 30, 11:59 PM Eastern (Dec 1 04:59 UTC), then switches back on its own. The /discount/ link applies DROPDAY in the cart. */
+if(Date.now()<Date.UTC(2026,11,1,4,59,59))h+='<a class="rig" href="https://shop.sharkleashfishing.com/discount/DROPDAY?redirect=/products/sharkleash-with-extra-bite-section" onclick="if(window.gtag)gtag(\'event\',\'rig_up_click\',{event_category:\'Conditions\',offer:\'blackfriday\'})"><span>🔥 Black Friday: Ready Pack (rig + spare bite section) $29.99 with code DROPDAY</span><b>Shop →</b></a>';
+else h+='<a class="rig" href="/#buy-anchor" onclick="if(window.gtag)gtag(\'event\',\'rig_up_click\',{event_category:\'Conditions\'})"><span>Fishing here? Rig up right.</span><b>Get Gen 2 →</b></a>';
 out.innerHTML=h;
 try{clWire(bkey,bm&&bm.clarity);}catch(e){}
 try{ruleWire(bkey,BM.near?BM.near.state:(w&&w.state));}catch(e){}
